@@ -22,18 +22,14 @@ app.get('/auth/github',
   passport.authenticate('github'));
 
 app.get('/auth/github/callback', 
-  passport.authenticate('github', {
-    failureRedirect: '/auth/failed'
-  }),
-  function(req, res) {
-    res.redirect('/');
-  });
+  passport.authenticate('github', { failureRedirect: '/auth/failed' }),
+  (req, res) => res.redirect('/'));
 
 app.get('/auth/failed', (req, res) => {
   res.send('Authentication failed');
 });
 
-app.get('/logout', function(req, res){
+app.get('/logout', (req, res) => {
   req.logout();
   res.redirect('/');
 });
