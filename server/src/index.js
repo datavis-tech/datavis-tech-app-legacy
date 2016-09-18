@@ -11,7 +11,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.get('/', (req, res) => {
-  if(req.session.passport){
+  if(req.user){
     res.send('Logged in');
   } else {
     res.send('Not logged in');
@@ -22,8 +22,21 @@ app.get('/auth/github',
   passport.authenticate('github'));
 
 app.get('/auth/github/callback', 
-  passport.authenticate('github', { failureRedirect: '/login' }),
-  function(req, res) { res.redirect('/'); });
+  passport.authenticate('github', {
+    failureRedirect: '/auth/failed'
+  }),
+  function(req, res) {
+    res.redirect('/');
+  });
+
+app.get('/auth/failed', (req, res) => {
+  res.send('Authentication failed');
+});
+
+app.get('/logout', function(req, res){
+  req.logout();
+  res.redirect('/');
+});
 
 app.listen(port);
 
