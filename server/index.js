@@ -1,15 +1,25 @@
 import express from 'express';
+import session from 'express-session';
 import passport from './passport';
 
 const app = express();
 const port = 3000;
 
+app.use(session({
+  secret: 'jhfadsnfjdkshare',
+  resave: false,
+  saveUninitialized: true
+}));
+
 app.use(passport.initialize());
 app.use(passport.session());
 
 app.get('/', (req, res) => {
-  console.log(req.session);
-  res.send('Hello World');
+  if(req.session.passport){
+    res.send('Logged in');
+  } else {
+    res.send('Not logged in');
+  }
 });
 
 app.get('/auth/github',
@@ -17,20 +27,7 @@ app.get('/auth/github',
 
 app.get('/auth/github/callback', 
   passport.authenticate('github', { failureRedirect: '/login' }),
-  function(req, res) {
-    // Successful authentication, redirect home.
-    res.redirect('/');
-  });
-
-//app.post('api/login', passport.authenticate('github'), (req, res) => {
-//  res.send('Hello World');
-//});
-
-//app.post('api/login', function() {
-//});
-//
-//app.post('api/logout', function() {
-//});
+  function(req, res) { res.redirect('/'); });
 
 app.listen(port);
 
