@@ -1,15 +1,11 @@
 import express from 'express';
-import session from 'express-session';
+import session from './session';
 import passport from './passport';
 
 const app = express();
 const port = 3000;
 
-app.use(session({
-  secret: 'jhfadsnfjdkshare',
-  resave: false,
-  saveUninitialized: true
-}));
+app.use(session);
 
 app.use(passport.initialize());
 app.use(passport.session());
