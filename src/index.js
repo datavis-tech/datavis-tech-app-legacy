@@ -7,3 +7,9 @@ ReactDOM.render(
   <App />,
   document.getElementById('root')
 );
+
+console.log("starting fetch");
+fetch('/')
+  .then(function(response) {
+    console.log(response);
+  });
