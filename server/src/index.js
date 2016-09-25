@@ -10,7 +10,12 @@ app.use(session);
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.get('/', (req, res) => {
+app.use(express.static('static'));
+
+// ***********************
+// * Auth-related routes *
+// ***********************
+app.get('/authcheck', (req, res) => {
   if(req.user){
     res.send('Logged in');
   } else {
@@ -34,6 +39,10 @@ app.get('/logout', (req, res) => {
   res.redirect('/');
 });
 
-app.listen(port);
+// ***********************
+// * End Auth-related routes *
+// ***********************
 
+
+app.listen(port);
 console.log('Listening on http://localhost:' + port);
