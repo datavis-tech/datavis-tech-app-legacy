@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
-import { Grid, Col, Alert } from 'react-bootstrap';
-import './App.css';
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import { Grid, Col, Alert } from 'react-bootstrap'
+import './App.css'
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
 
 class App extends Component {
   render() {
@@ -31,8 +31,8 @@ class App extends Component {
         </Col>
 
       </Grid>
-    );
+    )
   }
 }
 
-export default App;
+export default App
