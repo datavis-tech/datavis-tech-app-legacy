@@ -1,19 +1,35 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+
+import { Grid, Col, Alert } from 'react-bootstrap';
 import './App.css';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to Datavis Tech</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      <Grid>
+
+        <Col xs={12}>
+          <Alert bsStyle="warning">
+            Test
+          </Alert>
+          <Alert bsStyle="warning">
+            Home
+          </Alert>
+        </Col>
+
+        <Col md={6}>
+          <Alert bsStyle="warning">
+            Left
+          </Alert>
+        </Col>
+
+        <Col md={6}>
+          <Alert bsStyle="warning">
+            Right
+          </Alert>
+        </Col>
+
+      </Grid>
     );
   }
 }
