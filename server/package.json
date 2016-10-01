@@ -11,6 +11,6 @@
   },
   "dependencies": {},
   "scripts": {
-    "start": "babel-node src/index.js --presets es2015"
+    "start": "babel-node server.js --presets es2015"
   }
 }
