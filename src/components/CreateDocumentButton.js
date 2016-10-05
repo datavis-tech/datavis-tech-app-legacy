@@ -1,9 +1,12 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import * as actionCreators from '../actionCreators'
 
 class CreateDocumentButton extends Component {
 
   open() {
     console.log("OPEN")
+    console.log(this.props)
   }
 
   render() {
@@ -12,7 +15,7 @@ class CreateDocumentButton extends Component {
         <button 
           type="button"
           className="btn btn-primary btn-lg btn-block"
-          onClick={this.open}
+          onClick={ this.props.showModalCreateDocument }
         >
           Create Document
         </button>
@@ -57,8 +60,8 @@ class CreateDocumentButton extends Component {
 //            <Button onClick={this.close}>Close</Button>
 //          </Modal.Footer>
 //        </Modal>
-
   }
 }
 
-export default CreateDocumentButton
+
+export default connect(null, actionCreators)(CreateDocumentButton)

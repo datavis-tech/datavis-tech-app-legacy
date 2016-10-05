@@ -1,2 +1,5 @@
-const reducer = (state, action) => state
+const reducer = (state, action) => {
+  console.log(action)
+  return state
+}
 export default reducer

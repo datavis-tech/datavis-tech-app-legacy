@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import CreateDocumentButton from './components/CreateDocumentButton'
 
-import './App.css'
 import '../public/bootstrap.min.css'
 
 class App extends Component {
