@@ -1,26 +1,20 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
 import * as actionCreators from '../actionCreators'
 
-class CreateDocumentButton extends Component {
+const CreateDocumentButton = ({ showModalCreateDocument }) => (
+  <div className="m-x-auto m-t-1">
+    <button 
+      type="button"
+      className="btn btn-primary btn-lg btn-block"
+      onClick={ showModalCreateDocument }
+    >
+      Create Document
+    </button>
+  </div>
+);
+export default connect(null, actionCreators)(CreateDocumentButton)
 
-  open() {
-    console.log("OPEN")
-    console.log(this.props)
-  }
-
-  render() {
-    return (
-      <div className="m-x-auto m-t-1">
-        <button 
-          type="button"
-          className="btn btn-primary btn-lg btn-block"
-          onClick={ this.props.showModalCreateDocument }
-        >
-          Create Document
-        </button>
-      </div>
-    )
 //        <Modal show={this.state.showModal} onHide={this.close}>
 //          <Modal.Header closeButton>
 //            <Modal.Title>Create a new Document</Modal.Title>
@@ -60,8 +54,3 @@ class CreateDocumentButton extends Component {
 //            <Button onClick={this.close}>Close</Button>
 //          </Modal.Footer>
 //        </Modal>
-  }
-}
-
-
-export default connect(null, actionCreators)(CreateDocumentButton)
