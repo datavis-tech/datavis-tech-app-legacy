@@ -1,21 +1,20 @@
 import React, { Component } from 'react'
-import { Grid, Row, Col } from 'react-bootstrap'
 import CreateDocumentButton from './components/CreateDocumentButton'
 
 import './App.css'
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css'
+import '../public/bootstrap.min.css'
 
 class App extends Component {
 
   render() {
     return (
-      <Grid>
-        <Row>
-          <Col xs={12} >
+      <div className="container">
+        <div className="row">
+          <div className="col-sm-12">
             <CreateDocumentButton/>
-          </Col>
-        </Row>
-      </Grid>
+          </div>
+        </div>
+      </div>
     )
   }
 }
