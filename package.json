@@ -4,7 +4,6 @@
   "private": true,
   "devDependencies": {
     "react-scripts": "0.6.0",
-
     "babel-cli": "^6.14.0",
     "babel-preset-es2015": "^6.14.0",
     "sharedb": "^1.0.0-beta.5",
@@ -13,7 +12,9 @@
   },
   "dependencies": {
     "react": "^15.3.2",
-    "react-dom": "^15.3.2"
+    "react-dom": "^15.3.2",
+    "react-redux": "^4.4.5",
+    "redux": "^3.6.0"
   },
   "scripts": {
     "start": "react-scripts start",
