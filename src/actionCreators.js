@@ -1,7 +1,10 @@
 export const SHOW_MODAL = 'SHOW_MODAL'
-export const MODAL_CREATE_DOCUMENT = 'MODAL_CREATE_DOCUMENT'
+export const HIDE_MODAL = 'HIDE_MODAL'
 
 export const showModalCreateDocument = () => ({
-  type: SHOW_MODAL,
-  modalType: MODAL_CREATE_DOCUMENT
+  type: SHOW_MODAL
+})
+
+export const hideModalCreateDocument = () => ({
+  type: HIDE_MODAL
 })
