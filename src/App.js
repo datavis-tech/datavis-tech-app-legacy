@@ -1,15 +1,15 @@
 import React from 'react'
 import CreateDocumentButton from './components/CreateDocumentButton'
-
+import { Container, Row, Col } from 'reactstrap'
 import '../public/bootstrap.min.css'
 
 const App = () => (
-  <div className="container">
-    <div className="row">
-      <div className="col-sm-12">
+  <Container>
+    <Row>
+      <Col>
         <CreateDocumentButton/>
-      </div>
-    </div>
-  </div>
+      </Col>
+    </Row>
+  </Container>
 )
 export default App

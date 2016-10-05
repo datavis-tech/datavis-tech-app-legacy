@@ -1,6 +1,7 @@
 import { SHOW_MODAL, HIDE_MODAL } from './actionCreators'
 
 const reducer = (state = false, action) => {
+  console.log(action)
   switch (action.type) {
     case SHOW_MODAL:
       return true

@@ -1,17 +1,12 @@
 import React from 'react'
+import { Button } from 'reactstrap'
 import { connect } from 'react-redux'
 import * as actionCreators from '../actionCreators'
 
 const CreateDocumentButton = ({ showModalCreateDocument }) => (
-  <div className="m-x-auto m-t-1">
-    <button 
-      type="button"
-      className="btn btn-primary btn-lg btn-block"
-      onClick={ showModalCreateDocument }
-    >
-      Create Document
-    </button>
-  </div>
+  <Button onClick={ showModalCreateDocument }>
+    Create Document
+  </Button>
 );
 export default connect(null, actionCreators)(CreateDocumentButton)
 
