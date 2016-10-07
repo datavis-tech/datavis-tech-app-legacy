@@ -24,9 +24,14 @@ class Create extends Component {
     const { title, description } = this.state
     if(!title){
       this.setState({ titleDanger: true })
+      this.titleInput.focus()
     } else {
       this.props.createDocument(title, description)
     }
+  }
+  
+  componentDidMount() {
+    this.titleInput.focus()
   }
 
   render() {
@@ -47,6 +52,7 @@ class Create extends Component {
                 className="form-control"
                 id="title"
                 onChange={this.handleChange}
+                ref={(input) => this.titleInput = input}
               />
             </div>
 
