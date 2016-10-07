@@ -40,7 +40,13 @@ class Create extends Component {
       <div className="container m-t-1">
         <h1>Create a Document</h1>
         <form onSubmit={this.handleSubmit}>
-          <div className={classNames("form-group row", {"has-danger": titleDanger})}>
+          <div
+            className={classNames({
+              "form-group": true,
+              "row": true,
+              "has-danger": titleDanger
+            })}
+          >
 
             <label htmlFor="title" className="col-sm-2 col-form-label">
               Title
@@ -49,11 +55,23 @@ class Create extends Component {
             <div className="col-sm-10">
               <input
                 type="text"
-                className="form-control"
+                className={classNames({
+                  "form-control": true,
+                  "form-control-danger": titleDanger
+                })}
                 id="title"
                 onChange={this.handleChange}
                 ref={(input) => this.titleInput = input}
               />
+
+              {(() => {
+                if (titleDanger){
+                  return (
+                    <div className="form-control-feedback">A title is required.</div>
+                  )
+                }
+              })()}
+
             </div>
 
           </div>
