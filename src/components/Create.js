@@ -1,6 +1,7 @@
 import React, { Component }from 'react'
 import { connect } from 'react-redux'
 import * as actionCreators from '../actionCreators'
+import classNames from 'classnames'
 
 class Create extends Component {
   constructor() {
@@ -12,24 +13,29 @@ class Create extends Component {
 
   handleChange({ target: {id, value}}) {
     this.setState({ [id]: value })
+
+    if(id === "title" && value){
+      this.setState({ titleDanger: false })
+    }
   }
 
   handleSubmit(event) {
     event.preventDefault()
     const { title, description } = this.state
     if(!title){
-      console.log('Missing title! TODO handle validation styles')
+      this.setState({ titleDanger: true })
     } else {
-      console.log(`TODO submit Redux action CREATE_DOCUMENT(${title}, ${description})`)
+      this.props.createDocument(title, description)
     }
   }
 
   render() {
+    const titleDanger = this.state.titleDanger
     return (
-      <div className="container">
+      <div className="container m-t-1">
         <h1>Create a Document</h1>
         <form onSubmit={this.handleSubmit}>
-          <div className="form-group row">
+          <div className={classNames("form-group row", {"has-danger": titleDanger})}>
 
             <label htmlFor="title" className="col-sm-2 col-form-label">
               Title
