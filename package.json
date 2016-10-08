@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
-    "react-scripts": "0.6.0",
-    "babel-cli": "^6.14.0",
-    "babel-preset-es2015": "^6.14.0",
-    "sharedb": "^1.0.0-beta.5",
+    "babel-cli": "^6.16.0",
+    "babel-preset-es2015": "^6.16.0",
+    "react-scripts": "0.6.1",
+    "sharedb": "^1.0.0-beta.6",
     "websocket-json-stream": "0.0.3",
     "ws": "^1.1.1"
   },
