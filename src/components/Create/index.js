@@ -1,6 +1,7 @@
-import React, { Component }from 'react'
+import React, { Component } from 'react'
 import classNames from 'classnames'
 import './Create.css'
+import TitleFormGroup from './TitleFormGroup'
 
 export default class Create extends Component {
   constructor() {
@@ -33,6 +34,7 @@ export default class Create extends Component {
       this.props.createDocument(title, description)
     }
   }
+
   
   componentDidMount() {
     this.titleInput.focus()
@@ -44,41 +46,13 @@ export default class Create extends Component {
       <div className="container m-t-1">
         <h1>Create a Document</h1>
         <form onSubmit={this.handleSubmit}>
-          <div
-            className={classNames({
-              "form-group": true,
-              "row": true,
-              "has-danger": titleDanger
-            })}
-          >
 
-            <label htmlFor="title" className="col-sm-2 col-form-label">
-              Title
-            </label>
+          <TitleFormGroup
+            titleDanger={titleDanger}
+            handleChange={this.handleChange}
+            setTitleInput={(input) => this.titleInput = input}
+          />
 
-            <div className="col-sm-10">
-              <input
-                type="text"
-                className={classNames({
-                  "form-control": true,
-                  "form-control-danger": titleDanger
-                })}
-                id="title"
-                onChange={this.handleChange}
-                ref={(input) => this.titleInput = input}
-              />
-
-              {(() => {
-                if (titleDanger){
-                  return (
-                    <div className="form-control-feedback">A title is required.</div>
-                  )
-                }
-              })()}
-
-            </div>
-
-          </div>
           <div className="form-group row">
 
             <label htmlFor="description" className="col-sm-2 col-form-label">

@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import Create from './Create'
+import Create from './index'
 
 it('renders a .container', () => {
   const div = document.createElement('div')
