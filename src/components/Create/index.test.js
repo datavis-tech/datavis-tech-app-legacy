@@ -7,4 +7,3 @@ it('renders a .container', () => {
   ReactDOM.render(<Create />, div)
   expect(div.querySelectorAll('.container').length).toBe(1)
 })
-

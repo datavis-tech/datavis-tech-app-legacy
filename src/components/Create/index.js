@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import classNames from 'classnames'
-import './Create.css'
 import TitleFormGroup from './TitleFormGroup'
+import DescriptionFormGroup from './DescriptionFormGroup'
+import ContentUploadFormGroup from './ContentUploadFormGroup'
 
 export default class Create extends Component {
   constructor() {
@@ -9,6 +9,7 @@ export default class Create extends Component {
 
     this.state = {
       title: "",
+      titleDanger: false,
       description: ""
     }
 
@@ -34,7 +35,6 @@ export default class Create extends Component {
       this.props.createDocument(title, description)
     }
   }
-
   
   componentDidMount() {
     this.titleInput.focus()
@@ -53,56 +53,9 @@ export default class Create extends Component {
             setTitleInput={(input) => this.titleInput = input}
           />
 
-          <div className="form-group row">
+          <DescriptionFormGroup handleChange={this.handleChange} />
 
-            <label htmlFor="description" className="col-sm-2 col-form-label">
-              Description
-            </label>
-
-            <div className="col-sm-10">
-              <textarea
-                className="form-control"
-                id="description"
-                rows="3"
-                onChange={this.handleChange}
-              />
-            </div>
-
-          </div>
-
-          <div className="form-group row">
-
-            <label htmlFor="file" className="col-sm-2 col-form-label">
-              <span>Content</span>
-            </label>
-
-            <div className="col-sm-10">
-              <label className="custom-file">
-                <input
-                  type="file"
-                  id="file"
-                  className="custom-file-input"
-                  ref={(input) => this.fileInput = input}
-                  onChange={(event) => {
-
-                    // files.length is 0 if no file was chosen.
-                    const files = this.fileInput.files
-
-                    this.setState({
-                      chosenFileName: files.length ? files[0].name : null
-                    })
-                  }}
-                />
-                <span
-                  className="custom-file-control"
-                  data-content-value={
-                    this.state.chosenFileName || "Choose file..."
-                  }
-                />
-              </label>
-            </div>
-
-          </div>
+          <ContentUploadFormGroup />
 
           <div className="form-group row">
             <div className="offset-sm-2 col-sm-10">

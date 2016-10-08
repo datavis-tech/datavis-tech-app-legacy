@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import classNames from 'classnames'
 
 const TitleFormGroup = ({titleDanger, handleChange, setTitleInput}) => (
@@ -35,7 +35,6 @@ const TitleFormGroup = ({titleDanger, handleChange, setTitleInput}) => (
       })()}
 
     </div>
-
   </div>
 )
 export default TitleFormGroup
