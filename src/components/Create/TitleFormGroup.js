@@ -1,6 +1,8 @@
 import React from 'react'
 import classNames from 'classnames'
 
+export const titleFeedbackText = 'A title is required.'
+
 const TitleFormGroup = ({titleDanger, handleChange, setTitleInput}) => (
   <div
     className={classNames({
@@ -29,7 +31,7 @@ const TitleFormGroup = ({titleDanger, handleChange, setTitleInput}) => (
       {(() => {
         if (titleDanger){
           return (
-            <div className="form-control-feedback">A title is required.</div>
+            <div className="form-control-feedback title-feedback">{titleFeedbackText}</div>
           )
         }
       })()}
