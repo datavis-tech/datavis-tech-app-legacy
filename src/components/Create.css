@@ -1,0 +1,8 @@
+/*
+   Custom CSS for displaying for name of the uploaded file. See
+   https://github.com/twbs/bootstrap/issues/19661#issuecomment-235962379
+*/
+
+.custom-file-control:lang(en)::after {
+  content: attr(data-content-value);
+}

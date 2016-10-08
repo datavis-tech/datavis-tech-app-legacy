@@ -1,10 +1,16 @@
 import React, { Component }from 'react'
 import classNames from 'classnames'
+import './Create.css'
 
 export default class Create extends Component {
   constructor() {
     super()
-    this.state = { title: "", description: "" }
+
+    this.state = {
+      title: "",
+      description: ""
+    }
+
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
@@ -98,8 +104,27 @@ export default class Create extends Component {
 
             <div className="col-sm-10">
               <label className="custom-file">
-                <input type="file" id="file" className="custom-file-input"/>
-                <span className="custom-file-control"></span>
+                <input
+                  type="file"
+                  id="file"
+                  className="custom-file-input"
+                  ref={(input) => this.fileInput = input}
+                  onChange={(event) => {
+
+                    // files.length is 0 if no file was chosen.
+                    const files = this.fileInput.files
+
+                    this.setState({
+                      chosenFileName: files.length ? files[0].name : null
+                    })
+                  }}
+                />
+                <span
+                  className="custom-file-control"
+                  data-content-value={
+                    this.state.chosenFileName || "Choose file..."
+                  }
+                />
               </label>
             </div>
 
