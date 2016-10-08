@@ -1,9 +1,7 @@
 import React, { Component }from 'react'
-import { connect } from 'react-redux'
-import * as actionCreators from '../actionCreators'
 import classNames from 'classnames'
 
-class Create extends Component {
+export default class Create extends Component {
   constructor() {
     super()
     this.state = { title: "", description: "" }
@@ -101,5 +99,3 @@ class Create extends Component {
     )
   }
 }
-
-export default connect(null, actionCreators)(Create)
