@@ -89,11 +89,28 @@ export default class Create extends Component {
             </div>
 
           </div>
+
+          <div className="form-group row">
+
+            <label htmlFor="file" className="col-sm-2 col-form-label">
+              <span>Content</span>
+            </label>
+
+            <div className="col-sm-10">
+              <label className="custom-file">
+                <input type="file" id="file" className="custom-file-input"/>
+                <span className="custom-file-control"></span>
+              </label>
+            </div>
+
+          </div>
+
           <div className="form-group row">
             <div className="offset-sm-2 col-sm-10">
               <button type="submit" className="btn btn-primary">Create</button>
             </div>
           </div>
+
         </form>
       </div>
     )
