@@ -6,15 +6,18 @@ import Home from './components/Home'
 import Create from './components/Create'
 import Consulting from './components/Consulting'
 import About from './components/About'
+import ShareProvider from './share/ShareProvider'
 
 ReactDOM.render(
-  <Router history={browserHistory}>
-    <Route path="/" component={App}>
-      <IndexRoute component={Home}/>
-      <Route path="create" component={Create}/>
-      <Route path="consulting" component={Consulting}/>
-      <Route path="about" component={About}/>
-    </Route>
-  </Router>,
+  <ShareProvider>
+    <Router history={browserHistory}>
+      <Route path="/" component={App}>
+        <IndexRoute component={Home}/>
+        <Route path="create" component={Create}/>
+        <Route path="consulting" component={Consulting}/>
+        <Route path="about" component={About}/>
+      </Route>
+    </Router>
+  </ShareProvider>,
   document.getElementById('root')
 )
