@@ -10,20 +10,16 @@ import ShareDBStringBinding from 'sharedb-string-binding';
 export default class StringBinding extends Component {
 
   componentDidMount() {
-    const el = ReactDOM.findDOMNode(this.refs.el);
-    const doc = this.props.doc
+    const el = ReactDOM.findDOMNode(this.refs.el)
+    const { doc, path } = this.props
     doc.subscribe((err) => {
       if (err) throw err;
-      const binding = new ShareDBStringBinding(el, doc, ["title"]);
-      binding.setup();
+      this.binding = new ShareDBStringBinding(el, doc, path)
+      this.binding.setup()
     });
   }
 
   render() {
-    const { type } = this.props;
-    return React.createElement(
-      type,
-      { ref: 'el' }
-    );
+    return React.createElement( this.props.type, { ref: 'el' });
   }
 }
