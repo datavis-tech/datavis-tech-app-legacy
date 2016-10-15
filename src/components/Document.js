@@ -57,16 +57,21 @@ class Document extends Component {
             />
           </div>
 
-          <StringBinding
-            className="document-field"
-            type="textarea"
-            doc={doc}
-            path={["description"]}
-          />
-
-          <div>{this.state.views} views</div>
-          <div>Created on {this.state.createdDate}</div>
-          <div>Last updated {this.state.updatedDate}</div>
+          <div className="row">
+            <div className="col-sm-9">
+              <StringBinding
+                className="document-field"
+                type="textarea"
+                doc={doc}
+                path={["description"]}
+              />
+            </div>
+            <div className="col-sm-3">
+              <div>{this.state.views} views</div>
+              <div>Created on {this.state.createdDate}</div>
+              <div>Last updated {this.state.updatedDate}</div>
+            </div>
+          </div>
         </div>
       )
     }
