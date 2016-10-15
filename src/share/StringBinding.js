@@ -17,9 +17,7 @@ export default class StringBinding extends Component {
   }
 
   componentWillUnmount() {
-    if(this.binding){
-      this.binding.destroy()
-    }
+    this.binding.destroy()
   }
 
   render() {

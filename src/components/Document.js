@@ -14,13 +14,25 @@ class Document extends Component {
 
   componentWillMount() {
     const { params, getDocument } = this.props
-    this.doc = getDocument(params.id)
-    this.doc.subscribe(() => {
-      this.setState({
-        subscribed: true
-      })
-      this.setState(this.doc.data)
+    const doc = getDocument(params.id)
+    this.doc = doc
+
+    doc.subscribe(() => {
+      this.setState({ subscribed: true })
+
+      // Increment the view count.
+      doc.submitOp({p:["views"], na: 1})
+
+      // Initialize the state.
+      this.updateStateFromDoc()
+
+      // Update the state on any doc change.
+      doc.on('op', this.updateStateFromDoc.bind(this))
     })
+  }
+
+  updateStateFromDoc() {
+    this.setState(this.doc.data)
   }
 
   render() {
