@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
+import React from 'react'
 
 export default function withShare(Component) {
-  const WithShare = (props) => (
-    <Component ...props connection={this.context.connection} />
+  const WithShare = (props, context) => (
+    <Component {...props} {...context.share} />
   )
   WithShare.contextTypes = {
-    connection: React.PropTypes.object
+    share: React.PropTypes.object
   }
   return WithShare
 }

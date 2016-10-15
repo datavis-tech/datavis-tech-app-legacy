@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import connect from './connect'
+import methods from './methods'
 
 const CONNECTING = 'CONNECTING'
 const CONNECTED = 'CONNECTED'
@@ -35,7 +36,7 @@ export default class ShareProvider extends Component {
 
     connect()
       .then((connection) => {
-        this.connection = connection
+        this.share = methods(connection)
         this.setState({
           status: CONNECTED
         })
@@ -49,7 +50,7 @@ export default class ShareProvider extends Component {
 
   getChildContext() {
     return {
-      connection: this.connection 
+      share: this.share
     }
   }
 
@@ -68,5 +69,5 @@ export default class ShareProvider extends Component {
 }
 
 ShareProvider.childContextTypes = {
-  connection: React.PropTypes.object
+  share: React.PropTypes.object
 };
