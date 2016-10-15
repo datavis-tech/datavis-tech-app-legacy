@@ -2,14 +2,17 @@ import uuid from 'node-uuid'
 
 export default (connection) => ({
   createDocument: (title, description) => {
+    const initialContent = { title, description }
     const id = uuid.v4()
     const doc = connection.get('documents', id)
-    const initialContent = { title, description}
-
-    console.log("creating document")
-    doc.create(initialContent, () => {
-      console.log("created document")
-      console.log(doc)
+    return new Promise((resolve, reject) => {
+      doc.create(initialContent, (error) => {
+        if(error){
+          reject(error)
+        } else {
+          resolve(id)
+        }
+      })
     })
   }
 })

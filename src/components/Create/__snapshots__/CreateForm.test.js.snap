@@ -74,6 +74,7 @@ exports[`test renders 1`] = `
         className="offset-sm-2 col-sm-10">
         <button
           className="btn btn-primary"
+          disabled={false}
           type="submit">
           Create
         </button>
@@ -163,6 +164,7 @@ exports[`test validates against empty title and provides feedback 1`] = `
         className="offset-sm-2 col-sm-10">
         <button
           className="btn btn-primary"
+          disabled={false}
           type="submit">
           Create
         </button>

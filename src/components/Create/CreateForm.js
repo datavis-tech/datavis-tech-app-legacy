@@ -8,9 +8,19 @@ export default class Create extends Component {
     super()
 
     this.state = {
+
+      // The text from the title input field.
       title: "",
+
+      // A flag to trigger validation feedback
+      // when the form was submitted with no title present.
       titleDanger: false,
-      description: ""
+
+      // The text from the description input field.
+      description: "",
+
+      // A flag to signify that the document is being created.
+      creating: false
     }
 
     this.handleChange = this.handleChange.bind(this)
@@ -27,13 +37,21 @@ export default class Create extends Component {
   }
 
   handleSubmit(event) {
+
+    const {
+      state: { title, description },
+      props: { createDocument }
+    } = this
+
     event.preventDefault()
-    const { title, description } = this.state
+
     if(!title){
       this.setState({ titleDanger: true })
       this.focusTitle()
     } else {
-      this.props.createDocument(title, description)
+      this.setState({ creating: true })
+      createDocument(title, description)
+        .then((id) => console.log(id))
     }
   }
 
@@ -73,7 +91,22 @@ export default class Create extends Component {
 
           <div className="form-group row">
             <div className="offset-sm-2 col-sm-10">
-              <button type="submit" className="btn btn-primary">Create</button>
+              <button
+                type="submit"
+                className="btn btn-primary"
+                disabled={this.state.creating}
+              >
+                Create
+              </button>
+              {(() => {
+                if(this.state.creating){
+                  return (
+                    <div className="m-t-1">
+                      Creating document...
+                    </div>
+                  )
+                }
+              })()}
             </div>
           </div>
 
