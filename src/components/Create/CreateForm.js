@@ -15,12 +15,13 @@ export default class Create extends Component {
 
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.setTitleInput = this.setTitleInput.bind(this)
   }
 
   handleChange({ target: {id, value}}) {
     this.setState({ [id]: value })
 
-    if(id === "title" && value){
+    if(id === 'title' && value){
       this.setState({ titleDanger: false })
     }
   }
@@ -30,16 +31,24 @@ export default class Create extends Component {
     const { title, description } = this.state
     if(!title){
       this.setState({ titleDanger: true })
-      this.titleInput.focus()
+      this.focusTitle()
     } else {
       this.props.createDocument(title, description)
     }
   }
-  
-  componentDidMount() {
+
+  setTitleInput(input){
+    this.titleInput = input
+  }
+
+  focusTitle() {
     if(this.titleInput){
       this.titleInput.focus()
     }
+  }
+  
+  componentDidMount() {
+    this.focusTitle()
   }
 
   render() {
@@ -52,7 +61,7 @@ export default class Create extends Component {
           <TitleFormGroup
             titleDanger={titleDanger}
             handleChange={this.handleChange}
-            setTitleInput={(input) => this.titleInput = input}
+            setTitleInput={this.setTitleInput}
           />
 
           <DescriptionFormGroup handleChange={this.handleChange} />

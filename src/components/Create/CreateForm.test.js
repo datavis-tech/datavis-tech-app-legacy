@@ -7,24 +7,22 @@ it('renders', () => {
   expect(tree).toMatchSnapshot();
 })
 
-//it('validates against empty title and provides feedback', () => {
-//  const tree = renderer.create(<CreateForm/>).toJSON();
-//  tree.handleChange()
-//  expect(tree).toMatchSnapshot();
-//})
+it('validates against empty title and provides feedback', () => {
+  const render = renderer.create(<CreateForm/>)
+  const tree = render.toJSON()
+  const form = tree.children[1]
 
-//it('validates against empty title and provides feedback', () => {
-//  const div = document.createElement('div')
-//  let createDocumentCalled = false
-//  ReactDOM.render(<CreateForm createDocument={ () => {
-//    createDocumentCalled = true
-//  }}/>, div)
-//  div.querySelector('button').dispatchEvent(new Event('click'))
-//  expect(div.querySelectorAll('.title-feedback').length).toBe(1)
-//  expect(div.querySelector('.title-feedback').textContent).toBe(titleFeedbackText)
-//  expect(createDocumentCalled).toBe(false)
-//})
-//
+  // Simulate submitting the form.
+  let defaultPrevented = false
+  form.props.onSubmit({
+    preventDefault: () => defaultPrevented = true
+  })
+  expect(defaultPrevented).toBe(true)
+
+  // This snapshot contains the title danger feedback.
+  expect(render.toJSON()).toMatchSnapshot()
+})
+
 ////it('calls createDocument when title is present', (done) => {
 ////  const div = document.createElement('div')
 ////  let createDocumentCalled = false
