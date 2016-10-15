@@ -1,10 +1,15 @@
 import React from 'react'
 import { withRouter } from 'react-router'
+import withShare from '../share/withShare'
+import StringBinding from '../share/StringBinding'
 
-const Document = ({ params }) => (
+const Document = ({ params, getDocument }) => (
   <div className="container-fluid">
-    <h1>Document {params.id}</h1>
+    <StringBinding
+      type="textarea"
+      doc={getDocument(params.id)}
+    />
   </div>
 )
 
-export default withRouter(Document)
+export default withShare(withRouter(Document))

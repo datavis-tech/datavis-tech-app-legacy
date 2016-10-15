@@ -1,13 +1,14 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { Router, Route, IndexRoute, browserHistory } from 'react-router'
+import ShareProvider from './share/ShareProvider'
+
 import App from './components/App'
 import Home from './components/Home'
 import Create from './components/Create'
 import Consulting from './components/Consulting'
 import About from './components/About'
 import Document from './components/Document'
-import ShareProvider from './share/ShareProvider'
 
 const routes = (
   <Route path="/" component={App}>
