@@ -72,10 +72,7 @@ export default class Create extends Component {
   render() {
     const titleDanger = this.state.titleDanger
     return (
-      <div className="container m-t-1" testHooks={{
-        handleChange: this.handleChange,
-        handleSubmit: this.handleSubmit
-      }}>
+      <div className="container m-t-1">
         <h1>Create a Document</h1>
         <form onSubmit={this.handleSubmit}>
 

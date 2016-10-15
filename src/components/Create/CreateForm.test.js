@@ -10,10 +10,11 @@ it('renders', () => {
 it('validates against empty title and provides feedback', () => {
   const render = renderer.create(<CreateForm/>)
   const tree = render.toJSON()
+  const form = tree.children[1]
 
   // Simulate submitting the form.
   let defaultPrevented = false
-  tree.props.testHooks.handleSubmit({
+  form.props.onSubmit({
     preventDefault: () => defaultPrevented = true
   })
   expect(defaultPrevented).toBe(true)
