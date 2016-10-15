@@ -12,11 +12,8 @@ export default class StringBinding extends Component {
   componentDidMount() {
     const el = ReactDOM.findDOMNode(this.refs.el)
     const { doc, path } = this.props
-    doc.subscribe((err) => {
-      if (err) throw err;
-      this.binding = new ShareDBStringBinding(el, doc, path)
-      this.binding.setup()
-    });
+    this.binding = new ShareDBStringBinding(el, doc, path)
+    this.binding.setup()
   }
 
   componentWillUnmount() {
