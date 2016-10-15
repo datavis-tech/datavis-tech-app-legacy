@@ -3,7 +3,7 @@ import TitleFormGroup from './TitleFormGroup'
 import DescriptionFormGroup from './DescriptionFormGroup'
 import ContentUploadFormGroup from './ContentUploadFormGroup'
 
-export default class Create extends Component {
+export default class CreateForm extends Component {
   constructor() {
     super()
 
@@ -40,7 +40,7 @@ export default class Create extends Component {
 
     const {
       state: { title, description },
-      props: { createDocument }
+      props: { createDocument, router }
     } = this
 
     event.preventDefault()
@@ -51,7 +51,7 @@ export default class Create extends Component {
     } else {
       this.setState({ creating: true })
       createDocument(title, description)
-        .then((id) => console.log(id))
+        .then((id) => router.push("/" + id))
     }
   }
 
@@ -106,7 +106,6 @@ export default class Create extends Component {
               })()}
             </div>
           </div>
-
         </form>
       </div>
     )
