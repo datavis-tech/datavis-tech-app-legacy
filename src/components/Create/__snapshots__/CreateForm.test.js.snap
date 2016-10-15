@@ -1,6 +1,12 @@
 exports[`test renders 1`] = `
 <div
-  className="container m-t-1">
+  className="container m-t-1"
+  testHooks={
+    Object {
+      "handleChange": [Function bound handleChange],
+      "handleSubmit": [Function bound handleSubmit]
+    }
+  }>
   <h1>
     Create a Document
   </h1>
@@ -79,7 +85,13 @@ exports[`test renders 1`] = `
 
 exports[`test validates against empty title and provides feedback 1`] = `
 <div
-  className="container m-t-1">
+  className="container m-t-1"
+  testHooks={
+    Object {
+      "handleChange": [Function bound handleChange],
+      "handleSubmit": [Function bound handleSubmit]
+    }
+  }>
   <h1>
     Create a Document
   </h1>
