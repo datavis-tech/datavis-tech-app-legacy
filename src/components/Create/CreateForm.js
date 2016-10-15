@@ -37,7 +37,9 @@ export default class Create extends Component {
   }
   
   componentDidMount() {
-    this.titleInput.focus()
+    if(this.titleInput){
+      this.titleInput.focus()
+    }
   }
 
   render() {
