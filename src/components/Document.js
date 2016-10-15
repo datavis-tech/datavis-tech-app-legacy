@@ -6,7 +6,7 @@ import StringBinding from '../share/StringBinding'
 const Document = ({ params, getDocument }) => {
   const doc = getDocument(params.id)
   return (
-    <div className="container-fluid">
+    <div className="container">
       <StringBinding type="input" doc={doc} path={["title"]} />
       <StringBinding type="textarea" doc={doc} path={["description"]} />
       <StringBinding type="textarea" doc={doc} path={["content"]} />

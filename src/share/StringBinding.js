@@ -19,6 +19,12 @@ export default class StringBinding extends Component {
     });
   }
 
+  componentWillUnmount() {
+    if(this.binding){
+      this.binding.destroy()
+    }
+  }
+
   render() {
     return React.createElement( this.props.type, { ref: 'el' });
   }

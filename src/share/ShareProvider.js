@@ -31,8 +31,17 @@ export default class ShareProvider extends Component {
     super()
 
     this.state = {
-      status: CONNECTING
+      status: null
     }
+
+    // Avoid rendering the Connecting screen if the connection happens quickly.
+    setTimeout(() => {
+      if(this.state.status === null){
+        this.setState({
+          status: CONNECTING
+        })
+      }
+    }, 500)
 
     connect()
       .then((connection) => {
@@ -46,6 +55,7 @@ export default class ShareProvider extends Component {
           url: error.target.url
         })
       })
+
   }
 
   getChildContext() {
@@ -63,7 +73,7 @@ export default class ShareProvider extends Component {
       case ERROR:
         return <Error url={this.state.url}/>
       default:
-        throw new Error('no status, this should never happen')
+        return null
     }
   }
 }
