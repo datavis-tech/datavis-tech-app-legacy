@@ -21,12 +21,9 @@ export default class StringBinding extends Component {
   }
 
   render() {
-    return React.createElement(
-      this.props.type,
-      {
-        ref: 'el' ,
-        className: this.props.className
-      }
-    )
+    return React.createElement( this.props.type, {
+      ref: 'el',
+      className: this.props.className
+    })
   }
 }

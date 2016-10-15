@@ -1,0 +1,15 @@
+.document-field {
+  width: 100%;
+  border: 0px;
+}
+
+.document-title {
+  font-size: 2.5rem;
+  font-weight: 500;
+  padding: 0px;
+}
+
+.document-content {
+  margin-bottom: 1em;
+  font-family: monospace;
+}

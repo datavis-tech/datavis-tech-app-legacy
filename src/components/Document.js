@@ -48,9 +48,21 @@ class Document extends Component {
             path={["title"]}
           />
 
-          <StringBinding type="textarea" doc={doc} path={["description"]} />
+          <div>
+            <StringBinding
+              className="form-control document-content"
+              type="textarea"
+              doc={doc}
+              path={["content"]}
+            />
+          </div>
 
-          <StringBinding type="textarea" doc={doc} path={["content"]} />
+          <StringBinding
+            className="document-field"
+            type="textarea"
+            doc={doc}
+            path={["description"]}
+          />
 
           <div>{this.state.views} views</div>
           <div>Created on {this.state.createdDate}</div>
