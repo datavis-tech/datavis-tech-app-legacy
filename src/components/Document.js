@@ -67,7 +67,7 @@ class Document extends Component {
     if(documentMounted){
 
       return (
-        <div className="container">
+        <div className="container-fluid">
 
           <StringBinding
             className="form-control form-control-lg"
@@ -85,7 +85,7 @@ class Document extends Component {
           />
 
           <div className="row">
-            <div className="col-sm-9 p-r-0">
+            <div className="col-md-9">
               <StringBinding
                 className="form-control"
                 type="textarea"
@@ -94,7 +94,7 @@ class Document extends Component {
                 path={["description"]}
               />
             </div>
-            <div className="col-sm-3 p-l-0">
+            <div className="col-md-3">
               <div className="card card-block">
                 <div>{views} views</div>
                 <div>Created on {created}</div>

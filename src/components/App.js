@@ -2,7 +2,7 @@ import React from 'react'
 import Navbar from './Navbar'
 
 const App = ({children}) => (
-  <div className="container-fluid">
+  <div>
     <Navbar/>
     {children}
   </div>
