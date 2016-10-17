@@ -11,6 +11,35 @@ export default class ContentUploadFormGroup extends Component {
       chosenFileName: null
     }
   }
+  
+  handleChange(event) {
+
+    // files.length is 0 if no file was chosen.
+    const files = this.fileInput.files
+
+    if(files.length > 0){
+      const file = files[0]
+      const reader = new FileReader()
+
+      reader.addEventListener('load', () => {
+        this.setState({
+          chosenFileName: file.name,
+          chosenFileContent: reader.result
+        })
+      });
+
+      this.setState({
+        chosenFileName: 'Loading...'
+      })
+
+      reader.readAsText(file)
+    } else {
+      this.setState({
+        chosenFileName: null,
+        chosenFileContent: null
+      })
+    }
+  }
 
   render() {
     return (
@@ -27,15 +56,7 @@ export default class ContentUploadFormGroup extends Component {
               id="file"
               className="custom-file-input"
               ref={(input) => this.fileInput = input}
-              onChange={(event) => {
-
-                // files.length is 0 if no file was chosen.
-                const files = this.fileInput.files
-
-                this.setState({
-                  chosenFileName: files.length ? files[0].name : null
-                })
-              }}
+              onChange={this.handleChange.bind(this)}
             />
             <span
               className="custom-file-control"
