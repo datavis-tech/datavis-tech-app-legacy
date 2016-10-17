@@ -39,15 +39,19 @@ class Document extends Component {
   }
 
   updateStateFromDoc() {
-    this.setState(this.doc.data)
+    const { views, createdDate, updatedDate } = this.doc.data
+    this.setState({
+      views,
+      created: dateFormat(new Date(createdDate)),
+      updated: dateFormat(new Date(updatedDate))
+    })
   }
 
   render() {
-    if(this.state.documentMounted){
 
-      const { views, createdDate, updatedDate } = this.state
-      const created = dateFormat(new Date(createdDate))
-      const updated = dateFormat(new Date(updatedDate))
+    const { views, created, updated, documentMounted } = this.state
+
+    if(documentMounted){
 
       return (
         <div className="container">
