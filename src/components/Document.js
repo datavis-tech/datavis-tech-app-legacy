@@ -67,7 +67,7 @@ class Document extends Component {
     if(documentMounted){
 
       return (
-        <div className="container-fluid">
+        <div className="container">
 
           <StringBinding
             className="form-control form-control-lg"
@@ -97,8 +97,8 @@ class Document extends Component {
             <div className="col-md-3">
               <div className="card card-block">
                 <div>{views} views</div>
-                <div>Created on {created}</div>
-                <div>Last updated {updated}</div>
+                <div>Created {created}</div>
+                <div>Updated {updated}</div>
               </div>
             </div>
           </div>
