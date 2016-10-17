@@ -33,5 +33,18 @@ export default (connection) => ({
 
   getDocument: (id) => {
     return connection.get(DOCUMENTS, id)
+  },
+
+  mountDocument: (id) => {
+    const doc = connection.get(DOCUMENTS, id)
+    return new Promise((resolve, reject) => {
+      doc.subscribe((error) => {
+        if(error){
+          reject(error)
+        } else {
+          resolve(doc)
+        }
+      })
+    })
   }
 })

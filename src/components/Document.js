@@ -11,25 +11,30 @@ class Document extends Component {
   constructor() {
     super()
     this.state = {
-      subscribed: false
+      documentMounted: false
     }
   }
 
   componentWillMount() {
-    const { params, getDocument } = this.props
-    this.doc = getDocument(params.id)
-    this.doc.subscribe(() => {
 
-      this.setState({ subscribed: true })
+    const { params: {id}, mountDocument } = this.props
+
+    mountDocument(id).then((doc) => {
 
       // Increment the view count.
-      this.doc.submitOp({p:["views"], na: 1})
+      doc.submitOp({p:["views"], na: 1})
+
+      // Stash the doc reference for later use.
+      this.doc = doc
 
       // Initialize the state.
       this.updateStateFromDoc()
 
       // Update the state on any doc change.
-      this.doc.on('op', this.updateStateFromDoc.bind(this))
+      doc.on('op', this.updateStateFromDoc.bind(this))
+
+      // Trigger first rendering with document.
+      this.setState({ documentMounted: true })
     })
   }
 
@@ -38,7 +43,7 @@ class Document extends Component {
   }
 
   render() {
-    if(this.state.subscribed){
+    if(this.state.documentMounted){
 
       const { views, createdDate, updatedDate } = this.state
       const created = dateFormat(new Date(createdDate))
