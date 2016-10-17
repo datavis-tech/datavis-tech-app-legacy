@@ -3,7 +3,7 @@ import classNames from 'classnames'
 
 export const titleFeedbackText = 'A title is required.'
 
-const TitleFormGroup = ({titleDanger, handleChange, setTitleInput}) => (
+const TitleFormGroup = ({titleDanger, handleChange, setTitleInput, value}) => (
   <div
     className={classNames({
       "form-group": true,
@@ -24,6 +24,7 @@ const TitleFormGroup = ({titleDanger, handleChange, setTitleInput}) => (
           "form-control-danger": titleDanger
         })}
         id="title"
+        value={value}
         onChange={handleChange}
         ref={setTitleInput}
       />

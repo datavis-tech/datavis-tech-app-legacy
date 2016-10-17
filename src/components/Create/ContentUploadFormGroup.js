@@ -5,39 +5,32 @@ export default class ContentUploadFormGroup extends Component {
 
   constructor() {
     super()
-    this.state = {
-
-      // This is for displaying the name of the chosen file.
-      chosenFileName: null
-    }
+    this.state = {}
   }
   
   handleChange(event) {
 
-    // files.length is 0 if no file was chosen.
     const files = this.fileInput.files
 
+    // files.length is 0 if no file was chosen.
     if(files.length > 0){
       const file = files[0]
       const reader = new FileReader()
 
       reader.addEventListener('load', () => {
-        this.setState({
-          chosenFileName: file.name,
-          chosenFileContent: reader.result
-        })
+        this.setChosenFile(file.name, reader.result)
       });
-
-      this.setState({
-        chosenFileName: 'Loading...'
-      })
 
       reader.readAsText(file)
     } else {
-      this.setState({
-        chosenFileName: null,
-        chosenFileContent: null
-      })
+      this.setChosenFile(null, null)
+    }
+  }
+
+  setChosenFile(name, content){
+    this.setState({ name, content })
+    if(this.props.onFileChosen){
+      this.props.onFileChosen(name, content)
     }
   }
 
@@ -61,7 +54,7 @@ export default class ContentUploadFormGroup extends Component {
             <span
               className="custom-file-control"
               data-content-value={
-                this.state.chosenFileName || "Choose file..."
+                this.state.name || "Choose file..."
               }
             />
           </label>

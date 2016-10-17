@@ -20,11 +20,16 @@ export default class CreateForm extends Component {
       description: "",
 
       // A flag to signify that the document is being created.
-      creating: false
+      creating: false,
+
+      // The initial content of the document,
+      // populated by choosing a file to "upload".
+      content: ""
     }
 
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleFileChosen = this.handleFileChosen.bind(this)
     this.setTitleInput = this.setTitleInput.bind(this)
   }
 
@@ -39,8 +44,15 @@ export default class CreateForm extends Component {
   handleSubmit(event) {
 
     const {
-      state: { title, description },
-      props: { createDocument, router }
+      state: {
+        title,
+        description,
+        content
+      },
+      props: {
+        createDocument,
+        router
+      }
     } = this
 
     event.preventDefault()
@@ -50,7 +62,7 @@ export default class CreateForm extends Component {
       this.focusTitle()
     } else {
       this.setState({ creating: true })
-      createDocument(title, description)
+      createDocument(title, description, content)
         .then((id) => router.push("/" + id))
     }
   }
@@ -62,6 +74,15 @@ export default class CreateForm extends Component {
   focusTitle() {
     if(this.titleInput){
       this.titleInput.focus()
+    }
+  }
+
+  handleFileChosen(title, content){
+
+    this.setState({content})
+
+    if(!this.state.title){
+      this.setState({title})
     }
   }
   
@@ -77,6 +98,7 @@ export default class CreateForm extends Component {
         <form onSubmit={this.handleSubmit}>
 
           <TitleFormGroup
+            value={this.state.title}
             titleDanger={titleDanger}
             handleChange={this.handleChange}
             setTitleInput={this.setTitleInput}
@@ -84,7 +106,7 @@ export default class CreateForm extends Component {
 
           <DescriptionFormGroup handleChange={this.handleChange} />
 
-          <ContentUploadFormGroup />
+          <ContentUploadFormGroup onFileChosen={this.handleFileChosen}/>
 
           <div className="form-group row">
             <div className="offset-sm-2 col-sm-10">
