@@ -3,8 +3,9 @@ import { withRouter } from 'react-router'
 import withShare from '../share/withShare'
 import StringBinding from '../share/StringBinding'
 import { timeFormat } from 'd3-time-format'
+import { now } from '../share/methods'
 
-const dateFormat = timeFormat("%B %d, %Y")
+const dateFormat = timeFormat('%B %d, %Y')
 
 class Document extends Component {
 
@@ -22,7 +23,7 @@ class Document extends Component {
     mountDocument(id).then((doc) => {
 
       // Increment the view count.
-      doc.submitOp({p:["views"], na: 1})
+      doc.submitOp({p:['views'], na: 1})
 
       // Stash the doc reference for later use.
       this.doc = doc
@@ -31,7 +32,19 @@ class Document extends Component {
       this.updateStateFromDoc()
 
       // Update the state on any doc change.
-      doc.on('op', this.updateStateFromDoc.bind(this))
+      doc.on('op', (op, isLocal) => {
+
+        // If the content is changed locally, set the updatedDate to now.
+        if(isLocal && op[0].p[0] !== "updatedDate"){
+          doc.submitOp({
+            p: ["updatedDate"],
+            od: doc.data.updatedDate,
+            oi: now()
+          })
+        }
+
+        this.updateStateFromDoc()
+      })
 
       // Trigger first rendering with document.
       this.setState({ documentMounted: true })
