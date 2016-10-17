@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router'
 import withShare from '../share/withShare'
 import StringBinding from '../share/StringBinding'
+import { timeFormat } from 'd3-time-format'
+
+const dateFormat = timeFormat("%B %d, %Y")
 
 class Document extends Component {
 
@@ -35,15 +38,19 @@ class Document extends Component {
   }
 
   render() {
-    const doc = this.doc
     if(this.state.subscribed){
+
+      const { views, createdDate, updatedDate } = this.state
+      const created = dateFormat(new Date(createdDate))
+      const updated = dateFormat(new Date(updatedDate))
+
       return (
         <div className="container">
 
           <StringBinding
             className="form-control form-control-lg"
             type="input"
-            doc={doc}
+            doc={this.doc}
             path={["title"]}
           />
 
@@ -51,7 +58,7 @@ class Document extends Component {
             className="form-control"
             type="textarea"
             rows="20"
-            doc={doc}
+            doc={this.doc}
             path={["content"]}
           />
 
@@ -61,15 +68,15 @@ class Document extends Component {
                 className="form-control"
                 type="textarea"
                 rows="10"
-                doc={doc}
+                doc={this.doc}
                 path={["description"]}
               />
             </div>
             <div className="col-sm-3 p-l-0">
               <div className="card card-block">
-                <div>{this.state.views} views</div>
-                <div>Created on {this.state.createdDate}</div>
-                <div>Last updated {this.state.updatedDate}</div>
+                <div>{views} views</div>
+                <div>Created on {created}</div>
+                <div>Last updated {updated}</div>
               </div>
             </div>
           </div>

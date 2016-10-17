@@ -21,7 +21,9 @@ export default class StringBinding extends Component {
 
   render() {
     const props = Object.assign({ref: 'el'}, this.props)
-    props.type = props.doc = props.path = undefined
+    delete props.type
+    delete props.doc
+    delete props.path
     return React.createElement( this.props.type, props)
   }
 }
