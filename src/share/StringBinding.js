@@ -11,8 +11,7 @@ export default class StringBinding extends Component {
 
   componentDidMount() {
     const el = ReactDOM.findDOMNode(this.refs.el)
-    const { doc, path } = this.props
-    this.binding = new ShareDBStringBinding(el, doc, path)
+    this.binding = new ShareDBStringBinding(el, this.props.doc, this.props.path)
     this.binding.setup()
   }
 
@@ -21,9 +20,8 @@ export default class StringBinding extends Component {
   }
 
   render() {
-    return React.createElement( this.props.type, {
-      ref: 'el',
-      className: this.props.className
-    })
+    const props = Object.assign({ref: 'el'}, this.props)
+    props.type = props.doc = props.path = undefined
+    return React.createElement( this.props.type, props)
   }
 }

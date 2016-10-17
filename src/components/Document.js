@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { withRouter } from 'react-router'
 import withShare from '../share/withShare'
 import StringBinding from '../share/StringBinding'
-import './Document.css'
 
 class Document extends Component {
 
@@ -42,34 +41,36 @@ class Document extends Component {
         <div className="container">
 
           <StringBinding
-            className="document-title document-field"
+            className="form-control form-control-lg"
             type="input"
             doc={doc}
             path={["title"]}
           />
 
-          <div>
-            <StringBinding
-              className="form-control document-content"
-              type="textarea"
-              doc={doc}
-              path={["content"]}
-            />
-          </div>
+          <StringBinding
+            className="form-control"
+            type="textarea"
+            rows="20"
+            doc={doc}
+            path={["content"]}
+          />
 
           <div className="row">
-            <div className="col-sm-9">
+            <div className="col-sm-9 p-r-0">
               <StringBinding
-                className="document-field"
+                className="form-control"
                 type="textarea"
+                rows="10"
                 doc={doc}
                 path={["description"]}
               />
             </div>
-            <div className="col-sm-3">
-              <div>{this.state.views} views</div>
-              <div>Created on {this.state.createdDate}</div>
-              <div>Last updated {this.state.updatedDate}</div>
+            <div className="col-sm-3 p-l-0">
+              <div className="card card-block">
+                <div>{this.state.views} views</div>
+                <div>Created on {this.state.createdDate}</div>
+                <div>Last updated {this.state.updatedDate}</div>
+              </div>
             </div>
           </div>
         </div>
