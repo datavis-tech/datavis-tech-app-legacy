@@ -6,6 +6,11 @@ The client portion was bootstrapped with [Create React App](https://github.com/f
 
 # Server
 
+```
+npm run serve &
+npm start
+```
+
 References:
 
  * [Example Node Server w/ Babel](https://github.com/babel/example-node-server)
