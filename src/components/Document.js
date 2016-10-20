@@ -7,6 +7,7 @@ import { now } from '../share/methods'
 
 const dateFormat = timeFormat('%B %d, %Y')
 
+// TODO see about abstracting elements common to Document and Vis
 class Document extends Component {
 
   constructor() {

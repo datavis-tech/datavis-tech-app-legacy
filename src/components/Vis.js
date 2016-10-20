@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import withShare from '../share/withShare'
 import { withRouter } from 'react-router'
 
+// TODO see about abstracting elements common to Document and Vis
 class Vis extends Component {
 
   constructor() {
