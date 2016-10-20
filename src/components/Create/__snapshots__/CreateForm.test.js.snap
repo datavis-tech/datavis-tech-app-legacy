@@ -19,7 +19,8 @@ exports[`test renders 1`] = `
           className="form-control"
           id="title"
           onChange={[Function bound handleChange]}
-          type="text" />
+          type="text"
+          value="" />
       </div>
     </div>
     <div
@@ -54,7 +55,7 @@ exports[`test renders 1`] = `
           <input
             className="custom-file-input"
             id="file"
-            onChange={[Function onChange]}
+            onChange={[Function bound handleChange]}
             type="file" />
           <span
             className="custom-file-control"
@@ -99,7 +100,8 @@ exports[`test validates against empty title and provides feedback 1`] = `
           className="form-control form-control-danger"
           id="title"
           onChange={[Function bound handleChange]}
-          type="text" />
+          type="text"
+          value="" />
         <div
           className="form-control-feedback title-feedback">
           A title is required.
@@ -138,7 +140,7 @@ exports[`test validates against empty title and provides feedback 1`] = `
           <input
             className="custom-file-input"
             id="file"
-            onChange={[Function onChange]}
+            onChange={[Function bound handleChange]}
             type="file" />
           <span
             className="custom-file-control"

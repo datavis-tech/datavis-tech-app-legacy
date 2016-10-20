@@ -9,6 +9,7 @@ import Create from './components/Create'
 import Consulting from './components/Consulting'
 import About from './components/About'
 import Document from './components/Document'
+import Vis from './components/Vis'
 
 const routes = (
   <Route path="/" component={App}>
@@ -17,6 +18,7 @@ const routes = (
     <Route path="about" component={About}/>
     <Route path="create" component={Create}/>
     <Route path=":id" component={Document}/>
+    <Route path="vis/:id" component={Vis}/>
   </Route>
 )
 

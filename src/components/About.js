@@ -1,7 +1,7 @@
 import React from 'react'
 
 const About = () => (
-  <div className="container-fluid">
+  <div className="container">
     <h1>About</h1>
   </div>
 )

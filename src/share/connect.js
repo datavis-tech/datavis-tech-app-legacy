@@ -1,5 +1,7 @@
-// This module exposes a singleton WebSocket connection to the ShareDB server.
-
+/**
+ * This module exposes an asynchronous function that
+ * makes a WebSocket connection to the ShareDB server.
+ */
 import { Connection } from 'sharedb/lib/client'
 import { port } from '../config'
 const url = 'ws://' + window.location.hostname + ':' + port
