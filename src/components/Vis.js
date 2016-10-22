@@ -43,6 +43,24 @@ class Vis extends Component {
       title,
       content
     })
+
+    const idMatches = content.match(/{{........-....-4...-....-............}}/g)
+
+    const { mountDocument } = this.props
+
+    idMatches.forEach((idMatch) => {
+      const id = idMatch.replace(/{|}/g, '')
+      mountDocument(id).then((doc) => {
+
+        // TODO make this more reliable, refactor into
+        // state.rawContent
+        // state.contentReferences = [ { idMatch -> referencedContent} ]
+        // state.content = f(rawContent, contentReferences)
+        this.setState({
+          content: content.replace(idMatch, doc.data.content)
+        })
+      })
+    })
   }
 
   render() {
