@@ -58,42 +58,52 @@ class Vis extends Component {
     const idMatches = this.state.rawContent.match(idMatchRegex) || []
 
     const { mountDocument } = this.props
+    const { contentReferences } = this.state
 
     Promise.all(idMatches
       .map((idMatch) => {
-        const id = idMatch.replace(/{|}/g, '')
 
-        // TODO unmount this document on component unmount
-        return mountDocument(id).then((doc) => {
-          const updateContentReference = () => {
-            this.setState({
-              contentReferences: Object.assign(this.state.contentReferences, {
-                [idMatch]: doc.data.content
+        if(!(idMatch in contentReferences)){
+
+          const id = idMatch.replace(/{|}/g, '')
+
+          // TODO unmount this document on component unmount
+          return mountDocument(id).then((doc) => {
+            const updateContentReference = () => {
+              this.setState({
+                contentReferences: Object.assign(contentReferences, {
+                  [idMatch]: doc.data.content
+                })
               })
-            })
-          }
-          updateContentReference()
-          doc.on('op', (ops) => {
-            if(ops.some((op) => op.p[0] === 'content')){
-              updateContentReference()
-              this.updateContent()
             }
+            updateContentReference()
+
+            const listener = (ops) => {
+              if(ops.some((op) => op.p[0] === 'content')){
+                updateContentReference()
+                this.updateContent()
+              }
+            }
+
+            // TODO unsubscribe using removeListener(eventName, listener)
+            doc.on('op', listener)
           })
-        })
+        } else {
+          return Promise.resolve()
+        }
       })
     ).then(() => {
       this.updateContent()
     })
   }
 
+  // Replaces all ids referenced in rawContent with their corresponding document content.
   updateContent() {
-    const { contentReferences, rawContent } = this.state
-    this.setState({
-      content: Object.keys(contentReferences)
-        .reduce((content, idMatch) => {
-          return content.replace(idMatch, contentReferences[idMatch])
-        }, rawContent)
-    })
+    const content = Object.keys(this.state.contentReferences)
+      .reduce((content, idMatch) => {
+        return content.replace(idMatch, this.state.contentReferences[idMatch])
+      }, this.state.rawContent)
+    this.setState({ content })
   }
 
   render() {
