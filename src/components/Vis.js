@@ -8,7 +8,8 @@ class Vis extends Component {
   constructor() {
     super()
     this.state = {
-      documentMounted: false
+      documentMounted: false,
+      contentReferences: {}
     }
   }
 
@@ -28,9 +29,7 @@ class Vis extends Component {
       this.updateStateFromDoc()
 
       // Update the state on any doc change.
-      doc.on('op', (op, isLocal) => {
-        this.updateStateFromDoc()
-      })
+      doc.on('op', () => { this.updateStateFromDoc() })
 
       // Trigger first rendering with document.
       this.setState({ documentMounted: true })
@@ -38,28 +37,62 @@ class Vis extends Component {
   }
 
   updateStateFromDoc() {
-    const { title, content } = this.doc.data
-    this.setState({
+    const {
       title,
-      content
-    })
+      content:rawContent
+    } = this.doc.data
 
-    const idMatches = content.match(/{{........-....-4...-....-............}}/g)
+    if(title !== this.state.title){
+      this.setState({ title })
+    }
+    
+    if(rawContent !== this.state.rawContent){
+      this.setState({ rawContent })
+      this.updateReferences()
+    }
+  }
+
+  updateReferences() {
+
+    const idMatchRegex = /{{........-....-4...-....-............}}/g
+    const idMatches = this.state.rawContent.match(idMatchRegex)
 
     const { mountDocument } = this.props
 
-    idMatches.forEach((idMatch) => {
-      const id = idMatch.replace(/{|}/g, '')
-      mountDocument(id).then((doc) => {
+    Promise.all(idMatches
+      .map((idMatch) => {
+        const id = idMatch.replace(/{|}/g, '')
 
-        // TODO make this more reliable, refactor into
-        // state.rawContent
-        // state.contentReferences = [ { idMatch -> referencedContent} ]
-        // state.content = f(rawContent, contentReferences)
-        this.setState({
-          content: content.replace(idMatch, doc.data.content)
+        // TODO unmount this document on component unmount
+        return mountDocument(id).then((doc) => {
+          const updateContentReference = () => {
+            this.setState({
+              contentReferences: Object.assign(this.state.contentReferences, {
+                [idMatch]: doc.data.content
+              })
+            })
+          }
+          updateContentReference()
+          doc.on('op', (ops) => {
+            if(ops.some((op) => op.p[0] === 'content')){
+              updateContentReference()
+              this.updateContent()
+            }
+          })
         })
       })
+    ).then(() => {
+      this.updateContent()
+    })
+  }
+
+  updateContent() {
+    const { contentReferences, rawContent } = this.state
+    this.setState({
+      content: Object.keys(contentReferences)
+        .reduce((content, idMatch) => {
+          return content.replace(idMatch, contentReferences[idMatch])
+        }, rawContent)
     })
   }
 
