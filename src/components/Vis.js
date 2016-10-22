@@ -55,7 +55,7 @@ class Vis extends Component {
   updateReferences() {
 
     const idMatchRegex = /{{........-....-4...-....-............}}/g
-    const idMatches = this.state.rawContent.match(idMatchRegex)
+    const idMatches = this.state.rawContent.match(idMatchRegex) || []
 
     const { mountDocument } = this.props
 
