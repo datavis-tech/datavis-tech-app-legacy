@@ -23,7 +23,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom --coverage",
-    "serve": "babel-node src/server.js --presets es2015"
+    "serve": "babel-node src/server/index.js --presets es2015"
   },
   "eslintConfig": {
     "extends": "./node_modules/react-scripts/config/eslint.js"
