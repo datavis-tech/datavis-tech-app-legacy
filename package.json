@@ -13,6 +13,8 @@
   "dependencies": {
     "classnames": "^2.2.5",
     "d3-time-format": "^2.0.2",
+    "express": "^4.14.0",
+    "express-session": "^1.14.1",
     "node-uuid": "^1.4.7",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
