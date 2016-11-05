@@ -7,13 +7,27 @@ The client portion was bootstrapped with [Create React App](https://github.com/f
 # Server
 
 ```
+# Install dependencies
+cd datavis-tech
+npm install
+
+# Set up NGINX proxy server on port 80 that forwards to ports 8080 and 3000.
+sudo apt-get install nginx
+cp ./nginx.conf /etc/nginx/sites-enabled/default
+sudo service nginx restart
+
+# Start the API server on port 8080 (in the background)
 npm run serve &
+
+# Start the WebPack dev server on port 3000
 npm start
+
 ```
 
 References:
 
  * [Example Node Server w/ Babel](https://github.com/babel/example-node-server)
+ * [NGINX Beginners Guide: Setting Up a Simple Proxy Server](http://nginx.org/en/docs/beginners_guide.html#proxy)
 
 # Workflow
 
