@@ -30,10 +30,12 @@ const Navbar = () => (
         </li>
 
       </ul>
-      <form className="form-inline pull-xs-right">
+      <form className="form-inline float-xs-right">
         <Link to="/create" className="btn btn-primary" activeStyle={{display: "none"}}>
           Create
-        </Link>
+        </Link> <a href="/api/auth/github" className="btn btn-primary">
+          Log in
+        </a>
       </form>
     </div>
   </nav>
