@@ -3,8 +3,7 @@
  * makes a WebSocket connection to the ShareDB server.
  */
 import { Connection } from 'sharedb/lib/client'
-import { port } from '../server/config'
-const url = 'ws://' + window.location.hostname + ':' + port
+const url = 'ws://' + window.location.hostname + '/api'
 
 export default function connect(){
   return new Promise((resolve, reject) => {
