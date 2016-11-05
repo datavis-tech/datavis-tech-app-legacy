@@ -1,9 +1,13 @@
 import session from 'express-session'
-import { SESSION_SECRET } from './config'
-
 import passport from 'passport';
 import passportGitHub from 'passport-github';
-import { GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET } from './config';
+
+import {
+  SESSION_SECRET,
+  GITHUB_CLIENT_ID,
+  GITHUB_CLIENT_SECRET,
+  GITHUB_CALLBACK_URL
+} from './config';
 
 const routes = (app) => {
   app.get('/auth/failed', (req, res) => {
@@ -35,7 +39,7 @@ const routes = (app) => {
 
 const initPassport = () => {
 
-  const GitHubStrategy = passportGitHub.Strategy;
+  const GitHubStrategy = passportGitHub.Strategy
 
   passport.serializeUser(  (user, done) => done(null, user))
   passport.deserializeUser((user, done) => done(null, user))
@@ -43,7 +47,7 @@ const initPassport = () => {
   passport.use(new GitHubStrategy({
       clientID: GITHUB_CLIENT_ID,
       clientSecret: GITHUB_CLIENT_SECRET,
-      callbackURL: "http://127.0.0.1:8080/auth/github/callback"
+      callbackURL: GITHUB_CALLBACK_URL
     },
     (accessToken, refreshToken, profile, cb) => {
       setTimeout(() => {
