@@ -9,12 +9,17 @@ import {
   GITHUB_CALLBACK_URL
 } from './config';
 
+const AUTH_PATH = '/api/auth'
+const FAILURE_REDIRECT = AUTH_PATH + '/failed'
+const SUCCESS_REDIRECT = '/'
+const LOGOUT_REDIRECT = SUCCESS_REDIRECT
+
 const routes = (app) => {
-  app.get('/auth/failed', (req, res) => {
+  app.get(AUTH_PATH + '/failed', (req, res) => {
     res.send('Authentication failed')
   })
 
-  app.get('/auth/check', (req, res) => {
+  app.get(AUTH_PATH + '/check', (req, res) => {
     if(req.user){
       res.send('Logged in')
     } else {
@@ -22,18 +27,18 @@ const routes = (app) => {
     }
   })
 
-  app.get('/auth/github', passport.authenticate('github'))
+  app.get(AUTH_PATH + '/github', passport.authenticate('github'))
 
-  app.get('/auth/github/callback', 
+  app.get(AUTH_PATH + '/github/callback', 
     passport.authenticate('github', {
-      failureRedirect: '/auth/failed'
+      failureRedirect: FAILURE_REDIRECT
     }),
-    (req, res) => res.redirect('/')
+    (req, res) => res.redirect(SUCCESS_REDIRECT)
   )
 
-  app.get('/auth/logout', (req, res) => {
+  app.get(AUTH_PATH + '/logout', (req, res) => {
     req.logout()
-    res.redirect('/')
+    res.redirect(LOGOUT_REDIRECT)
   })
 }
 
@@ -41,7 +46,7 @@ const initPassport = () => {
 
   const GitHubStrategy = passportGitHub.Strategy
 
-  passport.serializeUser(  (user, done) => done(null, user))
+  passport.serializeUser((user, done) => done(null, user))
   passport.deserializeUser((user, done) => done(null, user))
 
   passport.use(new GitHubStrategy({

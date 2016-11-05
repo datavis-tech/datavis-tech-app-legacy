@@ -13,7 +13,7 @@ npm install
 
 # Set up NGINX proxy server on port 80 that forwards to ports 8080 and 3000.
 sudo apt-get install nginx
-cp ./nginx.conf /etc/nginx/sites-enabled/default
+sudo cp ./nginx.conf /etc/nginx/sites-enabled/default
 sudo service nginx restart
 
 # Start the API server on port 8080 (in the background)
