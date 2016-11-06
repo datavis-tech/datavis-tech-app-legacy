@@ -1,13 +1,13 @@
 import session from 'express-session'
-import passport from 'passport';
-import passportGitHub from 'passport-github';
+import passport from 'passport'
+import passportGitHub from 'passport-github'
 
 import {
   SESSION_SECRET,
   GITHUB_CLIENT_ID,
   GITHUB_CLIENT_SECRET,
   GITHUB_CALLBACK_URL
-} from './config';
+} from './config'
 
 const AUTH_PATH = '/api/auth'
 const FAILURE_REDIRECT = AUTH_PATH + '/failed'
@@ -56,12 +56,12 @@ const initPassport = () => {
     },
     (accessToken, refreshToken, profile, cb) => {
       setTimeout(() => {
-        var user = { id: profile.id };
+        var user = { id: profile.id }
         cb(null, user)
       }, 500)
       //User.findOrCreate({ githubId: profile.id }, function (err, user) {
-      //  return cb(err, user);
-      //});
+      //  return cb(err, user)
+      //})
     }
   ))
   return passport.initialize()
