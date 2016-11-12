@@ -31,10 +31,9 @@ export const session = (app) => {
 export const getSession = (ws, callback) => {
   const cookies = cookie.parse(ws.upgradeReq.headers.cookie)
   const sid = cookieParser.signedCookie(cookies['connect.sid'], SESSION_SECRET)
-  // TODO get the session from the store
-  //store.get(sid, (err, ss) => {
-  //  store.createSession(ws.upgradeReq, ss)
-  //})
-  // TODO adopt https://www.npmjs.com/package/connect-redis
-  callback(null, sid)
+  sessionStore.get(sid, (err, ss) => {
+    if(err) return callback(err)
+    sessionStore.createSession(ws.upgradeReq, ss)
+    callback(null, ws.upgradeReq.session)
+  })
 }
