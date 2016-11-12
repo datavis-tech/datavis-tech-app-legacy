@@ -1,4 +1,3 @@
-import session from 'express-session'
 import passport from 'passport'
 import passportGitHub from 'passport-github'
 
@@ -68,17 +67,8 @@ const initPassport = () => {
 }
 
 export default (app) => {
-
-  app.use(session({
-    secret: SESSION_SECRET,
-    resave: false,
-    saveUninitialized: true
-  }))
-
   app.use(initPassport())
   app.use(passport.session())
-
   routes(app)
-
   return passport
 }
