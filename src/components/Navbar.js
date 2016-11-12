@@ -35,28 +35,18 @@ const Navbar = ({ isLoggedIn }) => (
       <form className="form-inline float-xs-right">
         <Link to="/create" className="btn btn-primary" activeStyle={{display: "none"}}>
           Create
-        </Link> {(() => {
-          if(isLoggedIn){
-            return (
-              <a href="/todo/logout" className="btn btn-primary">
-                Log out
-              </a>
-            )
-          } else {
-            return (
-              <a href="/api/auth/github" className="btn btn-primary">
-                Log in
-              </a>
-            )
-          }
-        })()}
+        </Link> {
+          isLoggedIn ? (
+            <a href="/api/auth/logout" className="btn btn-primary">Log out</a>
+          ) : (
+            <a href="/api/auth/github" className="btn btn-primary">Log in</a>
+          )
+        }
       </form>
     </div>
   </nav>
 )
 
-const mapStateToProps = (state) => ({
-  isLoggedIn: state.user.isLoggedIn
-})
+const mapStateToProps = ({ user: {isLoggedIn}}) => ({ isLoggedIn })
 
 export default connect(mapStateToProps)(Navbar)
