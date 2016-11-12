@@ -13,27 +13,13 @@ const SUCCESS_REDIRECT = '/'
 const LOGOUT_REDIRECT = SUCCESS_REDIRECT
 
 const routes = (app) => {
-  app.get(AUTH_PATH + '/failed', (req, res) => {
-    res.send('Authentication failed')
-  })
-
-  app.get(AUTH_PATH + '/user', (req, res) => {
-    if(req.user){
-      res.send(JSON.stringify(req.user))
-    } else {
-      res.send('null')
-    }
-  })
-
+  app.get(AUTH_PATH + '/failed', (req, res) => res.send('Authentication failed'))
+  app.get(AUTH_PATH + '/user', (req, res) => res.json(req.user || null))
   app.get(AUTH_PATH + '/github', passport.authenticate('github'))
-
   app.get(AUTH_PATH + '/github/callback', 
-    passport.authenticate('github', {
-      failureRedirect: FAILURE_REDIRECT
-    }),
+    passport.authenticate('github', { failureRedirect: FAILURE_REDIRECT }),
     (req, res) => res.redirect(SUCCESS_REDIRECT)
   )
-
   app.get(AUTH_PATH + '/logout', (req, res) => {
     req.logout()
     res.redirect(LOGOUT_REDIRECT)
@@ -54,8 +40,7 @@ const initPassport = () => {
     },
     (accessToken, refreshToken, profile, cb) => {
       setTimeout(() => {
-        var user = { id: profile.id }
-        cb(null, user)
+        cb(null, profile)
       }, 500)
       //User.findOrCreate({ githubId: profile.id }, function (err, user) {
       //  return cb(err, user)

@@ -14,13 +14,16 @@ export const fetchUser = () => (dispatch) => {
 
 export default (state = {}, action) => {
   switch (action.type) {
+
     case REQUEST_USER:
       return { isFetching: true }
+
     case RECEIVE_USER:
       return Object.assign({
         isFetching: false,
         isLoggedIn: action.json !== null
       }, action.json)
+
     default:
       return state
   }

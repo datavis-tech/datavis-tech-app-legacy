@@ -8,7 +8,7 @@ export default class ContentUploadFormGroup extends Component {
     this.state = {}
   }
   
-  handleChange(event) {
+  handleChange() {
 
     const files = this.fileInput.files
 
@@ -19,7 +19,7 @@ export default class ContentUploadFormGroup extends Component {
 
       reader.addEventListener('load', () => {
         this.setChosenFile(file.name, reader.result)
-      });
+      })
 
       reader.readAsText(file)
     } else {
@@ -53,9 +53,7 @@ export default class ContentUploadFormGroup extends Component {
             />
             <span
               className="custom-file-control"
-              data-content-value={
-                this.state.name || "Choose file..."
-              }
+              data-content-value={this.state.name || 'Choose file...'}
             />
           </label>
         </div>
