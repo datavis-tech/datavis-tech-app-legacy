@@ -6,13 +6,14 @@ const requestUser = () => ({ type: REQUEST_USER })
 export const fetchUser = () => (dispatch) => {
   dispatch(requestUser())
 
-  // TODO use fetch here to invoke /api/auth/user
+  fetch('/api/auth/user', { credentials: 'same-origin' })
+    .then((response) => response.json())
+    .then((json) => console.log(json))
 }
 
 export default (state = {}, action) => {
   switch (action.type) {
-    case FETCH_USER:
-      console.log('should fetch user')
+    case REQUEST_USER:
       return { isFetching: true }
     default:
       return state
