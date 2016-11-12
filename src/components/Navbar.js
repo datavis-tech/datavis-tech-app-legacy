@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link, IndexLink } from 'react-router'
-const Navbar = () => (
+import { connect } from 'react-redux'
+
+const Navbar = ({ isLoggedIn }) => (
   <nav className="navbar navbar-light bg-faded">
 
     <div className="container">
@@ -33,11 +35,28 @@ const Navbar = () => (
       <form className="form-inline float-xs-right">
         <Link to="/create" className="btn btn-primary" activeStyle={{display: "none"}}>
           Create
-        </Link> <a href="/api/auth/github" className="btn btn-primary">
-          Log in
-        </a>
+        </Link> {(() => {
+          if(isLoggedIn){
+            return (
+              <a href="/todo/logout" className="btn btn-primary">
+                Log out
+              </a>
+            )
+          } else {
+            return (
+              <a href="/api/auth/github" className="btn btn-primary">
+                Log in
+              </a>
+            )
+          }
+        })()}
       </form>
     </div>
   </nav>
 )
-export default Navbar
+
+const mapStateToProps = (state) => ({
+  isLoggedIn: state.user.isLoggedIn
+})
+
+export default connect(mapStateToProps)(Navbar)
