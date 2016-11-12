@@ -18,11 +18,11 @@ const routes = (app) => {
     res.send('Authentication failed')
   })
 
-  app.get(AUTH_PATH + '/check', (req, res) => {
+  app.get(AUTH_PATH + '/user', (req, res) => {
     if(req.user){
-      res.send('Logged in')
+      res.send(JSON.stringify(req.user))
     } else {
-      res.send('Not logged in')
+      res.send('null')
     }
   })
 
