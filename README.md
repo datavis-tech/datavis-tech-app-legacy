@@ -24,6 +24,8 @@ Install dependencies.
 npm install
 ```
 
+## NGINX
+
 Set up the NGINX proxy server. This configuration:
 
  * serves on port 80,
@@ -37,6 +39,24 @@ sudo apt-get install nginx
 sudo cp ./nginx.conf /etc/nginx/sites-enabled/default
 sudo service nginx restart
 ```
+
+## Redis
+
+Install Reids, from [https://www.digitalocean.com/community/tutorials/how-to-install-and-use-redis](Digital Ocean: How to Install and Use Redis).
+
+```
+wget http://download.redis.io/releases/redis-stable.tar.gz
+tar xzf redis-stable.tar.gz
+cd redis-stable
+make
+sudo make install
+cd utils
+sudo ./install_server.sh
+```
+
+Choose all the default settings.
+
+## Starting the Server
 
 Start the API server on port 8080 (in the background).
 
@@ -57,7 +77,3 @@ Access [http://localhost](http://localhost). Note that this is running on port 8
 
  * [Example Node Server w/ Babel](https://github.com/babel/example-node-server)
  * [NGINX Beginners Guide: Setting Up a Simple Proxy Server](http://nginx.org/en/docs/beginners_guide.html#proxy)
-
-# Docker
-
- * [Install Docker on Ubuntu](https://docs.docker.com/engine/installation/linux/ubuntulinux/)
