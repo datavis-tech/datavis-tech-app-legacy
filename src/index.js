@@ -3,6 +3,12 @@ import ReactDOM from 'react-dom'
 import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 import ShareProvider from './share/ShareProvider'
 
+import { createStore, applyMiddleware } from 'redux'
+import { Provider } from 'react-redux'
+import thunk from 'redux-thunk'
+import rootReducer from './reducers/root'
+import { fetchUser } from './reducers/user'
+
 import App from './components/App'
 import Home from './components/Home'
 import Create from './components/Create'
@@ -22,11 +28,19 @@ const routes = (
   </Route>
 )
 
-ReactDOM.render(
-  <ShareProvider>
-    <Router history={browserHistory}>
-      {routes}
-    </Router>
-  </ShareProvider>,
-  document.getElementById('root')
+const store = createStore(rootReducer, applyMiddleware(thunk))
+
+const Root = (
+  <Provider store={store}>
+    <ShareProvider>
+      <Router history={browserHistory}>
+        {routes}
+      </Router>
+    </ShareProvider>
+  </Provider>
 )
+
+ReactDOM.render(Root, document.getElementById('root'))
+
+// Fetch data about the currently logged in user.
+store.dispatch(fetchUser())
