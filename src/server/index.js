@@ -17,6 +17,8 @@ auth(app)
 
 wss.on('connection', (ws) => {
   getSession(ws, (err, session) => {
+
+    // TODO use this session for access control.
     console.log(session)
   })
   sharedb.listen(new JSONStream(ws))
