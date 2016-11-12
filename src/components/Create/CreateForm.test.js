@@ -3,8 +3,8 @@ import renderer from 'react-test-renderer'
 import CreateForm from './CreateForm'
 
 it('renders', () => {
-  const tree = renderer.create(<CreateForm/>).toJSON();
-  expect(tree).toMatchSnapshot();
+  const tree = renderer.create(<CreateForm/>).toJSON()
+  expect(tree).toMatchSnapshot()
 })
 
 it('validates against empty title and provides feedback', () => {

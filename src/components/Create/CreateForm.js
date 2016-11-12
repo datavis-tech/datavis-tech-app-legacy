@@ -10,21 +10,21 @@ export default class CreateForm extends Component {
     this.state = {
 
       // The text from the title input field.
-      title: "",
+      title: '',
 
       // A flag to trigger validation feedback
       // when the form was submitted with no title present.
       titleDanger: false,
 
       // The text from the description input field.
-      description: "",
+      description: '',
 
       // A flag to signify that the document is being created.
       creating: false,
 
       // The initial content of the document,
-      // populated by choosing a file to "upload".
-      content: ""
+      // populated by choosing a file to 'upload'.
+      content: ''
     }
 
     this.handleChange = this.handleChange.bind(this)
@@ -63,7 +63,7 @@ export default class CreateForm extends Component {
     } else {
       this.setState({ creating: true })
       createDocument(title, description, content)
-        .then((id) => router.push("/" + id))
+        .then((id) => router.push('/' + id))
     }
   }
 

@@ -5,6 +5,8 @@
   "devDependencies": {
     "babel-cli": "^6.16.0",
     "babel-preset-es2015": "^6.16.0",
+    "eslint": "^3.10.0",
+    "eslint-plugin-react": "^6.6.0",
     "express": "^4.14.0",
     "express-session": "^1.14.1",
     "passport": "^0.3.2",
@@ -33,9 +35,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom --coverage",
-    "serve": "babel-node src/server/index.js --presets es2015"
-  },
-  "eslintConfig": {
-    "extends": "./node_modules/react-scripts/config/eslint.js"
+    "serve": "babel-node src/server/index.js --presets es2015",
+    "lint": "./node_modules/.bin/eslint ./src/"
   }
 }

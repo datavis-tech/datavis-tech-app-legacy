@@ -80,4 +80,4 @@ export default class ShareProvider extends Component {
 
 ShareProvider.childContextTypes = {
   share: React.PropTypes.object
-};
+}

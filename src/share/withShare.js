@@ -7,7 +7,7 @@
  */
 import React from 'react'
 
-export default function withShare(Component) {
+const withShare = (Component) => {
   const WithShare = (props, context) => (
     <Component {...props} {...context.share} />
   )
@@ -16,3 +16,5 @@ export default function withShare(Component) {
   }
   return WithShare
 }
+
+export default withShare

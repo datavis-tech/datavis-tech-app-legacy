@@ -36,9 +36,9 @@ class Document extends Component {
       doc.on('op', (op, isLocal) => {
 
         // If the content is changed locally, set the updatedDate to now.
-        if(isLocal && op[0].p[0] !== "updatedDate"){
+        if(isLocal && op[0].p[0] !== 'updatedDate'){
           doc.submitOp({
-            p: ["updatedDate"],
+            p: ['updatedDate'],
             od: doc.data.updatedDate,
             oi: now()
           })
@@ -74,7 +74,7 @@ class Document extends Component {
             className="form-control form-control-lg"
             type="input"
             doc={this.doc}
-            path={["title"]}
+            path={['title']}
           />
 
           <StringBinding
@@ -82,7 +82,7 @@ class Document extends Component {
             type="textarea"
             rows="20"
             doc={this.doc}
-            path={["content"]}
+            path={['content']}
           />
 
           <div className="row">
@@ -92,7 +92,7 @@ class Document extends Component {
                 type="textarea"
                 rows="10"
                 doc={this.doc}
-                path={["description"]}
+                path={['description']}
               />
             </div>
             <div className="col-md-3">

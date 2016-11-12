@@ -6,9 +6,9 @@ export const titleFeedbackText = 'A title is required.'
 const TitleFormGroup = ({titleDanger, handleChange, setTitleInput, value}) => (
   <div
     className={classNames({
-      "form-group": true,
-      "row": true,
-      "has-danger": titleDanger
+      'form-group': true,
+      'row': true,
+      'has-danger': titleDanger
     })}
   >
 
@@ -20,8 +20,8 @@ const TitleFormGroup = ({titleDanger, handleChange, setTitleInput, value}) => (
       <input
         type="text"
         className={classNames({
-          "form-control": true,
-          "form-control-danger": titleDanger
+          'form-control': true,
+          'form-control-danger': titleDanger
         })}
         id="title"
         value={value}
@@ -29,13 +29,13 @@ const TitleFormGroup = ({titleDanger, handleChange, setTitleInput, value}) => (
         ref={setTitleInput}
       />
 
-      {(() => {
-        if (titleDanger){
-          return (
-            <div className="form-control-feedback title-feedback">{titleFeedbackText}</div>
-          )
-        }
-      })()}
+      {
+        titleDanger ? (
+          <div className="form-control-feedback title-feedback">
+            {titleFeedbackText}
+          </div>
+        ) : null
+      }
 
     </div>
   </div>

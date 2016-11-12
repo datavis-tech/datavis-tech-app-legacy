@@ -4,11 +4,11 @@
  * https://github.com/share/sharedb/blob/master/examples/textarea/client.js
  */
 
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+import React, { Component } from 'react'
+import ReactDOM from 'react-dom'
 
 // https://github.com/share/sharedb-string-binding
-import ShareDBStringBinding from 'sharedb-string-binding';
+import ShareDBStringBinding from 'sharedb-string-binding'
 
 export default class StringBinding extends Component {
 

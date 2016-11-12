@@ -112,9 +112,9 @@ class Vis extends Component {
         <h1>{this.state.title}</h1>
         <iframe
           style={{
-            height: "500px",
-            width: "100%",
-            border: "solid 1px #ddd"
+            height: '500px',
+            width: '100%',
+            border: 'solid 1px #ddd'
           }}
           srcDoc={this.state.content}
         />
