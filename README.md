@@ -42,7 +42,12 @@ sudo service nginx restart
 
 ## Redis
 
-Install Reids, from [https://www.digitalocean.com/community/tutorials/how-to-install-and-use-redis](Digital Ocean: How to Install and Use Redis).
+Redis is used for two things in this app:
+
+ * Storing Express user sessions
+ * Providing Publish/Subscribe functionality for ShareDB
+
+Install Redis, from [https://www.digitalocean.com/community/tutorials/how-to-install-and-use-redis](Digital Ocean: How to Install and Use Redis).
 
 ```
 wget http://download.redis.io/releases/redis-stable.tar.gz
@@ -55,6 +60,19 @@ sudo ./install_server.sh
 ```
 
 Choose all the default settings.
+
+## MongoDB
+
+MongoDB stores the persistent ShareDB documents for this app.
+
+Install MongoDB, from [Install MongoDB Community Edition on Ubuntu](https://docs.mongodb.org/manual/tutorial/install-mongodb-on-ubuntu/).
+
+```
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
+echo "deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.2.list
+sudo apt-get update
+sudo apt-get install -y mongodb-org
+```
 
 ## Starting the Server
 

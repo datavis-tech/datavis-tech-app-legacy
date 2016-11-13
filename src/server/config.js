@@ -1,5 +1,5 @@
 // The port of the API server.
-export const port = 8080
+export const PORT = 8080
 
 // The secret used with express-session.
 export const SESSION_SECRET = 'kfn854j3k48emvdhjks85ur93jd29'
@@ -12,3 +12,6 @@ export const GITHUB_CALLBACK_URL = 'http://localhost/api/auth/github/callback'
 // Constants for Redis connection.
 export const REDIS_HOST = '127.0.0.1'
 export const REDIS_PORT = '6379'
+
+// Constants for the MongoDB connection
+export const MONGO_URL = 'mongodb://localhost:27017/test'

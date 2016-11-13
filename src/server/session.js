@@ -30,9 +30,10 @@ export const session = (app) => {
 export const getSession = (ws, callback) => {
   const cookies = cookie.parse(ws.upgradeReq.headers.cookie)
   const sid = cookieParser.signedCookie(cookies['connect.sid'], SESSION_SECRET)
-  sessionStore.get(sid, (err, ss) => {
+  sessionStore.get(sid, (err, session) => {
+    if(!session) return callback(null, null)
     if(err) return callback(err)
-    sessionStore.createSession(ws.upgradeReq, ss)
+    sessionStore.createSession(ws.upgradeReq, session)
     callback(null, ws.upgradeReq.session)
   })
 }
