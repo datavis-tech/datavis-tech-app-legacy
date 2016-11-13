@@ -25,15 +25,14 @@ export const session = (app) => {
   }))
 }
 
-// Gets the session from the WebSocket upgrade request.
+// Populates ws.upgradereq.session with the current Express session.
 // Draws from http://stackoverflow.com/questions/36842159/node-js-ws-and-express-session-how-to-get-session-object-from-ws-upgradereq
 export const getSession = (ws, callback) => {
   const cookies = cookie.parse(ws.upgradeReq.headers.cookie)
   const sid = cookieParser.signedCookie(cookies['connect.sid'], SESSION_SECRET)
   sessionStore.get(sid, (err, session) => {
-    if(!session) return callback(null, null)
-    if(err) return callback(err)
+    if(err || !session) return callback(err)
     sessionStore.createSession(ws.upgradeReq, session)
-    callback(null, ws.upgradeReq.session)
+    callback()
   })
 }

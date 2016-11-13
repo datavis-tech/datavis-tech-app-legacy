@@ -18,12 +18,24 @@ session(app)
 auth(app)
 
 wss.on('connection', (ws) => {
-  getSession(ws, (err, session) => {
-
-    // TODO use the user in this session for access control.
-    console.log(JSON.stringify(session, null, 2))
+  getSession(ws, (err) => {
+    if(err) return console.log(err)
+    sharedb.listen(new JSONStream(ws), ws.upgradeReq)
   })
-  sharedb.listen(new JSONStream(ws))
+})
+
+// Expose the session from initial connection as agent.session.
+sharedb.use('connect', (request, callback) => {
+  request.agent.session = request.req.session
+  callback()
+})
+
+sharedb.use('apply', (request, callback) => {
+
+  // TODO use request.agent.session for access control.
+  //console.log(request.agent.session)
+
+  callback()
 })
 
 server.listen(PORT)
