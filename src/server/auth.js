@@ -33,21 +33,17 @@ const initPassport = () => {
   passport.serializeUser((user, done) => done(null, user))
   passport.deserializeUser((user, done) => done(null, user))
 
-  passport.use(new GitHubStrategy({
+  passport.use(new GitHubStrategy(
+    {
       clientID: GITHUB_CLIENT_ID,
       clientSecret: GITHUB_CLIENT_SECRET,
       callbackURL: GITHUB_CALLBACK_URL
     },
-    (accessToken, refreshToken, profile, cb) => {
-      setTimeout(() => {
-        cb(null, profile)
-      }, 500)
-      //User.findOrCreate({ githubId: profile.id }, function (err, user) {
-      //  return cb(err, user)
-      //})
-    }
+    (accessToken, refreshToken, profile, cb) => cb(null, profile)
   ))
+
   return passport.initialize()
+
 }
 
 export default (app) => {
