@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 import TitleFormGroup from './TitleFormGroup'
 import DescriptionFormGroup from './DescriptionFormGroup'
 import ContentUploadFormGroup from './ContentUploadFormGroup'
+import { connect } from 'react-redux'
 
-export default class CreateForm extends Component {
+class CreateForm extends Component {
   constructor() {
     super()
 
@@ -51,7 +52,8 @@ export default class CreateForm extends Component {
       },
       props: {
         createDocument,
-        router
+        router,
+        owner
       }
     } = this
 
@@ -62,7 +64,9 @@ export default class CreateForm extends Component {
       this.focusTitle()
     } else {
       this.setState({ creating: true })
-      createDocument(title, description, content)
+
+      // TODO migrate to Redux actions for this.
+      createDocument(owner, title, description, content)
         .then((id) => router.push('/' + id))
     }
   }
@@ -133,3 +137,7 @@ export default class CreateForm extends Component {
     )
   }
 }
+
+const mapStateToProps = (state) => ({owner: state.user.id})
+
+export default connect(mapStateToProps)(CreateForm)
