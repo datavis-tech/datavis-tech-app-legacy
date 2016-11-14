@@ -18,8 +18,9 @@ session(app)
 auth(app)
 
 wss.on('connection', (ws) => {
-  getSession(ws, (err) => {
+  getSession(ws, (err, session) => {
     if(err) return console.log(err)
+    ws.upgradeReq.session = session
     sharedb.listen(new JSONStream(ws), ws.upgradeReq)
   })
 })
