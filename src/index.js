@@ -44,4 +44,4 @@ ReactDOM.render(Root, document.getElementById('root'))
 
 // Fetch data about the currently logged in user.
 store.dispatch(fetchUser())
-  .then(() => console.log(JSON.stringify(store.getState().user, null, 2)))
+//  .then(() => console.log(JSON.stringify(store.getState().user, null, 2)))

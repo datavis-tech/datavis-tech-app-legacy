@@ -25,18 +25,28 @@ wss.on('connection', (ws) => {
   })
 })
 
+// Middleware usage inspired by
+// https://github.com/dmapper/sharedb-access/blob/master/lib/index.js
+
 // Expose the session from initial connection as agent.session.
-sharedb.use('connect', (request, callback) => {
+sharedb.use('connect', (request, done) => {
   request.agent.session = request.req.session
-  callback()
+  done()
 })
 
-sharedb.use('apply', (request, callback) => {
+sharedb.use('apply', (request, done) => {
 
-  // TODO use request.agent.session for access control.
-  //console.log(request.agent.session)
+  const { op, agent: { session } } = request
 
-  callback()
+  if(op.create) {
+    const user = session.passport.user
+    const doc = op.create.data
+    doc.owner = user.id
+    //console.log(user)
+    //console.log(doc)
+  }
+
+  done()
 })
 
 server.listen(PORT)
