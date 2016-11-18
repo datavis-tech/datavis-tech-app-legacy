@@ -34,19 +34,24 @@ sharedb.use('connect', (request, done) => {
   done()
 })
 
-sharedb.use('apply', (request, done) => {
+sharedb.use('apply', ({ op, agent: { session } }, done) => {
 
-  const { op, agent: { session } } = request
-
+  // Access control rule:
+  // On document creation, owner must be the logged in user.
   if(op.create) {
-    const user = session.passport.user
-    const doc = op.create.data
-    doc.owner = user.id
-    //console.log(user)
-    //console.log(doc)
+    const user = (
+      session && session.passport && session.passport.user
+      ? session.passport.user
+      : {}
+    )
+    const doc = op.create.data || {}
+    if(!user.id || doc.owner !== user.id) {
+      return done("Error: Document owner must match currently logged in user.")
+    }
   }
 
   done()
 })
+
 
 server.listen(PORT)
