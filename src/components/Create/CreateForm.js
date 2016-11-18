@@ -4,7 +4,7 @@ import DescriptionFormGroup from './DescriptionFormGroup'
 import ContentUploadFormGroup from './ContentUploadFormGroup'
 import { connect } from 'react-redux'
 
-class CreateForm extends Component {
+export default class CreateForm extends Component {
   constructor() {
     super()
 
@@ -52,8 +52,7 @@ class CreateForm extends Component {
       },
       props: {
         createDocument,
-        router,
-        owner
+        router
       }
     } = this
 
@@ -66,7 +65,7 @@ class CreateForm extends Component {
       this.setState({ creating: true })
 
       // TODO migrate to Redux actions for this.
-      createDocument(owner, title, description, content)
+      createDocument(title, description, content)
         .then((id) => router.push('/' + id))
     }
   }
@@ -137,7 +136,3 @@ class CreateForm extends Component {
     )
   }
 }
-
-const mapStateToProps = (state) => ({owner: state.user.id})
-
-export default connect(mapStateToProps)(CreateForm)
