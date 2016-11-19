@@ -25,18 +25,33 @@ wss.on('connection', (ws) => {
   })
 })
 
+// Middleware usage inspired by
+// https://github.com/dmapper/sharedb-access/blob/master/lib/index.js
+
 // Expose the session from initial connection as agent.session.
-sharedb.use('connect', (request, callback) => {
+sharedb.use('connect', (request, done) => {
   request.agent.session = request.req.session
-  callback()
+  done()
 })
 
-sharedb.use('apply', (request, callback) => {
+sharedb.use('apply', ({ op, agent: { session } }, done) => {
 
-  // TODO use request.agent.session for access control.
-  //console.log(request.agent.session)
+  // Access control rule:
+  // On document creation, owner must be the logged in user.
+  if(op.create) {
+    const user = (
+      session && session.passport && session.passport.user
+      ? session.passport.user
+      : {}
+    )
+    const doc = op.create.data || {}
+    if(!user.id || doc.owner !== user.id) {
+      return done("Error: Document owner must match currently logged in user.")
+    }
+  }
 
-  callback()
+  done()
 })
+
 
 server.listen(PORT)
