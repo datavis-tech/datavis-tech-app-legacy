@@ -52,11 +52,7 @@ sharedb.use('apply', (request, done) => {
   } = request
 
   // Get the id of the currently logged in user from the session.
-  const userId = (
-    session && session.passport && session.passport.user
-    ? session.passport.user
-    : {}
-  ).id
+  const userId = get(session, 'passport.user.id')
 
   // Get the owner id.
   const owner = (
