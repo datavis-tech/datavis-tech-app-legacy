@@ -12,7 +12,7 @@ const Error = ({url}) => (
       <div><strong>Error</strong></div>
       <div>There was an error connecting to the WebSocket server.</div>
       <div>Attempting to connect to <code>{url}</code></div>
-      <span>Did you forget to start the WebSocket server using <code>npm run serve</code>?</span>
+      <div>Did you forget to start the WebSocket server using <code>npm run serve</code>?</div>
     </div>
   </div>
 )

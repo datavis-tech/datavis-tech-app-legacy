@@ -17,6 +17,13 @@ import About from './components/About'
 import Document from './components/Document'
 import Vis from './components/Vis'
 
+// For convenience during development, move from port 3000 to port 80.
+// npm start launches on port 3000, but the app only works on port 80
+// because it depends on an NGINX proxy for API invocations (see README).
+if(window.location && window.location.port === "3000"){
+  window.location = 'http://localhost'
+}
+
 const routes = (
   <Route path="/" component={App}>
     <IndexRoute component={Home}/>
