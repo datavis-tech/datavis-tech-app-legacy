@@ -7,6 +7,7 @@ import sharedbMongo from 'sharedb-mongo'
 import { PORT, MONGO_URL } from './config'
 import auth from './auth'
 import { session, getSession } from './session'
+import get from 'lodash/get'
 
 const app = express()
 const server = http.createServer(app)
@@ -34,20 +35,46 @@ sharedb.use('connect', (request, done) => {
   done()
 })
 
-sharedb.use('apply', ({ op, agent: { session } }, done) => {
+// Tests whether the given op increments the view count.
+const incrementsView = (op) => (
+  get(op, 'op[0].p[0]') === 'views'
+  &&
+  get(op, 'op[0].na') === 1
+)
 
-  // Access control rule:
-  // On document creation, owner must be the logged in user.
-  if(op.create) {
-    const user = (
-      session && session.passport && session.passport.user
-      ? session.passport.user
-      : {}
-    )
-    const doc = op.create.data || {}
-    if(!user.id || doc.owner !== user.id) {
-      return done("Error: Document owner must match currently logged in user.")
-    }
+sharedb.use('apply', (request, done) => {
+
+  // Unpack the ShareDB request object.
+  const {
+    op,
+    agent: { session },
+    snapshot
+  } = request
+
+  // Get the id of the currently logged in user from the session.
+  const userId = (
+    session && session.passport && session.passport.user
+    ? session.passport.user
+    : {}
+  ).id
+
+  // Get the owner id.
+  const owner = (
+    op.create
+    ? (op.create.data || {}) // Handle the case of a creation op.
+    : snapshot.data // Handle ops on an existing document.
+  ).owner
+
+  // Access control rules:
+
+  // Allow anyone to increment the view count for any document.
+  if(incrementsView(op)){
+    return done()
+  }
+
+  // For all ops, owner must be the logged in user.
+  else if(!userId || (owner !== userId)) {
+    return done("Error: Document owner must match currently logged in user.")
   }
 
   done()

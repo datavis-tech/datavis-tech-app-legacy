@@ -53,7 +53,6 @@ class Document extends Component {
   }
 
   updateStateFromDoc() {
-    console.log(this.doc.data);
     const { views, createdDate, updatedDate } = this.doc.data
     this.setState({
       views,
