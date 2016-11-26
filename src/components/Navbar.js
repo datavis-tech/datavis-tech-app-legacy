@@ -33,9 +33,17 @@ const Navbar = ({ isLoggedIn }) => (
 
       </ul>
       <form className="form-inline float-xs-right">
-        <Link to="/create" className="btn btn-primary" activeStyle={{display: 'none'}}>
-          Create
-        </Link> {
+        {
+          isLoggedIn ? (
+            <Link
+                to="/create"
+                className="btn btn-primary"
+                activeStyle={{display: 'none'}}
+            >
+              Create
+            </Link>
+          ) : null
+        } {
           isLoggedIn ? (
             <a href="/api/auth/logout" className="btn btn-primary">Log out</a>
           ) : (
