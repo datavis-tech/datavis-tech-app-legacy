@@ -27,7 +27,8 @@ export default (connection) => ({
       content, // A String, the content of the document.
       createdDate: now(), // The creation date as an ISO String.
       updatedDate: now(), // The 'last updated' date as an ISO String.
-      views: 0 // The lifetime count of views
+      views: 0, // The lifetime count of views.
+      version: 0 // The data schema version.
     }
 
     const doc = connection.get(DOCUMENTS, id)
