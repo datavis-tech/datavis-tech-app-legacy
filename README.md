@@ -91,6 +91,78 @@ The tab opened by `npm start` will be broken, as it is using port 3000 and does 
 
 Access [http://localhost](http://localhost). Note that this is running on port 80, which is proxied by NGINX to both the dev server and API server.
 
+# Production Setup
+
+On a fresh Ubuntu instance on AWS:
+
+```bash
+ssh -i cy.pem ubuntu@ec2-52-53-180-21.us-west-1.compute.amazonaws.com
+
+sudo apt-get update
+sudo apt-get install build-essential git nginx -y
+
+wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.32.1/install.sh | bash
+source .bashrc 
+nvm install stable
+
+# See https://docs.mongodb.org/manual/tutorial/install-mongodb-on-ubuntu/
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 0C49F3730359A14518585931BC711F9BA15703C6
+echo "deb http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.4.list
+sudo apt-get update
+sudo apt-get install -y mongodb-org
+
+# from https://www.digitalocean.com/community/tutorials/how-to-install-and-use-redis
+wget http://download.redis.io/releases/redis-stable.tar.gz
+tar xzf redis-stable.tar.gz
+cd redis-stable
+make
+sudo make install
+cd utils
+sudo ./install_server.sh
+
+# setup GitLab SSH key
+ssh-keygen -t rsa -C "curran.kelleher@gmail.com"
+cat ~/.ssh/id_rsa.pub
+
+git clone git@gitlab.com:curran/datavis-tech.git
+cd datavis-tech
+npm install
+
+npm install pm2 -g
+pm2 start process.json
+pm2 startup
+
+# Deploying new code
+ssh -i nv.pem ubuntu@datavis.tech
+cd datavis-tech
+git pull
+npm install
+pm2 reload all
+
+# Using an EBS volume for MongoDB storage
+# see http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-using-volumes.html
+lsblk
+sudo file -s /dev/xvdf
+sudo mkdir /data
+sudo mount /dev/xvdf /data
+sudo cp /etc/fstab /etc/fstab.orig
+sudo vim /etc/fstab
+# paste this: /dev/xvdf       /data   ext4    defaults,nofail        0       2
+sudo mount -a
+
+sudo service mongod stop
+sudo vim /etc/mongod.conf
+# default is: /var/lib/mongodb
+#   dbPath: /data/mongodb
+sudo service mongod start
+tail -f /var/log/mongodb/mongod.log
+
+# To transfer between VMs
+# Old VM
+sudo service mongod stop
+sudo umount /data
+```
+
 # References
 
  * [Example Node Server w/ Babel](https://github.com/babel/example-node-server)
