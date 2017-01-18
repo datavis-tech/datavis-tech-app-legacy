@@ -39,7 +39,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/users', users);
 app.use('/libs', libs);
-app.use('/create', create);
+app.use('/create', create(share));
 
 hbs.registerPartials(__dirname + '/views/partials');
 
