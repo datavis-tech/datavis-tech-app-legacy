@@ -1,11 +1,10 @@
 function documentCreation(callback){
-  casper.test.begin('Document Creation', 6, function(test) {
+  casper.test.begin('Document Creation', 4, function(test) {
     var id;
-    casper.start('http://localhost:3000/', function() {
-      test.assertTitle('Datavis Tech', 'Title is correct');
-      test.assertExists('form[action="create"]', 'Create form is found');
 
-      // Submit the form to create a new document.
+    // Submit the form to create a new document.
+    casper.start('http://localhost:3000/', function() {
+
       this.fill('form[action="create"]', {
         title: "testTitle",
         description: "testDescription"
