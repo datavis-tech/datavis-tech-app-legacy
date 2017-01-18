@@ -14,9 +14,9 @@ module.exports = function (connection){
     doc.fetch(function(err) {
       if(err) return next(err);
       if(doc.type === null) {
-        res.send("No such document");
+        res.send('No such document');
       } else {
-        res.send(JSON.stringify(doc.data));
+        res.render('read', doc.data);
       }
     });
   });
