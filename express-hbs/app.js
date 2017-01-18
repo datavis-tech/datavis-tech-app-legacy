@@ -1,3 +1,8 @@
+// This is the entry point for the application.
+// Generated using express-generator.
+//
+// Curran Kelleher January 2017
+
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -8,6 +13,7 @@ var bodyParser = require('body-parser');
 var index = require('./routes/index');
 var users = require('./routes/users');
 var libs = require('./routes/libs');
+var create = require('./routes/create');
 
 var app = express();
 
@@ -25,6 +31,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/users', users);
 app.use('/libs', libs);
+app.use('/create', create);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
