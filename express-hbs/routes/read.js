@@ -1,5 +1,9 @@
 // This module provides a route that is responsible for
 // reading documents (the R in CRUD).
+//
+// Draws from https://github.com/share/sharedb/blob/master/examples/textarea/server.js
+//
+// Curran Kelleher January 2017
 
 var express = require('express');
 
@@ -7,14 +11,14 @@ module.exports = function (connection){
   var router = express.Router();
 
   router.get('/:id', function(req, res, next) {
-    var id = req.params.id
+    var id = req.params.id;
     var doc = connection.get('documents', id);
 
-    // Draws from https://github.com/share/sharedb/blob/master/examples/textarea/server.js
     doc.fetch(function(err) {
-      if(err) return next(err);
-      if(doc.type === null) {
-        res.send('No such document');
+      if(err){
+        next(err);
+      } else if(doc.type === null) {
+        res.status(404).render('404');
       } else {
         res.render('read', doc.data);
       }
