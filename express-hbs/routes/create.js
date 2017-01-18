@@ -1,9 +1,11 @@
+// This module provides a route that is responsible for
+// creating new documents.
+
 var express = require('express');
 var uuid = require('uuid');
 
-module.exports = function (share){
+module.exports = function (connection){
   var router = express.Router();
-  var connection = share.connect();
 
   router.post('/', function(req, res, next) {
     var id = uuid.v4();
@@ -15,11 +17,8 @@ module.exports = function (share){
     };
 
     doc.create(data, function(err) {
-      if(err) {
-        next(err);
-      } else {
-        res.send("Created document " + id + " \n" + JSON.stringify(req.body, null, 2));
-      }
+      if(err) return next(err);
+      res.send("Created document " + id + " \n" + JSON.stringify(req.body, null, 2));
     });
   });
 

@@ -25,6 +25,9 @@ var app = express();
 // Draws from https://github.com/share/sharedb/blob/master/examples/leaderboard/server/index.js
 var share = ShareDB({db: new ShareDBMingoMemory()});
 
+// Create a persistent ShareDB connection used by multiple routes.
+var connection = share.connect();
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
@@ -39,7 +42,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/users', users);
 app.use('/libs', libs);
-app.use('/create', create(share));
+app.use('/create', create(connection));
 
 hbs.registerPartials(__dirname + '/views/partials');
 
