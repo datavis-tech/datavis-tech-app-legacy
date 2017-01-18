@@ -1,5 +1,5 @@
 // This module provides a route that is responsible for
-// creating new documents.
+// creating new documents (the C in CRUD).
 
 var express = require('express');
 var uuid = require('uuid');
@@ -18,7 +18,7 @@ module.exports = function (connection){
 
     doc.create(data, function(err) {
       if(err) return next(err);
-      res.send("Created document " + id + " \n" + JSON.stringify(req.body, null, 2));
+      res.redirect(id);
     });
   });
 

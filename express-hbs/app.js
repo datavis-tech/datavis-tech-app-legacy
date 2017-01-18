@@ -18,6 +18,7 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 var libs = require('./routes/libs');
 var create = require('./routes/create');
+var read = require('./routes/read');
 
 var app = express();
 
@@ -43,6 +44,7 @@ app.use('/', index);
 app.use('/users', users);
 app.use('/libs', libs);
 app.use('/create', create(connection));
+app.use('/', read(connection));
 
 hbs.registerPartials(__dirname + '/views/partials');
 
