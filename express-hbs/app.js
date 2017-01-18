@@ -11,12 +11,23 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+var ShareDB = require('sharedb');
+var ShareDBMingoMemory = require('sharedb-mingo-memory');
+
 var index = require('./routes/index');
 var users = require('./routes/users');
 var libs = require('./routes/libs');
 var create = require('./routes/create');
+var read = require('./routes/read');
 
 var app = express();
+
+// Start ShareDB.
+// Draws from https://github.com/share/sharedb/blob/master/examples/leaderboard/server/index.js
+var share = ShareDB({db: new ShareDBMingoMemory()});
+
+// Create a persistent ShareDB connection used by multiple routes.
+var connection = share.connect();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -32,7 +43,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/users', users);
 app.use('/libs', libs);
-app.use('/create', create);
+app.use('/create', create(connection));
+app.use('/', read(connection));
 
 hbs.registerPartials(__dirname + '/views/partials');
 
