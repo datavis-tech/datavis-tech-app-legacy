@@ -5,12 +5,8 @@
 //
 // Curran Kelleher January 2017
 
-var express = require('express');
-
 module.exports = function (connection){
-  var router = express.Router();
-
-  router.get('/:id', function(req, res, next) {
+  return function(req, res, next) {
     var id = req.params.id;
     var doc = connection.get('documents', id);
     doc.fetch(function(err) {
@@ -22,7 +18,5 @@ module.exports = function (connection){
         res.render('read', doc.data);
       }
     });
-  });
-
-  return router;
+  };
 };

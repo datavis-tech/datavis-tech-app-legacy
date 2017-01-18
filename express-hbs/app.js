@@ -37,6 +37,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 hbs.registerPartials(__dirname + '/views/partials');
 
+// Set up routes.
 app.use(routes(connection));
 
 // catch 404 and forward to error handler
