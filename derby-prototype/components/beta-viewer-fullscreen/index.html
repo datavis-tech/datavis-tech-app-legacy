@@ -1,0 +1,17 @@
+<index:>
+  <div class="dvt-beta-viewer-fullscreen">
+    {{if document.type === "data"}}
+      <view is="table-viewer" csvString="{{document.content}}"></view>
+    {{else if document.type === "vis"}}
+      <view is="vis-viewer" document="{{document}}" scrolling="{{scrolling ? scrolling : 'yes'}}"></view>
+    {{else}}
+      <pre class="form-control">
+        {{document.content}}
+      </pre>
+    {{/}}
+  </div>
+  {{if !hideLogo}}
+    <a class="dvt-beta-viewer-fullscreen-corner" href="/beta/{{document.id}}">
+      <img src="/img/logo/Logo_Icon_32px.png">
+    </a>
+  {{/}}

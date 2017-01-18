@@ -1,0 +1,34 @@
+<index:>
+  <div class="card-block">
+    <h1 class="display-1">Choose your username</h1>
+    <form>
+      <fieldset class="form-group">
+        <input type="text" class="form-control" placeholder="Enter your desired username here." value="{{_page.desiredUsername}}">
+      </fieldset>
+      {{if _page.desiredUsername}}
+        <p>
+          <button on-click="checkUsernameAvailability($event)" class="btn btn-default">Check availability</button>
+        </p>
+      {{/if}}
+  
+      {{if _page.usernameAvailable}}
+        <div class="alert alert-success" role="alert">
+          The username <strong>{{_page.checkedUsername}}</strong> is available!
+        </div>
+        <div class="alert alert-warning" role="alert">
+          <strong>Warning!</strong> You cannot change your username later, so choose wisely.
+        </div>
+        <p>
+          <button type="submit" class="btn btn btn-primary">Set my username to {{_page.checkedUsername}}</button>
+        </p>
+        <p>
+          <small class="text-muted">Your profile URL will be datavis.tech/{{_page.checkedUsername}}</small>
+        </p>
+      {{else if _page.checkedUsername}}
+        <div class="alert alert-danger" role="alert">
+          The username <strong>{{_page.checkedUsername}}</strong> is already taken. Please choose a different one.
+        </div>
+      {{/if}}
+
+    </form>
+  </div>

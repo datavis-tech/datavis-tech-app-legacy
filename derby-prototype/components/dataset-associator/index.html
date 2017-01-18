@@ -1,0 +1,53 @@
+<index:>
+  {{if document.associatedDatasets}}
+  <h3>Associated Dataset{{if document.associatedDatasets.length > 1}}s{{/}}</h3>
+    <ul>
+      {{each document.associatedDatasets as #dataset, #index}}
+        <li>
+          <a href="/beta/{{#dataset.id}}">
+            {{#dataset.name}}
+          </a> <a href="" on-click="removeAssociatedDataset(#index)">
+            <small class="text-muted">remove</small>
+          </a>
+        </li>
+      {{/each}}
+    </ul>
+  {{/}}
+
+  {{if showingForm}}
+    <div class="card card-block">
+      <h4 class="card-title">Associate a Dataset</h4>
+      <p class="card-text">Use the id of a dataset to make it available in this visualization. To find the id of a dataset, navigate to its page and look at the URL. As an example, the dataset located at the URL https://datavis.tech/beta/785edc719c254ec5874ca62dbf330c1a has an id of 785edc719c254ec5874ca62dbf330c1a. This is the id that should be entered into the form below.</p>
+      <form class="form" on-submit="associateDataset()">
+        <div class="form-group {{datasetIdFormGroupClass}}">
+          <label for="datasetIdInput">Dataset id</label>
+          <input type="text"
+                 class="form-control {{datasetIdInputClass}}"
+                 id="datasetIdInput"
+                 placeholder="Paste id here."
+                 value={{datasetId}}>
+          {{if datasetIdMessage}}
+            <small class="text-muted {{datasetIdMessageClass}}">{{datasetIdMessage}}
+              {{if datasetIdSpinner}}
+                <i class="fa fa-spinner fa-spin fa-fw"></i>
+              {{/}}
+            </small> 
+          {{/}}
+        </div>
+        <fieldset disabled={{!datasetIdIsValid}}>
+          <div class="form-group">
+            <label for="nameInput">Name</label>
+            <input type="text" class="form-control" id="nameInput" value="{{datasetName}}">
+            <small class="text-muted">
+              A name to reference this dataset within the visualization code or configuration.
+            </small> 
+          </div>
+          <button type="submit" class="btn btn-primary">Associate</button>
+        </fieldset>
+      </form>
+    </div>
+  {{else}}
+    <button type="button" on-click="showForm()" class="btn">
+      Associate a Dataset
+    </button>
+  {{/}}

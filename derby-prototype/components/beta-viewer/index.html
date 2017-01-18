@@ -1,0 +1,60 @@
+<index:>
+  
+  <h1 class="dvt-beta-viewer-title">
+    {{document.title}}
+  </h1>
+
+  <div class="dvt-beta-viewer-content">
+    {{if document.type === "data"}}
+      <view is="table-viewer" csvString="{{document.content}}"></view>
+    {{else if document.type === "vis"}}
+      <view is="vis-viewer" document="{{document}}"></view>
+    {{else}}
+      <pre class="form-control">
+        {{document.content}}
+      </pre>
+    {{/}}
+  </div>
+
+  <div>
+    <small class="text-muted">
+      Created on {{formatDate(document.createdDate)}}
+    </small>
+  </div>
+
+  <div>
+    <small class="text-muted">
+      Last updated {{formatDate(document.updatedDate)}}
+    </small>
+  </div>
+
+  <div>
+    <small class="text-muted">
+      {{numberFormat(document.views)}} view{{document.views === 1 ? "" : "s"}}
+    </small>
+  </div>
+  
+  <div class="row">
+    <div class="col-sm-9">
+      {{unescaped marked(document.description)}}
+    </div>
+    <div class="col-sm-3">
+      {{if canEdit}}
+        <div class="text-xs-right">
+          <a class="btn btn-primary" href="/beta/{{document.id}}/edit">
+            edit
+          </a>
+        </div>
+      {{/}}
+      <div class="text-xs-right">
+        <a class="btn btn-primary" href="/beta/{{document.id}}/fork">
+          fork
+        </a>
+      </div>
+      <div class="text-xs-right">
+        <a class="btn btn-primary" href="/beta/{{document.id}}/fullscreen">
+          fullscreen
+        </a>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,8 @@
+{
+  "NODE_ENV": "development",
+  "PORT": 3000,
+  "MONGO_URL": "mongodb://localhost:27017/datavis-tech",
+  "REDIS_URL": "redis://localhost:6379",
+  "SESSION_SECRET": "cb3b2ca5152951a97d9a02fb7c82211b3d71af99",
+  "SESSION_COOKIE": "306f4fc4082f00312a7970cdf4a803a889a892f8"
+}

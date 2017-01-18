@@ -1,0 +1,40 @@
+<index:>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-6">
+        <h1>Datasets</h1>
+
+        {{if _page.canCreate}}
+          <a href="/beta/create/data" class="btn btn-primary">
+            Create a dataset
+          </a>
+        {{/}}
+
+        {{each _page.dataDocuments}}
+          <div class="dvt-beta-document-list-entry">
+            <a href="/beta/{{this.id}}">{{this.title}}</a>
+          </div>
+        {{else}}
+          <div>There are no datasets.</div>
+        {{/each}}
+      </div>
+      <div class="col-sm-6">
+        <h1>Visualizations</h1>
+
+        {{if _page.canCreate}}
+          <a href="/beta/create/vis" class="btn btn-primary">
+            Create a visualization
+          </a>
+        {{/}}
+
+        {{each _page.visDocuments}}
+          <div class="dvt-beta-document-list-entry">
+            <a href="/beta/{{this.id}}">{{this.title}}</a>
+          </div>
+        {{else}}
+          <div>There are no visualizations.</div>
+        {{/each}}
+
+      </div>
+    </div>
+  </div>

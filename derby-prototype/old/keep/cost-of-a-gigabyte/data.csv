@@ -1,0 +1,129 @@
+Gigabytes,Cost ($ per month),Technology,Company,Group,URL,Observation Date
+1,5,Firebase,Firebase,Firebase on Firebase,https://www.firebase.com/pricing.html,8/13/2015
+10,49,Firebase,Firebase,Firebase on Firebase,https://www.firebase.com/pricing.html,8/13/2015
+30,149,Firebase,Firebase,Firebase on Firebase,https://www.firebase.com/pricing.html,8/13/2015
+100,449,Firebase,Firebase,Firebase on Firebase,https://www.firebase.com/pricing.html,8/13/2015
+300,1499,Firebase,Firebase,Firebase on Firebase,https://www.firebase.com/pricing.html,8/13/2015
+0.1,7,Redis,Redislabs,Redis on Redislabs,https://redislabs.com/pricing,8/13/2015
+0.25,18,Redis,Redislabs,Redis on Redislabs,https://redislabs.com/pricing,8/13/2015
+0.5,36,Redis,Redislabs,Redis on Redislabs,https://redislabs.com/pricing,8/13/2015
+1,71,Redis,Redislabs,Redis on Redislabs,https://redislabs.com/pricing,8/13/2015
+2.5,173,Redis,Redislabs,Redis on Redislabs,https://redislabs.com/pricing,8/13/2015
+5,338,Redis,Redislabs,Redis on Redislabs,https://redislabs.com/pricing,8/13/2015
+1,15,MongoDB,Mongolab,MongoDB on Mongolab,https://mongolab.com/plans/pricing,8/13/2015
+40,180,MongoDB,Mongolab,MongoDB on Mongolab,https://mongolab.com/plans/pricing,8/13/2015
+60,360,MongoDB,Mongolab,MongoDB on Mongolab,https://mongolab.com/plans/pricing,8/13/2015
+75,220,MongoDB,Mongolab,MongoDB on Mongolab,https://mongolab.com/plans/pricing,8/13/2015
+150,440,MongoDB,Mongolab,MongoDB on Mongolab,https://mongolab.com/plans/pricing,8/13/2015
+300,880,MongoDB,Mongolab,MongoDB on Mongolab,https://mongolab.com/plans/pricing,8/13/2015
+600,1760,MongoDB,Mongolab,MongoDB on Mongolab,https://mongolab.com/plans/pricing,8/13/2015
+1000,2730,MongoDB,Mongolab,MongoDB on Mongolab,https://mongolab.com/plans/pricing,8/13/2015
+1,0.03,S3,Amazon,S3 on Amazon,https://aws.amazon.com/s3/pricing/,8/13/2015
+10,0.3,S3,Amazon,S3 on Amazon,https://aws.amazon.com/s3/pricing/,8/13/2015
+100,3,S3,Amazon,S3 on Amazon,https://aws.amazon.com/s3/pricing/,8/13/2015
+1000,30,S3,Amazon,S3 on Amazon,https://aws.amazon.com/s3/pricing/,8/13/2015
+50000,1502.05,S3,Amazon,S3 on Amazon,https://aws.amazon.com/s3/pricing/,8/13/2015
+500000,14552.05,S3,Amazon,S3 on Amazon,https://aws.amazon.com/s3/pricing/,8/13/2015
+2,5,SQL,Microsoft Azure,SQL on Microsoft Azure,http://azure.microsoft.com/en-us/pricing/details/sql-database/,8/13/2015
+250,15,SQL,Microsoft Azure,SQL on Microsoft Azure,http://azure.microsoft.com/en-us/pricing/details/sql-database/,8/13/2015
+500,465,SQL,Microsoft Azure,SQL on Microsoft Azure,http://azure.microsoft.com/en-us/pricing/details/sql-database/,8/13/2015
+0.125,10.8,SQL,Google,SQL on Google,https://cloud.google.com/sql/pricing,8/13/2015
+0.5,43.8,SQL,Google,SQL on Google,https://cloud.google.com/sql/pricing,8/13/2015
+1,87.9,SQL,Google,SQL on Google,https://cloud.google.com/sql/pricing,8/13/2015
+2,132,SQL,Google,SQL on Google,https://cloud.google.com/sql/pricing,8/13/2015
+4,263.4,SQL,Google,SQL on Google,https://cloud.google.com/sql/pricing,8/13/2015
+8,527.1,SQL,Google,SQL on Google,https://cloud.google.com/sql/pricing,8/13/2015
+16,1053.9,SQL,Google,SQL on Google,https://cloud.google.com/sql/pricing,8/13/2015
+1,19,MongoDB,Rackspace ObjectRocket,MongoDB on Rackspace ObjectRocket,http://objectrocket.com/mongodb/,8/13/2015
+5,149,MongoDB,Rackspace ObjectRocket,MongoDB on Rackspace ObjectRocket,http://objectrocket.com/mongodb/,8/13/2015
+20,399,MongoDB,Rackspace ObjectRocket,MongoDB on Rackspace ObjectRocket,http://objectrocket.com/mongodb/,8/13/2015
+50,899,MongoDB,Rackspace ObjectRocket,MongoDB on Rackspace ObjectRocket,http://objectrocket.com/mongodb/,8/13/2015
+100,1599,MongoDB,Rackspace ObjectRocket,MongoDB on Rackspace ObjectRocket,http://objectrocket.com/mongodb/,8/13/2015
+500,5000,MongoDB,Rackspace ObjectRocket,MongoDB on Rackspace ObjectRocket,http://objectrocket.com/mongodb/,8/13/2015
+1000,10000,MongoDB,Rackspace ObjectRocket,MongoDB on Rackspace ObjectRocket,http://objectrocket.com/mongodb/,8/13/2015
+5000,50000,MongoDB,Rackspace ObjectRocket,MongoDB on Rackspace ObjectRocket,http://objectrocket.com/mongodb/,8/13/2015
+0.5,59,Redis,Rackspace ObjectRocket,Redis on Rackspace ObjectRocket,http://objectrocket.com/redis/,8/13/2015
+1,99,Redis,Rackspace ObjectRocket,Redis on Rackspace ObjectRocket,http://objectrocket.com/redis/,8/13/2015
+2.5,219,Redis,Rackspace ObjectRocket,Redis on Rackspace ObjectRocket,http://objectrocket.com/redis/,8/13/2015
+5,429,Redis,Rackspace ObjectRocket,Redis on Rackspace ObjectRocket,http://objectrocket.com/redis/,8/13/2015
+10,849,Redis,Rackspace ObjectRocket,Redis on Rackspace ObjectRocket,http://objectrocket.com/redis/,8/13/2015
+20,1649,Redis,Rackspace ObjectRocket,Redis on Rackspace ObjectRocket,http://objectrocket.com/redis/,8/13/2015
+50,3999,Redis,Rackspace ObjectRocket,Redis on Rackspace ObjectRocket,http://objectrocket.com/redis/,8/13/2015
+75,5799,Redis,Rackspace ObjectRocket,Redis on Rackspace ObjectRocket,http://objectrocket.com/redis/,8/13/2015
+100,7499,Redis,Rackspace ObjectRocket,Redis on Rackspace ObjectRocket,http://objectrocket.com/redis/,8/13/2015
+2,50,Elasticsearch,Rackspace ObjectRocket,Elasticsearch on Rackspace ObjectRocket,http://objectrocket.com/elasticsearch/,8/13/2015
+4,98,Elasticsearch,Rackspace ObjectRocket,Elasticsearch on Rackspace ObjectRocket,http://objectrocket.com/elasticsearch/,8/13/2015
+8,178,Elasticsearch,Rackspace ObjectRocket,Elasticsearch on Rackspace ObjectRocket,http://objectrocket.com/elasticsearch/,8/13/2015
+16,278,Elasticsearch,Rackspace ObjectRocket,Elasticsearch on Rackspace ObjectRocket,http://objectrocket.com/elasticsearch/,8/13/2015
+32,478,Elasticsearch,Rackspace ObjectRocket,Elasticsearch on Rackspace ObjectRocket,http://objectrocket.com/elasticsearch/,8/13/2015
+64,898,Elasticsearch,Rackspace ObjectRocket,Elasticsearch on Rackspace ObjectRocket,http://objectrocket.com/elasticsearch/,8/13/2015
+128,1598,Elasticsearch,Rackspace ObjectRocket,Elasticsearch on Rackspace ObjectRocket,http://objectrocket.com/elasticsearch/,8/13/2015
+256,2998,Elasticsearch,Rackspace ObjectRocket,Elasticsearch on Rackspace ObjectRocket,http://objectrocket.com/elasticsearch/,8/13/2015
+512,5598,Elasticsearch,Rackspace ObjectRocket,Elasticsearch on Rackspace ObjectRocket,http://objectrocket.com/elasticsearch/,8/13/2015
+8,85,Elasticsearch,Elastic Found,Elasticsearch on Elastic Found,https://www.elastic.co/found/pricing,8/13/2015
+16,134,Elasticsearch,Elastic Found,Elasticsearch on Elastic Found,https://www.elastic.co/found/pricing,8/13/2015
+32,229,Elasticsearch,Elastic Found,Elasticsearch on Elastic Found,https://www.elastic.co/found/pricing,8/13/2015
+64,399,Elasticsearch,Elastic Found,Elasticsearch on Elastic Found,https://www.elastic.co/found/pricing,8/13/2015
+128,725,Elasticsearch,Elastic Found,Elasticsearch on Elastic Found,https://www.elastic.co/found/pricing,8/13/2015
+256,1356,Elasticsearch,Elastic Found,Elasticsearch on Elastic Found,https://www.elastic.co/found/pricing,8/13/2015
+512,2602,Elasticsearch,Elastic Found,Elasticsearch on Elastic Found,https://www.elastic.co/found/pricing,8/13/2015
+768,3752,Elasticsearch,Elastic Found,Elasticsearch on Elastic Found,https://www.elastic.co/found/pricing,8/13/2015
+1000,4816,Elasticsearch,Elastic Found,Elasticsearch on Elastic Found,https://www.elastic.co/found/pricing,8/13/2015
+1500,6965,Elasticsearch,Elastic Found,Elasticsearch on Elastic Found,https://www.elastic.co/found/pricing,8/13/2015
+2000,9124,Elasticsearch,Elastic Found,Elasticsearch on Elastic Found,https://www.elastic.co/found/pricing,8/13/2015
+1,0.3,EFS,Amazon,EFS on Amazon,https://aws.amazon.com/efs/pricing/,8/13/2015
+2,0.6,EFS,Amazon,EFS on Amazon,https://aws.amazon.com/efs/pricing/,8/13/2015
+4,1.2,EFS,Amazon,EFS on Amazon,https://aws.amazon.com/efs/pricing/,8/13/2015
+8,2.4,EFS,Amazon,EFS on Amazon,https://aws.amazon.com/efs/pricing/,8/13/2015
+16,4.8,EFS,Amazon,EFS on Amazon,https://aws.amazon.com/efs/pricing/,8/13/2015
+32,9.6,EFS,Amazon,EFS on Amazon,https://aws.amazon.com/efs/pricing/,8/13/2015
+64,19.2,EFS,Amazon,EFS on Amazon,https://aws.amazon.com/efs/pricing/,8/13/2015
+128,38.4,EFS,Amazon,EFS on Amazon,https://aws.amazon.com/efs/pricing/,8/13/2015
+256,76.8,EFS,Amazon,EFS on Amazon,https://aws.amazon.com/efs/pricing/,8/13/2015
+512,153.6,EFS,Amazon,EFS on Amazon,https://aws.amazon.com/efs/pricing/,8/13/2015
+1024,307.2,EFS,Amazon,EFS on Amazon,https://aws.amazon.com/efs/pricing/,8/13/2015
+2048,614.4,EFS,Amazon,EFS on Amazon,https://aws.amazon.com/efs/pricing/,8/13/2015
+4096,1228.8,EFS,Amazon,EFS on Amazon,https://aws.amazon.com/efs/pricing/,8/13/2015
+1,18,MongoDB,Compose,MongoDB on Compose,https://www.compose.io/pricing/,8/15/2015
+2,36,MongoDB,Compose,MongoDB on Compose,https://www.compose.io/pricing/,8/15/2015
+4,72,MongoDB,Compose,MongoDB on Compose,https://www.compose.io/pricing/,8/15/2015
+8,144,MongoDB,Compose,MongoDB on Compose,https://www.compose.io/pricing/,8/15/2015
+16,288,MongoDB,Compose,MongoDB on Compose,https://www.compose.io/pricing/,8/15/2015
+32,576,MongoDB,Compose,MongoDB on Compose,https://www.compose.io/pricing/,8/15/2015
+64,1152,MongoDB,Compose,MongoDB on Compose,https://www.compose.io/pricing/,8/15/2015
+100,1800,MongoDB,Compose,MongoDB on Compose,https://www.compose.io/pricing/,8/15/2015
+0.25,18.5,Redis,Compose,Redis on Compose,https://www.compose.io/pricing/#redis-pricing,8/15/2015
+0.5,31.5,Redis,Compose,Redis on Compose,https://www.compose.io/pricing/#redis-pricing,8/15/2015
+1.02,57.5,Redis,Compose,Redis on Compose,https://www.compose.io/pricing/#redis-pricing,8/15/2015
+2.05,109.5,Redis,Compose,Redis on Compose,https://www.compose.io/pricing/#redis-pricing,8/15/2015
+3.07,161.5,Redis,Compose,Redis on Compose,https://www.compose.io/pricing/#redis-pricing,8/15/2015
+4.1,213.5,Redis,Compose,Redis on Compose,https://www.compose.io/pricing/#redis-pricing,8/15/2015
+5.12,265.5,Redis,Compose,Redis on Compose,https://www.compose.io/pricing/#redis-pricing,8/15/2015
+6.14,317.5,Redis,Compose,Redis on Compose,https://www.compose.io/pricing/#redis-pricing,8/15/2015
+7.17,369.5,Redis,Compose,Redis on Compose,https://www.compose.io/pricing/#redis-pricing,8/15/2015
+8.19,421.5,Redis,Compose,Redis on Compose,https://www.compose.io/pricing/#redis-pricing,8/15/2015
+1,17.5,SQL,Compose,SQL on Compose,https://www.compose.io/pricing/#postgresql-pricing,8/15/2015
+2,29.5,SQL,Compose,SQL on Compose,https://www.compose.io/pricing/#postgresql-pricing,8/15/2015
+5,65.5,SQL,Compose,SQL on Compose,https://www.compose.io/pricing/#postgresql-pricing,8/15/2015
+10,125.5,SQL,Compose,SQL on Compose,https://www.compose.io/pricing/#postgresql-pricing,8/15/2015
+50,605.5,SQL,Compose,SQL on Compose,https://www.compose.io/pricing/#postgresql-pricing,8/15/2015
+100,1205.5,SQL,Compose,SQL on Compose,https://www.compose.io/pricing/#postgresql-pricing,8/15/2015
+1,16.5,RethinkDB,Compose,RethinkDB on Compose,https://www.compose.io/pricing/#rethinkdb-pricing,8/15/2015
+2,28.5,RethinkDB,Compose,RethinkDB on Compose,https://www.compose.io/pricing/#rethinkdb-pricing,8/15/2015
+4,52.5,RethinkDB,Compose,RethinkDB on Compose,https://www.compose.io/pricing/#rethinkdb-pricing,8/15/2015
+8,100.5,RethinkDB,Compose,RethinkDB on Compose,https://www.compose.io/pricing/#rethinkdb-pricing,8/15/2015
+16,196.5,RethinkDB,Compose,RethinkDB on Compose,https://www.compose.io/pricing/#rethinkdb-pricing,8/15/2015
+32,388.5,RethinkDB,Compose,RethinkDB on Compose,https://www.compose.io/pricing/#rethinkdb-pricing,8/15/2015
+64,772.5,RethinkDB,Compose,RethinkDB on Compose,https://www.compose.io/pricing/#rethinkdb-pricing,8/15/2015
+100,1204.5,RethinkDB,Compose,RethinkDB on Compose,https://www.compose.io/pricing/#rethinkdb-pricing,8/15/2015
+2,45,Elasticsearch,Compose,Elasticsearch on Compose,https://www.compose.io/pricing/#elasticsearch-pricing,8/15/2015
+4,81,Elasticsearch,Compose,Elasticsearch on Compose,https://www.compose.io/pricing/#elasticsearch-pricing,8/15/2015
+8,153,Elasticsearch,Compose,Elasticsearch on Compose,https://www.compose.io/pricing/#elasticsearch-pricing,8/15/2015
+16,297,Elasticsearch,Compose,Elasticsearch on Compose,https://www.compose.io/pricing/#elasticsearch-pricing,8/15/2015
+32,585,Elasticsearch,Compose,Elasticsearch on Compose,https://www.compose.io/pricing/#elasticsearch-pricing,8/15/2015
+64,1161,Elasticsearch,Compose,Elasticsearch on Compose,https://www.compose.io/pricing/#elasticsearch-pricing,8/15/2015
+100,1809,Elasticsearch,Compose,Elasticsearch on Compose,https://www.compose.io/pricing/#elasticsearch-pricing,8/15/2015
+20,5,MongoDB,Digital Ocean,MongoDB on Digital Ocean,https://www.digitalocean.com/features/one-click-apps/mongodb/,1/13/2015
+30,10,MongoDB,Digital Ocean,MongoDB on Digital Ocean,https://www.digitalocean.com/features/one-click-apps/mongodb/,1/14/2015
+60,40,MongoDB,Digital Ocean,MongoDB on Digital Ocean,https://www.digitalocean.com/features/one-click-apps/mongodb/,1/15/2015
+80,80,MongoDB,Digital Ocean,MongoDB on Digital Ocean,https://www.digitalocean.com/features/one-click-apps/mongodb/,1/16/2015

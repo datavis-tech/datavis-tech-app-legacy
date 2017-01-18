@@ -1,0 +1,55 @@
+<index:>
+  <div class="card-block">
+    <div class="text-xs-center">
+      <h1 class="display-3">Hire Datavis Tech</h1>
+      <p>
+        Please use the form below to submit your request for proposal for our consulting services.
+      </p>
+    </div>
+    <form action="rfp" method="post">
+
+      <fieldset class="form-group">
+        <label for="email" class="col-sm-2 control-label">Email</label>
+        <div class="col-sm-10">
+          <input id="email" type="email" class="form-control" name="email" placeholder="Please enter your email, so we can contact you.">
+        </div>
+      </fieldset>
+
+      <fieldset class="form-group">
+        <label for="title" class="col-sm-2 control-label">Project Title</label>
+        <div class="col-sm-10">
+          <input type="text" class="form-control" id="title" name="title" placeholder="Title">
+        </div>
+      </fieldset>
+
+      <fieldset class="form-group">
+        <label for="description" class="col-sm-2 control-label">Project Description</label>
+        <div class="col-sm-10">
+          <textarea class="form-control" id="description" name="description" placeholder="Description" rows="5"></textarea>
+        </div>
+      </fieldset>
+
+      <fieldset class="form-group">
+        <label for="data" class="col-sm-2 control-label">Sample Data (optional)</label>
+        <div class="col-sm-10">
+          <textarea class="form-control" id="data" name="data" placeholder="Paste CSV data here" rows="5"></textarea>
+          <small>If you prefer email, feel free to reach out to curran@datavis.tech to get the conversation started.</small>
+        </div>
+      </fieldset>
+
+      <fieldset class="form-group">
+
+        <div class="col-sm-offset-2 col-sm-10">
+          <button type="submit" class="btn btn-lg btn-primary">Submit</button>
+        </div>
+
+      </fieldset>
+
+    </form>
+  </div>
+  <div class="card-block">
+    <h2>What to Expect</h2>
+    <p>After you submit this form, we will draft a Statement of Work to define scope of the project and the expected deliverables. Before the project begins, we can work together to iterate the Statement of Work and create an initial Proof of Concept to demonstrate that the project is feasible. At the beginning of a project, we can try out a number of visual encodings and interaction techniques for your data. Towards the end of a project, we can work together to evolve the deliverable into a polished piece depending on your target audience and the types of tasks you wish to enable using data visualization. The process will be iterative with frequent communication to ensure we are moving in the right direction.</p>
+    <h2>Sample Data</h2>
+    <p>If you include sample data in your submission, we can quickly evaluate possible approaches to visualizations and generate a Proof of Concept immediately. The sample data should be in Comma Separated Value (CSV) format (<a href="http://bl.ocks.org/curran/a08a1080b88344b0c8a7#iris.csv">example</a>), which can easily be exported from Excel and most databases. This can be synthetic, anonymized, or public data. Please describe the columns in your description.</p>
+  </div>

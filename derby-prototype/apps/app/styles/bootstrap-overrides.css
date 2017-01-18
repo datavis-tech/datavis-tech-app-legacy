@@ -1,0 +1,13 @@
+.btn {
+  border-radius: 1.2rem;
+  border-color: rgba(0, 0, 0, 0.33);
+}
+.btn-primary {
+  background-color: #3D9970;
+}
+.btn-primary:hover, .btn-primary:focus {
+  background-color: #317D5B;
+}
+.btn-primary:active, .btn-primary:active:focus {
+  background-color: #266549;
+}

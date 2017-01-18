@@ -1,0 +1,16 @@
+<index:>
+  <div class="card-block">
+    <h2>Documents</h2>
+    <ul>
+      {{each _page.documents}}
+        <li>
+          <a href="/alpha/{{this.id}}">{{this.title}}</a>
+        </li>
+      {{else}}
+        <li>There are no documents to show.</li>
+      {{/each}}
+    </ul>
+    <a href="/alpha/create">
+      <button type="button" class="btn btn-primary">Create</button>
+    </a>
+  </div>

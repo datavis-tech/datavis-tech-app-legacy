@@ -1,0 +1,9 @@
+{
+  "generator-derby": {
+    "project": "datavis tech",
+    "apps": [
+      "app"
+    ],
+    "coffee": false
+  }
+}
