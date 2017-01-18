@@ -40,15 +40,14 @@ hbs.registerPartials(__dirname + '/views/partials');
 // Set up routes.
 app.use(routes(connection));
 
-// catch 404 and forward to error handler
+// If no matching route, render 404 (Not Found) page.
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
-  err.status = 404;
-  next(err);
+  res.status(404).render('404');
 });
 
 // error handler
 app.use(function(err, req, res, next) {
+
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};

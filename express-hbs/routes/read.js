@@ -7,16 +7,10 @@
 
 module.exports = function (connection){
   return function(req, res, next) {
-    var id = req.params.id;
-    var doc = connection.get('documents', id);
+    var doc = connection.get('documents', req.params.id);
     doc.fetch(function(err) {
-      if(err){
-        next(err);
-      } else if(doc.type === null) {
-        res.status(404).render('404');
-      } else {
-        res.render('read', doc.data);
-      }
+      if(err || doc.type === null) return next(err);
+      res.render('read', doc.data);
     });
   };
 };
