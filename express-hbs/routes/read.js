@@ -13,7 +13,6 @@ module.exports = function (connection){
   router.get('/:id', function(req, res, next) {
     var id = req.params.id;
     var doc = connection.get('documents', id);
-
     doc.fetch(function(err) {
       if(err){
         next(err);

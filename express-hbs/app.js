@@ -14,7 +14,7 @@ var bodyParser = require('body-parser');
 var ShareDB = require('sharedb');
 var ShareDBMingoMemory = require('sharedb-mingo-memory');
 
-var index = require('./routes/index');
+var home = require('./routes/home');
 var users = require('./routes/users');
 var libs = require('./routes/libs');
 var create = require('./routes/create');
@@ -40,7 +40,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
+app.use('/', home);
 app.use('/users', users);
 app.use('/libs', libs);
 app.use('/create', create(connection));
