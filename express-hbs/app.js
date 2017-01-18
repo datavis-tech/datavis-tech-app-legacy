@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
+var libs = require('./routes/libs');
 
 var app = express();
 
@@ -21,11 +22,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Serve Bootstrap CSS and JS files from node_modules
-app.use('/bootstrap', express.static('node_modules/bootstrap/dist'))
-
 app.use('/', index);
 app.use('/users', users);
+app.use('/libs', libs);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
