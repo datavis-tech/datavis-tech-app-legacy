@@ -21,6 +21,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Serve Bootstrap CSS and JS files from node_modules
+app.use('/bootstrap', express.static('node_modules/bootstrap/dist'))
+
 app.use('/', index);
 app.use('/users', users);
 
