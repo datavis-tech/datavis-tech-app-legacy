@@ -7,8 +7,13 @@
 var express = require('express');
 var router = express.Router();
 
-router.use('/bootstrap', express.static('node_modules/bootstrap/dist'));
-router.use('/jquery', express.static('node_modules/jquery/dist'));
-router.use('/tether', express.static('node_modules/tether/dist'));
+// Encourage browsers to cache the libraries.
+var options = {
+  maxAge: '2d'
+};
+
+router.use('/bootstrap', express.static('node_modules/bootstrap/dist', options));
+router.use('/jquery', express.static('node_modules/jquery/dist', options));
+router.use('/tether', express.static('node_modules/tether/dist', options));
 
 module.exports = router;
