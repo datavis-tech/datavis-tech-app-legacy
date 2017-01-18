@@ -4,6 +4,7 @@
 // Curran Kelleher January 2017
 
 var express = require('express');
+var hbs = require('hbs');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -32,6 +33,8 @@ app.use('/', index);
 app.use('/users', users);
 app.use('/libs', libs);
 app.use('/create', create);
+
+hbs.registerPartials(__dirname + '/views/partials');
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
