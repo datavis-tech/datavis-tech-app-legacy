@@ -10,15 +10,10 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
 var ShareDB = require('sharedb');
 var ShareDBMingoMemory = require('sharedb-mingo-memory');
 
-var home = require('./routes/home');
-var users = require('./routes/users');
-var libs = require('./routes/libs');
-var create = require('./routes/create');
-var read = require('./routes/read');
+var routes = require('./routes');
 
 var app = express();
 
@@ -40,13 +35,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', home);
-app.use('/users', users);
-app.use('/libs', libs);
-app.use('/create', create(connection));
-app.use('/', read(connection));
-
 hbs.registerPartials(__dirname + '/views/partials');
+
+app.use(routes(connection));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
