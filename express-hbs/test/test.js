@@ -1,4 +1,4 @@
-casper.test.begin('Home Page', 5, function(test) {
+casper.test.begin('Document Creation', 6, function(test) {
 
   casper.start('http://localhost:3000/', function() {
 
@@ -26,7 +26,7 @@ casper.test.begin('Home Page', 5, function(test) {
     // Extract the id of the document.
     var id = url.substr(22);
 
-    //test.assertTitle("casperjs - Recherche Google", "google title is ok");
+    test.assertTitle('testTitle', 'Page title matches');
 
     test.assertEval(function() {
       return $('#doc-title').text() === 'testTitle';
@@ -34,7 +34,7 @@ casper.test.begin('Home Page', 5, function(test) {
 
     test.assertEval(function() {
       return $('#doc-description').text() === 'testDescription';
-    }, 'Rendered document title matches');
+    }, 'Rendered document description matches');
 
   });
   
