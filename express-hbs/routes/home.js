@@ -5,8 +5,6 @@ module.exports = function (connection){
     connection.createFetchQuery('documents', {}, {}, function(err, results) {
       if (err) return next(err);
 
-      console.log("Here");
-
       var documents = results.map(function (doc){
         return {
           id: doc.id,
