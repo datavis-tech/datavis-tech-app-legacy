@@ -14,7 +14,7 @@ module.exports = function (connection){
 
     doc.create(data, function(err) {
       if(err) return next(err);
-      res.redirect(id);
+      res.redirect(id + '/edit');
     });
   };
 };

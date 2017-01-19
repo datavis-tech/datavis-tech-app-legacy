@@ -6,10 +6,21 @@
 module.exports = function (connection){
   return function(req, res, next) {
 
-    var dataBundle = {
-      id: req.params.id
-    };
+    var doc = connection.get('documents', req.params.id);
+    doc.fetch(function(err) {
+      if(err || doc.type === null) return next(err);
 
-    res.render('update', { dataBundle: JSON.stringify(dataBundle, null, 2) });
+      // Construct the snapshot for client side ingestion.
+      var snapshot = {
+        id: doc.id,
+        v: doc.version,
+        data: doc.data
+      };
+
+      res.render('update', Object.assign({}, doc.data, {
+        dataBundle: JSON.stringify(snapshot, null, 2)
+      }));
+
+    });
   };
 };

@@ -7,33 +7,21 @@ var socket = new WebSocket('ws://' + window.location.host);
 var connection = new sharedb.Connection(socket);
 
 // Parse the server-rendered JSON data bundle.
-var dataBundle = JSON.parse(document.getElementById('data-bundle').textContent);
-var id = dataBundle.id;
+var dataBundle = document.getElementById('data-bundle').textContent;
+var snapshot = JSON.parse(dataBundle);
+var id = snapshot.id;
 
 var doc = connection.get('documents', id);
-doc.subscribe(function (){
+doc.ingestSnapshot(snapshot, function (err){
+  if(err) throw err;
+
   console.log(doc.data);
+
+  doc.subscribe(function (){
+    console.log("sub");
+    console.log(doc.data);
+  });
 });
-//
-//// When document changes (by this client or any other, or the server),
-//// update the number on the page
-//doc.on('op', showNumbers);
-//
-//function showNumbers() {
-//  document.querySelector('#num-clicks').textContent = doc.data.numClicks;
-//};
-//
-//// When clicking on the '+1' button, change the number in the local
-//// document and sync the change to the server and other connected
-//// clients
-//function increment() {
-//  // Increment `doc.data.numClicks`. See
-//  // https://github.com/ottypes/json0 for list of valid operations.
-//  doc.submitOp([{p: ['numClicks'], na: 1}]);
-//}
-//
-//// Expose to index.html
-//global.increment = increment;
 
 },{"sharedb/lib/client":11}],2:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
