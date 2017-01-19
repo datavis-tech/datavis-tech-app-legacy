@@ -2,3 +2,13 @@
 <p>Welcome to {{title}}</p>
 
 {{> newDocumentButton}}
+
+<h2>Documents</h2>
+
+<ul>
+{{#each documents}}
+  <li>
+    <a href="{{id}}">{{title}}</a>
+  </li>
+{{/each}}
+</ul>
