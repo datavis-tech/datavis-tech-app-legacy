@@ -3,6 +3,7 @@
 //
 // Curran Kelleher January 2017
 
+var http = require('http');
 var express = require('express');
 var hbs = require('hbs');
 var path = require('path');
@@ -57,4 +58,15 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-module.exports = app;
+function start(){
+  var port = process.env.PORT || '3000';
+  app.set('port', port);
+
+  var server = http.createServer(app);
+  server.listen(port);
+  server.on('listening', function (){
+    console.log('Listening at http://localhost:' + port);
+  });
+}
+
+module.exports = { start: start };
