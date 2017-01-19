@@ -4,7 +4,6 @@
 // Curran Kelleher January 2017
 
 // Express-related
-var http = require('http');
 var express = require('express');
 var hbs = require('hbs');
 var favicon = require('serve-favicon');
@@ -15,8 +14,6 @@ var bodyParser = require('body-parser');
 // ShareDB-related
 var ShareDB = require('sharedb');
 var ShareDBMingoMemory = require('sharedb-mingo-memory');
-var WebSocket = require('ws');
-var WebSocketJSONStream = require('websocket-json-stream');
 
 var routes = require('../routes');
 
@@ -64,24 +61,6 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-function start(){
-  var port = process.env.PORT || '3000';
-  app.set('port', port);
+app.share = share;
 
-  var server = http.createServer(app);
-
-  // Connect any incoming WebSocket connection to ShareDB
-  // Draws from https://github.com/share/sharedb/blob/master/examples/counter/server.js
-  var wss = new WebSocket.Server({server: server});
-  wss.on('connection', function(ws, req) {
-    var stream = new WebSocketJSONStream(ws);
-    share.listen(stream);
-  });
-
-  server.listen(port);
-  server.on('listening', function (){
-    console.log('Listening at http://localhost:' + port);
-  });
-}
-
-module.exports = { start: start };
+module.exports = app;
