@@ -7,7 +7,6 @@
 var http = require('http');
 var express = require('express');
 var hbs = require('hbs');
-var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
@@ -19,7 +18,7 @@ var ShareDBMingoMemory = require('sharedb-mingo-memory');
 var WebSocket = require('ws');
 var WebSocketJSONStream = require('websocket-json-stream');
 
-var routes = require('./routes');
+var routes = require('../routes');
 
 var app = express();
 
@@ -30,18 +29,20 @@ var share = ShareDB({db: new ShareDBMingoMemory()});
 // Create a persistent ShareDB connection used by multiple routes.
 var connection = share.connect();
 
+var root = __dirname + '/..';
+
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', root + '/views');
 app.set('view engine', 'hbs');
 
-app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(favicon(root + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(root + '/public'));
 
-hbs.registerPartials(__dirname + '/views/partials');
+hbs.registerPartials(root + '/views/partials');
 
 // Set up routes.
 app.use(routes(connection));

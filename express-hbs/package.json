@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "build": "browserify client.js -o public/js/client.js",
+    "build": "browserify client/client.js -o public/js/client.js",
     "start": "npm run build && node ./bin/www",
     "test": "casperjs test ./test/index.js"
   },
