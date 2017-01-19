@@ -1,4 +1,5 @@
-function documentCreation(callback){
+module.exports = function (callback){
+  console.log("");
   casper.test.begin('Document Creation', 2, function(test) {
     var id;
 
@@ -43,4 +44,3 @@ function documentCreation(callback){
     });
   });
 }
-module.exports = documentCreation;
