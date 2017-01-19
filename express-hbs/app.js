@@ -74,7 +74,7 @@ function start(){
   var wss = new WebSocket.Server({server: server});
   wss.on('connection', function(ws, req) {
     var stream = new WebSocketJSONStream(ws);
-    backend.listen(stream);
+    share.listen(stream);
   });
 
   server.listen(port);

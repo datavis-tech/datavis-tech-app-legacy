@@ -5,6 +5,11 @@
 
 module.exports = function (connection){
   return function(req, res, next) {
-    res.render('update');
+
+    var dataBundle = {
+      id: req.params.id
+    };
+
+    res.render('update', { dataBundle: JSON.stringify(dataBundle, null, 2) });
   };
 };
