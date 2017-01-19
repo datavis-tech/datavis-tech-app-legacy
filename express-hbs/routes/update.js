@@ -17,9 +17,11 @@ module.exports = function (connection){
         data: doc.data
       };
 
-      res.render('update', Object.assign({}, doc.data, {
+      res.render('update', {
+        id: doc.id,
+        title: doc.data.title,
         dataBundle: JSON.stringify(snapshot, null, 2)
-      }));
+      });
 
     });
   };

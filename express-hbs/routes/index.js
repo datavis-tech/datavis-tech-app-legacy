@@ -5,6 +5,7 @@ var libs = require('./libs');
 var create = require('./create');
 var read = require('./read');
 var update = require('./update');
+var del = require('./delete');
 
 module.exports = function (connection){
   var router = express.Router();
@@ -14,6 +15,7 @@ module.exports = function (connection){
   router.post('/create', create(connection));
   router.get('/:id', read(connection));
   router.get('/:id/edit', update(connection));
+  router.post('/:id/delete', del(connection));
 
   return router;
 };
