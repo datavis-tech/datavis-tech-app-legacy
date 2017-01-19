@@ -1,8 +1,8 @@
 var home = require('./home');
 var create = require('./create');
+var read = require('./read');
 
 function phase1(){
-  //console.log('\nPhase 1');
   home(function (){
     create(function (id){
       phase2(id);
@@ -11,8 +11,9 @@ function phase1(){
 }
 
 function phase2(id){
-  //console.log('\nPhase 2\nid = ' + id);
-  console.log('');
+  read(id, function (){
+    console.log('');
+  });
 }
 
 // Kick off the tests.

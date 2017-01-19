@@ -1,6 +1,8 @@
 module.exports = function (callback){
-  console.log("");
-  casper.test.begin('Document Creation', 2, function(test) {
+
+  console.log('');
+
+  casper.test.begin('Create', 2, function(test) {
     var id;
 
     // Submit the form to create a new document.
@@ -24,17 +26,6 @@ module.exports = function (callback){
 
       // Extract the id of the document.
       id = url.substr(22, 36);
-
-      // TODO move these to a test for the document listing page.
-      //test.assertTitle('testTitle', 'Page title matches');
-
-      //test.assertEval(function() {
-      //  return $('#doc-title').text() === 'testTitle';
-      //}, 'Rendered document title matches');
-
-      //test.assertEval(function() {
-      //  return $('#doc-description').text() === 'testDescription';
-      //}, 'Rendered document description matches');
 
     });
     
