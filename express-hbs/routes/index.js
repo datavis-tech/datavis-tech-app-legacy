@@ -11,11 +11,12 @@ module.exports = function (connection){
   var router = express.Router();
 
   router.get('/', home(connection));
-  router.use('/libs', libs);
   router.post('/create', create(connection));
   router.get('/:id', read(connection));
   router.get('/:id/edit', update(connection));
   router.post('/:id/delete', del(connection));
+
+  router.use('/libs', libs);
 
   return router;
 };
