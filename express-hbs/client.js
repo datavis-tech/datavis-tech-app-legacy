@@ -15,16 +15,16 @@ var doc = connection.get('documents', id);
 doc.ingestSnapshot(snapshot, function (err){
   if(err) throw err;
 
-  var element = document.getElementById('title-input');
-  var binding = new StringBinding(element, doc, ['title']);
-  binding.setup();
+  function bindInput(id, property){
+    var element = document.getElementById(id);
+    var binding = new StringBinding(element, doc, [property]);
+    binding.setup();
+  }
 
-  console.log("snapshot ingested");
-  console.log(doc.data);
+  bindInput('title-input', 'title');
+  bindInput('description-input', 'description');
 
   doc.subscribe(function (err){
     if(err) throw err;
-    console.log("subscribed");
-    console.log(doc.data);
   });
 });
