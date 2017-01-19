@@ -21,16 +21,7 @@
       </div>
       <form action="create" method="post">
         <div class="modal-body">
-
-          <!-- Draws from https://v4-alpha.getbootstrap.com/components/forms/ -->
-          <div class="form-group">
-            <label for="titleInput">Title</label>
-            <input name="title" type="text" class="form-control" id="titleInput">
-          </div>
-          <div class="form-group">
-            <label for="descriptionTextarea">Description</label>
-            <textarea name="description" class="form-control" id="descriptionTextarea" rows="3"></textarea>
-          </div>
+          {{> documentTitleDescriptionEditor}}
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>

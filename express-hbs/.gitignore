@@ -1,8 +1,8 @@
 # dependencies
 node_modules
 
-# production
-build
+# built client JS
+public/js/client.js
 
 # misc
 .DS_Store
