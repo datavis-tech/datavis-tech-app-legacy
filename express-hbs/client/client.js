@@ -6,6 +6,8 @@ var StringBinding = require('sharedb-string-binding');
 var socket = new WebSocket('ws://' + window.location.host);
 var connection = new sharedb.Connection(socket);
 
+window.connection = connection;
+
 // Parse the server-rendered JSON data bundle.
 var dataBundle = document.getElementById('data-bundle').textContent;
 var snapshot = JSON.parse(dataBundle);
