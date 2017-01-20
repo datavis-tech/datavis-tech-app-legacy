@@ -1,3 +1,5 @@
+var read = require('./read');
+
 module.exports = function (id, callback){
 
   console.log('');
@@ -14,15 +16,10 @@ module.exports = function (id, callback){
     });
 
     casper.thenOpen('http://localhost:3000/' + id, function() {
-      test.assertTitle('newTitle', 'Page title updated');
-
-      test.assertEval(function() {
-        return $('#doc-title').text() === 'newTitle';
-      }, 'Rendered document title matches');
-
-      test.assertEval(function() {
-        return $('#doc-description').text() === 'newDescription';
-      }, 'Rendered document description matches');
+      read.assertDoc(test, {
+        title: 'newTitle',
+        description: 'newDescription'
+      });
     });
     
     casper.run(function() {

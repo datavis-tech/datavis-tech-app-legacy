@@ -1,19 +1,25 @@
-module.exports = function (id, callback){
+function assertDoc(test, data){
+  test.assertTitle(data.title, 'Page title matches');
+
+  test.assertEval(function(data) {
+    return $('#doc-title').text() === data.title;
+  }, 'Rendered document title matches', data);
+
+  test.assertEval(function(data) {
+    return $('#doc-description').text() === data.description;
+  }, 'Rendered document description matches', data);
+}
+
+function read(id, callback){
 
   console.log('');
 
   casper.test.begin('Read', 3, function(test) {
     casper.start('http://localhost:3000/' + id, function() {
-
-      test.assertTitle('testTitle', 'Page title matches');
-
-      test.assertEval(function() {
-        return $('#doc-title').text() === 'testTitle';
-      }, 'Rendered document title matches');
-
-      test.assertEval(function() {
-        return $('#doc-description').text() === 'testDescription';
-      }, 'Rendered document description matches');
+      assertDoc(test, {
+        title: 'testTitle',
+        description: 'testDescription'
+      });
     });
     
     casper.run(function() {
@@ -22,3 +28,7 @@ module.exports = function (id, callback){
     });
   });
 }
+
+read.assertDoc = assertDoc;
+
+module.exports = read;
