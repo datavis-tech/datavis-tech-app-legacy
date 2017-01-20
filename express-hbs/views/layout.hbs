@@ -11,8 +11,16 @@
     <div class="container">
       {{{body}}}
     </div>
+
+    {{#if dataBundle}}
+      <script id="data-bundle" type="application/json">{{{dataBundle}}}</script>
+      <script src="/js/client.js"></script>
+    {{/if}}
+
+    <!-- Load the Bootstrap JS stack for interactions like modal dialogs. -->
     <script src="/libs/jquery/jquery.slim.min.js"></script>
     <script src="/libs/tether/js/tether.min.js"></script>
     <script src="/libs/bootstrap/js/bootstrap.min.js"></script>
+
   </body>
 </html>
