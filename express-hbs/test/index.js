@@ -1,6 +1,7 @@
 var home = require('./home');
 var create = require('./create');
 var read = require('./read');
+var update = require('./update');
 
 function phase1(){
   home(function (){
@@ -12,7 +13,9 @@ function phase1(){
 
 function phase2(id){
   read(id, function (){
-    console.log('');
+    update(id, function (){
+      console.log('');
+    });
   });
 }
 
