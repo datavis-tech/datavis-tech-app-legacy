@@ -14,10 +14,12 @@ module.exports = function (id, callback){
         $('#description-input').val('newDescription')[0].dispatchEvent(new Event('input'));
       });
 
+      // Assert that the title on the page updates instantly.
       test.assertTitle('newTitle', 'Page title syncs');
     });
 
-
+    // Assert that the changes were persisted to the backend,
+    // and that the server-rendered data matches the updated values.
     casper.thenOpen('http://localhost:3000/' + id, function() {
       read.assertDoc(test, {
         title: 'newTitle',
