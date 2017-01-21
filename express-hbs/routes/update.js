@@ -10,17 +10,23 @@ module.exports = function (connection){
     doc.fetch(function(err) {
       if(err || doc.type === null) return next(err);
 
-      // Construct the snapshot for client side ingestion.
-      var snapshot = {
-        id: doc.id,
-        v: doc.version,
-        data: doc.data
+      var dataBundle = {
+
+        // Tell the client which route it's on.
+        route: 'update',
+
+        // Construct the ShareDB snapshot for client side ingestion.
+        snapshot: {
+          id: doc.id,
+          v: doc.version,
+          data: doc.data
+        }
       };
 
       res.render('update', {
         id: doc.id,
         title: doc.data.title,
-        dataBundle: JSON.stringify(snapshot, null, 2)
+        dataBundleJSON: JSON.stringify(dataBundle, null, 2)
       });
 
     });

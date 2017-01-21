@@ -8,12 +8,14 @@ var socket = new WebSocket('ws://' + window.location.host);
 var connection = new sharedb.Connection(socket);
 
 // Parse the server-rendered JSON data bundle.
-var dataBundle = d3.select('#data-bundle').text();
+var dataBundleJSON = d3.select('#data-bundle').text();
+var dataBundle = JSON.parse(dataBundleJSON);
 
 update();
 
 function update(){
-  var snapshot = JSON.parse(dataBundle);
+
+  var snapshot = dataBundle.snapshot;
   var id = snapshot.id;
 
   var doc = connection.get('documents', id);
