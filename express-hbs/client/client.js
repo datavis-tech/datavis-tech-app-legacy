@@ -11,7 +11,11 @@ var connection = new sharedb.Connection(socket);
 var dataBundleJSON = d3.select('#data-bundle').text();
 var dataBundle = JSON.parse(dataBundleJSON);
 
-update();
+var routes = {
+  'update': update
+};
+
+routes[dataBundle.route]();
 
 function update(){
 
