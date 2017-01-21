@@ -1,5 +1,5 @@
 var d3 = require('d3-selection');
-var get = require('lodash.get');
+var listen = require('../utils/listen');
 
 module.exports = function (connection, dataBundle){
   var id = dataBundle.id;
@@ -11,19 +11,14 @@ module.exports = function (connection, dataBundle){
 }
 
 function sync(doc){
-  doc.on('op', function (op){
-    if(get(op, '[0].p[0]') === 'title'){
 
-      // Syncs the HTML <title> to the doc "title" property as changes occur.
-      d3.select('title').text(doc.data.title);
-      
-      // Syncs the displayed title.
-      d3.select('#doc-title').text(doc.data.title);
-    }
-    if(get(op, '[0].p[0]') === 'description'){
-
-      // Syncs the displayed title.
-      d3.select('#doc-description').text(doc.data.description);
-    }
+  listen(doc, 'title', function (title){
+    d3.select('title').text(title);
+    d3.select('#doc-title').text(title);
   });
+
+  listen(doc, 'description', function (description){
+    d3.select('#doc-description').text(description);
+  });
+
 }
