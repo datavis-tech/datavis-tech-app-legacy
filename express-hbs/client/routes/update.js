@@ -1,6 +1,6 @@
 var StringBinding = require('sharedb-string-binding');
 
-function update(connection){
+module.exports = function (connection, dataBundle){
 
   var snapshot = dataBundle.snapshot;
   var id = snapshot.id;

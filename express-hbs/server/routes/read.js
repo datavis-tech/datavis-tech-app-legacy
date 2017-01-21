@@ -10,10 +10,16 @@ module.exports = function (connection){
     var doc = connection.get('documents', req.params.id);
     doc.fetch(function(err) {
       if(err || doc.type === null) return next(err);
+
+      var dataBundle = {
+        route: 'read'
+      };
+
       res.render('read', {
         title: doc.data.title,
         description: doc.data.description,
-        id: doc.id
+        id: doc.id,
+        dataBundleJSON: JSON.stringify(dataBundle, null, 2)
       });
     });
   };

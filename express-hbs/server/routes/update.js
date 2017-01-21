@@ -11,11 +11,7 @@ module.exports = function (connection){
       if(err || doc.type === null) return next(err);
 
       var dataBundle = {
-
-        // Tell the client which route it's on.
         route: 'update',
-
-        // Construct the ShareDB snapshot for client side ingestion.
         snapshot: {
           id: doc.id,
           v: doc.version,

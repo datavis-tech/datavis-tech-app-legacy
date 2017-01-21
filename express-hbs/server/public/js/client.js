@@ -46,8 +46,9 @@
 
 	// Draws from https://github.com/share/sharedb/blob/master/examples/textarea/client.js
 	var sharedb = __webpack_require__(1);
-	var StringBinding = __webpack_require__(16);
-	var d3 = __webpack_require__(18);
+	var d3 = __webpack_require__(16);
+
+	var routes = __webpack_require__(17);
 
 	// Open WebSocket connection to ShareDB server
 	var socket = new WebSocket('ws://' + window.location.host);
@@ -56,38 +57,9 @@
 	// Parse the server-rendered JSON data bundle.
 	var dataBundleJSON = d3.select('#data-bundle').text();
 	var dataBundle = JSON.parse(dataBundleJSON);
+	var route = dataBundle.route;
 
-	var routes = {
-	  'update': update
-	};
-
-	routes[dataBundle.route]();
-
-	function update(){
-
-	  var snapshot = dataBundle.snapshot;
-	  var id = snapshot.id;
-
-	  var doc = connection.get('documents', id);
-
-	  function bindInput(id, property){
-	    var element = document.getElementById(id);
-	    var binding = new StringBinding(element, doc, [property]);
-	    binding.setup();
-	  }
-
-	  doc.ingestSnapshot(snapshot, function (err){
-	    if(err) throw err;
-
-	    bindInput('title-input', 'title');
-	    bindInput('description-input', 'description');
-
-	    doc.subscribe(function (err){
-	      if(err) throw err;
-	    });
-	  });
-	}
-
+	routes.start(route, connection, dataBundle);
 
 
 /***/ },
@@ -3548,227 +3520,6 @@
 /* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
-	var TextDiffBinding = __webpack_require__(17);
-
-	module.exports = StringBinding;
-
-	function StringBinding(element, doc, path) {
-	  TextDiffBinding.call(this, element);
-	  this.doc = doc;
-	  this.path = path || [];
-	  this._opListener = null;
-	  this._inputListener = null;
-	}
-	StringBinding.prototype = Object.create(TextDiffBinding.prototype);
-	StringBinding.prototype.constructor = StringBinding;
-
-	StringBinding.prototype.setup = function() {
-	  this.update();
-	  this.attachDoc();
-	  this.attachElement();
-	};
-
-	StringBinding.prototype.destroy = function() {
-	  this.detachElement();
-	  this.detachDoc();
-	};
-
-	StringBinding.prototype.attachElement = function() {
-	  var binding = this;
-	  this._inputListener = function() {
-	    binding.onInput();
-	  };
-	  this.element.addEventListener('input', this._inputListener, false);
-	};
-
-	StringBinding.prototype.detachElement = function() {
-	  this.element.removeEventListener('input', this._inputListener, false);
-	};
-
-	StringBinding.prototype.attachDoc = function() {
-	  var binding = this;
-	  this._opListener = function(op, source) {
-	    binding._onOp(op, source);
-	  };
-	  this.doc.on('op', this._opListener);
-	};
-
-	StringBinding.prototype.detachDoc = function() {
-	  this.doc.removeListener('op', this._opListener);
-	};
-
-	StringBinding.prototype._onOp = function(op, source) {
-	  if (source === this) return;
-	  if (op.length === 0) return;
-	  if (op.length > 1) {
-	    throw new Error('Op with multiple components emitted');
-	  }
-	  var component = op[0];
-	  if (isSubpath(this.path, component.p)) {
-	    this._parseInsertOp(component);
-	    this._parseRemoveOp(component);
-	  } else if (isSubpath(component.p, this.path)) {
-	    this._parseParentOp();
-	  }
-	};
-
-	StringBinding.prototype._parseInsertOp = function(component) {
-	  if (!component.si) return;
-	  var index = component.p[component.p.length - 1];
-	  var length = component.si.length;
-	  this.onInsert(index, length);
-	};
-
-	StringBinding.prototype._parseRemoveOp = function(component) {
-	  if (!component.sd) return;
-	  var index = component.p[component.p.length - 1];
-	  var length = component.sd.length;
-	  this.onRemove(index, length);
-	};
-
-	StringBinding.prototype._parseParentOp = function() {
-	  this.update();
-	};
-
-	StringBinding.prototype._get = function() {
-	  var value = this.doc.data;
-	  for (var i = 0; i < this.path.length; i++) {
-	    var segment = this.path[i];
-	    value = value[segment];
-	  }
-	  return value;
-	};
-
-	StringBinding.prototype._insert = function(index, text) {
-	  var path = this.path.concat(index);
-	  var op = {p: path, si: text};
-	  this.doc.submitOp(op, {source: this});
-	};
-
-	StringBinding.prototype._remove = function(index, text) {
-	  var path = this.path.concat(index);
-	  var op = {p: path, sd: text};
-	  this.doc.submitOp(op, {source: this});
-	};
-
-	function isSubpath(path, testPath) {
-	  for (var i = 0; i < path.length; i++) {
-	    if (testPath[i] !== path[i]) return false;
-	  }
-	  return true;
-	}
-
-
-/***/ },
-/* 17 */
-/***/ function(module, exports) {
-
-	module.exports = TextDiffBinding;
-
-	function TextDiffBinding(element) {
-	  this.element = element;
-	}
-
-	TextDiffBinding.prototype._get =
-	TextDiffBinding.prototype._insert =
-	TextDiffBinding.prototype._remove = function() {
-	  throw new Error('`_get()`, `_insert(index, length)`, and `_remove(index, length)` prototype methods must be defined.');
-	};
-
-	TextDiffBinding.prototype._getElementValue = function() {
-	  var value = this.element.value;
-	  // IE and Opera replace \n with \r\n. Always store strings as \n
-	  return value.replace(/\r\n/g, '\n');
-	};
-
-	TextDiffBinding.prototype._getInputEnd = function(previous, value) {
-	  if (this.element !== document.activeElement) return null;
-	  var end = value.length - this.element.selectionStart;
-	  if (end === 0) return end;
-	  if (previous.slice(previous.length - end) !== value.slice(value.length - end)) return null;
-	  return end;
-	};
-
-	TextDiffBinding.prototype.onInput = function() {
-	  var previous = this._get();
-	  var value = this._getElementValue();
-	  if (previous === value) return;
-
-	  var start = 0;
-	  // Attempt to use the DOM cursor position to find the end
-	  var end = this._getInputEnd(previous, value);
-	  if (end === null) {
-	    // If we failed to find the end based on the cursor, do a diff. When
-	    // ambiguous, prefer to locate ops at the end of the string, since users
-	    // more frequently add or remove from the end of a text input
-	    while (previous.charAt(start) === value.charAt(start)) {
-	      start++;
-	    }
-	    end = 0;
-	    while (
-	      previous.charAt(previous.length - 1 - end) === value.charAt(value.length - 1 - end) &&
-	      end + start < previous.length &&
-	      end + start < value.length
-	    ) {
-	      end++;
-	    }
-	  } else {
-	    while (
-	      previous.charAt(start) === value.charAt(start) &&
-	      start + end < previous.length &&
-	      start + end < value.length
-	    ) {
-	      start++;
-	    }
-	  }
-
-	  if (previous.length !== start + end) {
-	    var removed = previous.slice(start, previous.length - end);
-	    this._remove(start, removed);
-	  }
-	  if (value.length !== start + end) {
-	    var inserted = value.slice(start, value.length - end);
-	    this._insert(start, inserted);
-	  }
-	};
-
-	TextDiffBinding.prototype.onInsert = function(index, length) {
-	  this._transformSelectionAndUpdate(index, length, insertCursorTransform);
-	};
-	function insertCursorTransform(index, length, cursor) {
-	  return (index < cursor) ? cursor + length : cursor;
-	}
-
-	TextDiffBinding.prototype.onRemove = function(index, length) {
-	  this._transformSelectionAndUpdate(index, length, removeCursorTransform);
-	};
-	function removeCursorTransform(index, length, cursor) {
-	  return (index < cursor) ? cursor - Math.min(length, cursor - index) : cursor;
-	}
-
-	TextDiffBinding.prototype._transformSelectionAndUpdate = function(index, length, transformCursor) {
-	  if (document.activeElement === this.element) {
-	    var selectionStart = transformCursor(index, length, this.element.selectionStart);
-	    var selectionEnd = transformCursor(index, length, this.element.selectionEnd);
-	    var selectionDirection = this.element.selectionDirection;
-	    this.update();
-	    this.element.setSelectionRange(selectionStart, selectionEnd, selectionDirection);
-	  } else {
-	    this.update();
-	  }
-	};
-
-	TextDiffBinding.prototype.update = function() {
-	  var value = this._get();
-	  if (this._getElementValue() === value) return;
-	  this.element.value = value;
-	};
-
-
-/***/ },
-/* 18 */
-/***/ function(module, exports, __webpack_require__) {
-
 	// https://d3js.org/d3-selection/ Version 1.0.3. Copyright 2016 Mike Bostock.
 	(function (global, factory) {
 	   true ? factory(exports) :
@@ -4742,6 +4493,289 @@
 	Object.defineProperty(exports, '__esModule', { value: true });
 
 	})));
+
+
+/***/ },
+/* 17 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var update = __webpack_require__(18);
+	var read = __webpack_require__(21);
+
+	console.log('update = ' + update);
+
+	var routes = {
+	  'update': update,
+	  'read': read
+	};
+
+	function start(route, connection, dataBundle){
+	  routes[route](connection, dataBundle);
+	}
+
+	module.exports = { start: start };
+
+
+/***/ },
+/* 18 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var StringBinding = __webpack_require__(19);
+
+	module.exports = function (connection, dataBundle){
+
+	  var snapshot = dataBundle.snapshot;
+	  var id = snapshot.id;
+
+	  var doc = connection.get('documents', id);
+
+	  function bindInput(id, property){
+	    var element = document.getElementById(id);
+	    var binding = new StringBinding(element, doc, [property]);
+	    binding.setup();
+	  }
+
+	  doc.ingestSnapshot(snapshot, function (err){
+	    if(err) throw err;
+
+	    bindInput('title-input', 'title');
+	    bindInput('description-input', 'description');
+
+	    doc.subscribe(function (err){
+	      if(err) throw err;
+	    });
+	  });
+	}
+
+
+/***/ },
+/* 19 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var TextDiffBinding = __webpack_require__(20);
+
+	module.exports = StringBinding;
+
+	function StringBinding(element, doc, path) {
+	  TextDiffBinding.call(this, element);
+	  this.doc = doc;
+	  this.path = path || [];
+	  this._opListener = null;
+	  this._inputListener = null;
+	}
+	StringBinding.prototype = Object.create(TextDiffBinding.prototype);
+	StringBinding.prototype.constructor = StringBinding;
+
+	StringBinding.prototype.setup = function() {
+	  this.update();
+	  this.attachDoc();
+	  this.attachElement();
+	};
+
+	StringBinding.prototype.destroy = function() {
+	  this.detachElement();
+	  this.detachDoc();
+	};
+
+	StringBinding.prototype.attachElement = function() {
+	  var binding = this;
+	  this._inputListener = function() {
+	    binding.onInput();
+	  };
+	  this.element.addEventListener('input', this._inputListener, false);
+	};
+
+	StringBinding.prototype.detachElement = function() {
+	  this.element.removeEventListener('input', this._inputListener, false);
+	};
+
+	StringBinding.prototype.attachDoc = function() {
+	  var binding = this;
+	  this._opListener = function(op, source) {
+	    binding._onOp(op, source);
+	  };
+	  this.doc.on('op', this._opListener);
+	};
+
+	StringBinding.prototype.detachDoc = function() {
+	  this.doc.removeListener('op', this._opListener);
+	};
+
+	StringBinding.prototype._onOp = function(op, source) {
+	  if (source === this) return;
+	  if (op.length === 0) return;
+	  if (op.length > 1) {
+	    throw new Error('Op with multiple components emitted');
+	  }
+	  var component = op[0];
+	  if (isSubpath(this.path, component.p)) {
+	    this._parseInsertOp(component);
+	    this._parseRemoveOp(component);
+	  } else if (isSubpath(component.p, this.path)) {
+	    this._parseParentOp();
+	  }
+	};
+
+	StringBinding.prototype._parseInsertOp = function(component) {
+	  if (!component.si) return;
+	  var index = component.p[component.p.length - 1];
+	  var length = component.si.length;
+	  this.onInsert(index, length);
+	};
+
+	StringBinding.prototype._parseRemoveOp = function(component) {
+	  if (!component.sd) return;
+	  var index = component.p[component.p.length - 1];
+	  var length = component.sd.length;
+	  this.onRemove(index, length);
+	};
+
+	StringBinding.prototype._parseParentOp = function() {
+	  this.update();
+	};
+
+	StringBinding.prototype._get = function() {
+	  var value = this.doc.data;
+	  for (var i = 0; i < this.path.length; i++) {
+	    var segment = this.path[i];
+	    value = value[segment];
+	  }
+	  return value;
+	};
+
+	StringBinding.prototype._insert = function(index, text) {
+	  var path = this.path.concat(index);
+	  var op = {p: path, si: text};
+	  this.doc.submitOp(op, {source: this});
+	};
+
+	StringBinding.prototype._remove = function(index, text) {
+	  var path = this.path.concat(index);
+	  var op = {p: path, sd: text};
+	  this.doc.submitOp(op, {source: this});
+	};
+
+	function isSubpath(path, testPath) {
+	  for (var i = 0; i < path.length; i++) {
+	    if (testPath[i] !== path[i]) return false;
+	  }
+	  return true;
+	}
+
+
+/***/ },
+/* 20 */
+/***/ function(module, exports) {
+
+	module.exports = TextDiffBinding;
+
+	function TextDiffBinding(element) {
+	  this.element = element;
+	}
+
+	TextDiffBinding.prototype._get =
+	TextDiffBinding.prototype._insert =
+	TextDiffBinding.prototype._remove = function() {
+	  throw new Error('`_get()`, `_insert(index, length)`, and `_remove(index, length)` prototype methods must be defined.');
+	};
+
+	TextDiffBinding.prototype._getElementValue = function() {
+	  var value = this.element.value;
+	  // IE and Opera replace \n with \r\n. Always store strings as \n
+	  return value.replace(/\r\n/g, '\n');
+	};
+
+	TextDiffBinding.prototype._getInputEnd = function(previous, value) {
+	  if (this.element !== document.activeElement) return null;
+	  var end = value.length - this.element.selectionStart;
+	  if (end === 0) return end;
+	  if (previous.slice(previous.length - end) !== value.slice(value.length - end)) return null;
+	  return end;
+	};
+
+	TextDiffBinding.prototype.onInput = function() {
+	  var previous = this._get();
+	  var value = this._getElementValue();
+	  if (previous === value) return;
+
+	  var start = 0;
+	  // Attempt to use the DOM cursor position to find the end
+	  var end = this._getInputEnd(previous, value);
+	  if (end === null) {
+	    // If we failed to find the end based on the cursor, do a diff. When
+	    // ambiguous, prefer to locate ops at the end of the string, since users
+	    // more frequently add or remove from the end of a text input
+	    while (previous.charAt(start) === value.charAt(start)) {
+	      start++;
+	    }
+	    end = 0;
+	    while (
+	      previous.charAt(previous.length - 1 - end) === value.charAt(value.length - 1 - end) &&
+	      end + start < previous.length &&
+	      end + start < value.length
+	    ) {
+	      end++;
+	    }
+	  } else {
+	    while (
+	      previous.charAt(start) === value.charAt(start) &&
+	      start + end < previous.length &&
+	      start + end < value.length
+	    ) {
+	      start++;
+	    }
+	  }
+
+	  if (previous.length !== start + end) {
+	    var removed = previous.slice(start, previous.length - end);
+	    this._remove(start, removed);
+	  }
+	  if (value.length !== start + end) {
+	    var inserted = value.slice(start, value.length - end);
+	    this._insert(start, inserted);
+	  }
+	};
+
+	TextDiffBinding.prototype.onInsert = function(index, length) {
+	  this._transformSelectionAndUpdate(index, length, insertCursorTransform);
+	};
+	function insertCursorTransform(index, length, cursor) {
+	  return (index < cursor) ? cursor + length : cursor;
+	}
+
+	TextDiffBinding.prototype.onRemove = function(index, length) {
+	  this._transformSelectionAndUpdate(index, length, removeCursorTransform);
+	};
+	function removeCursorTransform(index, length, cursor) {
+	  return (index < cursor) ? cursor - Math.min(length, cursor - index) : cursor;
+	}
+
+	TextDiffBinding.prototype._transformSelectionAndUpdate = function(index, length, transformCursor) {
+	  if (document.activeElement === this.element) {
+	    var selectionStart = transformCursor(index, length, this.element.selectionStart);
+	    var selectionEnd = transformCursor(index, length, this.element.selectionEnd);
+	    var selectionDirection = this.element.selectionDirection;
+	    this.update();
+	    this.element.setSelectionRange(selectionStart, selectionEnd, selectionDirection);
+	  } else {
+	    this.update();
+	  }
+	};
+
+	TextDiffBinding.prototype.update = function() {
+	  var value = this._get();
+	  if (this._getElementValue() === value) return;
+	  this.element.value = value;
+	};
+
+
+/***/ },
+/* 21 */
+/***/ function(module, exports) {
+
+	module.exports = function (connection){
+	  console.log("Hereeee");
+	}
 
 
 /***/ }

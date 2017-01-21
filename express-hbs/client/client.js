@@ -13,4 +13,4 @@ var dataBundleJSON = d3.select('#data-bundle').text();
 var dataBundle = JSON.parse(dataBundleJSON);
 var route = dataBundle.route;
 
-routes.start(route, connection);
+routes.start(route, connection, dataBundle);
