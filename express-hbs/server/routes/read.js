@@ -5,21 +5,23 @@
 //
 // Curran Kelleher January 2017
 
+var bundle = require('../utils/bundle');
+
 module.exports = function (connection){
   return function(req, res, next) {
     var doc = connection.get('documents', req.params.id);
     doc.fetch(function(err) {
       if(err || doc.type === null) return next(err);
 
-      var dataBundle = {
+      var dataBundle = bundle({
         route: 'read'
-      };
+      });
 
       res.render('read', {
         title: doc.data.title,
         description: doc.data.description,
         id: doc.id,
-        dataBundleJSON: JSON.stringify(dataBundle, null, 2)
+        dataBundle: dataBundle
       });
     });
   };

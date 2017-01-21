@@ -3,6 +3,9 @@
 //
 // Curran Kelleher January 2017
 
+var bundle = require('../utils/bundle');
+var snapshot = require('../utils/snapshot');
+
 module.exports = function (connection){
   return function(req, res, next) {
 
@@ -10,19 +13,15 @@ module.exports = function (connection){
     doc.fetch(function(err) {
       if(err || doc.type === null) return next(err);
 
-      var dataBundle = {
+      var dataBundle = bundle({
         route: 'update',
-        snapshot: {
-          id: doc.id,
-          v: doc.version,
-          data: doc.data
-        }
-      };
+        snapshot: snapshot(doc)
+      });
 
       res.render('update', {
         id: doc.id,
         title: doc.data.title,
-        dataBundleJSON: JSON.stringify(dataBundle, null, 2)
+        dataBundle: dataBundle
       });
 
     });

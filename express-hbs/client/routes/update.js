@@ -28,11 +28,10 @@ module.exports = function (connection, dataBundle){
   });
 }
 
-// Syncs the HTML <title> to the doc as changes occur.
+// Syncs the HTML <title> to the doc "title" property as changes occur.
 function syncTitle(doc){
   doc.on('op', function (op){
     if(get(op, '[0].p[0]') === 'title'){
-      console.log('title changed');
       d3.select('title').text(doc.data.title);
     }
   });
