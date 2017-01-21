@@ -2,16 +2,14 @@ var http = require('http');
 
 var app = require('./app');
 var backend = require('./backend');
+var config = require('../server.config');
 
 function start(){
-  var port = process.env.PORT || '3000';
-  app.set('port', port);
-
   var server = http.createServer(app);
   backend.setupWebSockets(server, app.share);
-  server.listen(port);
+  server.listen(config.port);
   server.on('listening', function (){
-    console.log('Listening at http://localhost:' + port);
+    console.log('Listening at http://localhost:' + config.port);
   });
 }
 
