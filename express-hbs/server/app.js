@@ -12,7 +12,8 @@ var backend = require('./backend');
 var routes = require('./routes');
 
 var app = express();
-var share = backend();
+
+var share = backend.initShareDB();
 
 var root = __dirname;
 
