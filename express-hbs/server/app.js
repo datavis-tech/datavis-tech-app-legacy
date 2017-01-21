@@ -9,12 +9,13 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var backend = require('./backend');
-var routes = require('../routes');
+var routes = require('./routes');
 
 var app = express();
-var share = backend();
 
-var root = __dirname + '/..';
+var share = backend.initShareDB();
+
+var root = __dirname;
 
 // View engine setup.
 app.set('views', root + '/views');
