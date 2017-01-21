@@ -1,4 +1,6 @@
 var StringBinding = require('sharedb-string-binding');
+var get = require('lodash.get');
+var d3 = require('d3-selection');
 
 module.exports = function (connection, dataBundle){
 
@@ -21,6 +23,17 @@ module.exports = function (connection, dataBundle){
 
     doc.subscribe(function (err){
       if(err) throw err;
+      syncTitle(doc);
     });
+  });
+}
+
+// Syncs the HTML <title> to the doc as changes occur.
+function syncTitle(doc){
+  doc.on('op', function (op){
+    if(get(op, '[0].p[0]') === 'title'){
+      console.log('title changed');
+      d3.select('title').text(doc.data.title);
+    }
   });
 }

@@ -2,7 +2,7 @@
 node_modules
 
 # built client JS
-public/js/client.js
+server/public/js/client.js
 
 # misc
 .DS_Store
