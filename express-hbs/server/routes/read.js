@@ -14,7 +14,8 @@ module.exports = function (connection){
       if(err || doc.type === null) return next(err);
 
       var dataBundle = bundle({
-        route: 'read'
+        route: 'read',
+        id: doc.id
       });
 
       res.render('read', {
