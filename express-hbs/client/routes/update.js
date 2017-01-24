@@ -20,6 +20,7 @@ module.exports = function (connection, dataBundle){
 
     bindInput('title-input', 'title');
     bindInput('description-input', 'description');
+    bindInput('content-input', 'content');
 
     doc.subscribe(function (err){
       if(err) throw err;

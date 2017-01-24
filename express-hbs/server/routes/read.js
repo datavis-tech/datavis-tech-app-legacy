@@ -22,7 +22,8 @@ module.exports = function (connection){
         title: doc.data.title,
         description: doc.data.description,
         id: doc.id,
-        dataBundle: dataBundle
+        dataBundle: dataBundle,
+        srcdoc: doc.data.content
       });
     });
   };
