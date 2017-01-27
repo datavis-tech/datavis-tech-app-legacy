@@ -1,6 +1,6 @@
 var StringBinding = require('sharedb-string-binding');
 var d3 = require('d3-selection');
-var listen = require('../utils/listen');
+var changed = require('../utils/changed');
 
 module.exports = function (connection, dataBundle){
 
@@ -31,7 +31,9 @@ module.exports = function (connection, dataBundle){
 
 // Syncs the HTML <title> to the doc "title" property as changes occur.
 function sync(doc){
-  listen(doc, 'title', function (title){
-    d3.select('title').text(title);
+  doc.on('op', function (op){
+    if(changed(op, 'title')){
+      d3.select('title').text(doc.data.title);
+    }
   });
 }

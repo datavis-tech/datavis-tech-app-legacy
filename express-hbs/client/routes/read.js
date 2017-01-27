@@ -1,5 +1,5 @@
 var d3 = require('d3-selection');
-var listen = require('../utils/listen');
+var changed = require('../utils/changed');
 
 module.exports = function (connection, dataBundle){
   var id = dataBundle.id;
@@ -11,24 +11,21 @@ module.exports = function (connection, dataBundle){
 }
 
 function sync(doc){
+  doc.on('op', function (op){
 
-  listen(doc, 'title', function (title){
+    if(changed(op, 'title')){
+      d3.select('title').text(doc.data.title);
+      d3.select('#doc-title').text(doc.data.title);
+    }
 
-    d3.select('title')
-        .text(title);
+    if(changed(op, 'description')){
+      d3.select('#doc-description')
+          .text(doc.data.description);
+    }
 
-    d3.select('#doc-title')
-        .text(title);
+    if(changed(op, 'content')){
+      d3.select('#doc-content-iframe')
+          .attr('srcdoc', doc.data.content);
+    }
   });
-
-  listen(doc, 'description', function (description){
-    d3.select('#doc-description')
-        .text(description);
-  });
-
-  listen(doc, 'content', function (content){
-    d3.select('#doc-content-iframe')
-        .attr('srcdoc', content);
-  });
-
 }
