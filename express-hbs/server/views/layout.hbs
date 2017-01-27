@@ -15,7 +15,7 @@
     </div>
 
     {{#if dataBundle}}
-      <script id="data-bundle" type="application/text">{{{dataBundle}}}</script>
+      <script>var dataBundle = {{{dataBundle}}};</script>
       <script src="/js/client.js"></script>
     {{/if}}
 
