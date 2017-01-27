@@ -13,12 +13,22 @@ module.exports = function (connection, dataBundle){
 function sync(doc){
 
   listen(doc, 'title', function (title){
-    d3.select('title').text(title);
-    d3.select('#doc-title').text(title);
+
+    d3.select('title')
+        .text(title);
+
+    d3.select('#doc-title')
+        .text(title);
   });
 
   listen(doc, 'description', function (description){
-    d3.select('#doc-description').text(description);
+    d3.select('#doc-description')
+        .text(description);
+  });
+
+  listen(doc, 'content', function (content){
+    d3.select('#doc-content-iframe')
+        .attr('srcdoc', content);
   });
 
 }

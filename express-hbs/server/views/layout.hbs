@@ -7,12 +7,15 @@
     <link rel="stylesheet" href="/libs/bootstrap/css/bootstrap.min.css" />
   </head>
   <body>
+
+    {{> navbar}}
+
     <div class="container">
       {{{body}}}
     </div>
 
     {{#if dataBundle}}
-      <script id="data-bundle" type="application/json">{{{dataBundle}}}</script>
+      <script id="data-bundle" type="application/text">{{{dataBundle}}}</script>
       <script src="/js/client.js"></script>
     {{/if}}
 

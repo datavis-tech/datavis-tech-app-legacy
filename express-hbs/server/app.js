@@ -7,31 +7,27 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
 var backend = require('./backend');
 var routes = require('./routes');
 
 var app = express();
-
-var share = backend.initShareDB();
-
-var root = __dirname;
+app.share = backend.initShareDB();
 
 // View engine setup.
-app.set('views', root + '/views');
+app.set('views', __dirname + '/views');
 app.set('view engine', 'hbs');
-hbs.registerPartials(root + '/views/partials');
+hbs.registerPartials(__dirname + '/views/partials');
 
 // Middleware.
-app.use(favicon(root + '/public/favicon.ico'));
+app.use(favicon(__dirname + '/public/images/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(root + '/public'));
+app.use(express.static(__dirname + '/public'));
 
 // Set up routes.
-app.use(routes(share.connection));
+app.use(routes(app.share.connection));
 
 // If no matching route, render 404 (Not Found) page.
 app.use(function(req, res, next) {
@@ -49,7 +45,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
-app.share = share;
 
 module.exports = app;

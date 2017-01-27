@@ -5,6 +5,7 @@ var ShareDB = require('sharedb');
 var ShareDBMingoMemory = require('sharedb-mingo-memory');
 var WebSocket = require('ws');
 var WebSocketJSONStream = require('websocket-json-stream');
+var createDocument = require('./utils/createDocument');
 
 module.exports = {
   initShareDB: function (){
@@ -34,15 +35,15 @@ module.exports = {
 };
 
 function createSampleDoc(connection){
+
   var id = 'db945bee-b0d6-44cd-bc01-e4976f5b3f99';
-  var doc = connection.get('documents', id);
 
   var data = {
     title: 'Title of an Awesome Document',
     description: 'This document is the best document that ever existed. It is so awesome you will just not be able to handle it. Its awesomeness transcends everything that ever existed. It is able to help developers test the application manually with ease, as it has a fixed ID and gets created automatically in development mode'
   };
 
-  doc.create(data, function(err) {
+  createDocument(connection, id, data, function(err) {
     if(err) throw err;
   });
 }
