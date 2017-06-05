@@ -1,4 +1,4 @@
-import { Link, Router } from '../routes'
+import { Link } from '../routes'
 
 export default () => (
   <ul>
