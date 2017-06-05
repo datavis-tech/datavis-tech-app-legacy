@@ -1,18 +1,17 @@
 const expressSession = require('express-session')
 const connectRedis = require('connect-redis')
-
-// TODO externalise these
-const host = '127.0.0.1'
-const port = '6379'
-const secret = 'dafhjdkasfhdjkashfjksa'
+const config = require('../config.js')
 
 const RedisStore = connectRedis(expressSession)
-const store = new RedisStore({ host, port })
+const store = new RedisStore({
+  host: config.redisHost,
+  port: config.redisPort
+})
 
 module.exports = {
   middleware: expressSession({
     store,
-    secret,
+    secret: config.sessionSecret,
     resave: false,
     saveUninitialized: true
   })
