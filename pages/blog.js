@@ -1,4 +1,5 @@
 import React from 'react'
+import GlobalClientStore from '../modules/globalClientStore'
 
 const posts = [
   { slug: 'hello-world', title: 'Hello world' },
@@ -12,18 +13,29 @@ export default class extends React.Component {
     if (!post && res) {
       res.statusCode = 404
     }
-
-    console.log(req)
-    console.log('ereh')
+    
+    const user = process.browser ? GlobalClientStore.user : req.user
 
     return {
       post,
-      userJSON: JSON.stringify(req.user, null, 2)
+      user
+    }
+  }
+
+  constructor (props) {
+    super(props)
+
+    // TODO move this to a wrapper used by all pages.
+    if (process.browser) {
+      GlobalClientStore.user = props.user
+      GlobalClientStore.user.clientLoaded = true // TODO delete
     }
   }
 
   render () {
-    const { post, userJSON } = this.props
+    const { post, user } = this.props
+
+    const userJSON = JSON.stringify(user, null, 2)
 
     if (!post) return <h1>Post not found</h1>
 
