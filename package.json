@@ -24,6 +24,8 @@
   },
   "homepage": "https://gitlab.com/curran/datavis-tech#README",
   "dependencies": {
+    "connect-redis": "^3.3.0",
+    "express-session": "^1.15.3",
     "next": "^2.4.1",
     "next-routes": "^1.0.27",
     "react": "^15.5.4",

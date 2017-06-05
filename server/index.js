@@ -7,14 +7,16 @@ const express = require('express')
 const { createServer } = require('http')
 const next = require('next')
 const routes = require('../routes')
+const session = require('./session')
+
+const expressApp = express()
 
 const dev = process.env.NODE_ENV !== 'production'
 const nextApp = next({ dev })
 const handler = routes.getRequestHandler(nextApp)
-
-const expressApp = express()
-
 expressApp.get('*', handler)
+
+expressApp.use(session.middleware)
 
 nextApp
   .prepare()
