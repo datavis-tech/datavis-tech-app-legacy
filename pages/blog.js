@@ -6,21 +6,32 @@ const posts = [
 ]
 
 export default class extends React.Component {
-  static async getInitialProps ({ query, res }) {
+  static async getInitialProps ({ query, res, req }) {
     const post = posts.find(post => post.slug === query.slug)
 
     if (!post && res) {
       res.statusCode = 404
     }
 
-    return { post }
+    console.log(req)
+    console.log('ereh')
+
+    return {
+      post,
+      userJSON: JSON.stringify(req.user, null, 2)
+    }
   }
 
   render () {
-    const { post } = this.props
+    const { post, userJSON } = this.props
 
     if (!post) return <h1>Post not found</h1>
 
-    return <h1>{post.title}</h1>
+    return (
+      <div>
+        <h1>{post.title}</h1>
+        <pre>{userJSON}</pre>
+      </div>
+    )
   }
 }
