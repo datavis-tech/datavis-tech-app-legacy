@@ -1,0 +1,3 @@
+[submodule "datavis-tech-static"]
+	path = static
+	url = git@gitlab.com:curran/datavis-tech-static.git
