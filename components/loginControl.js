@@ -1,19 +1,18 @@
-import Link from 'next/link'
 import { Button, Popup } from 'semantic-ui-react'
-import PropTypes from 'prop-types'
+import { AUTH_PATH_GITHUB, AUTH_PATH_LOGOUT } from '../server/authConstants'
 
 const LoginControl = ({ user }) => {
   if(user){
     return (
-      <Link href='sign-out'>
+      <a href={AUTH_PATH_LOGOUT}>
         <Button>Sign out</Button>
-      </Link>
+      </a>
     )
   }
   return (
-    <Link href='sign-in'>
+    <a href={AUTH_PATH_GITHUB}>
       <Button>Sign in</Button>
-    </Link>
+    </a>
   )
 }
 

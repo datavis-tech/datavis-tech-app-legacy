@@ -13,7 +13,7 @@ class ViewPage extends React.Component {
     const userJSON = JSON.stringify(user, null, 2)
 
     return (
-      <Layout title={id + ' | Datavis.tech'}>
+      <Layout title={id + ' | Datavis.tech'} user={user}>
         <h1>{id}</h1>
         <pre>{userJSON}</pre>
       </Layout>
