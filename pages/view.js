@@ -1,5 +1,6 @@
 import React from 'react'
 import Page from '../components/page'
+import Layout from '../components/layout'
 
 class ViewPage extends React.Component {
   static async getInitialProps ({ query }) {
@@ -12,10 +13,10 @@ class ViewPage extends React.Component {
     const userJSON = JSON.stringify(user, null, 2)
 
     return (
-      <div>
+      <Layout title={id + ' | Datavis.tech'}>
         <h1>{id}</h1>
         <pre>{userJSON}</pre>
-      </div>
+      </Layout>
     )
   }
 }
