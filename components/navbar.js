@@ -1,9 +1,8 @@
 import Link from 'next/link'
 import { Image, Menu } from 'semantic-ui-react'
+import LoginControl from './loginControl'
 
-const LoginControl = <div>Login</div>
-
-const Navbar = () => (
+const Navbar = ({user}) => (
   <div>
     <Menu secondary>
       <Link href='/'>
@@ -12,7 +11,7 @@ const Navbar = () => (
         </Menu.Item>
       </Link>
       <Menu.Item position='right'>
-        {LoginControl}
+        <LoginControl user={user} />
       </Menu.Item>
     </Menu>
   </div>

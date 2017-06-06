@@ -2,7 +2,7 @@ import Head from 'next/head'
 import { Container } from 'semantic-ui-react'
 import Navbar from './navbar'
 
-export default ({ children, title }) => (
+export default ({ children, title, user }) => (
   <div>
     <Head>
       <title>{title}</title>
@@ -12,7 +12,7 @@ export default ({ children, title }) => (
       <link rel='shortcut icon' href='/static/images/favicon.ico' />
     </Head>
     <Container text>
-      <Navbar />
+      <Navbar user={user}/>
       { children }
     </Container>
   </div>
