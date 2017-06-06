@@ -31,7 +31,8 @@
     "passport": "^0.3.2",
     "passport-github": "^1.1.0",
     "react": "^15.5.4",
-    "react-dom": "^15.5.4"
+    "react-dom": "^15.5.4",
+    "semantic-ui-react": "^0.68.5"
   },
   "devDependencies": {
     "eslint": "^3.19.0",
