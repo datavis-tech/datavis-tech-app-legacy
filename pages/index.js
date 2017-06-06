@@ -1,9 +1,10 @@
 import { Link } from '../routes'
+import Page from '../modules/page'
 
-export default () => (
+export default Page(() => (
   <ul>
     <li><Link route='blog' params={{ slug: 'hello-world' }}><a>Blog: Hello world</a></Link></li>
     <li><Link route='blog' params={{ slug: 'another-blog-post' }}><a>Blog: Another blog post</a></Link></li>
     <li><Link route='blog' params={{ slug: 'non-existant' }}><a>Blog: Not found</a></Link></li>
   </ul>
-)
+))
