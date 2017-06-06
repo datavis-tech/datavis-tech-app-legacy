@@ -4,6 +4,8 @@ const config = require('../config.js')
 
 const {
   AUTH_PATH,
+  AUTH_PATH_GITHUB,
+  AUTH_PATH_LOGOUT,
   SUCCESS_REDIRECT,
   FAILURE_REDIRECT,
   LOGOUT_REDIRECT
