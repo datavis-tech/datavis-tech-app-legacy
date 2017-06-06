@@ -16,9 +16,7 @@ let globalUserData
 
 export default (Page) => {
   class WrappedPage extends React.Component {
-
     static async getInitialProps (pageContext) {
-
       // Get data about the currently logged in user.
       const user = process.browser ? globalUserData : pageContext.req.user
 
@@ -35,7 +33,6 @@ export default (Page) => {
 
       // In the case that this page was server-rendered,
       if (process.browser) {
-
         // store the user data from the server into this singleton variable
         // for use by other pages rendered on the client after a navigation.
         globalUserData = props.user
