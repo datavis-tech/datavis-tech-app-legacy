@@ -2,6 +2,7 @@ import React from 'react'
 import Page from '../components/page'
 import Layout from '../components/layout'
 import { Form, Button } from 'semantic-ui-react'
+import { Router } from '../routes'
 import createDocument from '../modules/createDocument'
 
 
@@ -9,11 +10,11 @@ class CreatePage extends React.Component {
 
   onSubmit (event) {
     event.preventDefault() // Prevent form submission
-    console.log(this)
-    createDocument({
+    const id = createDocument({
       title: this.titleInput.value,
       description: this.descriptionInput.value
     })
+    Router.pushRoute('view', { id })
   }
 
   render () {
