@@ -19,7 +19,11 @@ class CreatePage extends React.Component {
             <label>Description</label>
             <input placeholder='Enter your description here (optional).'/>
           </Form.Field>
-          <Button type='submit'>Create</Button>
+          <Button onClick={(event) => {
+            event.preventDefault() // Prevent form submission
+            console.log('here')
+
+          }}>Create</Button>
         </Form>
       </Layout>
     )
