@@ -29,16 +29,23 @@ const initPassport = () => {
   return passport.initialize()
 }
 
-module.exports = (app) => {
-  app.use(initPassport())
-  app.use(passport.session())
-  app.get(AUTH_PATH + '/failed', (req, res) => res.send('Authentication failed'))
-  app.get(AUTH_PATH_GITHUB, passport.authenticate('github'))
-  app.get(AUTH_PATH_GITHUB + '/callback',
+module.exports = (expressApp) => {
+  expressApp.use(initPassport())
+
+  expressApp.use(passport.session())
+
+  expressApp.get(AUTH_PATH + '/failed', (req, res) => {
+    res.send('Authentication failed')
+  })
+
+  expressApp.get(AUTH_PATH_GITHUB, passport.authenticate('github'))
+
+  expressApp.get(AUTH_PATH_GITHUB + '/callback',
     passport.authenticate('github', { failureRedirect: FAILURE_REDIRECT }),
     (req, res) => res.redirect(SUCCESS_REDIRECT)
   )
-  app.get(AUTH_PATH_LOGOUT, (req, res) => {
+
+  expressApp.get(AUTH_PATH_LOGOUT, (req, res) => {
     req.logout()
     res.redirect(LOGOUT_REDIRECT)
   })
