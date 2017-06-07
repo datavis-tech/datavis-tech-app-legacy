@@ -42,7 +42,7 @@ class ViewPage extends React.Component {
     const { title, description } = this.state
 
     return (
-      <Layout title={id + ' | Datavis.tech'} user={user}>
+      <Layout title={ (title || 'loading...') + ' | Datavis.tech'} user={user}>
         {this.state.docInitialized ? (
           <div>
             <Header as='h1'>{title}</Header>
