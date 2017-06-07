@@ -4,28 +4,40 @@ import Layout from '../components/layout'
 import { Form, Button } from 'semantic-ui-react'
 import createDocument from '../modules/createDocument'
 
-const onButtonClick = (event) => {
-  event.preventDefault() // Prevent form submission
-  createDocument()
-}
 
 class CreatePage extends React.Component {
+
+  onSubmit (event) {
+    event.preventDefault() // Prevent form submission
+    console.log(this)
+    createDocument({
+      title: this.titleInput.value,
+      description: this.descriptionInput.value
+    })
+  }
+
   render () {
     const { user } = this.props
 
     return (
       <Layout title={'Create | Datavis.tech'} user={user}>
         <h1>Create</h1>
-        <Form>
+        <Form onSubmit={this.onSubmit.bind(this)}>
           <Form.Field>
             <label>Title</label>
-            <input placeholder='Enter your title here.' />
+            <input
+              placeholder='Enter your title here.'
+              ref={(el) => this.titleInput = el}
+            />
           </Form.Field>
           <Form.Field>
             <label>Description</label>
-            <input placeholder='Enter your description here (optional).'/>
+            <input
+              placeholder='Enter your description here (optional).'
+              ref={(el) => this.descriptionInput = el}
+            />
           </Form.Field>
-          <Button onClick={onButtonClick} >Create</Button>
+          <Button>Create</Button>
         </Form>
       </Layout>
     )
