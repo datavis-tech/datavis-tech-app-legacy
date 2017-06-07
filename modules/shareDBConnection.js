@@ -1,4 +1,4 @@
-import sharedb from 'sharedb/lib/client'
+import shareDBClient from 'sharedb/lib/client'
 import ReconnectingWebSocket from 'reconnecting-websocket'
 
 let connection
@@ -6,7 +6,7 @@ let connection
 if(process.browser){
   const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:'
   const socket = new ReconnectingWebSocket(protocol + window.location.host)
-  connection = new sharedb.Connection(socket)
+  connection = new shareDBClient.Connection(socket)
 }
 
 export default connection

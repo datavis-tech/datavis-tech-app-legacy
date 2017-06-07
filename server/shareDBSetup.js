@@ -7,6 +7,6 @@ module.exports = (expressApp, httpServer) => {
   const shareDB = ShareDB()
 
   webSocketServer.on('connection', (webSocket) => {
-    sharedb.listen(new JSONStream(webSocketServer))
+    shareDB.listen(new JSONStream(webSocket))
   })
 }

@@ -2,6 +2,12 @@ import React from 'react'
 import Page from '../components/page'
 import Layout from '../components/layout'
 import { Form, Button } from 'semantic-ui-react'
+import createDocument from '../modules/createDocument'
+
+const onButtonClick = (event) => {
+  event.preventDefault() // Prevent form submission
+  createDocument()
+}
 
 class CreatePage extends React.Component {
   render () {
@@ -19,11 +25,7 @@ class CreatePage extends React.Component {
             <label>Description</label>
             <input placeholder='Enter your description here (optional).'/>
           </Form.Field>
-          <Button onClick={(event) => {
-            event.preventDefault() // Prevent form submission
-            console.log('here')
-
-          }}>Create</Button>
+          <Button onClick={onButtonClick} >Create</Button>
         </Form>
       </Layout>
     )
