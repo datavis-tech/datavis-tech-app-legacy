@@ -1,6 +1,6 @@
 import { Button, Image } from 'semantic-ui-react'
 import { Link } from '../routes'
-import { AUTH_PATH_GITHUB, AUTH_PATH_LOGOUT } from '../server/authConstants'
+import { AUTH_PATH_GITHUB, AUTH_PATH_LOGOUT } from '../modules/constants'
 
 const LoginControl = ({ user }) => {
   if (user) {

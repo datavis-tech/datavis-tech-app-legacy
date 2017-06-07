@@ -6,10 +6,10 @@ const {
   AUTH_PATH,
   AUTH_PATH_GITHUB,
   AUTH_PATH_LOGOUT,
-  SUCCESS_REDIRECT,
-  FAILURE_REDIRECT,
-  LOGOUT_REDIRECT
-} = require('./authConstants')
+  AUTH_SUCCESS_REDIRECT,
+  AUTH_FAILURE_REDIRECT,
+  AUTH_LOGOUT_REDIRECT
+} = require('../modules/constants')
 
 const initPassport = () => {
   const GitHubStrategy = passportGitHub.Strategy
@@ -41,12 +41,14 @@ module.exports = (expressApp) => {
   expressApp.get(AUTH_PATH_GITHUB, passport.authenticate('github'))
 
   expressApp.get(AUTH_PATH_GITHUB + '/callback',
-    passport.authenticate('github', { failureRedirect: FAILURE_REDIRECT }),
-    (req, res) => res.redirect(SUCCESS_REDIRECT)
+    passport.authenticate('github', {
+      failureRedirect: AUTH_FAILURE_REDIRECT
+    }),
+    (req, res) => res.redirect(AUTH_SUCCESS_REDIRECT)
   )
 
   expressApp.get(AUTH_PATH_LOGOUT, (req, res) => {
     req.logout()
-    res.redirect(LOGOUT_REDIRECT)
+    res.redirect(AUTH_LOGOUT_REDIRECT)
   })
 }
