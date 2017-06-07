@@ -1,14 +1,28 @@
 import { Button, Image } from 'semantic-ui-react'
+import { Link } from '../routes'
 import { AUTH_PATH_GITHUB, AUTH_PATH_LOGOUT } from '../server/authConstants'
 
 const LoginControl = ({ user }) => {
   if (user) {
+    const {
+      username,
+      _json: {
+        avatar_url
+      }
+    } = user
+
     return (
       <div>
-        <span style={{paddingRight: '8px'}}>
-          <Image src={user._json.avatar_url + '&size=36'} inline/>
-          <span>{user.username}</span>
-        </span>
+          <span style={{paddingRight: '8px'}}>
+            <Link route='profile' params={{ username }}>
+              <a>
+                <Image src={avatar_url + '&size=36'} inline/>
+                <span>
+                  {username}
+                </span>
+              </a>
+            </Link>
+          </span>
         <a href={AUTH_PATH_LOGOUT}>
           <Button>Sign out</Button>
         </a>
