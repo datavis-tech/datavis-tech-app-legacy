@@ -9,6 +9,7 @@ const next = require('next')
 const routes = require('../routes')
 const session = require('./session')
 const auth = require('./auth')
+const shareDBSetup = require('./shareDBSetup')
 
 const expressApp = express()
 expressApp.use(session.middleware)
@@ -22,9 +23,12 @@ expressApp.get('*', handler)
 nextApp
   .prepare()
   .then(() => {
-    createServer(expressApp)
-      .listen(3000, (err) => {
-        if (err) throw err
-        console.log('> Ready on http://localhost:3000')
-      })
+    const httpServer = createServer(expressApp)
+
+    shareDBSetup(expressApp, httpServer)
+
+    httpServer.listen(3000, (err) => {
+      if (err) throw err
+      console.log('> Ready on http://localhost:3000')
+    })
   })
