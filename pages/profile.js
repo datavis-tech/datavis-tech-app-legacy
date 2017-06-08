@@ -10,7 +10,7 @@ class ProfilePage extends React.Component {
   render () {
     const {
       username, // The username for the profile we're viewing.
-      user, // The currently logged in user.
+      user // The currently logged in user.
     } = this.props
 
     return (

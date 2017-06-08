@@ -1,6 +1,7 @@
 import React from 'react'
 import Page from '../components/page'
 import Layout from '../components/layout'
+import { Form } from 'semantic-ui-react'
 
 class EditPage extends React.Component {
   static async getInitialProps ({ query }) {
@@ -12,7 +13,16 @@ class EditPage extends React.Component {
 
     return (
       <Layout title={id + ' | Datavis.tech'} user={user}>
-        <h1>Editing {id}</h1>
+        <Form>
+          <Form.Field>
+            <label>Title</label>
+            <input ref={(el) => { this.titleInput = el }} />
+          </Form.Field>
+          <Form.Field>
+            <label>Description</label>
+            <input ref={(el) => { this.descriptionInput = el }} />
+          </Form.Field>
+        </Form>
       </Layout>
     )
   }

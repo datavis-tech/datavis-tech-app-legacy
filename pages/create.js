@@ -5,9 +5,7 @@ import { Form, Button } from 'semantic-ui-react'
 import { Router } from '../routes'
 import createDocument from '../modules/createDocument'
 
-
 class CreatePage extends React.Component {
-
   onSubmit (event) {
     event.preventDefault() // Prevent form submission
     const id = createDocument({
@@ -28,14 +26,14 @@ class CreatePage extends React.Component {
             <label>Title</label>
             <input
               placeholder='Enter your title here.'
-              ref={(el) => this.titleInput = el}
+              ref={(el) => { this.titleInput = el }}
             />
           </Form.Field>
           <Form.Field>
             <label>Description</label>
             <input
               placeholder='Enter your description here (optional).'
-              ref={(el) => this.descriptionInput = el}
+              ref={(el) => { this.descriptionInput = el }}
             />
           </Form.Field>
           <Button>Create</Button>

@@ -3,27 +3,26 @@ import { Header } from 'semantic-ui-react'
 import Page from '../components/page'
 import Layout from '../components/layout'
 import connection from '../modules/shareDBConnection'
-import { DB_DOCUMENTS_COLLECTION} from '../modules/constants'
+import { DB_DOCUMENTS_COLLECTION } from '../modules/constants'
 
 class ViewPage extends React.Component {
-
   static async getInitialProps ({ query }) {
     return { id: query.id }
   }
 
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.state = {
       docInitialized: false
     }
-    if(process.browser){
+    if (process.browser) {
       const doc = connection.get(DB_DOCUMENTS_COLLECTION, props.id)
 
       const updateState = () => {
         this.setState({
           docInitialized: true,
           title: doc.data.title,
-          description: doc.data.description,
+          description: doc.data.description
         })
       }
 
@@ -38,11 +37,11 @@ class ViewPage extends React.Component {
   }
 
   render () {
-    const { id, user } = this.props
+    const { user } = this.props
     const { title, description } = this.state
 
     return (
-      <Layout title={ (title || 'loading...') + ' | Datavis.tech'} user={user}>
+      <Layout title={(title || 'loading...') + ' | Datavis.tech'} user={user}>
         {this.state.docInitialized ? (
           <div>
             <Header as='h1'>{title}</Header>

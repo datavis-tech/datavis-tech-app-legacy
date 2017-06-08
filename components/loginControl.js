@@ -4,25 +4,21 @@ import { AUTH_PATH_GITHUB, AUTH_PATH_LOGOUT } from '../modules/constants'
 
 const LoginControl = ({ user }) => {
   if (user) {
-    const {
-      username,
-      _json: {
-        avatar_url
-      }
-    } = user
+    const username = user.username
+    const avatarURL = user._json.avatar_url
 
     return (
       <div>
-          <span style={{paddingRight: '8px'}}>
-            <Link route='profile' params={{ username }}>
-              <a>
-                <Image src={avatar_url + '&size=36'} inline/>
-                <span>
-                  {username}
-                </span>
-              </a>
-            </Link>
-          </span>
+        <span style={{paddingRight: '8px'}}>
+          <Link route='profile' params={{ username }}>
+            <a>
+              <Image src={avatarURL + '&size=36'} inline/>
+              <span>
+                {username}
+              </span>
+            </a>
+          </Link>
+        </span>
         <a href={AUTH_PATH_LOGOUT}>
           <Button>Sign out</Button>
         </a>
