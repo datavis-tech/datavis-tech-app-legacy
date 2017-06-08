@@ -27,25 +27,44 @@ class EditPage extends React.Component {
       
       this.doc.subscribe((err) => {
         if (err) throw err;
-        new StringBinding(this.titleInput, this.doc, ['title']).setup()
-        new StringBinding(this.descriptionInput, this.doc, ['description']).setup()
+
+        const doc = this.doc
+
+        new StringBinding(this.titleInput, doc, ['title']).setup()
+        new StringBinding(this.descriptionInput, doc, ['description']).setup()
+
+        const updateState = () => {
+          this.setState({
+            docInitialized: true,
+            title: doc.data.title,
+          })
+        }
+        updateState()
+        doc.on('op', updateState)
       })
     }
   }
 
   render () {
     const { user } = this.props
+    const { title } = this.state
 
     return (
-      <Layout title={' (editing) | Datavis.tech'} user={user}>
+      <Layout title={(title || 'Loading...') +  ' (editing) | Datavis.tech'} user={user}>
         <Form>
           <Form.Field>
             <label>Title</label>
-            <input ref={(el) => { this.titleInput = el }} />
+            <input
+              placeholder={this.state.docInitialized ? '' : 'Loading...'}
+              ref={(el) => { this.titleInput = el }}
+            />
           </Form.Field>
           <Form.Field>
             <label>Description</label>
-            <input ref={(el) => { this.descriptionInput = el }} />
+            <input
+              placeholder={ this.state.docInitialized ? '' : 'Loading...' }
+              ref={(el) => { this.descriptionInput = el }}
+            />
           </Form.Field>
         </Form>
       </Layout>
