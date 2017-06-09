@@ -10,7 +10,8 @@ class CreatePage extends React.Component {
     event.preventDefault() // Prevent form submission
     const id = createDocument({
       title: this.titleInput.value,
-      description: this.descriptionInput.value
+      description: this.descriptionInput.value,
+      owner: this.props.user.id
     })
     Router.pushRoute('view', { id })
   }
