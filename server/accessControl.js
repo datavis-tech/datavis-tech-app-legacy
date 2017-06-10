@@ -24,8 +24,6 @@ module.exports = (shareDB) => {
       request.agent.isServer = true
     }
 
-    console.log(request.agent)
-
     done()
   })
 
@@ -41,8 +39,6 @@ module.exports = (shareDB) => {
       },
       snapshot
     } = request
-
-    console.log(request.agent)
 
     // Allow server code to do anything (e.g. create and update User entries).
     if (isServer) {

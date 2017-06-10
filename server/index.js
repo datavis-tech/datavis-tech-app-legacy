@@ -8,14 +8,14 @@ const { createServer } = require('http')
 const next = require('next')
 const routes = require('../routes')
 const session = require('./session')
-const auth = require('./auth')
-const accessControl = require('./accessControl')
 const shareDB = require('./shareDB')
+const authorization = require('./authorization')
+const accessControl = require('./accessControl')
 
 const expressApp = express()
 expressApp.use(session.middleware)
 
-auth(expressApp)
+authorization(expressApp)
 accessControl(shareDB.backend)
 
 const dev = process.env.NODE_ENV !== 'production'
@@ -27,9 +27,7 @@ nextApp
   .prepare()
   .then(() => {
     const httpServer = createServer(expressApp)
-
     shareDB.setup(httpServer)
-
     httpServer.listen(3000, (err) => {
       if (err) throw err
       console.log('> Ready on http://localhost:3000')
