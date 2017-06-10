@@ -1,6 +1,7 @@
 const passport = require('passport')
 const passportGitHub = require('passport-github')
 const config = require('../config.js')
+const findOrCreateUser = require('./findOrCreateUser')
 
 const {
   AUTH_PATH,
@@ -23,7 +24,9 @@ const initPassport = () => {
       clientSecret: config.gitHubClientSecret,
       callbackURL: config.gitHubCallbackURL
     },
-    (accessToken, refreshToken, profile, cb) => cb(null, profile)
+    (accessToken, refreshToken, profile, callback) => {
+      findOrCreateUser(profile, callback)
+    }
   ))
 
   return passport.initialize()

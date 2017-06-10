@@ -8,9 +8,24 @@ const get = require('lodash/get')
 
 module.exports = (shareDB) => {
 
-  // Expose the session to downstram middleware as agent.session.
+  // This ShareDB middleware triggers when new connections are made,
+  // whether from the browser or from the server.
   shareDB.use('connect', (request, done) => {
-    request.agent.session = request.req.session
+
+    // If the connection is coming from the browser,
+    if(request.req){
+
+      // expose the session to downstram middleware as agent.session.
+      request.agent.session = request.req.session
+    } else {
+
+      // Otherwise set a flag that clarifies that
+      // the connection is coming from the server (e.g. for creating User entries).
+      request.agent.isServer = true
+    }
+
+    console.log(request.agent)
+
     done()
   })
 
@@ -20,9 +35,19 @@ module.exports = (shareDB) => {
     // Unpack the ShareDB request object.
     const {
       op,
-      agent: { session },
+      agent: {
+        isServer,
+        session
+      },
       snapshot
     } = request
+
+    console.log(request.agent)
+
+    // Allow server code to do anything (e.g. create and update User entries).
+    if(isServer){
+      return done()
+    }
 
     // Get the id of the currently logged in user from the session.
     const userId = get(session, 'passport.user.id')

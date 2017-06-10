@@ -9,11 +9,14 @@ const next = require('next')
 const routes = require('../routes')
 const session = require('./session')
 const auth = require('./auth')
-const shareDBSetup = require('./shareDBSetup')
+const accessControl = require('./accessControl')
+const shareDB = require('./shareDB')
 
 const expressApp = express()
 expressApp.use(session.middleware)
+
 auth(expressApp)
+accessControl(shareDB.backend)
 
 const dev = process.env.NODE_ENV !== 'production'
 const nextApp = next({ dev })
@@ -25,7 +28,7 @@ nextApp
   .then(() => {
     const httpServer = createServer(expressApp)
 
-    shareDBSetup(expressApp, httpServer)
+    shareDB.setup(httpServer)
 
     httpServer.listen(3000, (err) => {
       if (err) throw err
