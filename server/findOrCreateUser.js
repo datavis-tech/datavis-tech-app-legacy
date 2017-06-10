@@ -12,21 +12,21 @@ module.exports = (profile, callback) => {
   const userId = profile.id
 
   // Create the ShareDB connection if it doesn't exist.
-  if(!connection){
+  if (!connection) {
     connection = backend.connect()
   }
 
   // Fetch the ShareDB document for this User.
   const doc = connection.get(DB_USERS_COLLECTION, userId)
   doc.fetch((err) => {
-    if (err){
+    if (err) {
       return callback(err)
     }
 
     // Create the user document if if doesn't exist.
     if (doc.type === null) {
       return doc.create(profile, (err) => {
-        if (err){
+        if (err) {
           return callback(err)
         }
         callback(null, profile)
@@ -35,18 +35,18 @@ module.exports = (profile, callback) => {
 
     callback(null, profile)
 
-    //// If the user document does exist,
-    //// update it to contain the most recent profile data.
-    //const op = {
-    //  p: [],
-    //  od: doc.data,
-    //  oi: profile
-    //}
-    //doc.submitOp(op, (err) => {
-    //  if (err){
-    //    return callback(err)
-    //  }
-    //  callback(null, profile)
-    //})
+    // // If the user document does exist,
+    // // update it to contain the most recent profile data.
+    // const op = {
+    //   p: [],
+    //   od: doc.data,
+    //   oi: profile
+    // }
+    // doc.submitOp(op, (err) => {
+    //   if (err){
+    //     return callback(err)
+    //   }
+    //   callback(null, profile)
+    // })
   })
 }

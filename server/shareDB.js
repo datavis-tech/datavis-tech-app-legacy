@@ -15,6 +15,9 @@ const setup = (httpServer) => {
 
     // look up the session from the upgrade reques cookie,
     getSession(request, (err, session) => {
+      if (err) {
+        return console.error(err)
+      }
 
       // then expose the session on the upgrade request object,
       // so the access control middleware can access it.

@@ -24,9 +24,8 @@ class EditPage extends React.Component {
   componentDidMount () {
     if (process.browser) {
       // TODO cleanup on unmount
-      
       this.doc.subscribe((err) => {
-        if (err) throw err;
+        if (err) throw err
 
         const doc = this.doc
 
@@ -36,7 +35,7 @@ class EditPage extends React.Component {
         const updateState = () => {
           this.setState({
             docInitialized: true,
-            title: doc.data.title,
+            title: doc.data.title
           })
         }
         updateState()
@@ -50,7 +49,7 @@ class EditPage extends React.Component {
     const { title } = this.state
 
     return (
-      <Layout title={(title || 'Loading...') +  ' (editing) | Datavis.tech'} user={user}>
+      <Layout title={(title || 'Loading...') + ' (editing) | Datavis.tech'} user={user}>
         <Form>
           <Form.Field>
             <label>Title</label>
@@ -62,7 +61,7 @@ class EditPage extends React.Component {
           <Form.Field>
             <label>Description</label>
             <input
-              placeholder={ this.state.docInitialized ? '' : 'Loading...' }
+              placeholder={this.state.docInitialized ? '' : 'Loading...'}
               ref={(el) => { this.descriptionInput = el }}
             />
           </Form.Field>

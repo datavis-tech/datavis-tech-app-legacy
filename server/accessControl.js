@@ -13,7 +13,7 @@ module.exports = (shareDB) => {
   shareDB.use('connect', (request, done) => {
 
     // If the connection is coming from the browser,
-    if(request.req){
+    if (request.req) {
 
       // expose the session to downstram middleware as agent.session.
       request.agent.session = request.req.session
@@ -45,7 +45,7 @@ module.exports = (shareDB) => {
     console.log(request.agent)
 
     // Allow server code to do anything (e.g. create and update User entries).
-    if(isServer){
+    if (isServer) {
       return done()
     }
 
@@ -62,8 +62,8 @@ module.exports = (shareDB) => {
     // Access control rules:
 
     // For all ops, owner must be the logged in user.
-    if(!userId || (owner !== userId)) {
-      return done("Error: Document owner must match currently logged in user.")
+    if (!userId || (owner !== userId)) {
+      return done('Error: Document owner must match currently logged in user.')
     }
 
     done()

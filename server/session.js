@@ -20,7 +20,7 @@ const getSession = (req, callback) => {
   const headers = req.headers
 
   // If there's no cookie, there's no session, so do nothing.
-  if(!headers.cookie){
+  if (!headers.cookie) {
     return callback()
   }
 
