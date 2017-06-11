@@ -5,20 +5,11 @@ import {
   Grid
 } from 'semantic-ui-react'
 
-import Page from '../components/page'
-import Layout from '../components/layout'
-import connection from '../modules/shareDBConnection'
-import { DB_USERS_COLLECTION } from '../modules/constants'
-
-const ProfileCard = ({ profile }) => (
-  <Card>
-    <Image src={profile._json.avatar_url} />
-    <Card.Content>
-      <Card.Header>{profile.displayName}</Card.Header>
-      <Card.Meta>{profile.username}</Card.Meta>
-    </Card.Content>
-  </Card>
-)
+import Page from '../../components/page'
+import Layout from '../../components/layout'
+import connection from '../../modules/shareDBConnection'
+import { DB_USERS_COLLECTION } from '../../modules/constants'
+import ProfileCard from './profileCard'
 
 class ProfilePage extends React.Component {
   static async getInitialProps ({ query }) {
