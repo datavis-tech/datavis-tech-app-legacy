@@ -10,6 +10,16 @@ import Layout from '../components/layout'
 import connection from '../modules/shareDBConnection'
 import { DB_USERS_COLLECTION } from '../modules/constants'
 
+const ProfileCard = ({ profile }) => (
+  <Card>
+    <Image src={profile._json.avatar_url} />
+    <Card.Content>
+      <Card.Header>{profile.displayName}</Card.Header>
+      <Card.Meta>{profile.username}</Card.Meta>
+    </Card.Content>
+  </Card>
+)
+
 class ProfilePage extends React.Component {
   static async getInitialProps ({ query }) {
     return {
@@ -57,25 +67,14 @@ class ProfilePage extends React.Component {
 
     const { profile } = this.state
 
-    console.log(profile)
-
     return (
       <Layout title={username + ' | Datavis.tech'} user={user}>
-        {profile
-          ? <Grid>
-              <Grid.Column width={6}>
-                <Card>
-                  <Image src={profile._json.avatar_url} />
-                  <Card.Content>
-                    <Card.Header>{profile.displayName}</Card.Header>
-                    <Card.Meta>{username}</Card.Meta>
-                  </Card.Content>
-                </Card>
-              </Grid.Column>
-              <Grid.Column width={10}/>
-            </Grid>
-          : null
-        }
+        <Grid>
+          <Grid.Column width={6}>
+            {profile ? <ProfileCard profile={profile}/> : null }
+          </Grid.Column>
+          <Grid.Column width={10}/>
+        </Grid>
       </Layout>
     )
   }
