@@ -1,3 +1,5 @@
+// This defines the card element that contains the
+// profile picture, display name, and username.
 import { Card, Image } from 'semantic-ui-react'
 
 export default ({ profile }) => (

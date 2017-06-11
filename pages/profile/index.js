@@ -28,9 +28,9 @@ class ProfilePage extends React.Component {
     const mongoQuery = {
       username: this.props.username
     }
-    this.query = connection.createSubscribeQuery(DB_USERS_COLLECTION, mongoQuery)
+    this.profileQuery = connection.createSubscribeQuery(DB_USERS_COLLECTION, mongoQuery)
     const update = () => {
-      const results = this.query.results
+      const results = this.profileQuery.results
       if (results.length === 1) {
         this.setState({
           profile: results[0].data
@@ -38,12 +38,12 @@ class ProfilePage extends React.Component {
       }
       // TODO show when a user is not found
     }
-    this.query.on('ready', update)
-    this.query.on('changed', update)
+    this.profileQuery.on('ready', update)
+    this.profileQuery.on('changed', update)
   }
 
   componentWillUnmount () {
-    this.query.destroy()
+    this.profileQuery.destroy()
   }
 
   render () {
