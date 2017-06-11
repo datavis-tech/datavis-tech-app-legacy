@@ -1,4 +1,19 @@
 import React from 'react'
+import {
+  Container,
+  Header,
+  Card,
+  Image,
+  Icon,
+  Grid,
+  List,
+  Input,
+  Button,
+  Checkbox,
+  Form,
+  Menu
+} from 'semantic-ui-react'
+
 import Page from '../components/page'
 import Layout from '../components/layout'
 import connection from '../modules/shareDBConnection'
@@ -49,11 +64,26 @@ class ProfilePage extends React.Component {
       user // The currently logged in user.
     } = this.props
 
+    const { profile } = this.state
+
+    console.log(profile)
+
     return (
       <Layout title={username + ' | Datavis.tech'} user={user}>
-        <h1>{username}</h1>
-        {this.state.profile ?
-            <div>{this.state.profile.displayName}</div>
+        {profile ?
+            <Grid>
+              <Grid.Column width={6}>
+                <Card>
+                  <Image src={profile._json.avatar_url} />
+                  <Card.Content>
+                    <Card.Header>{profile.displayName}</Card.Header>
+                    <Card.Meta>{username}</Card.Meta>
+                  </Card.Content>
+                </Card>
+              </Grid.Column>
+              <Grid.Column width={10}>
+              </Grid.Column>
+            </Grid>
           :
             null
         }
