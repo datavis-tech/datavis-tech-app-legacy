@@ -1,8 +1,4 @@
-import {
-  Card,
-  Image,
-  Grid
-} from 'semantic-ui-react'
+import { Card, Image } from 'semantic-ui-react'
 
 export default ({ profile }) => (
   <Card>

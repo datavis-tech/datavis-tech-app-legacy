@@ -1,9 +1,5 @@
 import React from 'react'
-import {
-  Card,
-  Image,
-  Grid
-} from 'semantic-ui-react'
+import { Grid } from 'semantic-ui-react'
 
 import Page from '../../components/page'
 import Layout from '../../components/layout'
