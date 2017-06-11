@@ -1,17 +1,8 @@
 import React from 'react'
 import {
-  Container,
-  Header,
   Card,
   Image,
-  Icon,
-  Grid,
-  List,
-  Input,
-  Button,
-  Checkbox,
-  Form,
-  Menu
+  Grid
 } from 'semantic-ui-react'
 
 import Page from '../components/page'
@@ -43,15 +34,15 @@ class ProfilePage extends React.Component {
     this.query = connection.createSubscribeQuery(DB_USERS_COLLECTION, mongoQuery)
     const update = () => {
       const results = this.query.results
-      if(results.length === 1){
+      if (results.length === 1) {
         this.setState({
           profile: results[0].data
         })
       }
       // TODO show when a user is not found
     }
-    this.query.on('ready', update);
-    this.query.on('changed', update);
+    this.query.on('ready', update)
+    this.query.on('changed', update)
   }
 
   componentWillUnmount () {
@@ -70,8 +61,8 @@ class ProfilePage extends React.Component {
 
     return (
       <Layout title={username + ' | Datavis.tech'} user={user}>
-        {profile ?
-            <Grid>
+        {profile
+          ? <Grid>
               <Grid.Column width={6}>
                 <Card>
                   <Image src={profile._json.avatar_url} />
@@ -81,11 +72,9 @@ class ProfilePage extends React.Component {
                   </Card.Content>
                 </Card>
               </Grid.Column>
-              <Grid.Column width={10}>
-              </Grid.Column>
+              <Grid.Column width={10}/>
             </Grid>
-          :
-            null
+          : null
         }
       </Layout>
     )
