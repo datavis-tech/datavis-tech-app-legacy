@@ -1,9 +1,13 @@
 const ShareDB = require('sharedb')
 const WebSocket = require('ws')
 const JSONStream = require('websocket-json-stream')
+const ShareDBMongo = require('sharedb-mongo')
 const { getSession } = require('./session')
+const { mongoURL } = require('../config')
 
-const backend = ShareDB()
+const backend = ShareDB({
+  db: ShareDBMongo(mongoURL)
+})
 
 const setup = (httpServer) => {
   const webSocketServer = new WebSocket.Server({
