@@ -14,6 +14,7 @@ const createDocumentsQuery = (owner, update) => {
   const mongoQuery = { owner }
 
   // TODO use a projection here to exclude the full contents of each document
+  // TODO see if we can make the titles here update in real-time
   const query = connection.createSubscribeQuery(DB_DOCUMENTS_COLLECTION, mongoQuery)
 
   const change = () => {

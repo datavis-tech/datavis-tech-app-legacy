@@ -6,7 +6,7 @@ const DocumentPreview = ({id, data: { title, description }}) => (
     <List.Content>
       <Link route='view' params={{ id }}>
         <a>
-          <List.Header as='a'>{title}</List.Header>
+          <List.Header>{title}</List.Header>
           <List.Description>{description}</List.Description>
         </a>
       </Link>
