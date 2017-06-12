@@ -3,9 +3,8 @@ import { Grid } from 'semantic-ui-react'
 
 import Page from '../../components/page'
 import Layout from '../../components/layout'
-import connection from '../../modules/shareDBConnection'
-import { DB_USERS_COLLECTION } from '../../modules/constants'
 import ProfileCard from './profileCard'
+import createProfileQuery from './createProfileQuery'
 
 class ProfilePage extends React.Component {
   static async getInitialProps ({ query }) {
@@ -16,34 +15,32 @@ class ProfilePage extends React.Component {
 
   constructor (props) {
     super(props)
+
     this.state = {
+      loading: true,
       profile: null
     }
+
+    this.queries = []
   }
 
   componentDidMount () {
+    const username = this.props.username
+    this.profileQuery = createProfileQuery(username, (profile) => {
+      this.setState({
+        profile,
+        loading: false
+      })
 
-    // Find profile data by username.
-    // Draws from https://github.com/share/sharedb/blob/master/examples/leaderboard/client/Leaderboard.jsx
-    const mongoQuery = {
-      username: this.props.username
-    }
-    this.profileQuery = connection.createSubscribeQuery(DB_USERS_COLLECTION, mongoQuery)
-    const update = () => {
-      const results = this.profileQuery.results
-      if (results.length === 1) {
-        this.setState({
-          profile: results[0].data
-        })
-      }
-      // TODO show when a user is not found
-    }
-    this.profileQuery.on('ready', update)
-    this.profileQuery.on('changed', update)
+      const userId = profile.id
+      console.log(userId)
+    })
   }
 
   componentWillUnmount () {
-    this.profileQuery.destroy()
+    if(this.profileQuery){
+      this.profileQuery.destroy()
+    }
   }
 
   render () {
@@ -52,7 +49,10 @@ class ProfilePage extends React.Component {
       user // The currently logged in user.
     } = this.props
 
-    const { profile } = this.state
+    const {
+      profile,
+      profileNotFound
+    } = this.state
 
     return (
       <Layout title={username + ' | Datavis.tech'} user={user}>
