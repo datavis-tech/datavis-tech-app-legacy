@@ -6,6 +6,25 @@ import Layout from '../../components/layout'
 import ProfileCard from './profileCard'
 import createProfileQuery from './createProfileQuery'
 
+const ProfileBody = ({ loading, profile }) => {
+  if(loading){
+    return null
+  }
+  if(!profile){
+    return (
+      <div>User not found</div>
+    )
+  }
+  return (
+    <Grid>
+      <Grid.Column width={6}>
+        <ProfileCard profile={profile}/>
+      </Grid.Column>
+      <Grid.Column width={10}/>
+    </Grid>
+  )
+}
+
 class ProfilePage extends React.Component {
   static async getInitialProps ({ query }) {
     return {
@@ -31,9 +50,10 @@ class ProfilePage extends React.Component {
         profile,
         loading: false
       })
-
-      const userId = profile.id
-      console.log(userId)
+      if(profile){
+        const userId = profile.id
+        console.log(userId)
+      }
     })
   }
 
@@ -51,17 +71,15 @@ class ProfilePage extends React.Component {
 
     const {
       profile,
-      profileNotFound
+      loading
     } = this.state
 
     return (
       <Layout title={username + ' | Datavis.tech'} user={user}>
-        <Grid>
-          <Grid.Column width={6}>
-            {profile ? <ProfileCard profile={profile}/> : null }
-          </Grid.Column>
-          <Grid.Column width={10}/>
-        </Grid>
+        <ProfileBody
+          loading={loading}
+          profile={profile}
+        />
       </Layout>
     )
   }
