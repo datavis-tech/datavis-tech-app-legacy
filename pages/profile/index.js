@@ -1,29 +1,10 @@
 import React from 'react'
-import { Grid } from 'semantic-ui-react'
 
 import Page from '../../components/page'
 import Layout from '../../components/layout'
-import ProfileCard from './profileCard'
 import createProfileQuery from './createProfileQuery'
-
-const ProfileBody = ({ loading, profile }) => {
-  if(loading){
-    return null
-  }
-  if(!profile){
-    return (
-      <div>User not found</div>
-    )
-  }
-  return (
-    <Grid>
-      <Grid.Column width={6}>
-        <ProfileCard profile={profile}/>
-      </Grid.Column>
-      <Grid.Column width={10}/>
-    </Grid>
-  )
-}
+import createDocumentsQuery from './createDocumentsQuery'
+import ProfileBody from './profileBody'
 
 class ProfilePage extends React.Component {
   static async getInitialProps ({ query }) {
@@ -50,16 +31,21 @@ class ProfilePage extends React.Component {
         profile,
         loading: false
       })
-      if(profile){
-        const userId = profile.id
-        console.log(userId)
+      if(profile && !this.documentsQuery){
+        const owner = profile.id
+        this.documentsQuery = createDocumentsQuery(owner, (documents) => {
+          this.setState({ documents })
+        })
       }
     })
   }
 
   componentWillUnmount () {
-    if(this.profileQuery){
+    if (this.profileQuery) {
       this.profileQuery.destroy()
+    }
+    if (this.documentsQuery) {
+      this.documentsQuery.destroy()
     }
   }
 
@@ -70,8 +56,9 @@ class ProfilePage extends React.Component {
     } = this.props
 
     const {
+      loading,
       profile,
-      loading
+      documents
     } = this.state
 
     return (
@@ -79,6 +66,7 @@ class ProfilePage extends React.Component {
         <ProfileBody
           loading={loading}
           profile={profile}
+          documents={documents}
         />
       </Layout>
     )
