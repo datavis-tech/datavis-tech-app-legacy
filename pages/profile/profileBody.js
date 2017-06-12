@@ -3,10 +3,10 @@ import ProfileCard from './profileCard'
 import DocumentsList from './documentsList'
 
 const ProfileBody = ({ loading, profile, documents }) => {
-  if(loading){
+  if (loading) {
     return null
   }
-  if(!profile){
+  if (!profile) {
     return (
       <div>User not found</div>
     )

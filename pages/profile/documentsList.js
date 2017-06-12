@@ -1,18 +1,12 @@
-import {
-  Header,
-  Image,
-  Icon,
-  List
-} from 'semantic-ui-react'
-
-import { Link, Router } from '../../routes'
+import { List } from 'semantic-ui-react'
+import { Link } from '../../routes'
 
 const DocumentPreview = ({id, data: { title, description }}) => (
   <List.Item key={id} >
     <List.Content>
       <Link route='view' params={{ id }}>
         <a>
-          <List.Header as='a'>{title +'dd'}</List.Header>
+          <List.Header as='a'>{title}</List.Header>
           <List.Description>{description}</List.Description>
         </a>
       </Link>
@@ -21,7 +15,7 @@ const DocumentPreview = ({id, data: { title, description }}) => (
 )
 
 const DocumentsList = ({ documents }) => {
-  if(!documents){
+  if (!documents) {
     return null
   }
   return (

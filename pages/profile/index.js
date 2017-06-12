@@ -31,7 +31,7 @@ class ProfilePage extends React.Component {
         profile,
         loading: false
       })
-      if(profile && !this.documentsQuery){
+      if (profile && !this.documentsQuery) {
         const owner = profile.id
         this.documentsQuery = createDocumentsQuery(owner, (documents) => {
           this.setState({ documents })
