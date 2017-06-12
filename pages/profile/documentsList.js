@@ -5,16 +5,17 @@ import {
   List
 } from 'semantic-ui-react'
 
-import { Router } from '../../routes'
+import { Link, Router } from '../../routes'
 
 const DocumentPreview = ({id, data: { title, description }}) => (
-  <List.Item
-    key={id}
-    onClick={() => Router.pushRoute('view', { id })}
-  >
+  <List.Item key={id} >
     <List.Content>
-      <List.Header as='a'>{title}</List.Header>
-      <List.Description as='a'>{description}</List.Description>
+      <Link route='view' params={{ id }}>
+        <a>
+          <List.Header as='a'>{title +'dd'}</List.Header>
+          <List.Description>{description}</List.Description>
+        </a>
+      </Link>
     </List.Content>
   </List.Item>
 )
