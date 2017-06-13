@@ -169,3 +169,17 @@ sudo vim /etc/nginx/sites-available/default
 sudo /etc/init.d/nginx restart
 tail /var/log/nginx/error.log
 ```
+
+## Install Node.js
+
+Check the latest version of NVM at [github.com/creationix/nvm](https://github.com/creationix/nvm)
+
+```
+wget -qO- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
+source ~/.bashrc
+nvm install node
+```
+
+## Install Redis
+
+
