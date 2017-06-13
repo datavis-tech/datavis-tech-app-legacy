@@ -182,4 +182,20 @@ nvm install node
 
 ## Install Redis
 
+Install Redis, from [Digital Ocean: How to Install and Use Redis](https://www.digitalocean.com/community/tutorials/how-to-install-and-use-redis).
+
+```
+cd ~
+sudo apt-get install build-essential -y
+wget http://download.redis.io/releases/redis-stable.tar.gz
+tar xzf redis-stable.tar.gz
+cd redis-stable
+make
+sudo make install
+cd utils
+sudo ./install_server.sh
+```
+
+Choose all the default settings.
+
 
