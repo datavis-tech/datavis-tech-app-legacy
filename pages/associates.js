@@ -1,22 +1,6 @@
-import {
-  Container,
-  Header,
-  Input,
-  List,
-  Button,
-  Checkbox,
-  Form,
-  Segment,
-  Label,
-  Icon,
-  Grid,
-  Card,
-  Image,
-  Menu
-} from 'semantic-ui-react'
+import { Header, Segment } from 'semantic-ui-react'
 import Page from '../components/page'
 
-import Link from 'next/link'
 import Layout from '../components/layout'
 import Spacer from '../components/spacer'
 import HugeLogo from '../components/hugeLogo'

@@ -1,4 +1,3 @@
-import { Link } from '../routes'
 import Page from '../components/page'
 import Layout from '../components/layout'
 

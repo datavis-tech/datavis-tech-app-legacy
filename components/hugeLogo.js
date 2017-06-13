@@ -2,7 +2,7 @@ import { Container, Image } from 'semantic-ui-react'
 import Link from 'next/link'
 
 const LinkMaybe = ({ noLink, children }) => {
-  if(noLink){
+  if (noLink) {
     return children
   }
   return (

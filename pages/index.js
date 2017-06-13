@@ -1,14 +1,9 @@
 import {
   Container,
   Header,
-  Input,
   Button,
-  Checkbox,
-  Form,
-  Menu,
   Card,
-  Image,
-  Divider,
+  Divider
 } from 'semantic-ui-react'
 import Link from 'next/link'
 import Layout from '../components/layout'
