@@ -198,7 +198,7 @@ sudo ./install_server.sh
 
 Choose all the default settings.
 
-## Installing MongoDB
+## Install MongoDB
 
 MongoDB stores the persistent ShareDB documents for this app. Steps from [Install MongoDB Community Edition on Ubuntu](https://docs.mongodb.org/manual/tutorial/install-mongodb-on-ubuntu/).
 
@@ -209,3 +209,18 @@ sudo apt-get update
 sudo apt-get install mongodb-org -y
 sudo service mongod start
 ```
+
+## Deploy with PM2
+
+```
+npm install pm2 -g
+pm2 start server --env production
+```
+
+Generate a startup script:
+
+```
+pm2 startup
+```
+
+(follow the directions output there - run the command it generates as sudo)
