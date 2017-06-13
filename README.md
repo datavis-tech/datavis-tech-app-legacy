@@ -39,3 +39,19 @@ Start the server locally for development with:
 ```
 npm start
 ```
+
+# Production
+
+This section contains detailed information on how to launch the application in production on Amazon Web Services.
+
+## Launching the Virtual Maching
+
+In Amazon EC2, click "launch instance"
+
+ * Select "Ubuntu Server"
+ * Select "t2.small" -> "Next: Configure Instance Details"
+ * Check "Enable CloudWatch detailed monitoring" -> "Next: Add Storage"
+ * Use defaults -> "Next: Add Tags"
+ * Click on "Click to add a Name tag", choose a name -> "Next: Configure Security Group"
+ * Click "Add rule", select "HTTP" -> "Review and Launch" -> "Launch Instance"
+ 
