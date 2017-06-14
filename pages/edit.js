@@ -1,5 +1,10 @@
 import React from 'react'
-import { Form } from 'semantic-ui-react'
+import {
+  Form,
+  Grid,
+  Button
+} from 'semantic-ui-react'
+import { Link } from '../routes'
 import StringBinding from 'sharedb-string-binding'
 import Page from '../components/page'
 import Layout from '../components/layout'
@@ -45,7 +50,7 @@ class EditPage extends React.Component {
   }
 
   render () {
-    const { user } = this.props
+    const { id, user } = this.props
     const { title } = this.state
 
     return (
@@ -53,10 +58,21 @@ class EditPage extends React.Component {
         <Form>
           <Form.Field>
             <label>Title</label>
-            <input
-              placeholder={this.state.docInitialized ? '' : 'Loading...'}
-              ref={(el) => { this.titleInput = el }}
-            />
+            <Grid columns={2} divided>
+              <Grid.Row>
+                <Grid.Column width={12}>
+                  <input
+                    placeholder={this.state.docInitialized ? '' : 'Loading...'}
+                    ref={(el) => { this.titleInput = el }}
+                  />
+                </Grid.Column>
+                <Grid.Column width={4}>
+                  <Link route='view' params={{ id }}>
+                    <Button fluid>View</Button>
+                  </Link>
+                </Grid.Column>
+              </Grid.Row>
+            </Grid>
           </Form.Field>
           <Form.Field>
             <label>Description</label>
