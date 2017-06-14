@@ -60,7 +60,7 @@ class EditPage extends React.Component {
           </Form.Field>
           <Form.Field>
             <label>Description</label>
-            <input
+            <textarea
               placeholder={this.state.docInitialized ? '' : 'Loading...'}
               ref={(el) => { this.descriptionInput = el }}
             />
