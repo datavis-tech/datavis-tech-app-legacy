@@ -12,7 +12,7 @@ const LoginControl = ({ user }) => {
         <span style={{paddingRight: '8px'}}>
           <Link route='profile' params={{ username }}>
             <a>
-              <Image src={avatarURL + '&size=36'} inline/>
+              <Image height={36} src={avatarURL + '&size=72'} inline/>
               <span>
                 {username}
               </span>
