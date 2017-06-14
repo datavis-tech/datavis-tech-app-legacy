@@ -62,6 +62,11 @@ const team = [
     description: 'Fascinated by visual presentation of data as a means to understand the world better and communicate that understanding to others.',
     links: [
       {
+        icon: 'book',
+        href: 'https://curran.github.io/portfolio/Resume.pdf',
+        title: 'Resume'
+      },
+      {
         icon: 'github',
         href: 'https://github.com/curran',
         title: 'github.com/curran'
@@ -78,6 +83,11 @@ const team = [
     img: '/static/images/seemant.jpg',
     description: 'Part recovering engineer, part product-manager, part customer support expert, part data visualizer, and part organizer.',
     links: [
+      {
+        icon: 'book',
+        href: 'http://www.seemantk.com/',
+        title: 'seemantk.com'
+      },
       {
         icon: 'github',
         href: 'https://github.com/seemantk',
