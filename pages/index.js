@@ -105,10 +105,13 @@ const team = [
 export default Page(({ user }) => (
   <Layout title='Datavis.tech' user={user} hideNav>
     <HugeLogo noLink/>
+    <Container textAlign='center'>
+      <Header as='h1'>Data Visualization Consulting Services</Header>
+    </Container>
 
     <Spacer/>
     <Divider horizontal>
-      Recent Projects
+      Projects
     </Divider>
 
     <Card.Group>
@@ -129,7 +132,7 @@ export default Page(({ user }) => (
     </Container>
 
     <Divider horizontal>
-      Associates
+      Team
     </Divider>
 
     <Card.Group>
