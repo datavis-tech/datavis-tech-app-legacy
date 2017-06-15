@@ -224,3 +224,12 @@ pm2 startup
 ```
 
 (follow the directions output there - run the command it generates as sudo)
+
+## Update Deployment
+
+```
+git pull
+npm install
+npm run build
+pm2 restart all
+```
