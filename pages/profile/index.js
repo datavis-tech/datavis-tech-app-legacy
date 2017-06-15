@@ -4,7 +4,7 @@ import Page from '../../components/page'
 import Layout from '../../components/layout'
 import {
   createProfileQuery,
-  createDocumentsQuery 
+  createDocumentsQuery
 } from '../../modules/shareDBGateway'
 import ProfileBody from './profileBody'
 

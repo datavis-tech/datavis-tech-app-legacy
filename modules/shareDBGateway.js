@@ -1,7 +1,9 @@
 import shareDBClient from 'sharedb/lib/client'
 import ReconnectingWebSocket from 'reconnecting-websocket'
-import { DB_USERS_COLLECTION } from './constants'
-import { DB_DOCUMENTS_COLLECTION } from './constants'
+import {
+  DB_USERS_COLLECTION,
+  DB_DOCUMENTS_COLLECTION
+} from './constants'
 import uuidV4 from 'uuid/v4'
 
 // Initialize the singleton connection.
@@ -89,7 +91,6 @@ const createDocument = ({ title, description, owner }) => {
 
   return id
 }
-
 
 export {
   createDocument,
