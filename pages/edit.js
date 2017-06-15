@@ -8,8 +8,7 @@ import { Link } from '../routes'
 import StringBinding from 'sharedb-string-binding'
 import Page from '../components/page'
 import Layout from '../components/layout'
-import connection from '../modules/shareDBConnection'
-import { DB_DOCUMENTS_COLLECTION } from '../modules/constants'
+import { subscribeToDocument } from '../modules/shareDBGateway'
 
 class EditPage extends React.Component {
   static async getInitialProps ({ query }) {
@@ -21,21 +20,17 @@ class EditPage extends React.Component {
     this.state = {
       docInitialized: false
     }
-    if (process.browser) {
-      this.doc = connection.get(DB_DOCUMENTS_COLLECTION, props.id)
-    }
   }
 
   componentDidMount () {
     if (process.browser) {
       // TODO cleanup on unmount
-      this.doc.subscribe((err) => {
+      subscribeToDocument(this.props.id, (err, doc) => {
         if (err) throw err
-
-        const doc = this.doc
 
         new StringBinding(this.titleInput, doc, ['title']).setup()
         new StringBinding(this.descriptionInput, doc, ['description']).setup()
+        new StringBinding(this.contentInput, doc, ['content']).setup()
 
         const updateState = () => {
           this.setState({
@@ -79,6 +74,13 @@ class EditPage extends React.Component {
             <textarea
               placeholder={this.state.docInitialized ? '' : 'Loading...'}
               ref={(el) => { this.descriptionInput = el }}
+            />
+          </Form.Field>
+          <Form.Field>
+            <label>Content</label>
+            <textarea
+              placeholder={this.state.docInitialized ? '' : 'Loading...'}
+              ref={(el) => { this.contentInput = el }}
             />
           </Form.Field>
         </Form>

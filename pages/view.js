@@ -7,8 +7,7 @@ import {
 import { Link } from '../routes'
 import Page from '../components/page'
 import Layout from '../components/layout'
-import connection from '../modules/shareDBConnection'
-import { DB_DOCUMENTS_COLLECTION } from '../modules/constants'
+import { subscribeToDocument } from '../modules/shareDBGateway'
 
 class ViewPage extends React.Component {
   static async getInitialProps ({ query }) {
@@ -21,35 +20,36 @@ class ViewPage extends React.Component {
       docInitialized: false
     }
     if (process.browser) {
-      // TODO clean up this doc on unmount
-      const doc = connection.get(DB_DOCUMENTS_COLLECTION, props.id)
+      // TODO cleanup on unmount
+      subscribeToDocument(this.props.id, (err, doc) => {
+        if (err) throw err
 
-      const updateState = () => {
-        this.setState({
-          docInitialized: true,
-          id: doc.id,
-          title: doc.data.title,
-          description: doc.data.description
-        })
-      }
-
-      doc.subscribe((err) => {
-        if (err) {
-          return console.error(err)
+        const updateState = () => {
+          this.setState({
+            docInitialized: true,
+            title: doc.data.title,
+            description: doc.data.description
+          })
         }
-        updateState()
-        doc.on('op', updateState)
+
+        doc.subscribe((err) => {
+          if (err) {
+            return console.error(err)
+          }
+          updateState()
+          doc.on('op', updateState)
+        })
       })
     }
   }
 
   render () {
-    const { user } = this.props
-    const { id, title, description } = this.state
+    const { id, user } = this.props
+    const { docInitialized, title, description } = this.state
 
     return (
       <Layout title={(title || 'Loading...') + ' | Datavis.tech'} user={user}>
-        {this.state.docInitialized ? (
+        {docInitialized ? (
           <div>
             <Header as='h1'>{title}</Header>
             <Grid columns={2} divided>

@@ -2,8 +2,10 @@ import React from 'react'
 
 import Page from '../../components/page'
 import Layout from '../../components/layout'
-import createProfileQuery from './createProfileQuery'
-import createDocumentsQuery from './createDocumentsQuery'
+import {
+  createProfileQuery,
+  createDocumentsQuery 
+} from '../../modules/shareDBGateway'
 import ProfileBody from './profileBody'
 
 class ProfilePage extends React.Component {

@@ -3,16 +3,18 @@ import Page from '../components/page'
 import Layout from '../components/layout'
 import { Form, Button } from 'semantic-ui-react'
 import { Router } from '../routes'
-import createDocument from '../modules/createDocument'
+import { createDocument } from '../modules/shareDBGateway'
 
 class CreatePage extends React.Component {
   onSubmit (event) {
     event.preventDefault() // Prevent form submission
+
     const id = createDocument({
       title: this.titleInput.value,
       description: this.descriptionInput.value,
       owner: this.props.user.id
     })
+
     Router.pushRoute('view', { id })
   }
 
