@@ -14,9 +14,9 @@ export default ({ children, title, user, hideNav }) => (
       <link rel='stylesheet' href='/static/semantic/dist/semantic.min.css' />
       <link rel='shortcut icon' href='/static/images/favicon.ico' />
     </Head>
-    <Container>
+    <div style={{ width: '960px', margin: 'auto' }}>
       { hideNav ? <Spacer/> : <Navbar user={user}/> }
       { children }
-    </Container>
+    </div>
   </div>
 )
