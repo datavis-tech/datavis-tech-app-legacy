@@ -5,9 +5,10 @@ import {
   Button
 } from 'semantic-ui-react'
 import { Link } from '../routes'
+import { subscribeToDocument } from '../modules/shareDBGateway'
 import Page from '../components/page'
 import Layout from '../components/layout'
-import { subscribeToDocument } from '../modules/shareDBGateway'
+import Runner from '../components/runner'
 
 class ViewPage extends React.Component {
   static async getInitialProps ({ query }) {
@@ -27,32 +28,37 @@ class ViewPage extends React.Component {
           this.setState({
             docInitialized: true,
             title: doc.data.title,
-            description: doc.data.description
+            description: doc.data.description,
+            content: doc.data.content
           })
         }
 
         updateState()
         doc.on('op', updateState)
-        this.doc = doc
+        this.cleanupDoc = () => {
+          doc.destroy()
+          doc.removeListener('op', updateState)
+        }
       })
     }
   }
 
   componentWillUnmount () {
-    if(this.doc){
-      this.doc.destroy()
+    if(this.cleanupDoc){
+      this.cleanupDoc()
     }
   }
 
   render () {
     const { id, user } = this.props
-    const { docInitialized, title, description } = this.state
+    const { docInitialized, title, description, content } = this.state
 
     return (
       <Layout title={(title || 'Loading...') + ' | Datavis.tech'} user={user}>
         {docInitialized ? (
           <div>
             <Header as='h1'>{title}</Header>
+            <Runner content={content}/>
             <Grid columns={2} divided>
               <Grid.Row>
                 <Grid.Column width={12}>
@@ -60,7 +66,9 @@ class ViewPage extends React.Component {
                 </Grid.Column>
                 <Grid.Column width={4}>
                   <Link route='edit' params={{ id }}>
-                    <Button fluid>Edit</Button>
+                    <a>
+                      <Button fluid>Edit</Button>
+                    </a>
                   </Link>
                 </Grid.Column>
               </Grid.Row>

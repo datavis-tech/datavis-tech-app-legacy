@@ -39,14 +39,17 @@ class EditPage extends React.Component {
         }
         updateState()
         doc.on('op', updateState)
-        this.doc = doc
+        this.cleanupDoc = () => {
+          doc.destroy()
+          doc.removeListener('op', updateState)
+        }
       })
     }
   }
 
   componentWillUnmount () {
-    if(this.doc){
-      this.doc.destroy()
+    if(this.cleanupDoc){
+      this.cleanupDoc()
     }
   }
 
@@ -69,7 +72,9 @@ class EditPage extends React.Component {
                 </Grid.Column>
                 <Grid.Column width={4}>
                   <Link route='view' params={{ id }}>
-                    <Button fluid>View</Button>
+                    <a>
+                      <Button fluid>View</Button>
+                    </a>
                   </Link>
                 </Grid.Column>
               </Grid.Row>
