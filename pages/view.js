@@ -20,7 +20,6 @@ class ViewPage extends React.Component {
       docInitialized: false
     }
     if (process.browser) {
-      // TODO cleanup on unmount
       subscribeToDocument(this.props.id, (err, doc) => {
         if (err) throw err
 
@@ -32,14 +31,16 @@ class ViewPage extends React.Component {
           })
         }
 
-        doc.subscribe((err) => {
-          if (err) {
-            return console.error(err)
-          }
-          updateState()
-          doc.on('op', updateState)
-        })
+        updateState()
+        doc.on('op', updateState)
+        this.doc = doc
       })
+    }
+  }
+
+  componentWillUnmount () {
+    if(this.doc){
+      this.doc.destroy()
     }
   }
 

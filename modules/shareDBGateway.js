@@ -65,7 +65,6 @@ const createDocumentsQuery = (owner, update) => {
 
 const subscribeToDocument = (id, callback) => {
   const doc = connection.get(DB_DOCUMENTS_COLLECTION, id)
-  // TODO schema upgrades here
   doc.subscribe((err) => {
     callback(err, doc)
   })

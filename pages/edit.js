@@ -24,7 +24,6 @@ class EditPage extends React.Component {
 
   componentDidMount () {
     if (process.browser) {
-      // TODO cleanup on unmount
       subscribeToDocument(this.props.id, (err, doc) => {
         if (err) throw err
 
@@ -40,7 +39,14 @@ class EditPage extends React.Component {
         }
         updateState()
         doc.on('op', updateState)
+        this.doc = doc
       })
+    }
+  }
+
+  componentWillUnmount () {
+    if(this.doc){
+      this.doc.destroy()
     }
   }
 
