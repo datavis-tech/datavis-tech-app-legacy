@@ -132,17 +132,18 @@ export default Page(({ user }) => (
         <Spacer/>
       </Container>
 
-      <Divider horizontal>
-        Team
-      </Divider>
-
-      <Card.Group>
-        {
-          team.map((props, i) =>
-            <UserProfileCard {...props} key={i}/>
-          )
-        }
-      </Card.Group>
+{
+//      <Divider horizontal>
+//        Team
+//      </Divider>
+//      <Card.Group>
+//        {
+//          team.map((props, i) =>
+//            <UserProfileCard {...props} key={i}/>
+//          )
+//        }
+//      </Card.Group>
+}
     </Container>
   </Layout>
 ))
