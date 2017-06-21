@@ -104,61 +104,45 @@ const team = [
 
 export default Page(({ user }) => (
   <Layout title='Datavis.tech' user={user} hideNav>
-    <HugeLogo noLink/>
-    <Container textAlign='center'>
-      <Header as='h1'>Data Visualization Consulting Services</Header>
-    </Container>
+    <Container text>
+      <HugeLogo noLink/>
+      <Container textAlign='center'>
+        <Header as='h1'>Data Visualization Consulting Services</Header>
+      </Container>
 
-    <Spacer/>
-    <Divider horizontal>
-      Projects
-    </Divider>
-
-    <Card.Group>
-      {
-        visualizations.map((props, i) =>
-          <VisualizationCard {...props} key={i}/>
-        )
-      }
-    </Card.Group>
-
-    <Container textAlign='center'>
-      <Spacer/>
-      <p>We can help you visualize your data.</p>
-      <Link href='/consulting'>
-        <Button>Hire us!</Button>
-      </Link>
-      <Spacer/>
-    </Container>
-
-    <Divider horizontal>
-      Team
-    </Divider>
-
-    <Card.Group>
-      {
-        team.map((props, i) =>
-          <UserProfileCard {...props} key={i}/>
-        )
-      }
-    </Card.Group>
-
-    <Container textAlign='center'>
-      <Spacer/>
-      <p>We are actively recruiting associates.</p>
-      <Link href='/associates'>
-        <Button>Join our team!</Button>
-      </Link>
       <Spacer/>
       <Divider horizontal>
-        Product
+        Projects
       </Divider>
-      <Header as='h1'>We're building a product!</Header>
-      <p>A platform for collaborative data visualization is in the works.</p>
-      <a href='https://docs.google.com/forms/d/e/1FAIpQLSdO1wEo1Kj2ETfQMEhXGW6GIqtGFsfZ5UBwTnR-0QNvOYCEAw/viewform?usp=sf_link'>
-        <Button>Sign up to be notified when we launch!</Button>
-      </a>
-      <Spacer/>
+
+      <Card.Group>
+        {
+          visualizations.map((props, i) =>
+            <VisualizationCard {...props} key={i}/>
+          )
+        }
+      </Card.Group>
+
+      <Container textAlign='center'>
+        <Spacer/>
+        <p>We can help you visualize your data.</p>
+        <Link href='/consulting'>
+          <Button>Hire us!</Button>
+        </Link>
+        <Spacer/>
+      </Container>
+
+      <Divider horizontal>
+        Team
+      </Divider>
+
+      <Card.Group>
+        {
+          team.map((props, i) =>
+            <UserProfileCard {...props} key={i}/>
+          )
+        }
+      </Card.Group>
     </Container>
   </Layout>
 ))
