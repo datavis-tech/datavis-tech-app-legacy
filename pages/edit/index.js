@@ -13,45 +13,7 @@ import StringBinding from 'sharedb-string-binding'
 import Page from '../../components/page'
 import Layout from '../../components/layout'
 import { subscribeToDocument } from '../../modules/shareDBGateway'
-
-class DeleteConfirmModal extends React.Component {
-  constructor (props) {
-    super(props)
-
-    this.state = { show: false }
-
-    this.open = (event) => {
-      event.preventDefault() // Prevent form submission.
-      this.setState({ show: true })
-    }
-
-    this.close = () => {
-      this.setState({ show: false })
-    }
-  }
-
-  render () {
-    return (
-      <div>
-        <Button negative onClick={this.open}>Delete</Button>
-        <Modal open={this.state.show} onClose={this.close} basic size='small'>
-          <Header icon='archive' content='Are you sure?' />
-          <Modal.Content>
-            <p>Are you sure you want to delete this document? This cannot be undone.</p>
-          </Modal.Content>
-          <Modal.Actions>
-            <Button basic inverted onClick={this.close}>
-              <Icon name='remove' /> No
-            </Button>
-            <Button color='red' inverted>
-              <Icon name='checkmark' /> Yes
-            </Button>
-          </Modal.Actions>
-        </Modal>
-      </div>
-    )
-  }
-}
+import DeleteConfirmModal from './deleteConfirmModal'
 
 class EditPage extends React.Component {
   static async getInitialProps ({ query }) {
@@ -86,7 +48,16 @@ class EditPage extends React.Component {
           doc.destroy()
           doc.removeListener('op', updateState)
         }
+
+        // Store a reference to the document so it can be deleted.
+        this.doc = doc
       })
+    }
+  }
+
+  deleteDocument() {
+    if(this.doc){
+      console.log('delete this document')
     }
   }
 
@@ -139,7 +110,7 @@ class EditPage extends React.Component {
               />
             </Form.Field>
             <Form.Field>
-              <DeleteConfirmModal/>
+              <DeleteConfirmModal deleteDocument={this.deleteDocument.bind(this)}/>
             </Form.Field>
           </Form>
         </Container>
