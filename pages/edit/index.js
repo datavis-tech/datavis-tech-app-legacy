@@ -23,7 +23,8 @@ class EditPage extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      docInitialized: false
+      docInitialized: false,
+      deleting: false
     }
   }
 
@@ -55,9 +56,17 @@ class EditPage extends React.Component {
     }
   }
 
+  // This gets called after the user clicks through the delete confirm modal.
   deleteDocument() {
     if(this.doc){
-      console.log('delete this document')
+      this.setState({
+        deleting: true
+      })
+      this.doc.del((err) => {
+        console.log('The document was deleted');
+      })
+    } else {
+      console.error('Attempted delete before document was initialized. This should never happen.')
     }
   }
 
@@ -110,7 +119,10 @@ class EditPage extends React.Component {
               />
             </Form.Field>
             <Form.Field>
-              <DeleteConfirmModal deleteDocument={this.deleteDocument.bind(this)}/>
+              <DeleteConfirmModal
+                deleteDocument={this.deleteDocument.bind(this)}
+                deleting={this.state.deleting}
+              />
             </Form.Field>
           </Form>
         </Container>
