@@ -5,7 +5,7 @@ const Runner = ({ content }) => (
     height='500'
     style={{
       border: 'solid 1px #ddd'
-      //transform: 'scale(1)'
+      // transform: 'scale(1)'
     }}
     srcDoc={content}
   />

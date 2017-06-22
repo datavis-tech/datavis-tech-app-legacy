@@ -10,7 +10,6 @@ import Layout from '../components/layout'
 import Page from '../components/page'
 import Spacer from '../components/spacer'
 import VisualizationCard from './index/visualizationCard'
-import UserProfileCard from './index/userProfileCard'
 import HugeLogo from '../components/hugeLogo'
 
 const visualizations = [
@@ -55,52 +54,63 @@ const visualizations = [
   }
 ]
 
-const team = [
-  {
-    name: 'Curran',
-    img: '/static/images/CurranBioPicSmall.jpg',
-    description: 'Fascinated by visual presentation of data as a means to understand the world better and communicate that understanding to others.',
-    links: [
-      {
-        icon: 'book',
-        href: 'https://curran.github.io/portfolio/Resume.pdf',
-        title: 'Resume'
-      },
-      {
-        icon: 'github',
-        href: 'https://github.com/curran',
-        title: 'github.com/curran'
-      },
-      {
-        icon: 'twitter',
-        href: 'https://twitter.com/currankelleher',
-        title: 'twitter.com/currankelleher'
-      }
-    ]
-  },
-  {
-    name: 'Seemant',
-    img: '/static/images/seemant.jpg',
-    description: 'Part recovering engineer, part product-manager, part customer support expert, part data visualizer, and part organizer.',
-    links: [
-      {
-        icon: 'book',
-        href: 'http://www.seemantk.com/',
-        title: 'seemantk.com'
-      },
-      {
-        icon: 'github',
-        href: 'https://github.com/seemantk',
-        title: 'github.com/seemantk'
-      },
-      {
-        icon: 'twitter',
-        href: 'https://twitter.com/seemantk',
-        title: 'twitter.com/seemantk'
-      }
-    ]
-  }
-]
+// const team = [
+//   {
+//     name: 'Curran',
+//     img: '/static/images/CurranBioPicSmall.jpg',
+//     description: 'Fascinated by visual presentation of data as a means to understand the world better and communicate that understanding to others.',
+//     links: [
+//       {
+//         icon: 'book',
+//         href: 'https://curran.github.io/portfolio/Resume.pdf',
+//         title: 'Resume'
+//       },
+//       {
+//         icon: 'github',
+//         href: 'https://github.com/curran',
+//         title: 'github.com/curran'
+//       },
+//       {
+//         icon: 'twitter',
+//         href: 'https://twitter.com/currankelleher',
+//         title: 'twitter.com/currankelleher'
+//       }
+//     ]
+//   },
+//   {
+//     name: 'Seemant',
+//     img: '/static/images/seemant.jpg',
+//     description: 'Part recovering engineer, part product-manager, part customer support expert, part data visualizer, and part organizer.',
+//     links: [
+//       {
+//         icon: 'book',
+//         href: 'http://www.seemantk.com/',
+//         title: 'seemantk.com'
+//       },
+//       {
+//         icon: 'github',
+//         href: 'https://github.com/seemantk',
+//         title: 'github.com/seemantk'
+//       },
+//       {
+//         icon: 'twitter',
+//         href: 'https://twitter.com/seemantk',
+//         title: 'twitter.com/seemantk'
+//       }
+//     ]
+//   }
+// ]
+
+//      <Divider horizontal>
+//        Team
+//      </Divider>
+//      <Card.Group>
+//        {
+//          team.map((props, i) =>
+//            <UserProfileCard {...props} key={i}/>
+//          )
+//        }
+//      </Card.Group>
 
 export default Page(({ user }) => (
   <Layout title='Datavis.tech' user={user} hideNav>
@@ -131,19 +141,6 @@ export default Page(({ user }) => (
         </Link>
         <Spacer/>
       </Container>
-
-{
-//      <Divider horizontal>
-//        Team
-//      </Divider>
-//      <Card.Group>
-//        {
-//          team.map((props, i) =>
-//            <UserProfileCard {...props} key={i}/>
-//          )
-//        }
-//      </Card.Group>
-}
     </Container>
   </Layout>
 ))

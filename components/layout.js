@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import { Container } from 'semantic-ui-react'
 import Navbar from './navbar'
 import Spacer from './spacer'
 

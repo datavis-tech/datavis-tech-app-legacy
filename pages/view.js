@@ -44,7 +44,7 @@ class ViewPage extends React.Component {
   }
 
   componentWillUnmount () {
-    if(this.cleanupDoc){
+    if (this.cleanupDoc) {
       this.cleanupDoc()
     }
   }

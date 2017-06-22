@@ -3,10 +3,7 @@ import {
   Form,
   Grid,
   Button,
-  Container,
-  Modal,
-  Header,
-  Icon
+  Container
 } from 'semantic-ui-react'
 import { Link, Router } from '../../routes'
 import StringBinding from 'sharedb-string-binding'
@@ -57,13 +54,13 @@ class EditPage extends React.Component {
   }
 
   // This gets called after the user clicks through the delete confirm modal.
-  deleteDocument() {
-    if(this.doc){
+  deleteDocument () {
+    if (this.doc) {
       this.setState({
         deleting: true
       })
       this.doc.del((err) => {
-        if(err){
+        if (err) {
           return console.error(err)
         }
         console.log(this.props.user.username)
@@ -77,7 +74,7 @@ class EditPage extends React.Component {
   }
 
   componentWillUnmount () {
-    if(this.cleanupDoc){
+    if (this.cleanupDoc) {
       this.cleanupDoc()
     }
   }
