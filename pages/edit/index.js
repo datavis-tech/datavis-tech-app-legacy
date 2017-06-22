@@ -8,7 +8,7 @@ import {
   Header,
   Icon
 } from 'semantic-ui-react'
-import { Link } from '../../routes'
+import { Link, Router } from '../../routes'
 import StringBinding from 'sharedb-string-binding'
 import Page from '../../components/page'
 import Layout from '../../components/layout'
@@ -63,7 +63,13 @@ class EditPage extends React.Component {
         deleting: true
       })
       this.doc.del((err) => {
-        console.log('The document was deleted');
+        if(err){
+          return console.error(err)
+        }
+        console.log(this.props.user.username)
+        Router.pushRoute('profile', {
+          username: this.props.user.username
+        })
       })
     } else {
       console.error('Attempted delete before document was initialized. This should never happen.')
