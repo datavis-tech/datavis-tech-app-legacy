@@ -233,3 +233,33 @@ npm install
 npm run build
 pm2 restart all
 ```
+
+## Using Elastic Block Store
+
+In AWS Web UI, create volume, attach to VM (use default of `dev/sdf`).
+
+See also http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-using-volumes.html
+
+```
+lsblk
+sudo file -s /dev/xvdf # should say "data"
+sudo mkfs -t ext4 /dev/xvdf # Only run this if previous command said "data"
+sudo mkdir /data
+sudo mount /dev/xvdf /data
+sudo cp /etc/fstab /etc/fstab.orig
+sudo vim /etc/fstab
+# paste this: /dev/xvdf       /data   ext4    defaults,nofail        0       2
+sudo mount -a
+
+sudo mkdir /data/mongodb
+sudo chmod go+w /data/mongodb
+
+sudo service mongod stop
+sudo vim /etc/mongod.conf
+# default dbPath is:
+#   dbPath: /var/lib/mongodb
+# change it to:
+#   dbPath: /data/mongodb
+sudo service mongod start
+tail -f /var/log/mongodb/mongod.log
+```
