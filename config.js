@@ -1,13 +1,12 @@
 module.exports = {
-  // TODO read from environment variables
-  redisHost: '127.0.0.1',
-  redisPort: '6379',
+  redisHost: process.env.DVT_REDIS_HOST || '127.0.0.1',
+  redisPort: process.env.DVT_REDIS_HOST || '6379',
 
-  sessionSecret: 'dafhjdkasfhdjkashfjksa',
+  sessionSecret: process.env.DVT_SESSION_SECRET || 'dafhjdkasfhdjkashfjksa',
 
-  gitHubClientId: '25dbc152af91d189d2fc',
-  gitHubClientSecret: 'ac9faa321c0b0067ea52c1b32f31ee1de7b5a04e',
-  gitHubCallbackURL: 'http://localhost:3000/auth/github/callback',
+  gitHubClientId: process.env.DVT_GITHUB_CLIENT_ID || '25dbc152af91d189d2fc',
+  gitHubClientSecret: process.env.DVT_GITHUB_CLIENT_SECRET || 'ac9faa321c0b0067ea52c1b32f31ee1de7b5a04e',
+  gitHubCallbackURL: process.env.DVT_GITHUB_CALLBACK_URL || 'http://localhost:3000/auth/github/callback',
 
-  mongoURL: 'mongodb://localhost:27017/datavistech'
+  mongoURL: process.env.DVT_MONGO_URL || 'mongodb://localhost:27017/datavistech'
 }
