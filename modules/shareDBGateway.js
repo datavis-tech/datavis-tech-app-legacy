@@ -77,15 +77,23 @@ const createDocument = ({ title, description, owner }) => {
   const doc = connection.get(DB_DOCUMENTS_COLLECTION, id)
   const content = ''
 
-  // Tracks versions of the document schema, for migrations.
-  const schemaVersion = 2
-
+  const schemaVersion = 1
   doc.create({
+
+    // Tracks versions of the document schema, for handling migrations.
     schemaVersion,
+
+    // Human readable title, String.
     title,
+
+    // Human readable description, String.
     description,
+
+    // The id of the user who owns this document.
     owner,
-    content // New in schemaVersion 2
+
+    // The content of this document, String.
+    content
   })
 
   return id
