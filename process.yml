@@ -1,0 +1,10 @@
+apps:
+  - script: server
+    name: 'datavis-tech-server'
+    instances: 1
+    exec_mode: cluster
+    env_production:
+      NODE_ENV: production
+      DVT_GITHUB_CLIENT_ID: 4a5895f9d2ce03f2f3c3
+      DVT_GITHUB_CLIENT_SECRET: 9d8b01ee2febc243011190a9fd14d8364af03507
+      DVT_GITHUB_CALLBACK_URL: https://datavis.tech/auth/github/callback
