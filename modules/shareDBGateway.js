@@ -2,7 +2,8 @@ import shareDBClient from 'sharedb/lib/client'
 import ReconnectingWebSocket from 'reconnecting-websocket'
 import {
   DB_USERS_COLLECTION,
-  DB_DOCUMENTS_COLLECTION
+  DB_DOCUMENTS_COLLECTION,
+  DB_DOCUMENTS_PROJECTION
 } from './constants'
 import uuidV4 from 'uuid/v4'
 
@@ -51,9 +52,7 @@ const createProfileQuery = (username, update) => {
 const createDocumentsQuery = (owner, update) => {
   const mongoQuery = { owner }
 
-  // TODO use a projection here to exclude the full contents of each document
-  // TODO see if we can make the titles here update in real-time
-  const query = connection.createSubscribeQuery(DB_DOCUMENTS_COLLECTION, mongoQuery)
+  const query = connection.createSubscribeQuery(DB_DOCUMENTS_PROJECTION, mongoQuery)
 
   const change = () => {
     update(query.results)
