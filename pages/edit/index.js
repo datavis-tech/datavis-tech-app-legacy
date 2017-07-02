@@ -33,6 +33,7 @@ class EditPage extends React.Component {
       subscribeToDocument(this.props.id, (err, doc) => {
         if (err) throw err
 
+        // TODO call .destroy() on these on unmount
         new StringBinding(this.titleInput, doc, ['title']).setup()
         new StringBinding(this.descriptionInput, doc, ['description']).setup()
         new StringBinding(this.contentInput, doc, ['content']).setup()
