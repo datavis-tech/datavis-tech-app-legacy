@@ -1,4 +1,4 @@
-import { Table, Input } from 'semantic-ui-react'
+import { Table, Input, Button } from 'semantic-ui-react'
 
 class References extends React.Component {
 
@@ -16,11 +16,12 @@ class References extends React.Component {
 
   render () {
     return (
-      <Table celled>
+      <Table>
         <Table.Header>
           <Table.Row>
             <Table.HeaderCell>File name</Table.HeaderCell>
             <Table.HeaderCell>Document ID</Table.HeaderCell>
+            <Table.HeaderCell></Table.HeaderCell>
           </Table.Row>
         </Table.Header>
 
@@ -34,10 +35,24 @@ class References extends React.Component {
                 <Table.Cell>
                   <Input transparent fluid placeholder='Document ID...' value={id}/>
                 </Table.Cell>
+                <Table.Cell collapsing>
+                  <Button floated='right' negative size='small' compact>
+                    Remove
+                  </Button>
+                </Table.Cell>
               </Table.Row>
             ))
           }
         </Table.Body>
+        <Table.Footer fullWidth>
+          <Table.Row>
+            <Table.HeaderCell colSpan='3'>
+              <Button floated='right' primary size='small' compact>
+                Add
+              </Button>
+            </Table.HeaderCell>
+          </Table.Row>
+        </Table.Footer>
       </Table>
     )
   }
