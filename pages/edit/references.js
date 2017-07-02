@@ -21,7 +21,11 @@ class References extends React.Component {
           <Table.Row>
             <Table.HeaderCell>File name</Table.HeaderCell>
             <Table.HeaderCell>Document ID</Table.HeaderCell>
-            <Table.HeaderCell></Table.HeaderCell>
+            <Table.HeaderCell>
+              <Button floated='right' primary size='small' compact>
+                Add
+              </Button>
+            </Table.HeaderCell>
           </Table.Row>
         </Table.Header>
 
@@ -44,15 +48,6 @@ class References extends React.Component {
             ))
           }
         </Table.Body>
-        <Table.Footer fullWidth>
-          <Table.Row>
-            <Table.HeaderCell colSpan='3'>
-              <Button floated='right' primary size='small' compact>
-                Add
-              </Button>
-            </Table.HeaderCell>
-          </Table.Row>
-        </Table.Footer>
       </Table>
     )
   }
