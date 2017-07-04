@@ -3,7 +3,7 @@ import { Link } from '../../routes'
 
 // Use only the first line of the description
 // as the tagline in the listing.
-const truncate = (description) => description.split('\n')[0];
+const truncate = (description) => description.split('\n')[0]
 
 const DocumentPreview = ({id, data: { title, description }}) => (
   <List.Item key={id} >

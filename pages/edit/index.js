@@ -3,9 +3,7 @@ import {
   Form,
   Grid,
   Button,
-  Container,
-  Table,
-  Input
+  Container
 } from 'semantic-ui-react'
 import { Link, Router } from '../../routes'
 import ShareDBStringBinding from 'sharedb-string-binding'

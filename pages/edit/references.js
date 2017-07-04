@@ -1,3 +1,4 @@
+import React from 'react'
 import { Table, Input, Button } from 'semantic-ui-react'
 
 class References extends React.Component {
@@ -31,7 +32,7 @@ class References extends React.Component {
 
         <Table.Body>
           {
-            this.state.references.map(({ fileName, id}, i) => (
+            this.state.references.map(({ fileName, id }, i) => (
               <Table.Row key={id}>
                 <Table.Cell>
                   <Input transparent fluid placeholder='File name...' value={fileName} ref={(el) => console.log(el)}/>

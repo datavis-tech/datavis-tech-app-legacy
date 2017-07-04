@@ -22,7 +22,7 @@ backend.addProjection(DB_DOCUMENTS_PROJECTION, DB_DOCUMENTS_COLLECTION, {
   title: true,
   description: true,
   owner: true
-});
+})
 
 const setup = (httpServer) => {
   const webSocketServer = new WebSocket.Server({

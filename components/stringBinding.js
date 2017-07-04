@@ -5,23 +5,22 @@
  */
 
 import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
 
 // https://github.com/share/sharedb-string-binding
 import ShareDBStringBinding from 'sharedb-string-binding'
 
 export default class StringBinding extends Component {
 
-  componentDidMount() {
+  componentDidMount () {
     this.binding = new ShareDBStringBinding(this.el, this.props.doc, this.props.path)
     this.binding.setup()
   }
 
-  componentWillUnmount() {
+  componentWillUnmount () {
     this.binding.destroy()
   }
 
-  render() {
+  render () {
     const props = Object.assign({
       ref: (el) => {
         this.el = el
@@ -34,6 +33,6 @@ export default class StringBinding extends Component {
     delete props.doc
     delete props.path
 
-    return React.createElement( this.props.type, props)
+    return React.createElement(this.props.type, props)
   }
 }
