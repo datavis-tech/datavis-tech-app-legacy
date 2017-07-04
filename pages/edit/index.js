@@ -8,10 +8,11 @@ import {
   Input
 } from 'semantic-ui-react'
 import { Link, Router } from '../../routes'
-import StringBinding from 'sharedb-string-binding'
+import ShareDBStringBinding from 'sharedb-string-binding'
 import Page from '../../components/page'
 import Layout from '../../components/layout'
 import { subscribeToDocument } from '../../modules/shareDBGateway'
+import StringBinding from '../../components/stringBinding'
 import DeleteConfirmModal from './deleteConfirmModal'
 import References from './references'
 
@@ -33,10 +34,13 @@ class EditPage extends React.Component {
       subscribeToDocument(this.props.id, (err, doc) => {
         if (err) throw err
 
+        // Store a reference to the document for later use.
+        this.doc = doc
+
         // TODO call .destroy() on these on unmount
-        new StringBinding(this.titleInput, doc, ['title']).setup()
-        new StringBinding(this.descriptionInput, doc, ['description']).setup()
-        new StringBinding(this.contentInput, doc, ['content']).setup()
+//        new ShareDBStringBinding(this.titleInput, doc, ['title']).setup()
+        new ShareDBStringBinding(this.descriptionInput, doc, ['description']).setup()
+        new ShareDBStringBinding(this.contentInput, doc, ['content']).setup()
 
         const updateState = () => {
           this.setState({
@@ -44,15 +48,15 @@ class EditPage extends React.Component {
             title: doc.data.title
           })
         }
+
         updateState()
         doc.on('op', updateState)
+
         this.cleanupDoc = () => {
           doc.destroy()
           doc.removeListener('op', updateState)
         }
 
-        // Store a reference to the document so it can be deleted.
-        this.doc = doc
       })
     }
   }
@@ -63,11 +67,12 @@ class EditPage extends React.Component {
       this.setState({
         deleting: true
       })
+
       this.doc.del((err) => {
         if (err) {
           return console.error(err)
         }
-        console.log(this.props.user.username)
+
         Router.pushRoute('profile', {
           username: this.props.user.username
         })
@@ -96,10 +101,13 @@ class EditPage extends React.Component {
               <Grid columns={2} divided>
                 <Grid.Row>
                   <Grid.Column width={12}>
-                    <input
-                      placeholder={this.state.docInitialized ? '' : 'Loading...'}
-                      ref={(el) => { this.titleInput = el }}
-                    />
+                    {
+                      this.state.docInitialized ? (
+                        <StringBinding type='input' doc={this.doc} path={['title']} />
+                      ) : (
+                        <span>Loading...</span>
+                      )
+                    }
                   </Grid.Column>
                   <Grid.Column width={4}>
                     <Link route='view' params={{ id }}>
