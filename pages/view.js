@@ -51,14 +51,30 @@ class ViewPage extends React.Component {
 
   render () {
     const { id, user } = this.props
-    const { docInitialized, title, description, content } = this.state
+
+    const {
+      docInitialized,
+      title,
+      description,
+      content
+    } = this.state
+
+    const files = {
+      'logData.js': {
+        content: 'console.log("Data!!")'
+      }
+    }
+
+    const loading = !docInitialized
 
     return (
       <Layout title={(title || 'Loading...') + ' | Datavis.tech'} user={user}>
-        {docInitialized ? (
+        {loading ? (
+          <div>Loading...</div>
+        ) : (
           <div>
             <Header as='h1'>{title}</Header>
-            <Runner content={content}/>
+            <Runner content={content} files={files}/>
             <Grid columns={2} divided>
               <Grid.Row>
                 <Grid.Column width={12}>
@@ -74,8 +90,6 @@ class ViewPage extends React.Component {
               </Grid.Row>
             </Grid>
           </div>
-        ) : (
-          <div>Loading...</div>
         )}
       </Layout>
     )

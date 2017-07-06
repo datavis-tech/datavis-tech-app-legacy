@@ -31,6 +31,7 @@
     "express": "^4.15.3",
     "express-session": "^1.15.3",
     "lodash": "^4.17.4",
+    "magic-sandbox": "^1.0.0",
     "next": "^2.4.1",
     "next-routes": "^1.0.27",
     "passport": "^0.3.2",
