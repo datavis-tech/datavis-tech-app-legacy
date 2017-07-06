@@ -88,7 +88,7 @@ class EditPage extends React.Component {
 
     return (
       <Layout title={(title || 'Loading...') + ' (editing) | Datavis.tech'} user={user}>
-        <Container text>
+        <Container>
         {
           loading ? (
             <span>Loading...</span>
