@@ -93,6 +93,11 @@ const createDocument = ({ title, description, owner }) => {
 
     // The content of this document, String.
     content
+
+    // Another field "references" may be added later,
+    // which will be an array of objects containing:
+    //  * fileName:String The local alias for the reference.
+    //  * id:String The id of the referenced document.
   })
 
   return id

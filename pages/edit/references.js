@@ -5,13 +5,35 @@ class References extends React.Component {
 
   constructor (props) {
     super(props)
+
     this.state = {
-      references: [
-        {
-          fileName: 'iris.cskv',
-          id: '92f2f3a74cb84acc9f8527317d2f39f7'
-        }
-      ]
+      references: props.doc.data.references || []
+    }
+
+    const updateState = () => {
+      this.setState({
+        references: props.doc.data.references || []
+      })
+    }
+
+    // This gets invoked when the user clicks the "Add" button.
+    this.addReference = (event) => {
+      event.preventDefault() // Prevent form submission
+
+      const doc = this.props.doc
+
+      // If references is undefined, then create an empty array.
+      if (!doc.data.references) {
+        doc.submitOp([{p: ['references'], oi: []}])
+      }
+
+      // Push an empty reference object onto the references array.
+      doc.submitOp([{p: ['references', doc.data.references.length], li: {
+        fileName: '',
+        id: ''
+      }}])
+
+      updateState()
     }
   }
 
@@ -23,7 +45,7 @@ class References extends React.Component {
             <Table.HeaderCell>File name</Table.HeaderCell>
             <Table.HeaderCell>Document ID</Table.HeaderCell>
             <Table.HeaderCell>
-              <Button floated='right' primary size='small' compact>
+              <Button onClick={this.addReference} floated='right' primary size='small' compact>
                 Add
               </Button>
             </Table.HeaderCell>
@@ -33,9 +55,9 @@ class References extends React.Component {
         <Table.Body>
           {
             this.state.references.map(({ fileName, id }, i) => (
-              <Table.Row key={id}>
+              <Table.Row key={i}>
                 <Table.Cell>
-                  <Input transparent fluid placeholder='File name...' value={fileName} ref={(el) => console.log(el)}/>
+                  <Input transparent fluid placeholder='File name...' value={fileName} />
                 </Table.Cell>
                 <Table.Cell>
                   <Input transparent fluid placeholder='Document ID...' value={id}/>

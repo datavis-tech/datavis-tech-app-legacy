@@ -123,7 +123,7 @@ class EditPage extends React.Component {
                 <label>References</label>
               </Form.Field>
               <Form.Field inline>
-                <References/>
+                <References doc={this.doc}/>
               </Form.Field>
               <Form.Field>
                 <DeleteConfirmModal
