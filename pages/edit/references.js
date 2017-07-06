@@ -5,36 +5,46 @@ class References extends React.Component {
 
   constructor (props) {
     super(props)
+    const doc = this.props.doc
 
     this.state = {
-      references: props.doc.data.references || []
+      references: doc.data.references || []
     }
 
     const updateState = () => {
       this.setState({
-        references: props.doc.data.references || []
+        references: doc.data.references || []
       })
     }
 
-    // This gets invoked when the user clicks the "Add" button.
-    this.addReference = (event) => {
-      event.preventDefault() // Prevent form submission
+    doc.on('op', updateState)
+  }
 
-      const doc = this.props.doc
+  // This gets invoked when the user clicks the "Add" button.
+  addReference () {
+    const doc = this.props.doc
 
-      // If references is undefined, then create an empty array.
-      if (!doc.data.references) {
-        doc.submitOp([{p: ['references'], oi: []}])
-      }
-
-      // Push an empty reference object onto the references array.
-      doc.submitOp([{p: ['references', doc.data.references.length], li: {
-        fileName: '',
-        id: ''
-      }}])
-
-      updateState()
+    // If references is undefined, then create an empty array.
+    if (!doc.data.references) {
+      doc.submitOp([{p: ['references'], oi: []}])
     }
+
+    // Push an empty reference object onto the references array.
+    doc.submitOp([{p: ['references', doc.data.references.length], li: {
+      fileName: '',
+      id: ''
+    }}])
+  }
+
+  // This gets invoked when the user clicks the "Remove" button.
+  removeReference (index) {
+    const doc = this.props.doc
+
+    // Remove the element from the array.
+    doc.submitOp([{
+      p: ['references', index],
+      ld: doc.data.references[index]
+    }])
   }
 
   render () {
@@ -45,7 +55,12 @@ class References extends React.Component {
             <Table.HeaderCell>File name</Table.HeaderCell>
             <Table.HeaderCell>Document ID</Table.HeaderCell>
             <Table.HeaderCell>
-              <Button onClick={this.addReference} floated='right' primary size='small' compact>
+              <Button floated='right' primary size='small' compact
+                onClick={(event) => {
+                  event.preventDefault() // Prevent form submission
+                  this.addReference()
+                }}
+              >
                 Add
               </Button>
             </Table.HeaderCell>
@@ -63,7 +78,12 @@ class References extends React.Component {
                   <Input transparent fluid placeholder='Document ID...' value={id}/>
                 </Table.Cell>
                 <Table.Cell collapsing>
-                  <Button floated='right' negative size='small' compact>
+                  <Button floated='right' negative size='small' compact
+                    onClick={(event) => {
+                      event.preventDefault() // Prevent form submission
+                      this.removeReference(i)
+                    }}
+                  >
                     Remove
                   </Button>
                 </Table.Cell>
