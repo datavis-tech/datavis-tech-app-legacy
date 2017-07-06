@@ -35,11 +35,6 @@ class EditPage extends React.Component {
         // Store a reference to the document for later use.
         this.doc = doc
 
-        // TODO call .destroy() on these on unmount
-//        new ShareDBStringBinding(this.titleInput, doc, ['title']).setup()
-        new ShareDBStringBinding(this.descriptionInput, doc, ['description']).setup()
-        new ShareDBStringBinding(this.contentInput, doc, ['content']).setup()
-
         const updateState = () => {
           this.setState({
             docInitialized: true,
@@ -89,61 +84,56 @@ class EditPage extends React.Component {
   render () {
     const { id, user } = this.props
     const { title } = this.state
+    const loading = !this.state.docInitialized
 
     return (
       <Layout title={(title || 'Loading...') + ' (editing) | Datavis.tech'} user={user}>
         <Container text>
-          <Form>
-            <Form.Field>
-              <label>Title</label>
-              <Grid columns={2} divided>
-                <Grid.Row>
-                  <Grid.Column width={12}>
-                    {
-                      this.state.docInitialized ? (
-                        <StringBinding type='input' doc={this.doc} path={['title']} />
-                      ) : (
-                        <span>Loading...</span>
-                      )
-                    }
-                  </Grid.Column>
-                  <Grid.Column width={4}>
-                    <Link route='view' params={{ id }}>
-                      <a>
-                        <Button fluid>View</Button>
-                      </a>
-                    </Link>
-                  </Grid.Column>
-                </Grid.Row>
-              </Grid>
-            </Form.Field>
-            <Form.Field>
-              <label>Description</label>
-              <textarea
-                placeholder={this.state.docInitialized ? '' : 'Loading...'}
-                ref={(el) => { this.descriptionInput = el }}
-              />
-            </Form.Field>
-            <Form.Field>
-              <label>Content</label>
-              <textarea
-                placeholder={this.state.docInitialized ? '' : 'Loading...'}
-                ref={(el) => { this.contentInput = el }}
-              />
-            </Form.Field>
-            <Form.Field>
-              <label>References</label>
-            </Form.Field>
-            <Form.Field inline>
-              <References/>
-            </Form.Field>
-            <Form.Field>
-              <DeleteConfirmModal
-                deleteDocument={this.deleteDocument.bind(this)}
-                deleting={this.state.deleting}
-              />
-            </Form.Field>
-          </Form>
+        {
+          loading ? (
+            <span>Loading...</span>
+          ) : (
+            <Form>
+              <Form.Field>
+                <label>Title</label>
+                <Grid columns={2} divided>
+                  <Grid.Row>
+                    <Grid.Column width={12}>
+                      <StringBinding type='input' doc={this.doc} path={['title']} />
+                    </Grid.Column>
+                    <Grid.Column width={4}>
+                      <Link route='view' params={{ id }}>
+                        <a>
+                          <Button fluid>View</Button>
+                        </a>
+                      </Link>
+                    </Grid.Column>
+                  </Grid.Row>
+                </Grid>
+              </Form.Field>
+              <Form.Field>
+                <label>Description</label>
+                <StringBinding type='input' doc={this.doc} path={['description']} />
+              </Form.Field>
+              <Form.Field>
+                <label>Content</label>
+                <StringBinding type='textarea' doc={this.doc} path={['content']} />
+              </Form.Field>
+              <Form.Field>
+                <label>References</label>
+              </Form.Field>
+              <Form.Field inline>
+                <References/>
+              </Form.Field>
+              <Form.Field>
+                <DeleteConfirmModal
+                  deleteDocument={this.deleteDocument.bind(this)}
+                  deleting={this.state.deleting}
+                />
+              </Form.Field>
+            </Form>
+          )
+        }
         </Container>
       </Layout>
     )
