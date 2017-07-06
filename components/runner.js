@@ -26,35 +26,40 @@ class Runner extends React.Component {
 
     if (process.browser) {
       const references = this.props.doc.data.references || []
-      references.forEach(({ fileName, id}) => {
-        subscribeToDocument(id, (err, referenceDoc) => {
-          if (err) {
-            console.error(err)
-          }
 
-          const updateState = () => {
-            const newFile = {
-              [fileName]: {
-                content: referenceDoc.data.content
-              }
+      if(references.length !== 0){
+        references.forEach(({ fileName, id}) => {
+          subscribeToDocument(id, (err, referenceDoc) => {
+            if (err) {
+              console.error(err)
             }
-            this.setState((state) => {
-              const newFiles = Object.assign(state.files, newFile)
-              return {
-                files: newFiles,
-                allReferencesResolved: Object.keys(newFiles).length === references.length
+
+            const updateState = () => {
+              const newFile = {
+                [fileName]: {
+                  content: referenceDoc.data.content
+                }
               }
-            })
-          }
-          updateState()
-          referenceDoc.on('op', updateState)
-          // TODO clean up these references when the list changes, or when component unmounts.
-          //this.cleanupDocs.push(() => {
-          //  referenceDoc.destroy()
-          //  referenceDoc.removeListener('op', updateState)
-          //})
+              this.setState((state) => {
+                const newFiles = Object.assign(state.files, newFile)
+                return {
+                  files: newFiles,
+                  allReferencesResolved: Object.keys(newFiles).length === references.length
+                }
+              })
+            }
+            updateState()
+            referenceDoc.on('op', updateState)
+            // TODO clean up these references when the list changes, or when component unmounts.
+            //this.cleanupDocs.push(() => {
+            //  referenceDoc.destroy()
+            //  referenceDoc.removeListener('op', updateState)
+            //})
+          })
         })
-      })
+      } else {
+        this.setState({ allReferencesResolved: true })
+      }
     }
 
     //setTimeout(() => {
