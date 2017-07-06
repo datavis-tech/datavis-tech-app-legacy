@@ -24,12 +24,13 @@ class ViewPage extends React.Component {
       subscribeToDocument(this.props.id, (err, doc) => {
         if (err) throw err
 
+        this.doc = doc
+
         const updateState = () => {
           this.setState({
             docInitialized: true,
             title: doc.data.title,
-            description: doc.data.description,
-            content: doc.data.content
+            description: doc.data.description
           })
         }
 
@@ -55,42 +56,33 @@ class ViewPage extends React.Component {
     const {
       docInitialized,
       title,
-      description,
-      content
+      description
     } = this.state
 
-    const files = {
-      'logData.js': {
-        content: 'console.log("Data!!")'
-      }
+    if (!docInitialized) {
+      return <div>Loading...</div>
     }
-
-    const loading = !docInitialized
 
     return (
       <Layout title={(title || 'Loading...') + ' | Datavis.tech'} user={user}>
-        {loading ? (
-          <div>Loading...</div>
-        ) : (
-          <div>
-            <Header as='h1'>{title}</Header>
-            <Runner content={content} files={files}/>
-            <Grid columns={2} divided>
-              <Grid.Row>
-                <Grid.Column width={12}>
-                  <p>{description}</p>
-                </Grid.Column>
-                <Grid.Column width={4}>
-                  <Link route='edit' params={{ id }}>
-                    <a>
-                      <Button fluid>Edit</Button>
-                    </a>
-                  </Link>
-                </Grid.Column>
-              </Grid.Row>
-            </Grid>
-          </div>
-        )}
+        <div>
+          <Header as='h1'>{title}</Header>
+          <Runner doc={this.doc} />
+          <Grid columns={2} divided>
+            <Grid.Row>
+              <Grid.Column width={12}>
+                <p>{description}</p>
+              </Grid.Column>
+              <Grid.Column width={4}>
+                <Link route='edit' params={{ id }}>
+                  <a>
+                    <Button fluid>Edit</Button>
+                  </a>
+                </Link>
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
+        </div>
       </Layout>
     )
   }
