@@ -117,7 +117,7 @@ class EditPage extends React.Component {
               </Form.Field>
               <Form.Field>
                 <label>Content</label>
-                <StringBinding type='textarea' doc={this.doc} path={['content']} />
+                <StringBinding style={{ fontFamily: 'monospace' }} type='textarea' doc={this.doc} path={['content']} />
               </Form.Field>
               <Form.Field>
                 <label>References</label>
