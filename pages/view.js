@@ -35,7 +35,10 @@ class ViewPage extends React.Component {
         }
 
         updateState()
+
+        // TODO only invoke updateState if changes affect title or description.
         doc.on('op', updateState)
+
         this.cleanupDoc = () => {
           doc.destroy()
           doc.removeListener('op', updateState)

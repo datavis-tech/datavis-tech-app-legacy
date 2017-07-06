@@ -15,39 +15,44 @@ class Runner extends React.Component {
   }
 
   componentDidMount () {
-    const references = this.props.doc.data.references || []
-    
+
+    // Handle references.
+    // TODO test the following cases:
+    //  * A new reference is added.
+    //  * A reference is deleted.
+    //  * The content of a reference changes.
+    //  * The title of a reference changes (should not re-render)
+    //  * The description of a reference changes (should not re-render)
+
     if (process.browser) {
+      const references = this.props.doc.data.references || []
       references.forEach(({ fileName, id}) => {
         subscribeToDocument(id, (err, referenceDoc) => {
           if (err) {
             console.error(err)
           }
 
-          const newFile = {}
-          newFile[fileName] = {
-            content: referenceDoc.data.content
-          }
-          this.setState((state) => {
-            const newFiles = Object.assign(state.files, newFile)
-            return {
-              files: newFiles,
-              allReferencesResolved: Object.keys(newFile).length === references.length
+          const updateState = () => {
+            const newFile = {
+              [fileName]: {
+                content: referenceDoc.data.content
+              }
             }
-          })
-
-          //const updateState = () => {
-          //  this.setState({
-          //    docInitialized: true,
-          //    title: doc.data.title,
-          //    description: doc.data.description
-          //  })
-          //}
-          //doc.on('op', updateState)
-          //this.cleanupDoc = () => {
-          //  doc.destroy()
-          //  doc.removeListener('op', updateState)
-          //}
+            this.setState((state) => {
+              const newFiles = Object.assign(state.files, newFile)
+              return {
+                files: newFiles,
+                allReferencesResolved: Object.keys(newFiles).length === references.length
+              }
+            })
+          }
+          updateState()
+          referenceDoc.on('op', updateState)
+          // TODO clean up these references when the list changes, or when component unmounts.
+          //this.cleanupDocs.push(() => {
+          //  referenceDoc.destroy()
+          //  referenceDoc.removeListener('op', updateState)
+          //})
         })
       })
     }
