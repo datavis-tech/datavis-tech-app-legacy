@@ -1,5 +1,6 @@
 import React from 'react'
 import { Table, Input, Button } from 'semantic-ui-react'
+import StringBinding from '../../components/stringBinding'
 
 class References extends React.Component {
 
@@ -17,6 +18,7 @@ class References extends React.Component {
       })
     }
 
+    // TODO only call updateState if the op may have changed the "references" array.
     doc.on('op', updateState)
   }
 
@@ -78,10 +80,24 @@ class References extends React.Component {
             this.state.references.map(({ fileName, id }, i) => (
               <Table.Row key={i}>
                 <Table.Cell>
-                  <Input transparent fluid placeholder='File name...' value={fileName} />
+                  <div className='ui fluid transparent input'>
+                    <StringBinding
+                      type='input'
+                      doc={this.props.doc}
+                      path={['references', i, 'fileName']}
+                      placeholder='Type file name (local alias) here.'
+                    />
+                  </div>
                 </Table.Cell>
                 <Table.Cell>
-                  <Input transparent fluid placeholder='Document ID...' value={id}/>
+                  <div className='ui fluid transparent input'>
+                    <StringBinding
+                      type='input'
+                      doc={this.props.doc}
+                      path={['references', i, 'id']}
+                      placeholder='Paste document ID here.'
+                    />
+                  </div>
                 </Table.Cell>
                 <Table.Cell collapsing>
                   <Button floated='right' negative size='small' compact
