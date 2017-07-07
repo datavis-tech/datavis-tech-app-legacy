@@ -15,9 +15,9 @@ class Runner extends React.Component {
   }
 
   componentDidMount () {
-
     // Handle references.
     // TODO test the following cases:
+    //  * The main content changes.
     //  * A new reference is added.
     //  * A reference is deleted.
     //  * The content of a reference changes.
@@ -25,9 +25,11 @@ class Runner extends React.Component {
     //  * The description of a reference changes (should not re-render)
 
     if (process.browser) {
-      const references = this.props.doc.data.references || []
 
-      if(references.length !== 0){
+      const doc = this.props.doc
+      const references = doc.data.references || []
+      // Subscribe to referenced documents, and update state when they change.
+      if (references.length !== 0) {
         references.forEach(({ fileName, id}) => {
           subscribeToDocument(id, (err, referenceDoc) => {
             if (err) {
@@ -58,8 +60,19 @@ class Runner extends React.Component {
           })
         })
       } else {
-        this.setState({ allReferencesResolved: true })
+        this.setState({
+          allReferencesResolved: true
+        })
       }
+
+      // Respond to changes in the main document content.
+      // TODO only execute this if the content changes (ignore title and description changes)
+      // TODO clean up this listener on unmount
+      doc.on('op', () => {
+        this.setState({
+          template: doc.data.content
+        })
+      })
     }
 
     //setTimeout(() => {
