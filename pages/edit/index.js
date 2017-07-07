@@ -104,7 +104,7 @@ class EditPage extends React.Component {
                     <Grid.Column width={4}>
                       <Link route='view' params={{ id }}>
                         <a>
-                          <Button fluid>View</Button>
+                          <Button type='button' fluid>View</Button>
                         </a>
                       </Link>
                     </Grid.Column>
