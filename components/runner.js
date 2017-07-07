@@ -101,6 +101,7 @@ class Runner extends React.Component {
       <iframe
         width='960'
         height='500'
+        scrolling='no'
         style={{
           border: 'solid 1px #ddd'
           // transform: 'scale(1)'
