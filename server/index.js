@@ -11,12 +11,14 @@ const session = require('./session')
 const shareDB = require('./shareDB')
 const authorization = require('./authorization')
 const accessControl = require('./accessControl')
+const addUserToOps = require('./addUserToOps')
 
 const expressApp = express()
 expressApp.use(session.middleware)
 
 authorization(expressApp)
 accessControl(shareDB.backend)
+addUserToOps(shareDB.backend)
 
 const dev = process.env.NODE_ENV !== 'production'
 const nextApp = next({ dev })
