@@ -59,6 +59,8 @@ class Runner extends React.Component {
               })
             }
             updateState()
+
+            // TODO only execute this if the content changes (ignore title and description changes)
             referenceDoc.on('op', updateState)
 
             this.cleanupFunctions.push(() => {
@@ -75,28 +77,20 @@ class Runner extends React.Component {
 
       // Respond to changes in the main document content.
       // TODO only execute this if the content changes (ignore title and description changes)
-      // TODO clean up this listener on unmount
-      doc.on('op', () => {
+      const updateTemplate = () => {
         this.setState({
           template: doc.data.content
         })
+      }
+      doc.on('op', updateTemplate)
+      this.cleanupFunctions.push(() => {
+        doc.removeListener('op', updateTemplate)
       })
     }
-
-    //setTimeout(() => {
-    //  this.setState({
-    //    allReferencesResolved: true,
-    //    files: {
-    //      'logData.js': {
-    //        content: 'console.log("Data!!")'
-    //      }
-    //    }
-    //  })
-    //}, 1000)
   }
 
+  // Invoke each cleanup function on unmount.
   componentWillUnmount () {
-    // Invoke each cleanup function.
     this.cleanupFunctions.forEach(f => f())
   }
 
