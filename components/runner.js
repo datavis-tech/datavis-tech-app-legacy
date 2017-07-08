@@ -9,9 +9,17 @@ class Runner extends React.Component {
     super(props)
     this.state = {
       template: props.doc.data.content,
+
+      // The referenced "files" to be passed into magicSandbox.
+      // Keys are "fileName"s, values are text contents.
       files: {},
+
+      // True after all references resolved, triggers first rendering.
       allReferencesResolved: false
     }
+
+    // An array of functions to be invoked on unmount.
+    this.cleanupFunctions = []
   }
 
   componentDidMount () {
@@ -52,11 +60,11 @@ class Runner extends React.Component {
             }
             updateState()
             referenceDoc.on('op', updateState)
-            // TODO clean up these references when the list changes, or when component unmounts.
-            //this.cleanupDocs.push(() => {
-            //  referenceDoc.destroy()
-            //  referenceDoc.removeListener('op', updateState)
-            //})
+
+            this.cleanupFunctions.push(() => {
+              referenceDoc.destroy()
+              referenceDoc.removeListener('op', updateState)
+            })
           })
         })
       } else {
@@ -85,6 +93,11 @@ class Runner extends React.Component {
     //    }
     //  })
     //}, 1000)
+  }
+
+  componentWillUnmount () {
+    // Invoke each cleanup function.
+    this.cleanupFunctions.forEach(f => f())
   }
 
   render () {
