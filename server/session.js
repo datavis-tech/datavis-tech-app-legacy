@@ -2,6 +2,7 @@ const expressSession = require('express-session')
 const connectRedis = require('connect-redis')
 const cookie = require('cookie')
 const cookieParser = require('cookie-parser')
+const ms = require ('ms')
 const {
   redisHost,
   redisPort,
@@ -37,7 +38,9 @@ module.exports = {
     store,
     secret: sessionSecret,
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: true,
+    maxAge: ms('2 days'),
+    rolling: true
   }),
   getSession
 }
