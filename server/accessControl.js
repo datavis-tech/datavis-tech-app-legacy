@@ -51,8 +51,8 @@ module.exports = (shareDB) => {
     // Get the owner id.
     const owner = (
       op.create
-      ? (op.create.data || {}) // Handle the case of a creation op.
-      : snapshot.data // Handle ops on an existing document.
+        ? (op.create.data || {}) // Handle the case of a creation op.
+        : snapshot.data // Handle ops on an existing document.
     ).owner
 
     // Access control rules:

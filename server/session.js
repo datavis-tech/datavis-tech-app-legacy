@@ -2,7 +2,7 @@ const expressSession = require('express-session')
 const connectRedis = require('connect-redis')
 const cookie = require('cookie')
 const cookieParser = require('cookie-parser')
-const ms = require ('ms')
+const ms = require('ms')
 const {
   redisHost,
   redisPort,

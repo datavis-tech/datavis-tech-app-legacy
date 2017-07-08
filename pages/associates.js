@@ -13,13 +13,13 @@ const Callout = () => (
 
 export default Page(({ user }) => (
   <Layout title='Associates | Datavis.tech' user={user} hideNav>
-    <HugeLogo/>
+    <HugeLogo />
 
     <Header as='h1'>Become a Datavis Tech Associate</Header>
 
     <p>Datavis Tech INC. will handle the business and planning side of projects, while you as an associate will enjoy a competitive hourly rate for your remote collaboration on designing and developing data visualizations. We are only bringing on new associates who are experienced data visualization practitioners.</p>
 
-    <Callout/>
+    <Callout />
 
     <Header as='h2'>What to Expect as an Associate</Header>
 
@@ -39,7 +39,7 @@ export default Page(({ user }) => (
 
     <p>* For tasks noted with an asterisk, you'll be paid your hourly rate for this work only if we get the project.</p>
 
-    <Callout/>
-    <Spacer/>
+    <Callout />
+    <Spacer />
   </Layout>
 ))

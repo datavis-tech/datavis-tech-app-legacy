@@ -38,7 +38,7 @@ class Runner extends React.Component {
       const references = doc.data.references || []
       // Subscribe to referenced documents, and update state when they change.
       if (references.length !== 0) {
-        references.forEach(({ fileName, id}) => {
+        references.forEach(({ fileName, id }) => {
           subscribeToDocument(id, (err, referenceDoc) => {
             if (err) {
               console.error(err)
@@ -98,8 +98,6 @@ class Runner extends React.Component {
     if (!this.state.allReferencesResolved) {
       return <div>Loading...</div>
     }
-
-    const content = this.props.doc.data.content
 
     const { template, files } = this.state
     const source = magicSandbox(template, files)

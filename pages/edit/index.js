@@ -2,11 +2,9 @@ import React from 'react'
 import {
   Form,
   Grid,
-  Button,
-  Container
+  Button
 } from 'semantic-ui-react'
 import { Link, Router } from '../../routes'
-import ShareDBStringBinding from 'sharedb-string-binding'
 import Page from '../../components/page'
 import Layout from '../../components/layout'
 import { subscribeToDocument } from '../../modules/shareDBGateway'
@@ -81,60 +79,63 @@ class EditPage extends React.Component {
     }
   }
 
-  render () {
-    const { id, user } = this.props
-    const { title } = this.state
-    const loading = !this.state.docInitialized
+  renderBody () {
+    const { id } = this.props
+    const { docInitialized } = this.state
+
+    if (!docInitialized) {
+      return <div>Loading...</div>
+    }
 
     return (
+      <Form>
+        <Form.Field>
+          <label>Title</label>
+          <Grid columns={2} divided>
+            <Grid.Row>
+              <Grid.Column width={12}>
+                <StringBinding type='input' doc={this.doc} path={['title']} />
+              </Grid.Column>
+              <Grid.Column width={4}>
+                <Link route='view' params={{ id }}>
+                  <a>
+                    <Button type='button' fluid>View</Button>
+                  </a>
+                </Link>
+              </Grid.Column>
+            </Grid.Row>
+          </Grid>
+        </Form.Field>
+        <Form.Field>
+          <label>Description</label>
+          <StringBinding type='input' doc={this.doc} path={['description']} />
+        </Form.Field>
+        <Form.Field>
+          <label>Content</label>
+          <StringBinding style={{ fontFamily: 'monospace' }} type='textarea' doc={this.doc} path={['content']} />
+        </Form.Field>
+        <Form.Field>
+          <label>References</label>
+        </Form.Field>
+        <Form.Field inline>
+          <References doc={this.doc} />
+        </Form.Field>
+        <Form.Field>
+          <DeleteConfirmModal
+            deleteDocument={this.deleteDocument.bind(this)}
+            deleting={this.state.deleting}
+          />
+        </Form.Field>
+      </Form>
+    )
+  }
+
+  render () {
+    const { user } = this.props
+    const { title } = this.state
+    return (
       <Layout title={(title || 'Loading...') + ' (editing) | Datavis.tech'} user={user}>
-        <Container>
-        {
-          loading ? (
-            <span>Loading...</span>
-          ) : (
-            <Form>
-              <Form.Field>
-                <label>Title</label>
-                <Grid columns={2} divided>
-                  <Grid.Row>
-                    <Grid.Column width={12}>
-                      <StringBinding type='input' doc={this.doc} path={['title']} />
-                    </Grid.Column>
-                    <Grid.Column width={4}>
-                      <Link route='view' params={{ id }}>
-                        <a>
-                          <Button type='button' fluid>View</Button>
-                        </a>
-                      </Link>
-                    </Grid.Column>
-                  </Grid.Row>
-                </Grid>
-              </Form.Field>
-              <Form.Field>
-                <label>Description</label>
-                <StringBinding type='input' doc={this.doc} path={['description']} />
-              </Form.Field>
-              <Form.Field>
-                <label>Content</label>
-                <StringBinding style={{ fontFamily: 'monospace' }} type='textarea' doc={this.doc} path={['content']} />
-              </Form.Field>
-              <Form.Field>
-                <label>References</label>
-              </Form.Field>
-              <Form.Field inline>
-                <References doc={this.doc}/>
-              </Form.Field>
-              <Form.Field>
-                <DeleteConfirmModal
-                  deleteDocument={this.deleteDocument.bind(this)}
-                  deleting={this.state.deleting}
-                />
-              </Form.Field>
-            </Form>
-          )
-        }
-        </Container>
+        { this.renderBody() }
       </Layout>
     )
   }

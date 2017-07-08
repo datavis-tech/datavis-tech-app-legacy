@@ -14,7 +14,7 @@ export default ({ children, title, user, hideNav }) => (
       <link rel='shortcut icon' href='/static/images/favicon.ico' />
     </Head>
     <div style={{ width: '960px', margin: 'auto' }}>
-      { hideNav ? <Spacer/> : <Navbar user={user}/> }
+      { hideNav ? <Spacer /> : <Navbar user={user} /> }
       { children }
     </div>
   </div>

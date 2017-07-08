@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table, Input, Button } from 'semantic-ui-react'
+import { Table, Button } from 'semantic-ui-react'
 import StringBinding from '../../components/stringBinding'
 
 class References extends React.Component {

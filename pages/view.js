@@ -54,7 +54,7 @@ class ViewPage extends React.Component {
   }
 
   renderBody () {
-    const { id, user } = this.props
+    const { id } = this.props
     const { docInitialized, title, description } = this.state
 
     if (!docInitialized) {

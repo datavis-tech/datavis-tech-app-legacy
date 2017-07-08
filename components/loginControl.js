@@ -12,7 +12,7 @@ const LoginControl = ({ user }) => {
         <span style={{paddingRight: '8px'}}>
           <Link route='profile' params={{ username }}>
             <a>
-              <Image height={36} src={avatarURL + '&size=72'} inline/>
+              <Image height={36} src={avatarURL + '&size=72'} inline />
               <span>
                 {username}
               </span>
@@ -32,14 +32,14 @@ const LoginControl = ({ user }) => {
   )
 }
 
-    // <Link href='sign-in'>
-    //   <Popup
-    //     trigger={
-    //       <Button>Sign in</Button>
-    //     }
-    //     content='Sign in with your GitHub account'
-    //     position='bottom right'
-    //   />
-    // </Link>
+// <Link href='sign-in'>
+//   <Popup
+//     trigger={
+//       <Button>Sign in</Button>
+//     }
+//     content='Sign in with your GitHub account'
+//     position='bottom right'
+//   />
+// </Link>
 
 export default LoginControl

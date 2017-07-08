@@ -12,13 +12,13 @@ const Callout = () => (
 
 export default Page(({ user }) => (
   <Layout title='Consulting | Datavis.tech' user={user} hideNav>
-    <HugeLogo/>
+    <HugeLogo />
 
     <Header as='h1'>Data Visualization Consulting Services</Header>
 
     <p>Datavis Tech INC. offers consulting services for design and development of interactive data visualizations for the Web. We specialize in creative, collaborative projects in which your data is visualized using D3.js and other Open Source technologies. Given a data set or API to work with, and an understanding of the tasks you'd like visualization to facilitate, we can work with you to explore and present your data visually. Our projects typically last for several months, grounded in weekly meetings.</p>
 
-    <Callout/>
+    <Callout />
 
     <Header as='h2'>What to Expect as a Client</Header>
 
@@ -35,8 +35,8 @@ export default Page(({ user }) => (
       <li><strong>Milestone-based Payments</strong>: Throughout a project, for each milestone we reach, we will send an invoice with "due on receipt" terms of payment. Work for the subsequent milestones will only begin after we receive payment for the completed milestone. We encourage timely payments, as the project will be effectively "on ice" after we send an invoice and before we receive its payment. We accept mailed checks, credit/debit card payments, or other timely means of payment.</li>
       <li><strong>Project closeout call</strong>: After completing the last milestone, we'll schedule a final meeting to close out the project.</li>
     </ul>
-    <Spacer/>
-    <Callout/>
-    <Spacer/>
+    <Spacer />
+    <Callout />
+    <Spacer />
   </Layout>
 ))

@@ -115,12 +115,12 @@ const visualizations = [
 export default Page(({ user }) => (
   <Layout title='Datavis.tech' user={user} hideNav>
     <Container text>
-      <HugeLogo noLink/>
+      <HugeLogo noLink />
       <Container textAlign='center'>
         <Header as='h1'>Data Visualization Consulting Services</Header>
       </Container>
 
-      <Spacer/>
+      <Spacer />
       <Divider horizontal>
         Projects
       </Divider>
@@ -128,18 +128,18 @@ export default Page(({ user }) => (
       <Card.Group>
         {
           visualizations.map((props, i) =>
-            <VisualizationCard {...props} key={i}/>
+            <VisualizationCard {...props} key={i} />
           )
         }
       </Card.Group>
 
       <Container textAlign='center'>
-        <Spacer/>
+        <Spacer />
         <p>We can help you visualize your data.</p>
         <Link href='/consulting'>
           <Button>Hire us!</Button>
         </Link>
-        <Spacer/>
+        <Spacer />
       </Container>
     </Container>
   </Layout>

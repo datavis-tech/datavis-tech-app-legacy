@@ -7,7 +7,7 @@ import {
 export default ({title, description, img, links}) => (
   <Card centered>
     <a href={links[0].href}>
-      <Image src={img}/>
+      <Image src={img} />
     </a>
     <Card.Content>
       <Card.Header>

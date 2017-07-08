@@ -17,7 +17,7 @@ const LinkMaybe = ({ noLink, children }) => {
 export default ({ noLink }) => (
   <Container textAlign='center'>
     <LinkMaybe noLink={noLink}>
-      <Image src='/static/images/Logo_Largest.png'/>
+      <Image src='/static/images/Logo_Largest.png' />
     </LinkMaybe>
   </Container>
 )
