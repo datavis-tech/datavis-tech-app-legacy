@@ -53,39 +53,41 @@ class ViewPage extends React.Component {
     }
   }
 
-  render () {
+  renderBody () {
     const { id, user } = this.props
-
-    const {
-      docInitialized,
-      title,
-      description
-    } = this.state
+    const { docInitialized, title, description } = this.state
 
     if (!docInitialized) {
       return <div>Loading...</div>
     }
+    return (
+      <div>
+        <Header as='h1'>{title}</Header>
+        <Runner doc={this.doc} />
+        <Grid columns={2} divided>
+          <Grid.Row>
+            <Grid.Column width={12}>
+              <p>{description}</p>
+            </Grid.Column>
+            <Grid.Column width={4}>
+              <Link route='edit' params={{ id }}>
+                <a>
+                  <Button fluid>Edit</Button>
+                </a>
+              </Link>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+      </div>
+    )
+  }
 
+  render () {
+    const { user } = this.props
+    const { title } = this.state
     return (
       <Layout title={(title || 'Loading...') + ' | Datavis.tech'} user={user}>
-        <div>
-          <Header as='h1'>{title}</Header>
-          <Runner doc={this.doc} />
-          <Grid columns={2} divided>
-            <Grid.Row>
-              <Grid.Column width={12}>
-                <p>{description}</p>
-              </Grid.Column>
-              <Grid.Column width={4}>
-                <Link route='edit' params={{ id }}>
-                  <a>
-                    <Button fluid>Edit</Button>
-                  </a>
-                </Link>
-              </Grid.Column>
-            </Grid.Row>
-          </Grid>
-        </div>
+        { this.renderBody() }
       </Layout>
     )
   }
