@@ -137,6 +137,7 @@ class EditPage extends React.Component {
           <DeleteConfirmModal
             deleteDocument={this.deleteDocument.bind(this)}
             deleting={this.state.deleting}
+            title={this.state.title}
           />
         </Form.Field>
       </Form>
