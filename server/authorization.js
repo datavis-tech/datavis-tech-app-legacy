@@ -7,7 +7,6 @@ const {
   AUTH_PATH,
   AUTH_PATH_GITHUB,
   AUTH_PATH_LOGOUT,
-  AUTH_SUCCESS_REDIRECT,
   AUTH_FAILURE_REDIRECT,
   AUTH_LOGOUT_REDIRECT
 } = require('../modules/constants')
@@ -47,7 +46,9 @@ module.exports = (expressApp) => {
     passport.authenticate('github', {
       failureRedirect: AUTH_FAILURE_REDIRECT
     }),
-    (req, res) => res.redirect(AUTH_SUCCESS_REDIRECT)
+
+    // Redirect to user profile after successful login.
+    (req, res) => res.redirect('/' + req.user.username)
   )
 
   expressApp.get(AUTH_PATH_LOGOUT, (req, res) => {

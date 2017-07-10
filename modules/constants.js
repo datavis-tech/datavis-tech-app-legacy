@@ -1,9 +1,8 @@
 const AUTH_PATH = '/auth'
 const AUTH_PATH_GITHUB = AUTH_PATH + '/github'
 const AUTH_PATH_LOGOUT = AUTH_PATH + '/logout'
-const AUTH_SUCCESS_REDIRECT = '/'
 const AUTH_FAILURE_REDIRECT = AUTH_PATH + '/failed'
-const AUTH_LOGOUT_REDIRECT = AUTH_SUCCESS_REDIRECT
+const AUTH_LOGOUT_REDIRECT = '/'
 
 // The collection containing documents.
 const DB_DOCUMENTS_COLLECTION = 'documents'
@@ -19,7 +18,6 @@ module.exports = {
   AUTH_PATH,
   AUTH_PATH_GITHUB,
   AUTH_PATH_LOGOUT,
-  AUTH_SUCCESS_REDIRECT,
   AUTH_FAILURE_REDIRECT,
   AUTH_LOGOUT_REDIRECT,
   DB_DOCUMENTS_COLLECTION,
