@@ -9,20 +9,20 @@ class CreatePage extends React.Component {
   onSubmit (event) {
     event.preventDefault() // Prevent form submission
 
+    // Create a new document in the ShareDB backend.
     const id = createDocument({
       title: this.titleInput.value,
       description: this.descriptionInput.value,
       owner: this.props.user.id
     })
 
-    Router.pushRoute('view', { id })
+    // Redirect to the edit page after creation.
+    Router.pushRoute('edit', { id })
   }
 
   render () {
-    const { user } = this.props
-
     return (
-      <Layout title={'Create | Datavis.tech'} user={user}>
+      <Layout title={'Create | Datavis.tech'} user={this.props.user}>
         <Container text>
           <h1>Create</h1>
           <Form onSubmit={this.onSubmit.bind(this)}>
