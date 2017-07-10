@@ -94,7 +94,11 @@ class EditPage extends React.Component {
           <Grid columns={2} divided>
             <Grid.Row>
               <Grid.Column width={12}>
-                <StringBinding type='input' doc={this.doc} path={['title']} />
+                <StringBinding
+                  type='input'
+                  doc={this.doc}
+                  path={['title']}
+                />
               </Grid.Column>
               <Grid.Column width={4}>
                 <Link route='view' params={{ id }}>
@@ -108,11 +112,20 @@ class EditPage extends React.Component {
         </Form.Field>
         <Form.Field>
           <label>Description</label>
-          <StringBinding type='input' doc={this.doc} path={['description']} />
+          <StringBinding
+            type='textarea'
+            doc={this.doc}
+            path={['description']}
+          />
         </Form.Field>
         <Form.Field>
           <label>Content</label>
-          <StringBinding style={{ fontFamily: 'monospace' }} type='textarea' doc={this.doc} path={['content']} />
+          <StringBinding
+            style={{ fontFamily: 'monospace' }}
+            type='textarea'
+            doc={this.doc}
+            path={['content']}
+          />
         </Form.Field>
         <Form.Field>
           <label>References</label>
