@@ -5,6 +5,7 @@ import {
   Button
 } from 'semantic-ui-react'
 import { Link } from '../routes'
+import marked from 'marked'
 import { subscribeToDocument } from '../modules/shareDBGateway'
 import Page from '../components/page'
 import Layout from '../components/layout'
@@ -55,20 +56,32 @@ class ViewPage extends React.Component {
 
   renderBody () {
     const { id } = this.props
-    const { docInitialized, title, description } = this.state
+
+    const {
+      docInitialized,
+      title,
+      description
+    } = this.state
+
 
     if (!docInitialized) {
       return <div>Loading...</div>
     }
+
+    const descriptionHTML = {
+      __html: marked(description)
+    }
+
     return (
       <div>
         <Header as='h1'>{title}</Header>
         <Runner doc={this.doc} />
         <Grid columns={2} divided>
           <Grid.Row>
-            <Grid.Column width={12}>
-              <p>{description}</p>
-            </Grid.Column>
+            <Grid.Column
+              width={12}
+              dangerouslySetInnerHTML={descriptionHTML}
+            />
             <Grid.Column width={4}>
               <Link route='edit' params={{ id }}>
                 <a>
