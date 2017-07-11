@@ -9,6 +9,7 @@ import Page from '../../components/page'
 import Layout from '../../components/layout'
 import { subscribeToDocument } from '../../modules/shareDBGateway'
 import StringBinding from '../../components/stringBinding'
+import CodeMirrorBinding from '../../components/codeMirrorBinding'
 import DeleteConfirmModal from './deleteConfirmModal'
 import References from './references'
 
@@ -120,9 +121,7 @@ class EditPage extends React.Component {
         </Form.Field>
         <Form.Field>
           <label>Content</label>
-          <StringBinding
-            style={{ fontFamily: 'monospace' }}
-            type='textarea'
+          <CodeMirrorBinding
             doc={this.doc}
             path={['content']}
           />
@@ -148,7 +147,11 @@ class EditPage extends React.Component {
     const { user } = this.props
     const { title } = this.state
     return (
-      <Layout title={(title || 'Loading...') + ' (editing) | Datavis.tech'} user={user}>
+      <Layout
+        title={(title || 'Loading...') + ' (editing) | Datavis.tech'}
+        user={user}
+        includeCSS='/static/codemirror/codemirror.min.css'
+      >
         { this.renderBody() }
       </Layout>
     )

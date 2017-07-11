@@ -12,12 +12,16 @@ import ShareDBStringBinding from 'sharedb-string-binding'
 export default class StringBinding extends Component {
 
   componentDidMount () {
-    this.binding = new ShareDBStringBinding(this.el, this.props.doc, this.props.path)
-    this.binding.setup()
+    if (process.browser) {
+      this.binding = new ShareDBStringBinding(this.el, this.props.doc, this.props.path)
+      this.binding.setup()
+    }
   }
 
   componentWillUnmount () {
-    this.binding.destroy()
+    if (process.browser) {
+      this.binding.destroy()
+    }
   }
 
   render () {
