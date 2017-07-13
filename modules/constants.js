@@ -14,6 +14,9 @@ const DB_DOCUMENTS_PROJECTION = 'documentsProjection'
 // The collection containing user records.
 const DB_USERS_COLLECTION = 'users'
 
+// The collection containing feedback entries.
+const DB_FEEDBACK_COLLECTION = 'feedback'
+
 module.exports = {
   AUTH_PATH,
   AUTH_PATH_GITHUB,
@@ -22,5 +25,6 @@ module.exports = {
   AUTH_LOGOUT_REDIRECT,
   DB_DOCUMENTS_COLLECTION,
   DB_DOCUMENTS_PROJECTION,
-  DB_USERS_COLLECTION
+  DB_USERS_COLLECTION,
+  DB_FEEDBACK_COLLECTION
 }

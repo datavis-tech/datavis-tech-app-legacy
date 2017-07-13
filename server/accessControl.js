@@ -1,4 +1,5 @@
 const get = require('lodash/get')
+const { DB_FEEDBACK_COLLECTION } = require('../modules/constants')
 
 // This module implements access control rules at the ShareDB layer.
 // This prevents, for example, editing documents you don't own.
@@ -37,13 +38,9 @@ module.exports = (shareDB) => {
         isServer,
         session
       },
-      snapshot
+      snapshot,
+      collection
     } = request
-
-    // Allow server code to do anything (e.g. create and update User entries).
-    if (isServer) {
-      return done()
-    }
 
     // Get the id of the currently logged in user from the session.
     const userId = get(session, 'passport.user.id')
@@ -56,6 +53,19 @@ module.exports = (shareDB) => {
     ).owner
 
     // Access control rules:
+
+    // Allow server code to do anything (e.g. create and update User entries).
+    if (isServer) {
+      return done()
+    }
+
+    // Allow anyone to leave a feedback entry.
+    if (collection === DB_FEEDBACK_COLLECTION) {
+      if (userId) {
+        return done()
+      }
+      return done('Error: You must be logged in to leave feedback.')
+    }
 
     // For all ops, owner must be the logged in user.
     if (!userId || (owner !== userId)) {

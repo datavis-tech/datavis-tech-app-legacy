@@ -6,6 +6,8 @@ routes.add('associates', '/associates')
 
 routes.add('beta', '/beta')
 routes.add('create', '/create')
+routes.add('feedback', '/feedback')
+routes.add('feedback-thanks', '/feedback-thanks')
 routes.add('vis', '/vis/:id')
 routes.add('edit', '/edit/:id')
 routes.add('profile', '/:username')

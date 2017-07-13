@@ -3,7 +3,8 @@ import ReconnectingWebSocket from 'reconnecting-websocket'
 import {
   DB_USERS_COLLECTION,
   DB_DOCUMENTS_COLLECTION,
-  DB_DOCUMENTS_PROJECTION
+  DB_DOCUMENTS_PROJECTION,
+  DB_FEEDBACK_COLLECTION
 } from './constants'
 import uuidV4 from 'uuid/v4'
 
@@ -102,9 +103,24 @@ const createDocument = ({ title, description, owner }) => {
   return id
 }
 
+// Creates an entry in the feedback collection.
+const createFeedbackEntry = ({ feedback, user }) => {
+  const id = generateId()
+  const doc = connection.get(DB_FEEDBACK_COLLECTION, id)
+  doc.create({
+
+    // Human readable feedback, String.
+    feedback,
+
+    // The user who left this feedback.
+    user
+  })
+}
+
 export {
   createDocument,
   createProfileQuery,
   createDocumentsQuery,
-  subscribeToDocument
+  subscribeToDocument,
+  createFeedbackEntry
 }
