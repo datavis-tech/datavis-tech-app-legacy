@@ -25,8 +25,7 @@ if (process.browser) {
 //    * If unsuccessful, `update` is passed `null`, meaning no matching user found.
 //
 // Returns the query object so it can be closed on component unmount.
-const createProfileQuery = (username, update) => {
-  const mongoQuery = { username }
+const createProfileQuery = (mongoQuery, update) => {
   const query = connection.createSubscribeQuery(DB_USERS_COLLECTION, mongoQuery)
   const change = () => {
     if (query.results.length === 1) {

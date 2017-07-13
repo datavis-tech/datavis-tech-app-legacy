@@ -28,7 +28,7 @@ class ProfilePage extends React.Component {
 
   componentDidMount () {
     const username = this.props.username
-    this.profileQuery = createProfileQuery(username, (profile) => {
+    this.profileQuery = createProfileQuery({ username }, (profile) => {
       this.setState({
         profile,
         loading: false

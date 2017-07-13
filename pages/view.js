@@ -6,7 +6,10 @@ import {
 } from 'semantic-ui-react'
 import { Link } from '../routes'
 import marked from 'marked'
-import { subscribeToDocument } from '../modules/shareDBGateway'
+import {
+  createProfileQuery,
+  subscribeToDocument
+} from '../modules/shareDBGateway'
 import Page from '../components/page'
 import Layout from '../components/layout'
 import Runner from '../components/runner'
@@ -27,7 +30,7 @@ class ViewPage extends React.Component {
 
         this.doc = doc
 
-        const updateState = () => {
+        const updateDocState = () => {
           this.setState({
             docInitialized: true,
             title: doc.data.title,
@@ -35,15 +38,20 @@ class ViewPage extends React.Component {
           })
         }
 
-        updateState()
+        updateDocState()
 
-        // TODO only invoke updateState if changes affect title or description.
-        doc.on('op', updateState)
+        // TODO only invoke updateDocState if changes affect title or description.
+        doc.on('op', updateDocState)
 
         this.cleanupDoc = () => {
           doc.destroy()
-          doc.removeListener('op', updateState)
+          doc.removeListener('op', updateDocState)
         }
+
+        // Fetch the profile data for the document owner, so it can be shown.
+        this.ownerQuery = createProfileQuery({ id: doc.data.owner }, (ownerProfile) => {
+          this.setState({ ownerProfile })
+        })
       })
     }
   }
@@ -51,6 +59,9 @@ class ViewPage extends React.Component {
   componentWillUnmount () {
     if (this.cleanupDoc) {
       this.cleanupDoc()
+    }
+    if (this.ownerQuery) {
+      this.ownerQuery.destroy()
     }
   }
 
@@ -60,7 +71,8 @@ class ViewPage extends React.Component {
     const {
       docInitialized,
       title,
-      description
+      description,
+      ownerProfile
     } = this.state
 
 
@@ -78,10 +90,12 @@ class ViewPage extends React.Component {
         <Runner doc={this.doc} />
         <Grid columns={2} divided>
           <Grid.Row>
-            <Grid.Column
-              width={12}
-              dangerouslySetInnerHTML={descriptionHTML}
-            />
+            <Grid.Column width={12}>
+              { ownerProfile ? (
+                <div>By <a href={ownerProfile.username}>{ ownerProfile.displayName }</a></div>
+              ) : null}
+              <div dangerouslySetInnerHTML={descriptionHTML} />
+            </Grid.Column>
             <Grid.Column width={4}>
               <Link route='edit' params={{ id }}>
                 <a>
