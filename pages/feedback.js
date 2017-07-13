@@ -8,7 +8,7 @@ import { createFeedbackEntry } from '../modules/shareDBGateway'
 class FeedbackPage extends React.Component {
   onSubmit (event) {
     event.preventDefault() // Prevent form submission
-    const id = createFeedbackEntry({
+    createFeedbackEntry({
       feedback: this.feedbackInput.value,
       user: this.props.user
     })

@@ -25,12 +25,12 @@ export default class CodeMirrorBinding extends Component {
   }
 
   componentWillUnmount () {
-    if (process.browser) {
+    if (this.binding) {
       this.binding.destroy()
     }
   }
 
   render () {
-    return <div ref={ el => this.el = el } />
+    return <div ref={el => { this.el = el }} />
   }
 }

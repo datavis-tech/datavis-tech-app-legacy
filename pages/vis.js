@@ -75,7 +75,6 @@ class ViewPage extends React.Component {
       ownerProfile
     } = this.state
 
-
     if (!docInitialized) {
       return <div>Loading...</div>
     }
