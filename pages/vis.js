@@ -92,7 +92,7 @@ class ViewPage extends React.Component {
           <Grid.Row>
             <Grid.Column width={12}>
               { ownerProfile ? (
-                <div>By <a href={ownerProfile.username}>{ ownerProfile.displayName }</a></div>
+                <div>By <a href={`/${ownerProfile.username}`}>{ ownerProfile.displayName }</a></div>
               ) : null}
               <div dangerouslySetInnerHTML={descriptionHTML} />
             </Grid.Column>

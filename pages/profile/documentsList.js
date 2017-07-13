@@ -5,18 +5,25 @@ import { Link } from '../../routes'
 // as the tagline in the listing.
 const truncate = (description) => description.split('\n')[0]
 
-const DocumentPreview = ({id, data: { title, description }}) => (
-  <List.Item key={id} >
-    <List.Content>
-      <Link route='view' params={{ id }}>
-        <a>
-          <List.Header>{title}</List.Header>
-          <List.Description>{truncate(description)}</List.Description>
-        </a>
-      </Link>
-    </List.Content>
-  </List.Item>
-)
+const DocumentPreview = ({id, data: { title, description }}) => {
+
+  // TODO read this from the document
+  // once types are introduced.
+  const docType = 'vis'
+
+  return (
+    <List.Item key={id} >
+      <List.Content>
+        <Link route={docType} params={{ id }}>
+          <a>
+            <List.Header>{title}</List.Header>
+            <List.Description>{truncate(description)}</List.Description>
+          </a>
+        </Link>
+      </List.Content>
+    </List.Item>
+  )
+}
 
 const DocumentsList = ({ documents }) => {
   if (!documents) {

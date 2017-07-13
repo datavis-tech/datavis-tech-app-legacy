@@ -88,6 +88,10 @@ class EditPage extends React.Component {
       return <div>Loading...</div>
     }
 
+    // TODO read this from the document
+    // once types are introduced.
+    const docType = 'vis'
+
     return (
       <Form>
         <Form.Field>
@@ -102,7 +106,7 @@ class EditPage extends React.Component {
                 />
               </Grid.Column>
               <Grid.Column width={4}>
-                <Link route='view' params={{ id }}>
+                <Link route={docType} params={{ id }}>
                   <a>
                     <Button type='button' fluid>View</Button>
                   </a>
