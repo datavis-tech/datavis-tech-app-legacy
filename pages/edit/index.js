@@ -12,6 +12,7 @@ import StringBinding from '../../components/stringBinding'
 import CodeMirrorBinding from '../../components/codeMirrorBinding'
 import DeleteConfirmModal from './deleteConfirmModal'
 import References from './references'
+import DocTypeEditor from './docTypeEditor'
 
 class EditPage extends React.Component {
   static async getInitialProps ({ query }) {
@@ -122,6 +123,10 @@ class EditPage extends React.Component {
             doc={this.doc}
             path={['description']}
           />
+        </Form.Field>
+        <Form.Field>
+          <label>Document Type</label>
+          <DocTypeEditor doc={this.doc} />
         </Form.Field>
         <Form.Field>
           <label>Content</label>
