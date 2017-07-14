@@ -1,18 +1,12 @@
 import React from 'react'
-import {
-  Header,
-  Grid,
-  Button
-} from 'semantic-ui-react'
 import { Link } from '../routes'
 import marked from 'marked'
-import {
-  createProfileQuery,
-  subscribeToDocument
-} from '../modules/shareDBGateway'
+import { Header, Grid, Button } from 'semantic-ui-react'
+import { createProfileQuery, subscribeToDocument } from '../modules/shareDBGateway'
 import Page from '../components/page'
 import Layout from '../components/layout'
 import Runner from '../components/runner'
+import AvatarLink from '../components/avatarLink'
 
 class ViewPage extends React.Component {
   static async getInitialProps ({ query }) {
@@ -90,12 +84,10 @@ class ViewPage extends React.Component {
         <Grid columns={2} divided>
           <Grid.Row>
             <Grid.Column width={12}>
-              { ownerProfile ? (
-                <div>By <a href={`/${ownerProfile.username}`}>{ ownerProfile.displayName }</a></div>
-              ) : null}
               <div dangerouslySetInnerHTML={descriptionHTML} />
             </Grid.Column>
             <Grid.Column width={4}>
+              <AvatarLink user={ownerProfile} />
               <Link route='edit' params={{ id }}>
                 <a>
                   <Button fluid>Edit</Button>
