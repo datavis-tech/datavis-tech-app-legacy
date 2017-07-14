@@ -8,6 +8,18 @@ import Layout from '../components/layout'
 import Runner from '../components/runner'
 import AvatarLink from '../components/avatarLink'
 
+const OwnerAvatarLink = ({ user }) => {
+  if (user) {
+    return (
+      <div style={{ marginBottom: '0.3em' }}>
+        <span>By</span>
+        <AvatarLink user={user} />
+      </div>
+    )
+  }
+  return null
+}
+
 class ViewPage extends React.Component {
   static async getInitialProps ({ query }) {
     return { id: query.id }
@@ -87,7 +99,7 @@ class ViewPage extends React.Component {
               <div dangerouslySetInnerHTML={descriptionHTML} />
             </Grid.Column>
             <Grid.Column width={4}>
-              <AvatarLink user={ownerProfile} />
+              <OwnerAvatarLink user={ownerProfile} />
               <Link route='edit' params={{ id }}>
                 <a>
                   <Button fluid>Edit</Button>
