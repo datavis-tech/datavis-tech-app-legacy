@@ -2,6 +2,19 @@ import Link from 'next/link'
 import { Image, Menu } from 'semantic-ui-react'
 import LoginControl from './loginControl'
 
+const CreateButton = ({user}) => {
+  if (user) {
+    return (
+      <Menu.Item position='right' name='create'>
+        <Link href='/create'>
+          <a>Create</a>
+        </Link>
+      </Menu.Item>
+    )
+  }
+  return null
+}
+
 const Navbar = ({user}) => (
   <Menu secondary>
     <Link href='/'>
@@ -9,9 +22,7 @@ const Navbar = ({user}) => (
         <Image height='36px' verticalAlign='middle' src='/static/images/Logo_Nav.png' />
       </Menu.Item>
     </Link>
-    <Link href='/create'>
-      <Menu.Item position='right' name='create' />
-    </Link>
+    <CreateButton user={user} />
     <Menu.Item position='right'>
       <LoginControl user={user} />
     </Menu.Item>
