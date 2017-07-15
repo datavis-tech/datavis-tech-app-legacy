@@ -1,6 +1,7 @@
 import { Button } from 'semantic-ui-react'
 import AvatarLink from './avatarLink'
-import { AUTH_PATH_GITHUB, AUTH_PATH_LOGOUT } from '../modules/constants'
+import { AUTH_PATH_LOGOUT } from '../modules/constants'
+import LoginButton from './loginButton'
 
 const LoginControl = ({ user }) => {
   if (user) {
@@ -15,11 +16,7 @@ const LoginControl = ({ user }) => {
       </div>
     )
   }
-  return (
-    <a href={AUTH_PATH_GITHUB}>
-      <Button>Sign in</Button>
-    </a>
-  )
+  return <LoginButton />
 }
 
 // <Link href='sign-in'>
