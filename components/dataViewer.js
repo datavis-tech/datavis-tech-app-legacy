@@ -35,12 +35,7 @@ class DataViewer extends React.Component {
 
   render () {
     return (
-      <div 
-        style={{
-        maxHeight: '500px',
-        overflow: 'auto',
-        border: 'solid 1px #ddd'
-      }}>
+      <div style={{ maxHeight: '500px', overflow: 'auto', border: 'solid 1px #ddd' }} >
         <pre>{this.state.dataContent}</pre>
       </div>
     )
