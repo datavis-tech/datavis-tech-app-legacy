@@ -21,7 +21,8 @@ backend.addProjection(DB_DOCUMENTS_PROJECTION, DB_DOCUMENTS_COLLECTION, {
   schemaVersion: true,
   title: true,
   description: true,
-  owner: true
+  owner: true,
+  type: true
 })
 
 const setup = (httpServer) => {
