@@ -40,6 +40,7 @@ class EditPage extends React.Component {
             docInitialized: true,
             title: doc.data.title,
 
+            // TODO create a separate accessor that implements this logic.
             // Treat undefined type as 'vis' type.
             docType: doc.data.type || 'vis'
           })

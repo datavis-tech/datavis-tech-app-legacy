@@ -7,6 +7,7 @@ const truncate = (description) => description.split('\n')[0]
 
 const DocumentPreview = ({id, data: { title, description, type }}) => {
 
+  // TODO create a separate accessor that implements this logic.
   // If type is undefined, treat it as 'vis'.
   const docType = type || 'vis'
 
