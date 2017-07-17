@@ -38,7 +38,10 @@ class EditPage extends React.Component {
         const updateState = () => {
           this.setState({
             docInitialized: true,
-            title: doc.data.title
+            title: doc.data.title,
+
+            // Treat undefined type as 'vis' type.
+            docType: doc.data.type || 'vis'
           })
         }
 
@@ -83,15 +86,11 @@ class EditPage extends React.Component {
 
   renderBody () {
     const { id } = this.props
-    const { docInitialized } = this.state
+    const { docInitialized, docType } = this.state
 
     if (!docInitialized) {
       return <div>Loading...</div>
     }
-
-    // TODO read this from the document
-    // once types are introduced.
-    const docType = 'vis'
 
     return (
       <Form>
