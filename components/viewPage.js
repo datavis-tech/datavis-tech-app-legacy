@@ -2,10 +2,12 @@ import React from 'react'
 import { Link } from '../routes'
 import marked from 'marked'
 import { Header, Grid, Button } from 'semantic-ui-react'
-import { createProfileQuery, subscribeToDocument } from '../modules/shareDBGateway'
 import Layout from '../components/layout'
 import AvatarLink from '../components/avatarLink'
+import createProfileQuery from '../modules/db/createProfileQuery'
+import subscribeToDocument from '../modules/db/subscribeToDocument'
 
+// A wrapper around AvatarLink that adds some spacing and the text "By".
 const OwnerAvatarLink = ({ user }) => {
   if (user) {
     return (
@@ -18,6 +20,13 @@ const OwnerAvatarLink = ({ user }) => {
   return null
 }
 
+// This component factory provides the bulk of functionality
+// for so-called "view pages", which appear under
+// `/vis/:id` and `/data/:id`
+// The thing that differs between the pages at these routes
+// is the  way that the content is presented, which is
+// implemented by the ContentViewComponent, which is
+// defined differently for each route.
 const ViewPage = (ContentViewComponent) => {
   class ViewPageComponent extends React.Component {
     static async getInitialProps ({ query }) {

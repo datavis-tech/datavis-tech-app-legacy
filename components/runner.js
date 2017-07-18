@@ -2,7 +2,7 @@
 
 import React from 'react'
 import magicSandbox from 'magic-sandbox'
-import { subscribeToDocument } from '../modules/shareDBGateway'
+import subscribeToDocument from '../modules/db/subscribeToDocument'
 
 class Runner extends React.Component {
   constructor (props) {
