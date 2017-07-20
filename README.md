@@ -229,14 +229,19 @@ pm2 startup
 
 ```
 git pull
+git submodule update
 npm install
 npm run build
 pm2 restart all
 ```
 
+The above commands are also in `deploy.sh`, which you can run with `sh ./deploy.sh`.
+
 ## Using Elastic Block Store
 
-In AWS Web UI, create volume, attach to VM (use default of `dev/sdf`).
+We use [Amazon Elastic Block Store](https://aws.amazon.com/ebs/) for permanent storage of the MongoDB database content.
+
+To set up, in AWS Web UI, create volume, attach to VM (use default of `dev/sdf`).
 
 See also http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-using-volumes.html
 
