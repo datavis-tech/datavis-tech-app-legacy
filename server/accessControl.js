@@ -64,12 +64,12 @@ module.exports = (shareDB) => {
       if (userId) {
         return done()
       }
-      return done('Error: You must be logged in to leave feedback.')
+      return done('You must be logged in to leave feedback.')
     }
 
     // For all ops, owner must be the logged in user.
     if (!userId || (owner !== userId)) {
-      return done('Error: Document owner must match currently logged in user.')
+      return done('You must be logged in and the owner of this document in order to edit it.')
     }
 
     done()

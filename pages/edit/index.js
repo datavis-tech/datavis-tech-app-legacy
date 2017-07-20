@@ -2,7 +2,9 @@ import React from 'react'
 import {
   Form,
   Grid,
-  Button
+  Button,
+  Message,
+  Icon
 } from 'semantic-ui-react'
 import { Link, Router } from '../../routes'
 import Page from '../../components/page'
@@ -35,6 +37,7 @@ class EditPage extends React.Component {
         // Store a reference to the document for later use.
         this.doc = doc
 
+        // Updates the state based on changes in the ShareDB document.
         const updateState = () => {
           this.setState({
             docInitialized: true,
@@ -46,12 +49,27 @@ class EditPage extends React.Component {
           })
         }
 
+        // Shows errors to the user that originate from the server.
+        // For example, when attempting to violate access control rules.
+        const showError = (error) => {
+          this.setState({
+            errorMessage: error.message
+          })
+        }
+
         updateState()
         doc.on('op', updateState)
+        doc.on('error', showError)
 
         this.cleanupDoc = () => {
+
+          // TODO Change the strategy here, maybe don't destroy the doc.
+          //   Think about the case of navigating from view to edit.
+          //   Should the data really be thrown away and fetched again?
           doc.destroy()
+
           doc.removeListener('op', updateState)
+          doc.removeListener('error', showError)
         }
 
       })
@@ -152,6 +170,24 @@ class EditPage extends React.Component {
     )
   }
 
+  renderErrorMessage () {
+    if (this.state.errorMessage) {
+      return (
+        <Message
+          error
+          style={{
+            position: 'fixed',
+            bottom: '0px',
+            zIndex: 6 // Make this appear above CodeMirror editor.
+          }}
+        >
+          <Message.Header>Error</Message.Header>
+          <p>{this.state.errorMessage}</p>
+        </Message>
+      )
+    }
+  }
+
   render () {
     const { user } = this.props
     const { title } = this.state
@@ -162,6 +198,7 @@ class EditPage extends React.Component {
         includeCSS='/static/codemirror/codemirror.min.css'
       >
         { this.renderBody() }
+        { this.renderErrorMessage() }
       </Layout>
     )
   }
