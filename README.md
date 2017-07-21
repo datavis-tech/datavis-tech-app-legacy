@@ -14,31 +14,35 @@ This repository contains the Web application deployed at [https://datavis.tech](
 
 This section is for getting started with Datavis.tech on your development environment.
 
+First [set up SSH keys](#set-up-ssh-keys), then clone the repository with the following command.
+
 ```
 git clone git@gitlab.com:curran/data-vis-tech.git
 cd datavis-tech
 ```
 
-The repository uses [Git submodules](https://github.com/blog/2104-working-with-submodules) for static content like images (so the large files don't bloat the main repository).
+The repository uses [Git submodules](https://github.com/blog/2104-working-with-submodules) for static content like images (so the large files don't bloat the main repository). Run the following commands to initialize the Git submodule under `/static`.
 
 ```
 git submodule init
 git submodule update
 ```
 
-Use NPM to install dependencies.
+Use NPM to install dependencies. See also [Install Node.js](#install-nodejs).
 
 ```
 npm install
 ```
 
-Start Redis and MongoDB locally using the default ports.
+Start Redis and MongoDB locally using the default ports. See also [Install MongoDB](#install-mongodb) and [Install Redis](#install-redis).
 
 Start the server locally for development with:
 
 ```
 npm start
 ```
+
+Now access the app at http://localhost:3000/
 
 # Production
 
@@ -79,7 +83,7 @@ To prepare the maching for installations:
 sudo apt-get update
 ```
 
-## Set up SSH Keys & Clone the Repository
+## Set up SSH Keys
 
 Set up SSH keys for this machine in GitLab, which you'll need in order to clone the repository.
 
@@ -96,7 +100,7 @@ ssh-keygen -t rsa -C "your.email@example.com" -b 4096
  * Click on your avatar in upper right -> "Settings" -> "SSH Keys"
  * Paste the text in the "Key" box -> click "Add Key"
 
-Clone the repository:
+## Clone the Repository
 
 ```
 git clone git@gitlab.com:curran/datavis-tech.git
