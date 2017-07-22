@@ -47,8 +47,8 @@ export default class DeleteConfirmModal extends React.Component {
       open,
       close,
       deleteDocument,
-      props: { deleting, title },
-      state: { show }
+      props: { title },
+      state: { deleting, show }
     } = this
 
     return (
