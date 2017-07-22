@@ -57,6 +57,7 @@ To work on an issue:
  * After your first commit to the branch, [create a "Merge Request"](https://docs.gitlab.com/ee/gitlab-basics/add-merge-request.html)
  * Put "WIP" (short for "Work in Progress") in the merge request title if the issue is not resolved yet.
  * For the last commit that closes the issue, e.g. issue #42, put the text "Closes #42" in the commit message. This will cause the issue to be closed automatically when the branch gets merged.
+ * Lastly, run `npm lint` and correct any code style errors there coming from your new code.
  * When the issue is resolved and the code is ready for review, remove "WIP" from the merge request title.
  * To direct a reviewer's attention to the merge request, add a comment with a "@" mention (which triggers an email notification to be sent), for example "@curran This is ready for review.".
 
