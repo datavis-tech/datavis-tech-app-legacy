@@ -54,7 +54,7 @@ export default class DeleteConfirmModal extends React.Component {
     return (
       <div>
         <Button negative onClick={open} disabled={deleting} loading={deleting} >
-          Delete
+          Delete this document
         </Button>
         <Modal open={show} onClose={close} basic size='small'>
           <Header icon='trash' content='Are you sure?' />

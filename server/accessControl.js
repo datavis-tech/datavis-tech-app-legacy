@@ -52,6 +52,9 @@ module.exports = (shareDB) => {
         : snapshot.data // Handle ops on an existing document.
     ).owner
 
+    // Get the collaborators.
+    const collaborators = get(snapshot, 'data.collaborators')
+
     // Access control rules:
 
     // Allow server code to do anything (e.g. create and update User entries).
@@ -68,8 +71,17 @@ module.exports = (shareDB) => {
     }
 
     // For all ops, owner must be the logged in user.
-    if (!userId || (owner !== userId)) {
-      return done('You must be logged in and the owner of this document in order to edit it.')
+    if (!userId) {
+      return done('You must be logged in to edit.')
+    }
+
+    // Check that the user is either the owner or a collaborator.
+    if(owner !== userId) {
+      const ids = (collaborators || []).map(({id}) => id)
+      const isCollaborator = ids.filter(id => id === userId).length
+      if (!isCollaborator) {
+        return done('You must be the owner of this document or a collaborator in order to edit it.')
+      }
     }
 
     done()
