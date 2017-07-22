@@ -27,6 +27,7 @@ class CreatePage extends React.Component {
     })
 
     // TODO for #91: set 'creating' state to true here to signal disabled button state
+    // See line 36 of pages/edit/deleteConfirmModal.js
 
     // Redirect to the edit page after creation.
     Router.pushRoute('edit', { id })
