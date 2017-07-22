@@ -1,7 +1,8 @@
 import React from 'react'
-import { Table, Button } from 'semantic-ui-react'
+import { Table, Button, List } from 'semantic-ui-react'
 import AddCollaboratorModal from './addCollaboratorModal'
 import StringBinding from '../../components/stringBinding'
+import CollaboratorListItem from './collaboratorListItem'
 
 class Collaborators extends React.Component {
 
@@ -59,7 +60,16 @@ class Collaborators extends React.Component {
 
   render () {
     return (
-      <AddCollaboratorModal addCollaborator={this.addCollaborator}/>
+      <div>
+        <List verticalAlign='middle'>
+        {
+          this.state.collaborators.map((collaborator, i) => (
+            <CollaboratorListItem key={i} id={collaborator.id} />
+          ))
+        }
+        </List>
+        <AddCollaboratorModal addCollaborator={this.addCollaborator} />
+      </div>
     )
   }
 }
