@@ -12,7 +12,8 @@ export default class DeleteConfirmModal extends React.Component {
 
     // Initialize the modal to not show.
     this.state = {
-      show: false
+      show: false,
+      deleting: false
     }
 
     // Open the modal.
@@ -32,6 +33,10 @@ export default class DeleteConfirmModal extends React.Component {
 
     // Actually delete the document, after user clicks through modal.
     this.deleteDocument = () => {
+      this.setState({
+        deleting: true // Signals the button to show as disabled with spinner.
+      })
+
       this.close()
       this.props.deleteDocument()
     }

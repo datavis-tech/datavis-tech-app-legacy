@@ -24,8 +24,7 @@ class EditPage extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      docInitialized: false,
-      deleting: false
+      docInitialized: false
     }
   }
 
@@ -79,10 +78,6 @@ class EditPage extends React.Component {
   // This gets called after the user clicks through the delete confirm modal.
   deleteDocument () {
     if (this.doc) {
-      this.setState({
-        deleting: true
-      })
-
       this.doc.del((err) => {
         if (err) {
           return console.error(err)
@@ -162,7 +157,6 @@ class EditPage extends React.Component {
         <Form.Field>
           <DeleteConfirmModal
             deleteDocument={this.deleteDocument.bind(this)}
-            deleting={this.state.deleting}
             title={this.state.title}
           />
         </Form.Field>

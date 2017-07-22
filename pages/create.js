@@ -7,6 +7,13 @@ import { Router } from '../routes'
 import createDocument from '../modules/db/createDocument'
 
 class CreatePage extends React.Component {
+  // TODO add a 'creating' property to the state
+  //constructor (props) {
+  //  super(props)
+  //  this.state = {
+  //    creating: false
+  //  }
+  //}
   onSubmit (event) {
     event.preventDefault() // Prevent form submission
 
@@ -16,6 +23,8 @@ class CreatePage extends React.Component {
       description: this.descriptionInput.value,
       owner: this.props.user.id
     })
+
+    // TODO set 'creating' state to true to signal disabled button state
 
     // Redirect to the edit page after creation.
     Router.pushRoute('edit', { id })
