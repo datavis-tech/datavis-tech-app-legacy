@@ -44,6 +44,22 @@ npm start
 
 Now access the app at http://localhost:3000/
 
+# Contributing
+
+We use [Milestones](https://gitlab.com/curran/datavis-tech/milestones) to track issues. Take a look there at the current milestone to see what's currently being worked on.
+
+All work should be based on issues. If you're working on something that doesn't have an issue yet, please create a new issue for it and put it in the current milestone.
+
+To work on an issue:
+
+ * Assign yourself to that issue (Under "Assignee", click "Assign yourself"), so others know you're working on it.
+ * Create a new branch for your commits on this issue. See also [git: Basic Branching and Merging](https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging).
+ * After your first commit to the branch, [create a "Merge Request"](https://docs.gitlab.com/ee/gitlab-basics/add-merge-request.html)
+ * Put "WIP" (short for "Work in Progress") in the merge request title if the issue is not resolved yet.
+ * For the last commit that closes the issue, e.g. issue #42, put the text "Closes #42" in the commit message. This will cause the issue to be closed automatically when the branch gets merged.
+ * When the issue is resolved and the code is ready for review, remove "WIP" from the merge request title.
+ * To direct a reviewer's attention to the merge request, add a comment with a "@" mention (which triggers an email notification to be sent), for example "@curran This is ready for review.".
+
 # Production
 
 This section contains detailed information on how to launch the application in production on Amazon Web Services.
