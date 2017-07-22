@@ -44,7 +44,11 @@ export default class AddCollaboratorModal extends React.Component {
       setTimeout(() => {
         const profileQuery = createProfileQuery({ username }, (profile) => {
           if (profile) {
-            this.close()
+            this.setState({
+              loading: false,
+              notFound: false,
+              show: false
+            })
             this.props.addCollaborator(profile.id)
           } else {
             this.setState({
@@ -55,7 +59,6 @@ export default class AddCollaboratorModal extends React.Component {
           profileQuery.destroy()
         })
       }, 1000)
-
     }
   }
 
@@ -107,3 +110,10 @@ export default class AddCollaboratorModal extends React.Component {
     )
   }
 }
+// TODO think about putting this somewhere:
+// <p>Collaborators can:</p>
+// <ul>
+//   <li>Edit all parts of the document</li>
+//   <li>Add and remove collaborators</li>
+//   <li>Delete the document.</li>
+// </ul>
