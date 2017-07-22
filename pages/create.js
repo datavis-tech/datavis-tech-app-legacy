@@ -7,13 +7,15 @@ import { Router } from '../routes'
 import createDocument from '../modules/db/createDocument'
 
 class CreatePage extends React.Component {
-  // TODO add a 'creating' property to the state
+  // TODO add a 'creating' property to the state.
+  // uncomment this constructor for starting on issue #91
   //constructor (props) {
   //  super(props)
   //  this.state = {
   //    creating: false
   //  }
   //}
+
   onSubmit (event) {
     event.preventDefault() // Prevent form submission
 
