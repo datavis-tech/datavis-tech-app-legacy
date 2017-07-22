@@ -2,7 +2,6 @@ import React from 'react'
 import { Table, Button } from 'semantic-ui-react'
 import AddCollaboratorModal from './addCollaboratorModal'
 import StringBinding from '../../components/stringBinding'
-import createProfileQuery from '../../modules/db/createProfileQuery'
 
 class Collaborators extends React.Component {
 
@@ -28,17 +27,7 @@ class Collaborators extends React.Component {
 
 
   // This gets invoked when the user clicks the "Add" button.
-  addCollaborator (username) {
-
-    const profileQuery = createProfileQuery({ username }, (profile) => {
-      if (profile) {
-        console.log(profile.id)
-      }
-      profileQuery.destroy()
-    })
-
-    console.log(username)
-    console.log(this)
+  addCollaborator (id) {
     const doc = this.props.doc
 
     // If collaborators is undefined, then create an empty array.
@@ -52,10 +41,9 @@ class Collaborators extends React.Component {
     // Push an empty reference object onto the collaborators array.
     doc.submitOp([{
       p: ['collaborators', doc.data.collaborators.length],
-      li: {
-        username: username
-      }
+      li: { id }
     }])
+
   }
 
   // This gets invoked when the user clicks the "Remove" button.

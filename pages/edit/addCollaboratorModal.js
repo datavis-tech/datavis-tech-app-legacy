@@ -4,8 +4,10 @@ import {
   Modal,
   Header,
   Icon,
-  Form
+  Form,
+  Message
 } from 'semantic-ui-react'
+import createProfileQuery from '../../modules/db/createProfileQuery'
 
 export default class AddCollaboratorModal extends React.Component {
   constructor (props) {
@@ -33,12 +35,27 @@ export default class AddCollaboratorModal extends React.Component {
     }
 
     // Add the given user as a collaborator.
+    // Called when the user clicks "add collaborator" button.
     this.addCollaborator = () => {
+      const username = this.usernameInput.value
       this.setState({
-        loading: true // Signals the button to show as disabled with spinner.
+        loading: true
       })
-      this.close()
-      this.props.addCollaborator(this.usernameInput.value)
+      setTimeout(() => {
+        const profileQuery = createProfileQuery({ username }, (profile) => {
+          if (profile) {
+            this.close()
+            this.props.addCollaborator(profile.id)
+          } else {
+            this.setState({
+              loading: false,
+              notFound: true
+            })
+          }
+          profileQuery.destroy()
+        })
+      }, 1000)
+
     }
   }
 
@@ -48,33 +65,40 @@ export default class AddCollaboratorModal extends React.Component {
       close,
       deleteDocument,
       props: { title },
-      state: { loading, show }
+      state: { loading, show, notFound }
     } = this
 
     return (
       <div>
-        <Button primary onClick={open} disabled={loading} loading={loading} >
+        <Button primary onClick={open}>
           Add Collaborator
         </Button>
         <Modal open={show} onClose={close} size='small'>
           <Header content='Add Collaborator' />
           <Modal.Content>
-            <p>Collaborators can edit the document.</p>
             <Form>
               <Form.Field>
-                <label>Collaborator Username</label>
+                <label>Username</label>
                 <input
                   placeholder='Enter the user name of the collaborator.'
                   ref={(el) => { this.usernameInput = el }}
                 />
               </Form.Field>
             </Form>
+            <div>
+              {this.state.notFound ? (
+                <Message negative>
+                  <Icon name='warning' />
+                  User not found.
+                </Message>
+              ) : null }
+            </div>
           </Modal.Content>
           <Modal.Actions>
             <Button onClick={close}>
               <Icon name='remove' />Cancel
             </Button>
-            <Button primary onClick={this.addCollaborator}>
+            <Button primary onClick={this.addCollaborator} disabled={loading} loading={loading} >
               <Icon name='checkmark' />Add Collaborator
             </Button>
           </Modal.Actions>
