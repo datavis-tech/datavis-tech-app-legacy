@@ -64,7 +64,11 @@ class Collaborators extends React.Component {
         <List verticalAlign='middle'>
         {
           this.state.collaborators.map((collaborator, i) => (
-            <CollaboratorListItem key={i} id={collaborator.id} />
+            <CollaboratorListItem
+              key={i}
+              id={collaborator.id}
+              remove={() => this.removeCollaborator(i)}
+            />
           ))
         }
         </List>

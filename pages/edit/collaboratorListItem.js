@@ -37,11 +37,12 @@ class CollaboratorListItem extends React.Component {
   }
 
   render () {
+    const { remove } = this.props
     const { loading, profile } = this.state
     return profile ? (
       <List.Item>
         <List.Content floated='right'>
-          <Button>Remove</Button>
+          <Button onClick={remove}>Remove</Button>
         </List.Content>
         <Image avatar src={profile._json.avatar_url} />
         <List.Content>
