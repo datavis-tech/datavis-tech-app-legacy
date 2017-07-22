@@ -13,6 +13,7 @@ import CodeMirrorBinding from '../../components/codeMirrorBinding'
 import subscribeToDocument from '../../modules/db/subscribeToDocument'
 import DeleteConfirmModal from './deleteConfirmModal'
 import References from './references'
+import Collaborators from './collaborators'
 import DocTypeEditor from './docTypeEditor'
 
 class EditPage extends React.Component {
@@ -152,6 +153,12 @@ class EditPage extends React.Component {
         </Form.Field>
         <Form.Field inline>
           <References doc={this.doc} />
+        </Form.Field>
+        <Form.Field>
+          <label>Collaborators</label>
+        </Form.Field>
+        <Form.Field inline>
+          <Collaborators doc={this.doc} />
         </Form.Field>
         <Form.Field>
           <DeleteConfirmModal
