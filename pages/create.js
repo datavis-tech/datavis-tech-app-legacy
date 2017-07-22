@@ -26,7 +26,7 @@ class CreatePage extends React.Component {
       owner: this.props.user.id
     })
 
-    // TODO set 'creating' state to true to signal disabled button state
+    // TODO for #91: set 'creating' state to true here to signal disabled button state
 
     // Redirect to the edit page after creation.
     Router.pushRoute('edit', { id })
