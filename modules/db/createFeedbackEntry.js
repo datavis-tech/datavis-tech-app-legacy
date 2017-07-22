@@ -2,7 +2,6 @@ import connection from './connection'
 import { DB_FEEDBACK_COLLECTION } from '../constants'
 import generateId from './generateId'
 
-
 // Creates an entry in the feedback collection.
 const createFeedbackEntry = ({ feedback, user }) => {
   const id = generateId()

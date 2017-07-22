@@ -3,8 +3,7 @@ import {
   Form,
   Grid,
   Button,
-  Message,
-  Icon
+  Message
 } from 'semantic-ui-react'
 import { Link, Router } from '../../routes'
 import Page from '../../components/page'
