@@ -48,7 +48,7 @@ Now access the app at http://localhost:3000/
 
 # Contributing
 
-We use [Milestones](https://gitlab.com/curran/datavis-tech/milestones) to track issues. Take a look there at the current milestone to see what's currently being worked on.
+We use [Milestones](https://gitlab.com/curran/datavis-tech/milestones) to track issues. Take a look at the current milestone to see what's currently being worked on.
 
 All work should be based on issues. If you're working on something that doesn't have an issue yet, please create a new issue for it and put it in the current milestone.
 
