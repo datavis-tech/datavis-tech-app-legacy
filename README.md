@@ -2,13 +2,15 @@ This repository contains the Web application deployed at [https://datavis.tech](
 
 # Technology Stack
 
- * [Semantic-UI-React](https://github.com/Semantic-Org/Semantic-UI-React)
- * [Nextjs](https://github.com/zeit/next.js)
- * [ShareDB](https://github.com/share/sharedb)
- * [Express](https://github.com/expressjs/express)
- * [Passport](http://passportjs.org/)
- * [Redis](https://redis.io/)
- * [MongoDB](https://docs.mongodb.com/getting-started/shell/)
+ * [Semantic UI](https://semantic-ui.com/) CSS framework with user interface components.
+ * [React](https://facebook.github.io/react/) User interface component system.
+ * [Semantic-UI-React](http://react.semantic-ui.com/introduction) React components for Semantic UI.
+ * [Nextjs](https://github.com/zeit/next.js) Server-side rendering and routing.
+ * [ShareDB](https://github.com/share/sharedb) Real-time collaboration infrastructure.
+ * [Express](https://github.com/expressjs/express) Node.js library used for the server.
+ * [Passport](http://passportjs.org/) Node.js library for authentication.
+ * [Redis](https://redis.io/) Used for storing sessions.
+ * [MongoDB](https://docs.mongodb.com/getting-started/shell/) Used for persistent storage (via ShareDB).
 
 # Getting Started
 
