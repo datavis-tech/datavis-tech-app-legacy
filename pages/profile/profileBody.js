@@ -3,7 +3,7 @@ import ProfileCard from './profileCard'
 import DocumentsList from './documentsList'
 import Loading from '../../components/loading'
 
-const ProfileBody = ({ loading, profile, documents }) => {
+const ProfileBody = ({ loading, profile, documents, documentsLoading }) => {
   if (loading) {
     return <Loading />
   }
@@ -18,7 +18,7 @@ const ProfileBody = ({ loading, profile, documents }) => {
         <ProfileCard profile={profile} />
       </Grid.Column>
       <Grid.Column width={11}>
-        <DocumentsList documents={documents} />
+        <DocumentsList documents={documents} documentsLoading={documentsLoading}/>
       </Grid.Column>
     </Grid>
   )

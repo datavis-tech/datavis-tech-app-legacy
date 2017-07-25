@@ -1,5 +1,6 @@
 import { List, Divider } from 'semantic-ui-react'
 import { Link } from '../../routes'
+import Loading from '../../components/loading'
 
 // Use only the first line of the description
 // as the tagline in the listing.
@@ -25,7 +26,10 @@ const DocumentPreview = ({id, data: { title, description, type }}) => {
   )
 }
 
-const DocumentsList = ({ documents }) => {
+const DocumentsList = ({ documents, documentsLoading }) => {
+  if (documentsLoading) {
+    return <Loading />
+  }
   if (!documents) {
     return null
   }

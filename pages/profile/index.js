@@ -18,7 +18,8 @@ class ProfilePage extends React.Component {
 
     this.state = {
       loading: true,
-      profile: null
+      profile: null,
+      documentsLoading: true
     }
 
     this.queries = []
@@ -34,7 +35,10 @@ class ProfilePage extends React.Component {
       if (profile && !this.documentsQuery) {
         const owner = profile.id
         this.documentsQuery = createDocumentsQuery(owner, (documents) => {
-          this.setState({ documents })
+          this.setState({
+            documents,
+            documentsLoading: false
+          })
         })
       }
     })
@@ -58,7 +62,8 @@ class ProfilePage extends React.Component {
     const {
       loading,
       profile,
-      documents
+      documents,
+      documentsLoading
     } = this.state
 
     return (
@@ -66,6 +71,7 @@ class ProfilePage extends React.Component {
         <ProfileBody
           loading={loading}
           profile={profile}
+          documentsLoading={documentsLoading}
           documents={documents}
         />
       </Layout>
