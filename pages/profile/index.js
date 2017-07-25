@@ -17,8 +17,9 @@ class ProfilePage extends React.Component {
     super(props)
 
     this.state = {
-      loading: true,
+      profileLoading: true,
       profile: null,
+      documents: null,
       documentsLoading: true
     }
 
@@ -30,7 +31,7 @@ class ProfilePage extends React.Component {
     this.profileQuery = createProfileQuery({ username }, (profile) => {
       this.setState({
         profile,
-        loading: false
+        profileLoading: false
       })
       if (profile && !this.documentsQuery) {
         const owner = profile.id
@@ -60,7 +61,7 @@ class ProfilePage extends React.Component {
     } = this.props
 
     const {
-      loading,
+      profileLoading,
       profile,
       documents,
       documentsLoading
@@ -69,7 +70,7 @@ class ProfilePage extends React.Component {
     return (
       <Layout title={username + ' | Datavis.tech'} user={user}>
         <ProfileBody
-          loading={loading}
+          profileLoading={profileLoading}
           profile={profile}
           documentsLoading={documentsLoading}
           documents={documents}

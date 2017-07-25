@@ -3,8 +3,15 @@ import ProfileCard from './profileCard'
 import DocumentsList from './documentsList'
 import Loading from '../../components/loading'
 
-const ProfileBody = ({ loading, profile, documents, documentsLoading }) => {
-  if (loading) {
+const ProfileBody = (props) => {
+  const {
+    profileLoading,
+    profile,
+    documents,
+    documentsLoading
+  } = props
+
+  if (profileLoading) {
     return <Loading />
   }
   if (!profile) {
