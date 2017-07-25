@@ -15,6 +15,7 @@ import DeleteConfirmModal from './deleteConfirmModal'
 import References from './references'
 import Collaborators from './collaborators'
 import DocTypeEditor from './docTypeEditor'
+import Loading from '../../components/loading'
 
 class EditPage extends React.Component {
   static async getInitialProps ({ query }) {
@@ -103,7 +104,7 @@ class EditPage extends React.Component {
     const { docInitialized, docType } = this.state
 
     if (!docInitialized) {
-      return <div>Loading...</div>
+      return <Loading />
     }
 
     return (
