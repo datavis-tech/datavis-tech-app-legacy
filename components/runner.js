@@ -3,6 +3,7 @@
 import React from 'react'
 import magicSandbox from 'magic-sandbox'
 import subscribeToDocument from '../modules/db/subscribeToDocument'
+import Loading from './loading'
 
 class Runner extends React.Component {
   constructor (props) {
@@ -96,7 +97,7 @@ class Runner extends React.Component {
 
   render () {
     if (!this.state.allReferencesResolved) {
-      return <div>Loading...</div>
+      return <Loading />
     }
 
     const { template, files } = this.state

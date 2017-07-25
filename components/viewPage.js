@@ -6,6 +6,7 @@ import Layout from '../components/layout'
 import AvatarLink from '../components/avatarLink'
 import createProfileQuery from '../modules/db/createProfileQuery'
 import subscribeToDocument from '../modules/db/subscribeToDocument'
+import Loading from './loading'
 
 // A wrapper around AvatarLink that adds some spacing and the text "By".
 const OwnerAvatarLink = ({ user }) => {
@@ -90,7 +91,7 @@ const ViewPage = (ContentViewComponent) => {
       } = this.state
 
       if (!docInitialized) {
-        return <div>Loading...</div>
+        return <Loading />
       }
 
       const descriptionHTML = {

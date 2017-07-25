@@ -1,10 +1,11 @@
 import { Grid } from 'semantic-ui-react'
 import ProfileCard from './profileCard'
 import DocumentsList from './documentsList'
+import Loading from '../../components/loading'
 
 const ProfileBody = ({ loading, profile, documents }) => {
   if (loading) {
-    return null
+    return <Loading />
   }
   if (!profile) {
     return (
