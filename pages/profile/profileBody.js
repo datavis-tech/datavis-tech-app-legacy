@@ -21,10 +21,10 @@ const ProfileBody = (props) => {
   }
   return (
     <Grid>
-      <Grid.Column width={5}>
+      <Grid.Column width={4}>
         <ProfileCard profile={profile} />
       </Grid.Column>
-      <Grid.Column width={11}>
+      <Grid.Column width={12}>
         <DocumentsList documents={documents} documentsLoading={documentsLoading}/>
       </Grid.Column>
     </Grid>
