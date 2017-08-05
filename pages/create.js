@@ -7,14 +7,13 @@ import { Router } from '../routes'
 import createDocument from '../modules/db/createDocument'
 
 class CreatePage extends React.Component {
-  // TODO add a 'creating' property to the state.
-  // uncomment this constructor for starting on issue #91
-  //constructor (props) {
-  //  super(props)
-  //  this.state = {
-  //    creating: false
-  //  }
-  //}
+
+  constructor (props) {
+    super(props)
+    this.state = {
+      creating: false
+    }
+  }
 
   onSubmit (event) {
     event.preventDefault() // Prevent form submission
@@ -26,14 +25,18 @@ class CreatePage extends React.Component {
       owner: this.props.user.id
     })
 
-    // TODO for #91: set 'creating' state to true here to signal disabled button state
-    // See line 36 of pages/edit/deleteConfirmModal.js
+    // Set the creating flag to provide visual feedback
+    // that something is happening.
+    this.setState({
+      creating: true
+    })
 
     // Redirect to the edit page after creation.
     Router.pushRoute('edit', { id })
   }
 
   renderBody () {
+    const { creating } = this.state
     if (this.props.user) {
       return (
         <Form onSubmit={this.onSubmit.bind(this)}>
@@ -51,7 +54,7 @@ class CreatePage extends React.Component {
               ref={(el) => { this.descriptionInput = el }}
             />
           </Form.Field>
-          <Button>Create</Button>
+          <Button disabled={creating} loading={creating}>Create</Button>
         </Form>
       )
     }
