@@ -17,8 +17,12 @@ export default class CodeMirrorBinding extends Component {
 
       // Static import breaks the server, see https://github.com/codemirror/CodeMirror/issues/3701
       const CodeMirror = require('codemirror')
+      require('codemirror/mode/javascript/javascript')
+      require('codemirror/mode/xml/xml')
+      require('codemirror/mode/css/css')
+      require('codemirror/mode/htmlmixed/htmlmixed')
 
-      const codeMirror = CodeMirror(this.el)
+      const codeMirror = CodeMirror(this.el, { mode: 'htmlmixed' })
       this.binding = new ShareDBCodeMirrorBinding(codeMirror, doc, path)
       this.binding.setup()
     }
