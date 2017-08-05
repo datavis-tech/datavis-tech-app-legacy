@@ -9,6 +9,18 @@ import React, { Component } from 'react'
 // https://github.com/curran/codemirror-binding
 import ShareDBCodeMirrorBinding from 'codemirror-binding'
 
+// Use two spaces instead of tabs when indenting.
+// From https://github.com/codemirror/CodeMirror/issues/988#issuecomment-14921785
+function betterTab(cm) {
+  if (cm.somethingSelected()) {
+    cm.indentSelection("add");
+  } else {
+    cm.replaceSelection(cm.getOption("indentWithTabs")? "\t":
+      Array(cm.getOption("indentUnit") + 1).join(" "), "end", "+input");
+  }
+}
+
+
 export default class CodeMirrorBinding extends Component {
 
   componentDidMount () {
@@ -22,7 +34,15 @@ export default class CodeMirrorBinding extends Component {
       require('codemirror/mode/css/css')
       require('codemirror/mode/htmlmixed/htmlmixed')
 
-      const codeMirror = CodeMirror(this.el, { mode: 'htmlmixed' })
+      const codeMirror = CodeMirror(this.el, {
+        mode: 'htmlmixed',
+        indentWithTabs: false,
+        indentUnit: 2,
+        extraKeys: {
+          Tab: betterTab
+        }
+      })
+
       this.binding = new ShareDBCodeMirrorBinding(codeMirror, doc, path)
       this.binding.setup()
     }
