@@ -5,12 +5,13 @@ import {
   Card,
   Divider
 } from 'semantic-ui-react'
-import Link from 'next/link'
+import { Link } from '../routes'
 import Layout from '../components/layout'
 import Page from '../components/page'
 import Spacer from '../components/spacer'
 import VisualizationCard from './index/visualizationCard'
 import HugeLogo from '../components/hugeLogo'
+import { AUTH_PATH_GITHUB } from '../modules/constants'
 
 const visualizations = [
   {
@@ -111,36 +112,42 @@ const visualizations = [
 //          )
 //        }
 //      </Card.Group>
+//
+//      <Spacer />
+//      <Divider horizontal>
+//        Projects
+//      </Divider>
+//
+//      <Card.Group>
+//        {
+//          visualizations.map((props, i) =>
+//            <VisualizationCard {...props} key={i} />
+//          )
+//        }
+//      </Card.Group>
+//
+//      <Container textAlign='center'>
+//        <Spacer />
+//        <p>We can help you visualize your data.</p>
+//        <Link href='/consulting'>
+//          <Button>Hire us!</Button>
+//        </Link>
+//        <Spacer />
+//      </Container>
 
 export default Page(({ user }) => (
-  <Layout title='Datavis.tech' user={user} hideNav>
+  <Layout title='Datavis.tech' user={user}>
     <Container text>
+      <Spacer space="100px"/>
       <HugeLogo noLink />
+      <Spacer space="10px" />
       <Container textAlign='center'>
-        <Header as='h1'>Data Visualization Consulting Services</Header>
+        <Header as='h1'>A collaborative data visualization platform.</Header>
       </Container>
-
-      <Spacer />
-      <Divider horizontal>
-        Projects
-      </Divider>
-
-      <Card.Group>
-        {
-          visualizations.map((props, i) =>
-            <VisualizationCard {...props} key={i} />
-          )
-        }
-      </Card.Group>
-
-      <Container textAlign='center'>
-        <Spacer />
-        <p>We can help you visualize your data.</p>
-        <Link href='/consulting'>
-          <Button>Hire us!</Button>
-        </Link>
-        <Spacer />
-      </Container>
+      <Spacer space="100px" />
+      <p style={{fontSize: '1.5em'}}>You can use this site to publish datasets and create visualizations, collaborating with others in real time.</p>
+      <p style={{fontSize: '1.5em'}}>To get started, <a href={AUTH_PATH_GITHUB}>log in via GitHub authentication</a> and take a look around, or have a look at some <Link route='profile' params={{ username: 'curran' }}><a>examples.</a></Link></p>
+      <Spacer space="250px"/>
     </Container>
   </Layout>
 ))

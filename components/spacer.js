@@ -1,3 +1,3 @@
-export default () => (
-  <div style={{ paddingTop: '50px' }} />
+export default ({space}) => (
+  <div style={{ paddingTop: space || '50px' }} />
 )
