@@ -143,7 +143,7 @@ scp -i secret.pem ./SSL/upload/* ubuntu@datavis.tech:ssl/
 ## Configure NGINX
 
 These instructions draw from [Node.js + Nginx - What now?](http://stackoverflow.com/questions/5009324/node-js-nginx-what-now
-)) and [Nginx: Configuring HTTPS servers](http://nginx.org/en/docs/http/configuring_https_servers.html).
+) and [Nginx: Configuring HTTPS servers](http://nginx.org/en/docs/http/configuring_https_servers.html).
 
 After SSHing into the machine:
 
