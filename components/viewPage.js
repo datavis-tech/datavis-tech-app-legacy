@@ -13,7 +13,7 @@ const OwnerAvatarLink = ({ user }) => {
   if (user) {
     return (
       <div style={{ marginBottom: '0.3em' }}>
-        <span style={{marginRight:'4px'}}>By</span>
+        <span style={{marginRight: '4px'}}>By</span>
         <AvatarLink user={user} />
       </div>
     )
