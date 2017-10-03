@@ -66,9 +66,7 @@ export default class AddCollaboratorModal extends React.Component {
     const {
       open,
       close,
-      deleteDocument,
-      props: { title },
-      state: { loading, show, notFound }
+      state: { loading, show }
     } = this
 
     return (

@@ -1,7 +1,6 @@
 import React from 'react'
-import { Table, Button, List } from 'semantic-ui-react'
+import { List } from 'semantic-ui-react'
 import AddCollaboratorModal from './addCollaboratorModal'
-import StringBinding from '../../components/stringBinding'
 import CollaboratorListItem from './collaboratorListItem'
 
 class Collaborators extends React.Component {

@@ -13,7 +13,6 @@ class CollaboratorListItem extends React.Component {
     super(props)
 
     this.state = {
-      loading: true,
       profile: null
     }
 
@@ -23,10 +22,7 @@ class CollaboratorListItem extends React.Component {
   componentDidMount () {
     const id = this.props.id
     this.profileQuery = createProfileQuery({ id }, (profile) => {
-      this.setState({
-        profile,
-        loading: false
-      })
+      this.setState({ profile })
     })
   }
 
@@ -38,7 +34,7 @@ class CollaboratorListItem extends React.Component {
 
   render () {
     const { remove } = this.props
-    const { loading, profile } = this.state
+    const { profile } = this.state
     return profile ? (
       <List.Item>
         <List.Content floated='right'>
