@@ -3,7 +3,9 @@ import AvatarLink from './avatarLink'
 import { AUTH_PATH_LOGOUT } from '../modules/constants'
 import LoginButton from './loginButton'
 
-const LoginControl = ({ user }) => {
+// This component provides a either button that users can click to log in
+// or an avatar link next to a button the user can click to log out.
+export default ({ user }) => {
   if (user) {
     return (
       <div>
@@ -18,15 +20,3 @@ const LoginControl = ({ user }) => {
   }
   return <LoginButton />
 }
-
-// <Link href='sign-in'>
-//   <Popup
-//     trigger={
-//       <Button>Sign in</Button>
-//     }
-//     content='Sign in with your GitHub account'
-//     position='bottom right'
-//   />
-// </Link>
-
-export default LoginControl

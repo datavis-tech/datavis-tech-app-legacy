@@ -1,5 +1,4 @@
 import { Loader } from 'semantic-ui-react'
-const Loading = () => (
-  <Loader active inline='centered' />
-)
-export default Loading
+
+// This component provides a spinning loading indicator.
+export default () => <Loader active inline='centered' />

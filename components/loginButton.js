@@ -2,16 +2,13 @@ import React from 'react'
 import { Button } from 'semantic-ui-react'
 import { AUTH_PATH_GITHUB } from '../modules/constants'
 
+// This component provides a button that users can click to log in.
 class LoginButton extends React.Component {
   constructor (props) {
     super(props)
-    this.state = {
-      loading: false
-    }
+    this.state = { loading: false }
     this.handleClick = () => {
-      this.setState({
-        loading: true
-      })
+      this.setState({ loading: true })
     }
   }
 

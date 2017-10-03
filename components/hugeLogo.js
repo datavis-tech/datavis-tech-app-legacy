@@ -14,6 +14,7 @@ const LinkMaybe = ({ noLink, children }) => {
   )
 }
 
+// This component provides a large image of the Datavis.tech logo.
 export default ({ noLink }) => (
   <Container textAlign='center'>
     <LinkMaybe noLink={noLink}>

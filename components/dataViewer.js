@@ -1,6 +1,6 @@
-// This component is the thing that displays a dataset
 import React from 'react'
 
+// This component is the thing that displays a dataset.
 class DataViewer extends React.Component {
   constructor (props) {
     super(props)

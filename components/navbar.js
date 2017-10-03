@@ -15,6 +15,8 @@ const CreateButton = ({user}) => {
   return null
 }
 
+// This component provides the navigation bar on the top of most pages,
+// which includes the logo, create button, and login control.
 const Navbar = ({user}) => (
   <Menu secondary>
     <Link href='/'>

@@ -3,7 +3,10 @@ import Navbar from './navbar'
 import Spacer from './spacer'
 import { Grid } from 'semantic-ui-react'
 
-// `title` is absolutely required, otherwise you'll see errors like this:
+// This component provides the page layout common to most pages in the app,
+// including content of the <head> of the document, the navigation bar, and the footer.
+
+// Note that the `title` prop is absolutely required, otherwise you'll see errors like this:
 // head-manager.js?0f2a390:75 Uncaught (in promise) TypeError: Cannot read property 'join' of undefined at HeadManager.updateTitle
 export default ({ children, title, user, hideNav, includeCSS, hideFeedback }) => (
   <div>

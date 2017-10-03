@@ -1,10 +1,9 @@
-// This component is the thing that runs the code in an iframe.
-
 import React from 'react'
 import magicSandbox from 'magic-sandbox'
 import subscribeToDocument from '../modules/db/subscribeToDocument'
 import Loading from './loading'
 
+// This component runs the code for a visualization in an iframe.
 class Runner extends React.Component {
   constructor (props) {
     super(props)
