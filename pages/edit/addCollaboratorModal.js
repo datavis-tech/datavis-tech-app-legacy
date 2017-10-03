@@ -72,7 +72,7 @@ export default class AddCollaboratorModal extends React.Component {
         <Modal open={show} onClose={close} size='small'>
           <Header content='Add Collaborator' />
           <Modal.Content>
-            <Form>
+            <Form onSubmit={this.addCollaborator}>
               <Form.Field>
                 <label>Username</label>
                 <input
