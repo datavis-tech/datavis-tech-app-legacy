@@ -25,7 +25,7 @@ const ProfileBody = (props) => {
         <ProfileCard profile={profile} />
       </Grid.Column>
       <Grid.Column width={12}>
-        <DocumentsList documents={documents} documentsLoading={documentsLoading}/>
+        <DocumentsList documents={documents} documentsLoading={documentsLoading} />
       </Grid.Column>
     </Grid>
   )

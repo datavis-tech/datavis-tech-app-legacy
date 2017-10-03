@@ -76,7 +76,7 @@ module.exports = (shareDB) => {
     }
 
     // Check that the user is either the owner or a collaborator.
-    if(owner !== userId) {
+    if (owner !== userId) {
       const ids = (collaborators || []).map(({id}) => id)
       const isCollaborator = ids.filter(id => id === userId).length
       if (!isCollaborator) {
