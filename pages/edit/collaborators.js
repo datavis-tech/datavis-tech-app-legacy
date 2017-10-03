@@ -45,14 +45,12 @@ class Collaborators extends React.Component {
 
   }
 
-  // This gets invoked when the user clicks the "Remove" button.
+  // When the user clicks the "Remove" button,
+  // remove the clicked element from the array.
   removeCollaborator (index) {
-    const doc = this.props.doc
-
-    // Remove the element from the array.
-    doc.submitOp([{
+    this.props.doc.submitOp([{
       p: ['collaborators', index],
-      ld: doc.data.collaborators[index]
+      ld: this.props.doc.data.collaborators[index]
     }])
   }
 

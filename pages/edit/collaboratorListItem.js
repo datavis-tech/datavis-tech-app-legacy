@@ -1,21 +1,15 @@
 import React from 'react'
-import { List, Button, Image } from 'semantic-ui-react'
+import { List, Button } from 'semantic-ui-react'
 import createProfileQuery from '../../modules/db/createProfileQuery'
+import AvatarLink from '../../components/avatarLink'
 
+// This component represents a single item that appears in the
+// list of collaborators
 class CollaboratorListItem extends React.Component {
-  static async getInitialProps ({ query }) {
-    return {
-      username: query.username
-    }
-  }
 
   constructor (props) {
     super(props)
-
-    this.state = {
-      profile: null
-    }
-
+    this.state = { profile: null }
     this.queries = []
   }
 
@@ -33,16 +27,11 @@ class CollaboratorListItem extends React.Component {
   }
 
   render () {
-    const { remove } = this.props
-    const { profile } = this.state
-    return profile ? (
+    return this.state.profile ? (
       <List.Item>
+        <AvatarLink user={this.state.profile} />
         <List.Content floated='right'>
-          <Button onClick={remove}>Remove</Button>
-        </List.Content>
-        <Image avatar src={profile._json.avatar_url} />
-        <List.Content>
-          {profile.displayName}
+          <Button onClick={this.props.remove}>Remove</Button>
         </List.Content>
       </List.Item>
     ) : null
