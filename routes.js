@@ -4,7 +4,6 @@ const routes = module.exports = nextRoutes()
 routes.add('consulting', '/consulting')
 routes.add('associates', '/associates')
 
-routes.add('beta', '/beta')
 routes.add('create', '/create')
 routes.add('feedback', '/feedback')
 routes.add('feedback-thanks', '/feedback-thanks')
