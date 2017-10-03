@@ -11,15 +11,14 @@ import ShareDBCodeMirrorBinding from 'codemirror-binding'
 
 // Use two spaces instead of tabs when indenting.
 // From https://github.com/codemirror/CodeMirror/issues/988#issuecomment-14921785
-function betterTab(cm) {
+function betterTab (cm) {
   if (cm.somethingSelected()) {
-    cm.indentSelection("add");
+    cm.indentSelection('add')
   } else {
-    cm.replaceSelection(cm.getOption("indentWithTabs")? "\t":
-      Array(cm.getOption("indentUnit") + 1).join(" "), "end", "+input");
+    cm.replaceSelection(cm.getOption('indentWithTabs') ? '\t'
+      : Array(cm.getOption('indentUnit') + 1).join(' '), 'end', '+input')
   }
 }
-
 
 export default class CodeMirrorBinding extends Component {
 

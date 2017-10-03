@@ -23,9 +23,8 @@ class Collaborators extends React.Component {
     // TODO only call updateState if the op may have changed the "collaborators" array.
     doc.on('op', updateState)
 
-    this.addCollaborator = this.addCollaborator.bind(this);
+    this.addCollaborator = this.addCollaborator.bind(this)
   }
-
 
   // This gets invoked when the user clicks the "Add" button.
   addCollaborator (id) {
@@ -62,15 +61,15 @@ class Collaborators extends React.Component {
     return (
       <div>
         <List verticalAlign='middle'>
-        {
-          this.state.collaborators.map((collaborator, i) => (
-            <CollaboratorListItem
-              key={i}
-              id={collaborator.id}
-              remove={() => this.removeCollaborator(i)}
-            />
-          ))
-        }
+          {
+            this.state.collaborators.map((collaborator, i) => (
+              <CollaboratorListItem
+                key={i}
+                id={collaborator.id}
+                remove={() => this.removeCollaborator(i)}
+              />
+            ))
+          }
         </List>
         <AddCollaboratorModal addCollaborator={this.addCollaborator} />
       </div>
