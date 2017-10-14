@@ -48,20 +48,22 @@ Now access the app at http://localhost:3000/
 
 # Contributing
 
-We use [Milestones](https://gitlab.com/curran/datavis-tech/milestones) to track issues. Take a look at the current milestone to see what's currently being worked on.
+Please review our [Product Development Process](https://gitlab.com/curran/datavis-tech/wikis/Product-Development-Process).
 
-All work should be based on issues. If you're working on something that doesn't have an issue yet, please create a new issue for it and put it in the current milestone.
+All work should be based on tracked issues in the current sprint. If you're working on something that doesn't have an issue yet, please create a new issue for it.
 
-To work on an issue:
+Work that closes an issue should be submitted as a Merge Request. To work on an issue:
 
  * Assign yourself to that issue (Under "Assignee", click "Assign yourself"), so others know you're working on it.
  * Create a new branch for your commits on this issue. See also [git: Basic Branching and Merging](https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging).
  * After your first commit to the branch, [create a "Merge Request"](https://docs.gitlab.com/ee/gitlab-basics/add-merge-request.html)
  * Put "WIP" (short for "Work in Progress") in the merge request title if the issue is not resolved yet.
- * For the last commit that closes the issue, e.g. issue #42, put the text "Closes #42" in the commit message. This will cause the issue to be closed automatically when the branch gets merged.
+ * For the last commit that closes the issue, e.g. issue #42, put the text "Closes #42" in the commit message.
+  * This will cause the issue to be closed automatically when the branch gets merged.
  * Lastly, run `npm lint` and correct any code style errors there coming from your new code.
  * When the issue is resolved and the code is ready for review, remove "WIP" from the merge request title.
- * To direct a reviewer's attention to the merge request, add a comment with a "@" mention (which triggers an email notification to be sent), for example "@curran This is ready for review.".
+ * To direct a reviewer's attention to the merge request, add a comment with a "@" mention (which triggers an email notification to be sent)
+  * For example "@curran This is ready for review.".
 
 # Production
 
