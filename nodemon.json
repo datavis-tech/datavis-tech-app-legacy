@@ -1,0 +1,4 @@
+{
+  "verbose": true,
+  "ignore": ["prototypes/*", "node_modules/*", ".next/*"]
+}

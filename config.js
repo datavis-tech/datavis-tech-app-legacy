@@ -1,6 +1,6 @@
 module.exports = {
   redisHost: process.env.DVT_REDIS_HOST || '127.0.0.1',
-  redisPort: process.env.DVT_REDIS_HOST || '6379',
+  redisPort: process.env.DVT_REDIS_PORT || '6379',
 
   sessionSecret: process.env.DVT_SESSION_SECRET || 'dafhjdkasfhdjkashfjksa',
 

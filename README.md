@@ -19,7 +19,7 @@ This section is for getting started with Datavis.tech on your development enviro
 First [set up SSH keys](#set-up-ssh-keys), then clone the repository with the following command.
 
 ```
-git clone git@gitlab.com:curran/data-vis-tech.git
+git clone git@gitlab.com:curran/datavis-tech.git
 cd datavis-tech
 ```
 
@@ -46,6 +46,18 @@ npm start
 
 Now access the app at http://localhost:3000/
 
+## Launch the app via docker
+  ### Prerequsites:  
+  1. install docker ([instructions for ubuntu](https://store.docker.com/editions/community/docker-ce-server-ubuntu))
+  2. install docker-compose ([how to install](https://docs.docker.com/compose/install/))  
+
+  ### Launch:
+  1. set up DVT_START_COMMAND -- it should point to any available script from package,json scripts section (default is start)
+  2. execute docker-compose up
+  Example:
+  ```
+  DVT_START_COMMAND=start:watch docker-compose up
+  ```
 # Contributing
 
 Please review our [Product Development Process](https://gitlab.com/curran/datavis-tech/wikis/Product-Development-Process).
