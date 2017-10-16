@@ -19,7 +19,7 @@ This section is for getting started with Datavis.tech on your development enviro
 First [set up SSH keys](#set-up-ssh-keys), then clone the repository with the following command.
 
 ```
-git clone git@gitlab.com:curran/data-vis-tech.git
+git clone git@gitlab.com:curran/datavis-tech.git
 cd datavis-tech
 ```
 
@@ -45,6 +45,16 @@ npm start
 ```
 
 Now access the app at http://localhost:3000/
+
+## Launch the app via Docker
+  1. Install Docker ([instructions for ubuntu](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/#install-using-the-repository))
+  2. Install docker-compose ([how to install](https://docs.docker.com/compose/install/))
+  3. Launch:
+  ```
+  sudo docker-compose up
+  ```
+
+**Note:** Use of `sudo` is required with a basic Docker installation. To remove the necessity of `sudo` (for example when setting up a production deploy), you can follow these instructions: [Post-installation steps for Linux - Manage Docker as a non-root user](https://docs.docker.com/engine/installation/linux/linux-postinstall/#manage-docker-as-a-non-root-user).
 
 # Contributing
 
