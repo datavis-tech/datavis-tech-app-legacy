@@ -46,14 +46,14 @@ npm start
 
 Now access the app at http://localhost:3000/
 
-## Launch the app via docker
+## Launch the app via Docker
   ### Prerequsites:  
-  1. install docker ([instructions for ubuntu](https://store.docker.com/editions/community/docker-ce-server-ubuntu))
-  2. install docker-compose ([how to install](https://docs.docker.com/compose/install/))  
+  1. Install Docker ([instructions for ubuntu](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/#install-using-the-repository))
+  2. Install docker-compose ([how to install](https://docs.docker.com/compose/install/))  
 
   ### Launch:
-  1. set up DVT_START_COMMAND -- it should point to any available script from package,json scripts section (default is start)
-  2. execute docker-compose up
+  1. Set up DVT_START_COMMAND -- it should point to any available script from package,json scripts section (default is start)
+  2. Execute docker-compose up
   Example:
   ```
   DVT_START_COMMAND=start:watch docker-compose up
