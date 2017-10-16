@@ -17,4 +17,3 @@ services:
       - DVT_REDIS_HOST=redis
       - DVT_REDIS_PORT=6379
       - DVT_MONGO_URL=mongodb://mongo:27017/datavistech
-    command: npm run ${DVT_START_COMMAND:-start}
