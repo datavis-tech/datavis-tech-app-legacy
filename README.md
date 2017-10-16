@@ -49,15 +49,18 @@ Now access the app at http://localhost:3000/
 ## Launch the app via Docker
   ### Prerequsites:  
   1. Install Docker ([instructions for ubuntu](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/#install-using-the-repository))
-  2. Install docker-compose ([how to install](https://docs.docker.com/compose/install/))  
+  2. Install docker-compose ([how to install](https://docs.docker.com/compose/install/))
 
   ### Launch:
   1. Set up DVT_START_COMMAND -- it should point to any available script from package,json scripts section (default is start)
   2. Execute docker-compose up
   Example:
   ```
-  DVT_START_COMMAND=start:watch docker-compose up
+  DVT_START_COMMAND=start:watch sudo docker-compose up
   ```
+
+**Note:** Use of `sudo` is required with a basic Docker installation. To remove the necessity of `sudo` (for example when setting up a production deploy), you can follow these instructions: [Post-installation steps for Linux - Manage Docker as a non-root user](https://docs.docker.com/engine/installation/linux/linux-postinstall/#manage-docker-as-a-non-root-user).
+
 # Contributing
 
 Please review our [Product Development Process](https://gitlab.com/curran/datavis-tech/wikis/Product-Development-Process).
