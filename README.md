@@ -56,6 +56,17 @@ Now access the app at http://localhost:3000/
 
 **Note:** Use of `sudo` is required with a basic Docker installation. To remove the necessity of `sudo` (for example when setting up a production deploy), you can follow these instructions: [Post-installation steps for Linux - Manage Docker as a non-root user](https://docs.docker.com/engine/installation/linux/linux-postinstall/#manage-docker-as-a-non-root-user).
 
+# Testing
+## Unit test
+```npm test```  
+or  
+```npm test -- --watch```  
+
+via docker-compose:  
+```docker-compose run --no-deps --rm app npm test -- --watch```
+
+**Note:** if you add new package or root level file (alongside with package.json) you need to rebuild an image: ```docker-compose build --force-rm --no-cache app``` before launch
+
 # Contributing
 
 Please review our [Product Development Process](https://gitlab.com/curran/datavis-tech/wikis/Product-Development-Process).
