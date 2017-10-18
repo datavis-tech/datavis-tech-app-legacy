@@ -17,4 +17,4 @@ lint:
 
 unit:
   script:
-    - npm test
+    - npm run test:coverage
