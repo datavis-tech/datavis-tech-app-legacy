@@ -10,7 +10,7 @@ describe('login button', () => {
   let sut
 
   beforeEach(() => {
-    sut = shallow(<LoginButton/>)
+    sut = shallow(<LoginButton />)
   })
 
   it('should have a link to github auth path', () => {
@@ -36,7 +36,7 @@ describe('login button', () => {
     })
 
     it('should change to loading state', () => {
-      expect(sut.find(Button).prop('loading')).toBeFalsy()
+      expect(sut.find(Button).prop('loading')).toBeTruthy()
     })
 
   })
