@@ -6,5 +6,11 @@ module.exports = {
     '<rootDir>/modules/',
     '<rootDir>/pages/',
     '<rootDir>/server/'
+  ],
+  collectCoverageFrom: [
+    '**/*.{js,jsx}',
+    '!node_modules/**',
+    '!prototypes/**',
+    '!static/**'
   ]
 }
