@@ -12,5 +12,8 @@ module.exports = {
     '!node_modules/**',
     '!prototypes/**',
     '!static/**'
+  ],
+  setupFiles: [
+    './tests/setupTests.js'
   ]
 }

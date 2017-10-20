@@ -17,7 +17,7 @@ describe('avatar link', () => {
   })
 
   it('should render nothing if user was not provided', () => {
-    expect(sut.node).toBeNull()
+    expect(sut.get(0)).toBeNull()
   })
 
   describe('if user was provided', () => {
