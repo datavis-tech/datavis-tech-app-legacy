@@ -3,6 +3,7 @@
   "rules": {
     "react/jsx-space-before-closing": "off",
     "padded-blocks": "off",
-    "no-undef": "off"
+    "no-undef": "off",
+    "import/first": "off"
   }
 }
