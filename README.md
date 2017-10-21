@@ -65,7 +65,9 @@ or
 via docker-compose:  
 ```docker-compose run --no-deps --rm app npm test -- --watch```
 
-**Note:** if you add new package or root level file (alongside with package.json) you need to rebuild an image: ```docker-compose build --force-rm --no-cache app``` before launch
+**Note:** if dependencies in `package.json` change, you need to rebuild the image before launching:
+
+```docker-compose build --force-rm --no-cache app```
 
 # Contributing
 
