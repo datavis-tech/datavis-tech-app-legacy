@@ -17,6 +17,8 @@ import Collaborators from './collaborators'
 import DocTypeEditor from './docTypeEditor'
 import Loading from '../../components/loading'
 
+const VIS_DOC_TYPE = 'vis'
+
 class EditPage extends React.Component {
   static async getInitialProps ({ query }) {
     return { id: query.id }
@@ -45,7 +47,7 @@ class EditPage extends React.Component {
 
             // TODO create a separate accessor that implements this logic.
             // Treat undefined type as 'vis' type.
-            docType: doc.data.type || 'vis'
+            docType: doc.data.type || VIS_DOC_TYPE
           })
         }
 
@@ -99,6 +101,21 @@ class EditPage extends React.Component {
     }
   }
 
+  renderReferences () {
+    if (this.state.docType === VIS_DOC_TYPE) {
+      return [
+        <Form.Field key='references-label'>
+          <label>References</label>
+        </Form.Field>,
+        <Form.Field key='references' inline>
+          <References doc={this.doc} />
+        </Form.Field>
+      ]
+    }
+
+    return null
+  }
+
   renderBody () {
     const { id } = this.props
     const { docInitialized, docType } = this.state
@@ -149,12 +166,9 @@ class EditPage extends React.Component {
             path={['content']}
           />
         </Form.Field>
-        <Form.Field>
-          <label>References</label>
-        </Form.Field>
-        <Form.Field inline>
-          <References doc={this.doc} />
-        </Form.Field>
+        {
+          this.renderReferences()
+        }
         <Form.Field>
           <label>Collaborators</label>
         </Form.Field>
