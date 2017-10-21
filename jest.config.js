@@ -14,6 +14,7 @@ module.exports = {
     '!static/**'
   ],
   setupFiles: [
+    './tests/rafPolyfill',
     './tests/setupTests.js'
   ]
 }
