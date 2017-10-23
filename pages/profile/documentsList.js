@@ -1,4 +1,4 @@
-import {partition} from 'lodash'
+import partition from 'lodash/partition'
 import {List, Divider} from 'semantic-ui-react'
 import Loading from '../../components/loading'
 import DocumentPreview from '../../components/documentPreview'
