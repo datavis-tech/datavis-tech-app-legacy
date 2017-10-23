@@ -5,6 +5,9 @@ import { Link } from '../routes'
 // as the tagline in the listing.
 const truncate = (description) => description.split('\n')[0]
 
+// This component implements a preview for a document
+// that shows its title and a truncated version of its description.
+// Clicking on this preview will navigate to the view page for the document shown.
 const DocumentPreview = ({id, data: { title, description, type }}) => {
 
   // TODO create a separate accessor that implements this logic.
