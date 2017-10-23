@@ -30,9 +30,7 @@ describe('document list', () => {
 
     it('should render N document previews with proper document', () => {
       sut.find(DocumentPreview).forEach((doc, i) => {
-        expect(doc.props()).toMatchObject({
-          ...documents[i]
-        })
+        expect(doc.props()).toMatchObject(documents[i])
       })
     })
   }
@@ -40,5 +38,7 @@ describe('document list', () => {
 })
 
 function createRandomDocumentArray (type) {
-  return range(random(2, 10)).map(_ => ({data: {type, description: String(Math.random())}}))
+  return range(random(2, 10)).map(_ => (
+    {id: String(Math.random()), data: {type, description: String(Math.random())}})
+  )
 }

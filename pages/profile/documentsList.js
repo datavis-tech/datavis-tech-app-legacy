@@ -1,4 +1,5 @@
-import { List, Divider } from 'semantic-ui-react'
+import {partition} from 'lodash'
+import {List, Divider} from 'semantic-ui-react'
 import Loading from '../../components/loading'
 import DocumentPreview from '../../components/documentPreview'
 
@@ -9,8 +10,8 @@ const DocumentsList = ({ documents, documentsLoading }) => {
   if (!documents) {
     return null
   }
-  const dataDocuments = documents.filter(d => d.data.type === 'data')
-  const visDocuments = documents.filter(d => d.data.type !== 'data')
+
+  const [dataDocuments, visDocuments] = partition(documents, d => d.data.type === 'data')
 
   // TODO: extract to new component
   return (
