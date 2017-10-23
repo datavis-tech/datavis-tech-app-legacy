@@ -23,7 +23,9 @@ git clone git@gitlab.com:curran/datavis-tech.git
 cd datavis-tech
 ```
 
-The repository uses [Git submodules](https://github.com/blog/2104-working-with-submodules) for static content like images (so the large files don't bloat the main repository). Run the following commands to initialize the Git submodule under `/static`.
+The repository uses [Git submodules](https://github.com/blog/2104-working-with-submodules) for static content like images and built CSS. This is so the large files don't bloat the main repository over time. Note that our Semantic UI build is located under `/static`.
+
+Run the following commands to initialize the Git submodule under `/static`.
 
 ```
 git submodule init
@@ -49,15 +51,20 @@ Now access the app at http://localhost:3000/
 ## Launch the app via Docker
   1. Install Docker ([instructions for ubuntu](https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/#install-using-the-repository))
   2. Install docker-compose ([how to install](https://docs.docker.com/compose/install/))
-  3. Launch:
-  ```
-  sudo docker-compose up
-  ```
+  3. Launch: `sudo docker-compose up`
 
-**Note:** Use of `sudo` is required with a basic Docker installation. To remove the necessity of `sudo` (for example when setting up a production deploy), you can follow these instructions: [Post-installation steps for Linux - Manage Docker as a non-root user](https://docs.docker.com/engine/installation/linux/linux-postinstall/#manage-docker-as-a-non-root-user).
+**Note:** Use of `sudo` is required with a basic Docker installation. To remove the necessity of `sudo` (for example when setting up a production deploy), you can follow these instructions: [Post-installation steps for Linux - Manage Docker as a non-root user](https://docs.docker.com/engine/installation/linux/linux-postinstall/#manage-docker-as-a-non-root-user). This is highly recommended.
 
-# Testing
-## Unit test
+**Note:** if dependencies in `package.json` change, you need to rebuild the image before launching again (will re-run `npm install` for the image):
+
+```docker-compose build --force-rm --no-cache app```
+
+If you're just getting started with the system, please watch this video to learn how to run and use it locall [Datavis Tech Manual Testing](https://www.youtube.com/watch?v=K_kEzndQ66U&feature=youtu.be).
+
+# Testing and Linting
+
+We use unit tests with [Jest](https://github.com/facebook/jest) in this project. To run the tests, run
+
 ```npm test```  
 or  
 ```npm test -- --watch```  
@@ -65,9 +72,13 @@ or
 via docker-compose:  
 ```docker-compose run --no-deps --rm app npm test -- --watch```
 
-**Note:** if dependencies in `package.json` change, you need to rebuild the image before launching:
+We also use [ESLint](https://eslint.org/) with [JavaScript Standard Style](https://standardjs.com). To lint the code, run
 
-```docker-compose build --force-rm --no-cache app```
+```
+npm run lint
+```
+
+Testing and linting both run in our Continuous Integration setup, and must both pass before any Merge Request is merged.
 
 # Contributing
 
