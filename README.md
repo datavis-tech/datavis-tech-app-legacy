@@ -89,7 +89,10 @@ All work should be based on tracked issues in the current sprint. If you're work
 Work that closes an issue should be submitted as a Merge Request. To work on an issue:
 
  * Assign yourself to that issue (Under "Assignee", click "Assign yourself"), so others know you're working on it.
- * Create a new branch for your commits on this issue. See also [git: Basic Branching and Merging](https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging).
+ * Create a new branch for your commits on this issue.
+  * Please prefix your branch name with one of these [types](https://gist.github.com/stephenparish/9941e89d80e2bc58a153#allowed-type) and a `/`
+  * For example `test/edit-page`, or `feature/reference-autocomplete`
+  * See also [git: Basic Branching and Merging](https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging).
  * After your first commit to the branch, [create a "Merge Request"](https://docs.gitlab.com/ee/gitlab-basics/add-merge-request.html)
  * Put "WIP" (short for "Work in Progress") in the merge request title if the issue is not resolved yet.
  * For the last commit that closes the issue, e.g. issue #42, put the text "Closes #42" in the commit message.
