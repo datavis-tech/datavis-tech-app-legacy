@@ -5,7 +5,9 @@ import { AUTH_PATH_LOGOUT } from '../../modules/constants'
 
 import LoginControl from '../../components/loginControl'
 
-describe.only('login control', () => {
+import fakeUser from '../utils/fakeUser'
+
+describe('login control', () => {
   let sut
   let props
 
@@ -22,13 +24,7 @@ describe.only('login control', () => {
     let user
 
     beforeEach(() => {
-      user = {
-        username: String(Math.random()),
-        displayName: String(Math.random()),
-        _json: {
-          avatar_url: String(Math.random())
-        }
-      }
+      user = fakeUser()
       sut.setProps({user})
     })
 
