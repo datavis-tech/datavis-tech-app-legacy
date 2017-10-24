@@ -37,7 +37,7 @@ describe('login control', () => {
     })
 
     it(`should have an anchor tag with href ${AUTH_PATH_LOGOUT}`, () => {
-      expect(sut.find(`a[href="${AUTH_PATH_LOGOUT}"]`)).toHaveLength(1)
+      expect(sut.find(`a[href='${AUTH_PATH_LOGOUT}']`)).toHaveLength(1)
     })
 
     it(`should have an button with text 'Sign out'`, () => {
