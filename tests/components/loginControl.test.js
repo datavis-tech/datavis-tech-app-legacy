@@ -45,7 +45,7 @@ describe.only('login control', () => {
     })
 
     it(`should have an button with text 'Sign out'`, () => {
-      expect(sut.find('a Button').dive().text()).toEqual('Sign out')
+      expect(sut.find('Button').contains('Sign out')).toBeTruthy()
     })
 
   })
