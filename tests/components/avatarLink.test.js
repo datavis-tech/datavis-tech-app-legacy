@@ -6,6 +6,8 @@ import {Link} from '../../routes'
 
 import AvatarLink from '../../components/avatarLink'
 
+import fakeUser from '../utils/fakeUser'
+
 describe('avatar link', () => {
 
   let props
@@ -24,13 +26,7 @@ describe('avatar link', () => {
     let user
 
     beforeEach(() => {
-      user = {
-        username: String(Math.random()),
-        displayName: String(Math.random()),
-        _json: {
-          avatar_url: String(Math.random())
-        }
-      }
+      user = fakeUser()
       sut.setProps({user})
     })
 
