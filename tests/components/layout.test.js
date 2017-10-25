@@ -19,20 +19,8 @@ describe('Layout', () => {
     sut = shallow(<Layout {...props} ><div>I am child</div></Layout>)
   })
 
-  it('should render the children', () => {
-    expect(sut.find('div').contains('I am child')).toBeTruthy()
-  })
-
   it('should render the title', () => {
     expect(sut.find('title').contains('This is title')).toBeTruthy()
-  })
-
-  it('should render the Navbar with user prop as undefined', () => {
-    expect(sut.find('Navbar').prop('user')).toBeUndefined()
-  })
-
-  it('should render feedback Grid.Column', () => {
-    expect(sut.find(Grid.Column).html()).toContain('feedback')
   })
 
   it(`should contains 2 'link' tags in Head`, () => {
@@ -41,6 +29,18 @@ describe('Layout', () => {
 
   it(`should contains 2 'meta' tags in Head`, () => {
     expect(sut.find(Head).find('meta')).toHaveLength(2)
+  })
+
+  it('should render the Navbar with user prop as undefined', () => {
+    expect(sut.find('Navbar').prop('user')).toBeUndefined()
+  })
+
+  it('should render the children', () => {
+    expect(sut.find('div').contains('I am child')).toBeTruthy()
+  })
+
+  it('should render feedback Grid.Column', () => {
+    expect(sut.find(Grid.Column).html()).toContain('feedback')
   })
 
   describe('if user was provided', () => {
