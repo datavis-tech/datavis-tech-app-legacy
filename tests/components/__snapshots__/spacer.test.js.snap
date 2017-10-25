@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`spacer if space was provided should have overriden style 'paddingTop:100px' 1`] = `
+<div
+  style={
+    Object {
+      "paddingTop": "100px",
+    }
+  }
+/>
+`;
+
+exports[`spacer should have default style 'paddingTop:50px' 1`] = `
+<div
+  style={
+    Object {
+      "paddingTop": "50px",
+    }
+  }
+/>
+`;
