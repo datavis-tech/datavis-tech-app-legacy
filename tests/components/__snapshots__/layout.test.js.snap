@@ -7,20 +7,16 @@ exports[`Layout should match Head snapshot 1`] = `
   </title>
   <meta
     charSet="utf-8"
-    data-test="meta-charset"
   />
   <meta
     content="initial-scale=1.0, width=device-width"
-    data-test="meta-viewport"
     name="viewport"
   />
   <link
-    data-test="main-stylesheet"
     href="/static/semantic/dist/semantic.min.css"
     rel="stylesheet"
   />
   <link
-    data-test="favicon"
     href="/static/images/favicon.ico"
     rel="shortcut icon"
   />
