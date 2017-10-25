@@ -26,20 +26,8 @@ describe('Layout', () => {
     expect(sut.find('title').contains('This is title')).toBeTruthy()
   })
 
-  it(`should contains 'link' with 'main-stylesheet'`, () => {
-    expect(sut.find(nodeSelector('main-stylesheet')).get(0)).toMatchSnapshot()
-  })
-
-  it(`should contains 'link' with 'favicon'`, () => {
-    expect(sut.find(nodeSelector('favicon')).get(0)).toMatchSnapshot()
-  })
-
-  it(`should contains 'meta' with 'meta-charset'`, () => {
-    expect(sut.find(nodeSelector('meta-charset')).get(0)).toMatchSnapshot()
-  })
-
-  it(`should contains 'meta' with 'meta-viewport'`, () => {
-    expect(sut.find(nodeSelector('meta-viewport')).get(0)).toMatchSnapshot()
+  it(`should match Head snapshot`, () => {
+    expect(sut.find(Head).get(0)).toMatchSnapshot()
   })
 
   it('should render the Navbar', () => {
@@ -72,25 +60,27 @@ describe('Layout', () => {
 
   })
 
-  describe('if hideNav present and true', () => {
+  describe('hide navbar', () => {
 
-    beforeEach(() => {
-      sut.setProps({hideNav: true})
+    describe('when it is set', () => {
+      beforeEach(() => {
+        sut.setProps({hideNav: true})
+      })
+
+      it('should not render the Navbar', () => {
+        expect(sut.find(Navbar)).toHaveLength(0)
+      })
+
+      it('should still render feedback', () => {
+        expect(sut.find(Grid.Column).html()).toContain('feedback')
+      })
+
+      it('should render the Spacer', () => {
+        expect(sut.find(Spacer)).toHaveLength(1)
+      })
     })
 
-    it('should not render the Navbar', () => {
-      expect(sut.find(Navbar)).toHaveLength(0)
-    })
-
-    it('should still render feedback', () => {
-      expect(sut.find(Grid.Column).html()).toContain('feedback')
-    })
-
-    it('should render the Spacer', () => {
-      expect(sut.find(Spacer)).toHaveLength(1)
-    })
-
-    describe('if false', () => {
+    describe('when it is not set', () => {
 
       beforeEach(() => {
         sut.setProps({hideNav: false})
@@ -108,21 +98,22 @@ describe('Layout', () => {
 
   })
 
-  describe('if hideFeedback present and true', () => {
+  describe('hide Feedback', () => {
+    describe('when it is set', () => {
+      beforeEach(() => {
+        sut.setProps({hideFeedback: true})
+      })
 
-    beforeEach(() => {
-      sut.setProps({hideFeedback: true})
+      it('should not render feedback', () => {
+        expect(sut.find(Grid.Column)).toHaveLength(0)
+      })
+
+      it('should still render Navbar with user prop as undefined', () => {
+        expect(sut.find(Navbar).prop('user')).toBeUndefined()
+      })
     })
 
-    it('should not render feedback', () => {
-      expect(sut.find(Grid.Column)).toHaveLength(0)
-    })
-
-    it('should still render Navbar with user prop as undefined', () => {
-      expect(sut.find(Navbar).prop('user')).toBeUndefined()
-    })
-
-    describe('if false', () => {
+    describe('when it is not set', () => {
 
       beforeEach(() => {
         sut.setProps({hideFeedback: false})
