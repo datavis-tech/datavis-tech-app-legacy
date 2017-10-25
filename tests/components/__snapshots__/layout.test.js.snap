@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Layout should contains 'link' with 'favicon' 1`] = `
+<link
+  data-test="favicon"
+  href="/static/images/favicon.ico"
+  rel="shortcut icon"
+/>
+`;
+
+exports[`Layout should contains 'link' with 'main-stylesheet' 1`] = `
+<link
+  data-test="main-stylesheet"
+  href="/static/semantic/dist/semantic.min.css"
+  rel="stylesheet"
+/>
+`;
+
+exports[`Layout should contains 'meta' with 'meta-charset' 1`] = `
+<meta
+  charSet="utf-8"
+  data-test="meta-charset"
+/>
+`;
+
+exports[`Layout should contains 'meta' with 'meta-viewport' 1`] = `
+<meta
+  content="initial-scale=1.0, width=device-width"
+  data-test="meta-viewport"
+  name="viewport"
+/>
+`;
