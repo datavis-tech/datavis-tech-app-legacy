@@ -11,7 +11,7 @@ describe('spacer', () => {
   })
 
   it(`should have default style 'paddingTop:50px'`, () => {
-    expect(sut.find('div').prop('style').paddingTop).toBe('50px')
+    expect(sut.find('div').get(0)).toMatchSnapshot()
   })
 
   describe('if space was provided', () => {
@@ -22,7 +22,7 @@ describe('spacer', () => {
     })
 
     it(`should have overriden style 'paddingTop:${space}'`, () => {
-      expect(sut.find('div').prop('style').paddingTop).toBe(space)
+      expect(sut.find('div').get(0)).toMatchSnapshot()
     })
 
   })
