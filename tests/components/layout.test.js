@@ -9,7 +9,6 @@ import Spacer from '../../components/spacer'
 import Navbar from '../../components/navbar'
 
 import fakeUser from '../utils/fakeUser'
-import nodeSelector from '../utils/nodeSelector'
 
 describe('Layout', () => {
   let sut
