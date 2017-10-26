@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Layout should match Head snapshot 1`] = `
+<SideEffect(Head)>
+  <title>
+    This is title
+  </title>
+  <meta
+    charSet="utf-8"
+  />
+  <meta
+    content="initial-scale=1.0, width=device-width"
+    name="viewport"
+  />
+  <link
+    href="/static/semantic/dist/semantic.min.css"
+    rel="stylesheet"
+  />
+  <link
+    href="/static/images/favicon.ico"
+    rel="shortcut icon"
+  />
+</SideEffect(Head)>
+`;
