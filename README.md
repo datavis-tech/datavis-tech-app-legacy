@@ -62,7 +62,7 @@ Now access the app at http://localhost:3000/
 
 ```docker-compose build --force-rm --no-cache app```
 
-If you're just getting started with the system, please watch this video to learn how to run and use it locall [Datavis Tech Manual Testing](https://www.youtube.com/watch?v=K_kEzndQ66U&feature=youtu.be).
+If you're just getting started with the system, please watch this video to learn how to run and use it locally: [Datavis Tech Manual Testing](https://www.youtube.com/watch?v=K_kEzndQ66U&feature=youtu.be).
 
 # Testing and Linting
 
