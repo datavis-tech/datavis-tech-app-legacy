@@ -1,5 +1,7 @@
 This repository contains the Web application deployed at [https://datavis.tech](https://datavis.tech).
 
+To understand the overall direction of the product, see [Product Vision](https://gitlab.com/curran/datavis-tech/wikis/Product-Vision) in the [Wiki](https://gitlab.com/curran/datavis-tech/wikis/Home).
+
 # Technology Stack
 
  * [Semantic UI](https://semantic-ui.com/) CSS framework with user interface components.
@@ -11,6 +13,7 @@ This repository contains the Web application deployed at [https://datavis.tech](
  * [Passport](http://passportjs.org/) Node.js library for authentication.
  * [Redis](https://redis.io/) Used for storing sessions.
  * [MongoDB](https://docs.mongodb.com/getting-started/shell/) Used for persistent storage (via ShareDB).
+ * [Docker](https://en.wikipedia.org/wiki/Docker_(software))
 
 # Getting Started
 
@@ -59,7 +62,7 @@ Now access the app at http://localhost:3000/
 
 ```docker-compose build --force-rm --no-cache app```
 
-If you're just getting started with the system, please watch this video to learn how to run and use it locall [Datavis Tech Manual Testing](https://www.youtube.com/watch?v=K_kEzndQ66U&feature=youtu.be).
+If you're just getting started with the system, please watch this video to learn how to run and use it locally: [Datavis Tech Manual Testing](https://www.youtube.com/watch?v=K_kEzndQ66U&feature=youtu.be).
 
 # Testing and Linting
 
@@ -84,11 +87,13 @@ Testing and linting both run in our Continuous Integration setup, and must both 
 
 Please review our [Product Development Process](https://gitlab.com/curran/datavis-tech/wikis/Product-Development-Process).
 
-All work should be based on tracked issues in the current sprint. If you're working on something that doesn't have an issue yet, please create a new issue for it.
+All work should be based on tracked issues in the [current sprint](https://gitlab.com/curran/datavis-tech/milestones), prioritized by the [To Do Board](https://gitlab.com/curran/datavis-tech/boards).
+
+If you want to work on something that doesn't have an issue yet, please create a new issue for it.
 
 Work that closes an issue should be submitted as a Merge Request. To work on an issue:
 
- * Assign yourself to that issue (Under "Assignee", click "Assign yourself"), so others know you're working on it.
+ * [Assign yourself](https://gitlab.com/curran/datavis-tech/wikis/assign-yourself-an-issue) to that issue, so others know you're working on it.
  * Create a new branch for your commits on this issue.
   * Please prefix your branch name with one of these [types](https://gist.github.com/stephenparish/9941e89d80e2bc58a153#allowed-type) and a `/`
   * For example `test/edit-page`, or `feature/reference-autocomplete`
