@@ -7,7 +7,7 @@ const { mongoURL } = require('../config')
 const {
   DB_DOCUMENTS_PROJECTION,
   DB_DOCUMENTS_COLLECTION
-} = require('../modules/constants')
+} = require('../constants')
 
 const backend = ShareDB({
   db: ShareDBMongo(mongoURL)

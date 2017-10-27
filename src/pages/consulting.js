@@ -1,3 +1,4 @@
+// TODO delete/archive this file
 import { Header, Segment } from 'semantic-ui-react'
 import Page from '../components/page'
 import Layout from '../components/layout'

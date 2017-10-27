@@ -4,7 +4,7 @@ import {shallow} from 'enzyme'
 import fakeDoc from '../../utils/fakeDoc'
 import fakeUser from '../../utils/fakeUser'
 
-import ViewPageLayout from '../../../components/viewPage/viewPageLayout'
+import ViewPageLayout from '../../../src/components/viewPage/viewPageLayout'
 
 describe('view page layout', () => {
 

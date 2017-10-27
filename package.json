@@ -4,7 +4,7 @@
   "description": "Datavis.tech Web Application",
   "main": "index.js",
   "scripts": {
-    "start": "node server/index.js",
+    "start": "node src/server/index.js",
     "build": "next build",
     "test": "jest",
     "test:coverage": "jest --coverage",

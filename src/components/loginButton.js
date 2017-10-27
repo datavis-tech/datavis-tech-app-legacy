@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button } from 'semantic-ui-react'
-import { AUTH_PATH_GITHUB } from '../modules/constants'
+import { AUTH_PATH_GITHUB } from '../constants'
 
 // This component provides a button that users can click to log in.
 class LoginButton extends React.Component {

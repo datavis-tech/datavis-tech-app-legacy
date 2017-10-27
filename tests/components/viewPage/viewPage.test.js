@@ -3,12 +3,12 @@ import {mount} from 'enzyme'
 
 import fakeDoc from '../../utils/fakeDoc'
 
-jest.mock('../../../modules/db/subscribeToDocument')
-jest.mock('../../../modules/db/createProfileQuery')
+jest.mock('../../../src/db/subscribeToDocument')
+jest.mock('../../../src/db/createProfileQuery')
 
-import subscribeToDocument from '../../../modules/db/subscribeToDocument'
-import createProfileQuery from '../../../modules/db/createProfileQuery'
-import ViewPage from '../../../components/viewPage/viewPage'
+import subscribeToDocument from '../../../src/db/subscribeToDocument'
+import createProfileQuery from '../../../src/db/createProfileQuery'
+import ViewPage from '../../../src/components/viewPage/viewPage'
 
 describe('view page', () => {
 

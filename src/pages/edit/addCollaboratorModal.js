@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button, Modal, Header, Icon, Form, Message } from 'semantic-ui-react'
-import createProfileQuery from '../../modules/db/createProfileQuery'
+import createProfileQuery from '../../db/createProfileQuery'
 
 // This component defines the modal dialog that pops up
 // in the editor page when the user clicks "Add Collaborator".

@@ -1,5 +1,5 @@
 const get = require('lodash/get')
-const { DB_FEEDBACK_COLLECTION } = require('../modules/constants')
+const { DB_FEEDBACK_COLLECTION } = require('../constants')
 
 // This module implements access control rules at the ShareDB layer.
 // This prevents, for example, editing documents you don't own.

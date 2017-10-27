@@ -1,3 +1,5 @@
+// This module defines constants used across many modules.
+
 const AUTH_PATH = '/auth'
 const AUTH_PATH_GITHUB = AUTH_PATH + '/github'
 const AUTH_PATH_LOGOUT = AUTH_PATH + '/logout'

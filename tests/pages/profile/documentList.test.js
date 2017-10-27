@@ -2,8 +2,8 @@ import React from 'react'
 import {shallow} from 'enzyme'
 import {random, range} from 'lodash'
 
-import DocumentPreview from '../../../components/documentPreview'
-import DocumentsList from '../../../pages/profile/documentsList'
+import DocumentPreview from '../../../src/components/documentPreview'
+import DocumentsList from '../../../src/pages/profile/documentsList'
 
 describe('document list', () => {
 

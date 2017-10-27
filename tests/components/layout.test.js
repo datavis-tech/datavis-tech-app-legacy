@@ -4,9 +4,9 @@ import { shallow } from 'enzyme'
 import { Grid } from 'semantic-ui-react'
 import Head from 'next/head'
 
-import Layout from '../../components/layout'
-import Spacer from '../../components/spacer'
-import Navbar from '../../components/navbar'
+import Layout from '../../src/components/layout'
+import Spacer from '../../src/components/spacer'
+import Navbar from '../../src/components/navbar'
 
 import fakeUser from '../utils/fakeUser'
 

@@ -1,11 +1,11 @@
 import * as React from 'react'
 import {shallow} from 'enzyme'
 
-jest.mock('../../../modules/db/subscribeToDocument')
+jest.mock('../../../src/db/subscribeToDocument')
 
-import subscribeToDocument from '../../../modules/db/subscribeToDocument'
-import References from '../../../pages/edit/references'
-import Edit from '../../../pages/edit'
+import subscribeToDocument from '../../../src/db/subscribeToDocument'
+import References from '../../../src/pages/edit/references'
+import Edit from '../../../src/pages/edit'
 
 describe('edit page', () => {
 
@@ -13,7 +13,7 @@ describe('edit page', () => {
   let id
   let props
 
-  // TODO create test utils
+  // TODO use tests/utils/fakeDoc.js
   let doc = {
     on: jest.fn(),
     destroy: jest.fn(),

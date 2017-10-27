@@ -1,4 +1,4 @@
-// This utility creates a fake "doc" object that can be used
+// This utility creates a fake ShareDB "doc" object that can be used
 // in any tests where a doc object is required.
 export default ({id, data: {type, title, description, owner}} = {data: {}}) => ({
   id: id || String(Math.random()),

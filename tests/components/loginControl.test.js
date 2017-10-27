@@ -1,9 +1,9 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 
-import { AUTH_PATH_LOGOUT } from '../../modules/constants'
+import { AUTH_PATH_LOGOUT } from '../../src/constants'
 
-import LoginControl from '../../components/loginControl'
+import LoginControl from '../../src/components/loginControl'
 
 import fakeUser from '../utils/fakeUser'
 

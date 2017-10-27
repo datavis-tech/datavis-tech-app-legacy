@@ -2,8 +2,8 @@ import React from 'react'
 
 import Page from '../../components/page'
 import Layout from '../../components/layout'
-import createProfileQuery from '../../modules/db/createProfileQuery'
-import createDocumentsQuery from '../../modules/db/createDocumentsQuery'
+import createProfileQuery from '../../db/createProfileQuery'
+import createDocumentsQuery from '../../db/createDocumentsQuery'
 import ProfileBody from './profileBody'
 
 class ProfilePage extends React.Component {

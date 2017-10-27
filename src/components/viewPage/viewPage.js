@@ -1,6 +1,6 @@
 import React from 'react'
-import createProfileQuery from '../../modules/db/createProfileQuery'
-import subscribeToDocument from '../../modules/db/subscribeToDocument'
+import createProfileQuery from '../../db/createProfileQuery'
+import subscribeToDocument from '../../db/subscribeToDocument'
 import Loading from '../loading'
 
 // TODO: extract Loader into new Higher Order Component to make it re-usable ?

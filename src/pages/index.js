@@ -6,6 +6,7 @@ import Spacer from '../components/spacer'
 import HugeLogo from '../components/hugeLogo'
 import { AUTH_PATH_GITHUB } from '../modules/constants'
 
+// TODO delete/archive this commented out code.
 // const visualizations = [
 //   {
 //     title: 'Campaign Finance Institute',

@@ -1,6 +1,6 @@
 import React from 'react'
 import magicSandbox from 'magic-sandbox'
-import subscribeToDocument from '../modules/db/subscribeToDocument'
+import subscribeToDocument from '../db/subscribeToDocument'
 import Loading from './loading'
 
 // This component runs the code for a visualization in an iframe.

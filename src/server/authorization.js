@@ -9,7 +9,7 @@ const {
   AUTH_PATH_LOGOUT,
   AUTH_FAILURE_REDIRECT,
   AUTH_LOGOUT_REDIRECT
-} = require('../modules/constants')
+} = require('../constants')
 
 const initPassport = () => {
   const GitHubStrategy = passportGitHub.Strategy

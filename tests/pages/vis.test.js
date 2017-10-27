@@ -1,12 +1,12 @@
 import React from 'react'
 import {shallow} from 'enzyme'
 
-jest.mock('../../components/viewPage/viewPage', () => jest.fn(() => () => <div>test</div>))
+jest.mock('../../src/components/viewPage/viewPage', () => jest.fn(() => () => <div>test</div>))
 
-import Runner from '../../components/runner'
-import ViewPageDescription from '../../components/viewPage/viewPageDescription'
-import ViewPage from '../../components/viewPage/viewPage'
-import Vis from '../../pages/vis'
+import Runner from '../../src/components/runner'
+import ViewPageDescription from '../../src/components/viewPage/viewPageDescription'
+import ViewPage from '../../src/components/viewPage/viewPage'
+import Vis from '../../src/pages/vis'
 
 describe('vis page', () => {
 
