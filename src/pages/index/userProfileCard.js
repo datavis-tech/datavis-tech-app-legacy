@@ -1,17 +1,16 @@
+// TODO delete/archive this file
 import {
   Card,
   Image,
   List
 } from 'semantic-ui-react'
 
-export default ({title, description, img, links}) => (
+export default ({name, img, links, description}) => (
   <Card centered>
-    <a href={links[0].href}>
-      <Image src={img} />
-    </a>
+    <Image src={img} />
     <Card.Content>
       <Card.Header>
-        {title}
+        {name}
       </Card.Header>
       <Card.Description>
         {description}

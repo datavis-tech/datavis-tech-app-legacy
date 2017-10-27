@@ -3,7 +3,7 @@ import {shallow} from 'enzyme'
 
 import fakeDoc from '../../utils/fakeDoc'
 
-import ViewPageDescription from '../../../components/viewPage/viewPageDescription'
+import ViewPageDescription from '../../../src/components/viewPage/viewPageDescription'
 
 describe('view page description', () => {
 

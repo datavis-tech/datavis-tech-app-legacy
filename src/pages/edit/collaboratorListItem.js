@@ -1,6 +1,6 @@
 import React from 'react'
 import { List, Button } from 'semantic-ui-react'
-import createProfileQuery from '../../modules/db/createProfileQuery'
+import createProfileQuery from '../../db/createProfileQuery'
 import AvatarLink from '../../components/avatarLink'
 
 // This component represents a single item that appears in the

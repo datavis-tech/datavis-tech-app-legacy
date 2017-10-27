@@ -1,3 +1,5 @@
+// This file reads environment-specific configuration from environment variables,
+// and falls back to defaults intended for use during local development.
 module.exports = {
   redisHost: process.env.DVT_REDIS_HOST || '127.0.0.1',
   redisPort: process.env.DVT_REDIS_PORT || '6379',

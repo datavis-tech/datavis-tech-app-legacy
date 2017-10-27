@@ -1,7 +1,7 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 
-import Spacer from '../../components/spacer'
+import Spacer from '../../src/components/spacer'
 
 describe('spacer', () => {
   let sut

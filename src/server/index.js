@@ -20,12 +20,18 @@ authorization(expressApp)
 accessControl(shareDB.backend)
 addUserToOps(shareDB.backend)
 
-// Determine wheter we are in a production or dev environment.
-const dev = process.env.NODE_ENV !== 'production'
-
-// Set up the Next.js server, informing it whether we are in dev mode.
+// Set up the Next.js server, informing it whether we are in dev mode,
+// and also informing it that it should look for pages under the src directory.
 // If `dev` is true, the Next.js server will watch for changes.
-const nextApp = next({ dev })
+const nextApp = next({
+  dev: process.env.NODE_ENV !== 'production',
+  dir: 'src'
+})
+
+// Serve static assets.
+expressApp.use('/static', express.static('static'))
+
+// Set up the NextJS Express handler.
 const handler = routes.getRequestHandler(nextApp)
 expressApp.get('*', handler)
 

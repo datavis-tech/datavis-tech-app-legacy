@@ -1,4 +1,4 @@
-const { DB_USERS_COLLECTION } = require('../modules/constants')
+const { DB_USERS_COLLECTION } = require('../constants')
 const { backend } = require('./shareDB')
 
 // A reusable ShareDB connection.

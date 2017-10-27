@@ -2,9 +2,9 @@ import React from 'react'
 import {shallow} from 'enzyme'
 
 import {List} from 'semantic-ui-react'
-import {Link} from '../../routes'
+import {Link} from '../../src/routes'
 
-import DocumentPreview from '../../components/documentPreview'
+import DocumentPreview from '../../src/components/documentPreview'
 
 describe('document preview', () => {
 

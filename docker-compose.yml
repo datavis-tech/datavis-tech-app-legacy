@@ -7,10 +7,10 @@ services:
   app:
     build: .
     volumes:
-      - ./components:/usr/src/app/components
-      - ./modules:/usr/src/app/modules
-      - ./pages:/usr/src/app/pages
-      - ./server:/usr/src/app/server
+      - ./src/components:/usr/src/app/components
+      - ./src/db:/usr/src/app/db
+      - ./src/pages:/usr/src/app/pages
+      - ./src/server:/usr/src/app/server
       - ./static:/usr/src/app/static
       - ./tests:/usr/src/app/tests
     ports:

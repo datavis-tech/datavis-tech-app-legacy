@@ -2,9 +2,9 @@ import React from 'react'
 import {shallow} from 'enzyme'
 
 import {Image} from 'semantic-ui-react'
-import {Link} from '../../routes'
+import {Link} from '../../src/routes'
 
-import AvatarLink from '../../components/avatarLink'
+import AvatarLink from '../../src/components/avatarLink'
 
 import fakeUser from '../utils/fakeUser'
 

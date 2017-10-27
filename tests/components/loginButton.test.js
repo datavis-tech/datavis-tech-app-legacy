@@ -2,9 +2,9 @@ import React from 'react'
 import { shallow } from 'enzyme'
 
 import { Button } from 'semantic-ui-react'
-import { AUTH_PATH_GITHUB } from '../../modules/constants'
+import { AUTH_PATH_GITHUB } from '../../src/constants'
 
-import LoginButton from '../../components/loginButton'
+import LoginButton from '../../src/components/loginButton'
 
 describe('login button', () => {
   let sut
