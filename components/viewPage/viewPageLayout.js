@@ -21,7 +21,7 @@ const OwnerAvatarLink = ({ user }) => {
 
 /**
  * Component which represents layout for components of View Page family.
- * It have to slots -- Content and Description which allows to fill in with appropriate sections
+ * It has two slots -- Content and Description which allows to fill in with appropriate sections
  */
 const ViewPageLayout = ({id, user, ownerProfile, doc, Content, Description}) => (
   <Layout title={(doc.data.title || 'Loading...') + ' | Datavis.tech'} user={user}>
