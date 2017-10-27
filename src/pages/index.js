@@ -4,7 +4,7 @@ import Layout from '../components/layout'
 import Page from '../components/page'
 import Spacer from '../components/spacer'
 import HugeLogo from '../components/hugeLogo'
-import { AUTH_PATH_GITHUB } from '../modules/constants'
+import { AUTH_PATH_GITHUB } from '../constants'
 
 // TODO delete/archive this commented out code.
 // const visualizations = [

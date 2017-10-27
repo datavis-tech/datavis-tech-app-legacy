@@ -3,7 +3,7 @@ module.exports = {
   roots: [
     '<rootDir>/tests/',
     '<rootDir>/components/',
-    '<rootDir>/modules/',
+    '<rootDir>/db/',
     '<rootDir>/pages/',
     '<rootDir>/server/'
   ],

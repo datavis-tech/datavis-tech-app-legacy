@@ -8,7 +8,7 @@ services:
     build: .
     volumes:
       - ./src/components:/usr/src/app/components
-      - ./src/modules:/usr/src/app/modules
+      - ./src/db:/usr/src/app/db
       - ./src/pages:/usr/src/app/pages
       - ./src/server:/usr/src/app/server
       - ./static:/usr/src/app/static

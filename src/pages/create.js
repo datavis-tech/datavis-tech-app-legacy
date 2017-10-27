@@ -4,7 +4,7 @@ import Layout from '../components/layout'
 import LoginButton from '../components/loginButton'
 import { Form, Button, Container } from 'semantic-ui-react'
 import { Router } from '../routes'
-import createDocument from '../modules/db/createDocument'
+import createDocument from '../db/createDocument'
 
 class CreatePage extends React.Component {
 
