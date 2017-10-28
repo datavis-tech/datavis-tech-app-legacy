@@ -1,7 +1,5 @@
-// TODO bring back this test after refactor.
-
 import React from 'react'
-import {render, shallow} from 'enzyme'
+import {render} from 'enzyme'
 import fakeDoc from '../utils/fakeDoc'
 import fakeUser from '../utils/fakeUser'
 
@@ -11,6 +9,7 @@ const mockOwnerProfile = fakeUser()
 
 // Mock the ViewPage component with one that invokes children,
 // passing render prop with `ownerProfile` and `doc`.
+// TODO refactor this out? Also in vis.test.js
 jest.mock('../../src/components/viewPage/viewPage', () => {
   return jest.fn(props => {
     return props.children({
@@ -21,11 +20,9 @@ jest.mock('../../src/components/viewPage/viewPage', () => {
 })
 
 // Mock ViewPageLayout so we can test its props.
-jest.mock('../../src/components/viewPage/viewPageLayout', () => jest.fn(() => <div>Test</div>))
+jest.mock('../../src/components/viewPage/viewPageLayout', () => jest.fn(() => null))
 
 import DataViewer from '../../src/components/dataViewer'
-import ViewPageDescription from '../../src/components/viewPage/viewPageDescription'
-import ViewPage from '../../src/components/viewPage/viewPage'
 import ViewPageLayout from '../../src/components/viewPage/viewPageLayout'
 import Data from '../../src/pages/data'
 
@@ -33,23 +30,23 @@ describe('data page', () => {
 
   let sut
   beforeEach(() => {
-    render(<Data id={mockId}/>)
+    render(<Data id={mockId} />)
     sut = ViewPageLayout.mock.calls[0][0]
   })
 
-  it('should render layout with data viewer as content', () => {
+  it('should pass DataViewer as content to ViewPageLayout', () => {
     expect(sut.Content).toEqual(DataViewer)
   })
 
-  it('should render layout with id pass into Data page', () => {
+  it('should pass id to ViewPageLayout', () => {
     expect(sut.id).toEqual(mockId)
   })
 
-  it('should render layout with id pass into Data page', () => {
+  it('should pass ownerProfile to ViewPageLayout', () => {
     expect(sut.ownerProfile).toEqual(mockOwnerProfile)
   })
 
-  it('should render layout doc from ViewPage', () => {
+  it('should pass doc to ViewPageLayout', () => {
     expect(sut.doc).toEqual(mockDoc)
   })
 
