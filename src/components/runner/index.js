@@ -118,7 +118,7 @@ class Runner extends React.Component {
     return (
       <RunnerRenderer
         template={this.state.template}
-        files={this.state.template}
+        files={this.state.files}
       />
     )
   }
