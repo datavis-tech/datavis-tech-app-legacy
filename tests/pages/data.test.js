@@ -5,6 +5,7 @@ import {render, shallow} from 'enzyme'
 import fakeDoc from '../utils/fakeDoc'
 import fakeUser from '../utils/fakeUser'
 
+const mockId = 'foo'
 const mockDoc = fakeDoc()
 const mockOwnerProfile = fakeUser()
 
@@ -32,12 +33,24 @@ describe('data page', () => {
 
   let sut
   beforeEach(() => {
-    render(<Data id='foo'/>)
+    render(<Data id={mockId}/>)
     sut = ViewPageLayout.mock.calls[0][0]
   })
 
   it('should render layout with data viewer as content', () => {
     expect(sut.Content).toEqual(DataViewer)
+  })
+
+  it('should render layout with id pass into Data page', () => {
+    expect(sut.id).toEqual(mockId)
+  })
+
+  it('should render layout with id pass into Data page', () => {
+    expect(sut.ownerProfile).toEqual(mockOwnerProfile)
+  })
+
+  it('should render layout doc from ViewPage', () => {
+    expect(sut.doc).toEqual(mockDoc)
   })
 
 })
