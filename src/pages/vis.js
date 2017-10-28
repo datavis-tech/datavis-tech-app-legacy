@@ -3,16 +3,30 @@ import Page from '../components/page'
 import {ViewPage, ViewPageLayout} from '../components/viewPage'
 import Runner from '../components/runner'
 
-export default Page(
-  <ViewPage>
-    { ({id, user, ownerProfile, doc}) => (
-      <ViewPageLayout
-        id={id}
-        user={user}
-        ownerProfile={ownerProfile}
-        doc={doc}
-        Content={Runner}
-      />
-    )}
-  </ViewPage>
-)
+class VisViewPage extends React.Component {
+
+  // TODO refactor this into a common thing.
+  static async getInitialProps ({query}) {
+    return {
+      id: query.id
+    }
+  }
+
+  render () {
+    return (
+      <ViewPage id={this.props.id}>
+        { ({ownerProfile, doc}) => (
+          <ViewPageLayout
+            id={this.props.id}
+            user={this.props.user}
+            ownerProfile={ownerProfile}
+            doc={doc}
+            Content={Runner}
+          />
+        )}
+      </ViewPage>
+    )
+  }
+}
+
+export default Page(VisViewPage)

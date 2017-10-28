@@ -14,11 +14,6 @@ import Loading from '../loading'
  */
 
 class ViewPage extends React.Component {
-  static async getInitialProps ({query}) {
-    return {
-      id: query.id
-    }
-  }
 
   constructor (props) {
     super(props)
@@ -68,13 +63,16 @@ class ViewPage extends React.Component {
   }
 
   render () {
-    if (!docInitialized) {
+    if (!this.state.docInitialized) {
       return <Loading />
     }
+
     return this.props.children({
-      id: this.props.id,
-      user: this.props.user,
-      ownerProfile: this.state.ownerProfile
+
+      // TODO refactor to split out owner profile fetching.
+      ownerProfile: this.state.ownerProfile,
+
+      // TODO refactor to split out document fetching.
       doc: this.doc
     })
   }
