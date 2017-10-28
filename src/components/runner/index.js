@@ -1,13 +1,16 @@
 import React from 'react'
-import magicSandbox from 'magic-sandbox'
-import subscribeToDocument from '../db/subscribeToDocument'
-import Loading from './loading'
+import subscribeToDocument from '../../db/subscribeToDocument'
+import Loading from '../loading'
+import RunnerRenderer from './runnerRenderer'
 
-// This component runs the code for a visualization in an iframe.
+// This "smart" component subscribes to all documents
+// referenced by the visualization document.
 class Runner extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
+      // Props.doc is expected to be a ShareDB document
+      // that has already been subscribed to.
       template: props.doc.data.content,
 
       // The referenced "files" to be passed into magicSandbox.
@@ -35,7 +38,11 @@ class Runner extends React.Component {
     if (process.browser) {
 
       const doc = this.props.doc
+
+      // TODO move this fallback logic out of here.
+      // Perhaps to an accessor?
       const references = doc.data.references || []
+
       // Subscribe to referenced documents, and update state when they change.
       if (references.length !== 0) {
         references.forEach(({ fileName, id }) => {
@@ -70,6 +77,9 @@ class Runner extends React.Component {
           })
         })
       } else {
+
+        // If the document has no references,
+        // consider all refererences resolved.
         this.setState({
           allReferencesResolved: true
         })
@@ -82,7 +92,9 @@ class Runner extends React.Component {
           template: doc.data.content
         })
       }
+
       doc.on('op', updateTemplate)
+
       this.cleanupFunctions.push(() => {
         doc.removeListener('op', updateTemplate)
       })
@@ -95,23 +107,18 @@ class Runner extends React.Component {
   }
 
   render () {
+
+    // If not all references have resolved yet,
+    // render a spinner to show things are loading.
     if (!this.state.allReferencesResolved) {
       return <Loading />
     }
 
-    const { template, files } = this.state
-    const source = magicSandbox(template, files)
-
+    // Render the iframe whenever the state changes.
     return (
-      <iframe
-        width='960'
-        height='500'
-        scrolling='no'
-        style={{
-          border: 'solid 1px #ddd'
-          // transform: 'scale(1)'
-        }}
-        srcDoc={source}
+      <RunnerRenderer
+        template={this.state.template}
+        files={this.state.template}
       />
     )
   }
