@@ -4,10 +4,15 @@ import {ViewPage, ViewPageLayout} from '../components/viewPage'
 import Runner from '../components/runner'
 
 export default Page(
-  ViewPage((props) => (
-    <ViewPageLayout
-      {...props}
-      Content={Runner}
-    />
-  ))
+  <ViewPage>
+    { ({id, user, ownerProfile, doc}) => (
+      <ViewPageLayout
+        id={id}
+        user={user}
+        ownerProfile={ownerProfile}
+        doc={doc}
+        Content={Runner}
+      />
+    )}
+  </ViewPage>
 )
