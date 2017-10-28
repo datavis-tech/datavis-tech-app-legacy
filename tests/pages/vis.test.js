@@ -21,7 +21,6 @@ describe('vis page', () => {
 
   it('should render layout with runner as content and default description', () => {
     expect(sut.props()).toMatchObject({
-      Content: Runner,
       Description: ViewPageDescription
     })
   })

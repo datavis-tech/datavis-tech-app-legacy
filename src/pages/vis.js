@@ -6,6 +6,13 @@ import Runner from '../components/runner'
 class VisViewPage extends React.Component {
 
   // TODO refactor this into a common thing.
+  // and make this the test for it:
+  // it('should be able retrieve id from query', async () => {
+  //   const id = Symbol('id')
+  //   const props = await Component.getInitialProps({query: {id}})
+  //   expect(props).toEqual({id})
+  // })
+  //
   static async getInitialProps ({query}) {
     return {
       id: query.id

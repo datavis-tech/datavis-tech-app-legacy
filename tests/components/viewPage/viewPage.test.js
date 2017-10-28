@@ -13,7 +13,6 @@ import ViewPage from '../../../src/components/viewPage/viewPage'
 describe('view page', () => {
 
   let sut
-  let Content
   let Component
   let props
 
@@ -21,20 +20,17 @@ describe('view page', () => {
   let user
 
   beforeEach(() => {
-    Content = () => <div>{String(Math.random())}</div>
-    Component = ViewPage(Content)
+    Component = props => (
+      <ViewPage {...props}>
+        { () => <div>{String(Math.random())}</div> }
+      </ViewPage>
+    )
 
     id = Symbol('id')
     user = Symbol('user')
 
     props = {id, user}
     sut = mount(<Component {...props} />)
-  })
-
-  it('should be able retrieve id from query', async () => {
-    const id = Symbol('id')
-    const props = await Component.getInitialProps({query: {id}})
-    expect(props).toEqual({id})
   })
 
   describe('non browser env', () => {
