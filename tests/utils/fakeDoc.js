@@ -8,6 +8,7 @@ export default ({id, data: {type, title, description, owner}} = {data: {}}) => (
     description: description || String(Math.random()),
     owner: owner || Symbol('owner')
   },
+  subscribe: jest.fn(),
   on: jest.fn(),
   destroy: jest.fn(),
   removeListener: jest.fn()

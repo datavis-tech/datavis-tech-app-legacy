@@ -1,10 +1,7 @@
 import React from 'react'
-import createProfileQuery from '../../db/createProfileQuery'
-import subscribeToDocument from '../../db/subscribeToDocument'
+import {DocumentSubscription, ProfileSubscription} from '../../db/subscriptions'
+import Subscription from '../subscription'
 import Loading from '../loading'
-
-// TODO: extract Loader into new Higher Order Component to make it re-usable ?
-// TODO: extract subscription logic to service and inject it here ?
 
 /**
  * This component is a generalization of the ViewPage components family.
@@ -15,66 +12,27 @@ import Loading from '../loading'
 
 class ViewPage extends React.Component {
 
-  constructor (props) {
-    super(props)
-    this.state = {
-      docInitialized: false
-    }
-  }
-
-  componentDidMount () {
-    if (process.browser) {
-      subscribeToDocument(this.props.id, (err, doc) => {
-        if (err) throw err
-        this.doc = doc
-
-        const updateDocState = () => {
-          this.setState({
-            docInitialized: true
-          })
-        }
-
-        updateDocState()
-
-        // TODO only invoke updateDocState if changes affect title or description.
-        doc.on('op', updateDocState)
-
-        this.cleanupDoc = () => {
-          doc.destroy()
-          doc.removeListener('op', updateDocState)
-        }
-
-        // Fetch the profile data for the document owner, so it can be shown.
-        // TODO refactor this into separate query component.
-        this.ownerQuery = createProfileQuery({id: doc.data.owner}, (ownerProfile) => {
-          this.setState({ownerProfile})
-        })
-      })
-    }
-  }
-
-  componentWillUnmount () {
-    if (this.cleanupDoc) {
-      this.cleanupDoc()
-    }
-    if (this.ownerQuery) {
-      this.ownerQuery.destroy()
-    }
-  }
-
   render () {
-    if (!this.state.docInitialized) {
-      return <Loading />
-    }
-
-    return this.props.children({
-
-      // TODO refactor to split out owner profile fetching.
-      ownerProfile: this.state.ownerProfile,
-
-      // TODO refactor to split out document fetching.
-      doc: this.doc
-    })
+    return (
+      <Subscription subscription={new DocumentSubscription()} parameters={{id: this.props.id}}>
+        {
+          ({docs: [doc]}) => (
+            !!doc
+              ? (
+                <Subscription subscription={new ProfileSubscription()} parameters={{id: doc.owner}}>
+                  {
+                    ({docs}) => {
+                      const ownerProfile = docs[0] ? docs[0].data : null
+                      return this.props.children({doc, ownerProfile})
+                    }
+                  }
+                </Subscription>
+              )
+              : <Loading/>
+          )
+        }
+      </Subscription>
+    )
   }
 }
 
