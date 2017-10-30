@@ -17,7 +17,7 @@ class ViewPage extends React.Component {
       <Subscription subscription={new DocumentSubscription()} parameters={{id: this.props.id}}>
         {
           ({docs: [doc]}) => (
-            !!doc
+            doc
               ? (
                 <Subscription subscription={new ProfileSubscription()} parameters={{id: doc.owner}}>
                   {
@@ -28,7 +28,7 @@ class ViewPage extends React.Component {
                   }
                 </Subscription>
               )
-              : <Loading/>
+              : <Loading />
           )
         }
       </Subscription>

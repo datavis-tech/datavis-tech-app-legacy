@@ -1,10 +1,10 @@
 export default class CallbackTrigger {
-  set(callback, ctx, ...params) {
+  set (callback, ctx, ...params) {
     this.__callback = callback.bind(ctx, ...params)
   }
 
-  trigger() {
-    if(this.__callback) {
+  trigger () {
+    if (this.__callback) {
       this.__callback()
     }
   }

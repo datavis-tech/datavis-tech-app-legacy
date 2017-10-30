@@ -45,7 +45,7 @@ describe('references subscription', () => {
         readyCallbackTrigger.set(callback, null)
       }
 
-      if(op === 'changed') {
+      if (op === 'changed') {
         changeCallbackTrigger.set(callback, null)
       }
 

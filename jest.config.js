@@ -2,7 +2,7 @@ module.exports = {
   verbose: true,
   roots: [
     '<rootDir>/tests/',
-    '<rootDir>/src/',
+    '<rootDir>/src/'
   ],
   collectCoverageFrom: [
     '**/*.{js,jsx}',

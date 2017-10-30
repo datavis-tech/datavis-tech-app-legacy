@@ -22,8 +22,8 @@ describe('subscription', () => {
   beforeEach(() => {
 
     parameters = {
-      a: Symbol(),
-      b: Symbol()
+      a: Symbol('a'),
+      b: Symbol('b')
     }
 
     subscription = {
@@ -38,7 +38,7 @@ describe('subscription', () => {
 
     children = jest.fn(() => null)
 
-    sut = mount(<Subscription {...props}>{children}</Subscription> )
+    sut = mount(<Subscription {...props}>{children}</Subscription>)
 
   })
 
@@ -65,7 +65,7 @@ describe('subscription', () => {
       let docs
 
       beforeEach(() => {
-        docs = [Symbol()]
+        docs = [Symbol('doc')]
         subscriptionCallbacks.onUpdate(docs)
       })
 

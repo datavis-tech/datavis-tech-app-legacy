@@ -1,16 +1,15 @@
 import React from 'react'
 
-
 export default class Subscription extends React.Component {
 
-  constructor(props){
-    super(props);
-    this.state = {docs: []};
+  constructor (props) {
+    super(props)
+    this.state = {docs: []}
   }
 
-  componentDidMount() {
+  componentDidMount () {
 
-    if(process.browser) {
+    if (process.browser) {
 
       const {subscription, parameters} = this.props
       subscription.init(
@@ -23,11 +22,11 @@ export default class Subscription extends React.Component {
     }
   }
 
-  componentWillUnmount() {
+  componentWillUnmount () {
     this.props.subscription.tearDown()
   }
 
-  render() {
+  render () {
     return this.props.children({docs: this.state.docs})
   }
 }

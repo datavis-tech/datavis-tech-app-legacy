@@ -1,14 +1,13 @@
 import connection from '../connection'
 
-
 export default class BaseQuerySubscription {
 
-  constructor(collectionName, queryFactory) {
+  constructor (collectionName, queryFactory) {
     this.__collectionName = collectionName
     this.__queryFactory = queryFactory
   }
 
-  init(parameters, {onUpdate, onError}) {
+  init (parameters, {onUpdate, onError}) {
     this.__query = connection.createSubscribeQuery(this.__collectionName, this.__queryFactory(parameters))
 
     const onUpdateListener = () => {
@@ -19,8 +18,8 @@ export default class BaseQuerySubscription {
     this.__query.on('changed', onUpdateListener)
   }
 
-  tearDown() {
-    if(this.__query) {
+  tearDown () {
+    if (this.__query) {
       this.__query.destroy()
     }
   }

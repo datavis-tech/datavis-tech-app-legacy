@@ -1,15 +1,14 @@
 import {DB_DOCUMENTS_COLLECTION} from '../../constants'
 import connection from '../connection'
 
-
 export default class DocumentSubscription {
 
-  init({id}, {onUpdate, onError}) {
+  init ({id}, {onUpdate, onError}) {
 
     const doc = connection.get(DB_DOCUMENTS_COLLECTION, id)
     doc.subscribe((err) => {
 
-      if(err) {
+      if (err) {
         onError(err)
         return
       }
@@ -28,8 +27,8 @@ export default class DocumentSubscription {
     })
   }
 
-  tearDown() {
-    if(this.__cleanup) {
+  tearDown () {
+    if (this.__cleanup) {
       this.__cleanup()
     }
   }
