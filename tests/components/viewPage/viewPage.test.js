@@ -20,15 +20,14 @@ describe('view page', () => {
   let childrenProps
 
   beforeEach(() => {
-    const Component = props => (
-      <ViewPage {...props}>
+    mount(
+      <ViewPage>
         { props => {
           childrenProps = props
           return null
         }}
       </ViewPage>
     )
-    mount(<Component />)
   })
 
   it('should subscribe to document and owner', () => {
