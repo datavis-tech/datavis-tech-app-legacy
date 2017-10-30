@@ -14,7 +14,7 @@ class ViewPage extends React.Component {
 
   render () {
     return (
-      <Subscription subscription={new DocumentSubscription()} parameters={{id: this.props.id}}>
+      <Subscription subscription={DocumentSubscription()} parameters={{id: this.props.id}}>
         {
           ({docs: [doc]}) => (
             doc
