@@ -17,21 +17,18 @@ import ViewPage from '../../../src/components/viewPage/viewPage'
 
 describe('view page', () => {
 
-  let childrenProps
+  let children = jest.fn(() => null)
 
   beforeEach(() => {
     mount(
       <ViewPage>
-        { props => {
-          childrenProps = props
-          return null
-        }}
+        {children}
       </ViewPage>
     )
   })
 
   it('should subscribe to document and owner', () => {
-    expect(childrenProps).toMatchObject({
+    expect(children).toHaveBeenCalledWith({
       doc: mockDoc,
       ownerProfile: mockDoc.data
     })
