@@ -11,6 +11,14 @@ describe('subscription', () => {
   let parameters
   let children
 
+  beforeAll(() => {
+    process.browser = true
+  })
+
+  afterAll(() => {
+    process.browser = undefined
+  })
+
   beforeEach(() => {
 
     parameters = {
