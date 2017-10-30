@@ -19,7 +19,7 @@ class ViewPage extends React.Component {
           ({docs: [doc]}) => (
             doc
               ? (
-                <Subscription subscription={new ProfileSubscription()} parameters={{id: doc.owner}}>
+                <Subscription subscription={ProfileSubscription()} parameters={{id: doc.owner}}>
                   {
                     ({docs}) => {
                       const ownerProfile = docs[0] ? docs[0].data : null
