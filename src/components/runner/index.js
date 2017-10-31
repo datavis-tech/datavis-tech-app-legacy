@@ -2,19 +2,9 @@ import RunnerRenderer from './runnerRenderer'
 import {DocumentSubscriptions} from '../../db/subscriptions'
 import Subscription from '../subscription'
 import Loading from '../loading'
+import files from './files'
 
-// Constructs the "files" object expected by MagicSandbox.js,
-// using the file names from `references`, and content from `docs`.
-const files = (references, docs) => {
-  const filesObject = {}
-  references.forEach(({ fileName }, i) => {
-    filesObject[fileName] = {
-      content: docs[i].data.content
-    }
-  })
-  return filesObject
-}
-
+// TODO refactor this subscription logic to the page root level.
 export default ({doc}) => (
   <Subscription
     subscription={DocumentSubscriptions()}
