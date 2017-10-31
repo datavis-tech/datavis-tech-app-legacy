@@ -4,20 +4,25 @@ export default (collectionName, queryFactory) => {
   let query
 
   return {
-    init (parameters, {onUpdate, onError}) {
-      query = connection.createSubscribeQuery(collectionName, queryFactory(parameters))
+    init,
+    tearDown
+  }
 
-      const onUpdateListener = () => {
-        onUpdate(query.results)
-      }
+  function init (parameters, {onUpdate, onError}) {
+    query = connection.createSubscribeQuery(collectionName, queryFactory(parameters))
 
-      query.on('ready', onUpdateListener)
-      query.on('changed', onUpdateListener)
-    },
-    tearDown () {
-      if (query) {
-        query.destroy()
-      }
+    const onUpdateListener = () => {
+      onUpdate(query.results)
+    }
+
+    query.on('ready', onUpdateListener)
+    query.on('changed', onUpdateListener)
+  }
+
+  function tearDown () {
+    if (query) {
+      query.destroy()
     }
   }
+
 }
