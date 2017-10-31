@@ -13,12 +13,12 @@ export default () => {
     subscriptions = ids.map((id, i) => {
       const subscription = DocumentSubscription()
 
-      //subscription.init({id}, {
-      //  onUpdate: docs => {
-      //
-      //  },
-      //  onError
-      //})
+      subscription.init({id}, {
+        onUpdate: docs => {
+      
+        },
+        onError
+      })
 
       return subscription
     })
