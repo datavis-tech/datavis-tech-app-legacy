@@ -1,10 +1,15 @@
 import {DB_DOCUMENTS_COLLECTION} from '../../constants'
 import connection from '../connection'
 
-export default class DocumentSubscription {
+export default () => {
+  let cleanup
 
-  init ({id}, {onUpdate, onError}) {
+  return {
+    init,
+    tearDown
+  }
 
+  function init ({id}, {onUpdate, onError}) {
     const doc = connection.get(DB_DOCUMENTS_COLLECTION, id)
     doc.subscribe((err) => {
 
@@ -19,17 +24,16 @@ export default class DocumentSubscription {
       const onUpdateListener = () => onUpdate([doc])
       doc.on('op', onUpdateListener)
 
-      this.__cleanup = () => {
+      cleanup = () => {
         doc.destroy()
         doc.removeListener('op', onUpdateListener)
       }
-
     })
   }
 
-  tearDown () {
-    if (this.__cleanup) {
-      this.__cleanup()
+  function tearDown () {
+    if (cleanup) {
+      cleanup()
     }
   }
 

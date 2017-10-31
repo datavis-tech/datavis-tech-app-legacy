@@ -24,7 +24,7 @@ describe('document subscription', () => {
     id = String(Math.random())
     onUpdate = jest.fn()
     onError = jest.fn()
-    sut = new DocumentSubscription()
+    sut = DocumentSubscription()
     sut.init({id}, {onUpdate, onError})
   })
 

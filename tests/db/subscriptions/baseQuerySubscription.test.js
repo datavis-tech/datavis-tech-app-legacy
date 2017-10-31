@@ -51,7 +51,7 @@ describe('references subscription', () => {
 
     })
 
-    sut = new BaseQuerySubscription(collectionName, queryFactory)
+    sut = BaseQuerySubscription(collectionName, queryFactory)
     sut.init(parameters, {onUpdate, onError})
   })
 
