@@ -8,7 +8,8 @@
     "build": "next build",
     "test": "jest",
     "test:coverage": "jest --coverage",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "standard": {
     "ignore": [

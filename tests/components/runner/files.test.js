@@ -6,10 +6,9 @@ describe('files', () => {
       { fileName: 'bar' }
     ]
     const docs = [
-      { data: { content: 'fooContent'} },
-      { data: { content: 'barContent'} }
+      { data: { content: 'fooContent' } },
+      { data: { content: 'barContent' } }
     ]
-    //console.log(JSON.stringify(files(references, docs), null, 2))
     expect(files(references, docs)).toMatchObject({
       foo: { content: 'fooContent' },
       bar: { content: 'barContent' }
