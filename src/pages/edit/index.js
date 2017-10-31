@@ -16,7 +16,9 @@ import References from './references'
 import Collaborators from './collaborators'
 import DocTypeEditor from './docTypeEditor'
 import Loading from '../../components/loading'
+import Runner from '../../components/runner'
 
+// TODO move this into src/constants, and do the same for DATA_DOC_TYPE
 const VIS_DOC_TYPE = 'vis'
 
 class EditPage extends React.Component {
@@ -33,6 +35,8 @@ class EditPage extends React.Component {
 
   componentDidMount () {
     if (process.browser) {
+
+      // TODO refactor this page to leverage DocumentSubscription
       subscribeToDocument(this.props.id, (err, doc) => {
         if (err) throw err
 
@@ -116,6 +120,19 @@ class EditPage extends React.Component {
     return null
   }
 
+  renderPreview () {
+    if (this.state.docType === VIS_DOC_TYPE) {
+      return (
+        <Form.Field>
+          <label>Preview</label>
+          <Runner doc={this.doc} />
+        </Form.Field>
+      )
+    }
+
+    return null
+  }
+
   renderBody () {
     const { id } = this.props
     const { docInitialized, docType } = this.state
@@ -159,6 +176,9 @@ class EditPage extends React.Component {
           <label>Document Type</label>
           <DocTypeEditor doc={this.doc} />
         </Form.Field>
+        {
+          this.renderPreview()
+        }
         <Form.Field>
           <label>Content</label>
           <CodeMirrorBinding

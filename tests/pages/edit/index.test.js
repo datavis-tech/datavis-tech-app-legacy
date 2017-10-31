@@ -5,6 +5,7 @@ jest.mock('../../../src/db/subscribeToDocument')
 
 import subscribeToDocument from '../../../src/db/subscribeToDocument'
 import References from '../../../src/pages/edit/references'
+import Runner from '../../../src/components/runner'
 import Edit from '../../../src/pages/edit'
 
 describe('edit page', () => {
@@ -55,4 +56,15 @@ describe('edit page', () => {
     expect(sut.find(References).exists()).toBeFalsy()
   })
 
+  it('should show runner if doc type is visualization', () => {
+    doc.data = {type: 'vis'}
+    sut = shallow(<Edit {...props} />).dive()
+    expect(sut.find(Runner).props()).toMatchObject({doc})
+  })
+
+  it('should not show runner if doc type is dataset', () => {
+    doc.data = {type: 'data'}
+    sut = shallow(<Edit {...props} />).dive()
+    expect(sut.find(Runner).exists()).toBeFalsy()
+  })
 })
