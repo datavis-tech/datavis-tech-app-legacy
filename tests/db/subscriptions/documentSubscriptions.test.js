@@ -30,6 +30,9 @@ describe('document subscriptions', () => {
 
   it('should init multiple document subscriptions', () => {
     expect(mockInit).toHaveBeenCalledTimes(ids.length)
+    ids.forEach((id, i) => {
+      expect(mockInit.mock.calls[i][0]).toMatchObject({ id: ids[i] })
+    })
   })
 
   it('should tear down multiple document subscriptions', () => {
