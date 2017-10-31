@@ -1,6 +1,7 @@
 import {DB_DOCUMENTS_COLLECTION} from '../../constants'
 import connection from '../connection'
 
+// Manages subscription to a single ShareDB document.
 export default () => {
   let cleanup
 
