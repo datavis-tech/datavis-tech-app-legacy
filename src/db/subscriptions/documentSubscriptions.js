@@ -6,7 +6,7 @@ export default () => {
   const docs = []
 
   // Returns true if all documents corresponding to ids are defined.
-  const allDocsSubscribed = (ids) => ids.every((id, i) => docs[i])
+  const allDocsSubscribed = ids => ids.every((id, i) => docs[i])
 
   return {
     init,
