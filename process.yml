@@ -1,5 +1,5 @@
 apps:
-  - script: server
+  - script: src/server
     name: 'datavis-tech-server'
     instances: 1
     exec_mode: cluster
