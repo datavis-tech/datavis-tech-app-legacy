@@ -14,21 +14,23 @@ export default () => {
   }
 
   function init ({ids}, {onUpdate, onError}) {
-    subscriptions = ids.map((id, i) => {
-      const subscription = DocumentSubscription()
+    if (ids.length > 0) {
+      subscriptions = ids.map((id, i) => {
+        const subscription = DocumentSubscription()
 
-      subscription.init({id}, {
-        onUpdate: ([doc]) => {
-          docs[i] = doc
-          if (allDocsSubscribed(ids)) {
-            onUpdate(docs)
-          }
-        },
-        onError
+        subscription.init({id}, {
+          onUpdate: ([doc]) => {
+            docs[i] = doc
+            if (allDocsSubscribed(ids)) {
+              onUpdate(docs)
+            }
+          },
+          onError
+        })
+
+        return subscription
       })
-
-      return subscription
-    })
+    }
   }
 
   function tearDown () {
