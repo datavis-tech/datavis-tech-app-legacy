@@ -43,7 +43,7 @@ describe('data page', () => {
   })
 
   it('should pass ownerProfile to ViewPageLayout', () => {
-    expect(sut.ownerProfile).toEqual(mockOwnerProfile)
+    expect(sut.ownerProfile).toEqual(mockOwnerProfile.data)
   })
 
   it('should pass doc to ViewPageLayout', () => {

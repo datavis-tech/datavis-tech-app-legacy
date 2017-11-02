@@ -15,24 +15,30 @@ describe('view page layout', () => {
   let user
   let ownerProfile
   let doc
+  let referenceDocs
   let Content
   let Description
+  let References
 
   beforeEach(() => {
     id = String(Math.random())
     user = fakeUser()
     ownerProfile = {}
     doc = fakeDoc()
+    referenceDocs = Symbol('referenceDocs')
     Content = () => <div>{String(Math.random())}</div>
     Description = () => <div>{String(Math.random())}</div>
+    References = () => <div>{String(Math.random())}</div>
 
     props = {
       id,
       user,
       ownerProfile,
       doc,
+      referenceDocs,
       Content,
-      Description
+      Description,
+      References
     }
 
     sut = shallow(<ViewPageLayout {...props}> <span>TEST</span> </ViewPageLayout>)
@@ -40,11 +46,15 @@ describe('view page layout', () => {
   })
 
   it('should render Content', () => {
-    expect(sut.find(Content).props()).toMatchObject({doc})
+    expect(sut.find(Content).props()).toMatchObject({doc, referenceDocs})
   })
 
   it('should render Description', () => {
     expect(sut.find(Description).props()).toMatchObject({doc})
+  })
+
+  it('should render References', () => {
+    expect(sut.find(References).props()).toMatchObject({referenceDocs})
   })
 
 })

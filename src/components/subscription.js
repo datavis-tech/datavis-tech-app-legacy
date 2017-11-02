@@ -4,7 +4,10 @@ export default class Subscription extends React.Component {
 
   constructor (props) {
     super(props)
-    this.state = {docs: []}
+    this.state = {
+      data: null,
+      isReady: false
+    }
   }
 
   componentDidMount () {
@@ -15,7 +18,7 @@ export default class Subscription extends React.Component {
       subscription.init(
         parameters,
         {
-          onUpdate: (docs) => this.setState({docs})
+          onUpdate: (data) => this.setState({data, isReady: true}) // possibly we might need more sophisticated method to define readiness
         }
       )
 
@@ -27,6 +30,6 @@ export default class Subscription extends React.Component {
   }
 
   render () {
-    return this.props.children({docs: this.state.docs})
+    return this.props.children(this.state)
   }
 }

@@ -17,7 +17,7 @@ describe('document subscription', () => {
   let onUpdate
   let onError
 
-  beforeAll(() => {
+  beforeEach(() => {
 
     mockDoc.on.mockImplementation((_, callback) => callback())
 
@@ -26,6 +26,10 @@ describe('document subscription', () => {
     onError = jest.fn()
     sut = DocumentSubscription()
     sut.init({id}, {onUpdate, onError})
+  })
+
+  afterEach(() => {
+    mockDoc.subscribe.mockClear()
   })
 
   describe('init', () => {
@@ -57,7 +61,7 @@ describe('document subscription', () => {
 
       it('should listen to ops', () => {
         expect(mockDoc.on.mock.calls[0][0]).toEqual('op')
-        expect(onUpdate).toHaveBeenCalledWith([mockDoc])
+        expect(onUpdate).toHaveBeenCalledWith(mockDoc)
       })
 
     })
@@ -67,6 +71,8 @@ describe('document subscription', () => {
   describe('tear down', () => {
 
     beforeEach(() => {
+      // calling subscribe callback
+      mockDoc.subscribe.mock.calls[0][0]()
       sut.tearDown()
     })
 
@@ -79,5 +85,4 @@ describe('document subscription', () => {
     })
 
   })
-
 })

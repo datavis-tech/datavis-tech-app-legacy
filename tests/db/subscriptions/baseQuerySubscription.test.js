@@ -11,7 +11,7 @@ import CallbackTrigger from '../../utils/callbackTrigger'
 import connection from '../../../src/db/connection'
 import BaseQuerySubscription from '../../../src/db/subscriptions/baseQuerySubscription'
 
-describe('references subscription', () => {
+describe('base query subscription', () => {
 
   let sut
 

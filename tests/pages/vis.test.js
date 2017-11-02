@@ -1,53 +1,89 @@
 import React from 'react'
-import {render} from 'enzyme'
-import fakeDoc from '../utils/fakeDoc'
-import fakeUser from '../utils/fakeUser'
-
-const mockId = 'foo'
-const mockDoc = fakeDoc()
-const mockOwnerProfile = fakeUser()
-
-// Mock the ViewPage component with one that invokes children,
-// passing render prop with `ownerProfile` and `doc`.
-// TODO refactor this out? Also in data.test.js
-jest.mock('../../src/components/viewPage/viewPage', () => {
-  return jest.fn(props => {
-    return props.children({
-      ownerProfile: mockOwnerProfile,
-      doc: mockDoc
-    })
-  })
-})
+import {mount, shallow} from 'enzyme'
 
 // Mock ViewPageLayout so we can test its props.
 jest.mock('../../src/components/viewPage/viewPageLayout', () => jest.fn(() => null))
+jest.mock('../../src/db/subscriptions/visSubscription')
 
-import Runner from '../../src/components/runner'
+import VisSubscription from '../../src/db/subscriptions/visSubscription'
+
+import Loader from '../../src/components/loader'
+import Runner from '../../src/components/runner/runner'
+import DocumentPreviewList from '../../src/components/documentPreviewList'
 import ViewPageLayout from '../../src/components/viewPage/viewPageLayout'
+
+import fakeUser from '../utils/fakeUser'
+import fakeSubscription from '../utils/fakeSubscription'
+import CallbackTrigger from '../utils/callbackTrigger'
 import Vis from '../../src/pages/vis'
 
 describe('vis page', () => {
 
   let sut
+  let id
+  let user
+  let subscription
+  let updateTrigger
+  let doc
+  let profile
+  let references
+
+  beforeAll(() => {
+    process.browser = true
+  })
+
+  afterAll(() => {
+    delete process.browser
+  })
+
   beforeEach(() => {
-    render(<Vis id={mockId} />)
-    sut = ViewPageLayout.mock.calls[0][0]
+    id = Symbol('id')
+    user = Symbol('user')
+    doc = Symbol('doc')
+    profile = fakeUser()
+    references = Symbol('references')
+
+    updateTrigger = new CallbackTrigger()
+    subscription = fakeSubscription((_, {onUpdate}) => updateTrigger.set(onUpdate, null, {doc, profile, references}))
+    VisSubscription.mockReturnValue(subscription)
+    sut = mount(<Vis id={id} user={user} />)
   })
 
-  it('should pass Runner as content to ViewPageLayout', () => {
-    expect(sut.Content).toEqual(Runner)
+  it('should show loader when subscription is not ready', () => {
+    expect(sut.find(Loader).props()).toMatchObject({ready: false})
   })
 
-  it('should pass id to ViewPageLayout', () => {
-    expect(sut.id).toEqual(mockId)
-  })
+  describe('when ready', () => {
 
-  it('should pass ownerProfile to ViewPageLayout', () => {
-    expect(sut.ownerProfile).toEqual(mockOwnerProfile)
-  })
+    beforeEach(() => {
+      updateTrigger.trigger()
+      sut.update()
+    })
 
-  it('should pass doc to ViewPageLayout', () => {
-    expect(sut.doc).toEqual(mockDoc)
+    it('should not have loader', () => {
+      expect(sut.find(Loader).props()).toMatchObject({ready: true})
+    })
+
+    it('should render view page layout with doc, profile, references and runner as content', () => {
+      expect(sut.find(ViewPageLayout).props()).toMatchObject({
+        id,
+        user: user,
+        ownerProfile: profile.data,
+        doc: doc,
+        referenceDocs: references,
+        Content: Runner
+      })
+    })
+
+    it('should render references', () => {
+      const References = sut.find(ViewPageLayout).prop('References')
+      const Component = shallow(<References referenceDocs={references} />)
+      expect(Component.find(DocumentPreviewList).props()).toMatchObject({
+        title: 'Datasets',
+        documents: references
+      })
+    })
+
   })
 
 })

@@ -19,10 +19,10 @@ export default () => {
         return
       }
 
-      onUpdate([doc])
+      onUpdate(doc)
 
       // doc passed in array in order to keep update subscription result shape consistent across all subscriptions
-      const onUpdateListener = () => onUpdate([doc])
+      const onUpdateListener = () => onUpdate(doc)
       doc.on('op', onUpdateListener)
 
       cleanup = () => {

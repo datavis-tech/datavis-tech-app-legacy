@@ -1,31 +1,23 @@
+import React from 'react'
 import partition from 'lodash/partition'
-import {List, Divider} from 'semantic-ui-react'
-import Loading from '../../components/loading'
-import DocumentPreview from '../../components/documentPreview'
+import Loader from '../../components/loader'
+import DocumentPreviewList from '../../components/documentPreviewList'
 
 const DocumentsList = ({ documents, documentsLoading }) => {
-  if (documentsLoading) {
-    return <Loading />
-  }
-  if (!documents) {
+
+  if (!documents || !documents.length) {
     return null
   }
 
   const [dataDocuments, visDocuments] = partition(documents, d => d.data.type === 'data')
 
-  // TODO: extract to new component
   return (
-    <div>
-      { dataDocuments.length ? <Divider horizontal>Datasets</Divider> : null }
-      <List divided relaxed>
-        { dataDocuments.map(d => <DocumentPreview key={d.id} {...d} />) }
-      </List>
-
-      { visDocuments.length ? <Divider horizontal>Visualizations</Divider> : null }
-      <List divided relaxed>
-        { visDocuments.map(d => <DocumentPreview key={d.id} {...d} />) }
-      </List>
-    </div>
+    <Loader ready={!documentsLoading}>
+      <div>
+        <DocumentPreviewList title='Datasets' documents={dataDocuments} dataTest='datasets' />
+        <DocumentPreviewList title='Visualizations' documents={visDocuments} dataTest='visualizations' />
+      </div>
+    </Loader>
   )
 }
 
