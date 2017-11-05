@@ -29,7 +29,7 @@ describe('vis subscription', () => {
   let profileUpdatesTrigger
 
   let mockReferencesSubscription
-  let mockReferences
+  let mockReferenceDocs
   let referencesUpdatesTrigger
 
   beforeEach(() => {
@@ -46,7 +46,7 @@ describe('vis subscription', () => {
 
     const referencesMocs = createSubscriptionMocks(ReferencesSubscription, fakeDoc)
     mockReferencesSubscription = referencesMocs[0]
-    mockReferences = referencesMocs[1]
+    mockReferenceDocs = referencesMocs[1]
     referencesUpdatesTrigger = referencesMocs[2]
 
     id = String(Math.random())
@@ -64,10 +64,10 @@ describe('vis subscription', () => {
       expect(onUpdate).not.toHaveBeenCalled()
     })
 
-    it('should not call updates if only doc and profile are available', () => {
+    it('should call updates if doc and profile are available and there are no references', () => {
       docUpdatesTrigger.trigger()
       profileUpdatesTrigger.trigger()
-      expect(onUpdate).not.toHaveBeenCalled()
+      expect(onUpdate).toHaveBeenCalled()
     })
 
     it('should call updates if only doc and profile and references are available', () => {
@@ -77,7 +77,7 @@ describe('vis subscription', () => {
       expect(onUpdate).toHaveBeenCalledWith({
         doc: mockDoc,
         profile: mockProfile,
-        references: mockReferences
+        referenceDocs: mockReferenceDocs
       })
     })
 

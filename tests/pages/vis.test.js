@@ -26,7 +26,7 @@ describe('vis page', () => {
   let updateTrigger
   let doc
   let profile
-  let references
+  let referenceDocs
 
   beforeAll(() => {
     process.browser = true
@@ -41,10 +41,10 @@ describe('vis page', () => {
     user = Symbol('user')
     doc = Symbol('doc')
     profile = fakeUser()
-    references = Symbol('references')
+    referenceDocs = Symbol('referenceDocs')
 
     updateTrigger = new CallbackTrigger()
-    subscription = fakeSubscription((_, {onUpdate}) => updateTrigger.set(onUpdate, null, {doc, profile, references}))
+    subscription = fakeSubscription((_, {onUpdate}) => updateTrigger.set(onUpdate, null, {doc, profile, referenceDocs}))
     VisSubscription.mockReturnValue(subscription)
     sut = mount(<Vis id={id} user={user} />)
   })
@@ -70,17 +70,17 @@ describe('vis page', () => {
         user: user,
         ownerProfile: profile.data,
         doc: doc,
-        referenceDocs: references,
+        referenceDocs: referenceDocs,
         Content: Runner
       })
     })
 
     it('should render references', () => {
       const References = sut.find(ViewPageLayout).prop('References')
-      const Component = shallow(<References referenceDocs={references} />)
+      const Component = shallow(<References referenceDocs={referenceDocs} />)
       expect(Component.find(DocumentPreviewList).props()).toMatchObject({
         title: 'Datasets',
-        documents: references
+        documents: referenceDocs
       })
     })
 
