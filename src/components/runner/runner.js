@@ -2,16 +2,11 @@
 
 import RunnerRenderer from './runnerRenderer'
 import files from './files'
+import {references, content} from '../../db/accessors'
 
-// TODO split this into a common module, use it everywhere.
-// This accessor returns the references for the given document,
-// or an empty array if there are no references.
-const references = doc => doc.data.references || []
-
-// TODO refactor this subscription logic to the page root level.
 export default ({doc, referenceDocs}) => (
   <RunnerRenderer
-    template={doc.data.content}
+    template={content(doc)}
     files={files(references(doc), referenceDocs)}
   />
 )

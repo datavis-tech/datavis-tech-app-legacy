@@ -11,6 +11,7 @@ export default () => {
   }
 
   function init ({id}, {onUpdate, onError}) {
+
     const doc = connection.get(DB_DOCUMENTS_COLLECTION, id)
     doc.subscribe((err) => {
 
@@ -21,13 +22,16 @@ export default () => {
 
       onUpdate(doc)
 
-      // doc passed in array in order to keep update subscription result shape consistent across all subscriptions
       const onUpdateListener = () => onUpdate(doc)
       doc.on('op', onUpdateListener)
+
+      const onErrorListener = error => onError(error.message)
+      doc.on('error', onErrorListener)
 
       cleanup = () => {
         doc.destroy()
         doc.removeListener('op', onUpdateListener)
+        doc.removeListener('error', onErrorListener)
       }
     })
   }

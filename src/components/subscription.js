@@ -18,7 +18,16 @@ export default class Subscription extends React.Component {
       subscription.init(
         parameters,
         {
-          onUpdate: (data) => this.setState({data, isReady: true}) // possibly we might need more sophisticated method to define readiness
+          onUpdate: data => {
+            // possibly we might need more sophisticated method to define readiness
+            this.setState({
+              data,
+              isReady: true
+            })
+          },
+          onError: error => {
+            this.setState({ error })
+          }
         }
       )
 

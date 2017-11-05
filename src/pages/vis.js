@@ -25,7 +25,6 @@ class VisViewPage extends React.Component {
 
   constructor (props) {
     super(props)
-    this.subscription = VisSubscription()
   }
 
   render () {
@@ -33,7 +32,7 @@ class VisViewPage extends React.Component {
     const {id, user} = this.props
 
     return (
-      <Subscription subscription={this.subscription} parameters={{id}}>
+      <Subscription subscription={VisSubscription()} parameters={{id}}>
         {
           ({data, isReady}) => {
             const {doc, profile, referenceDocs} = data || {} // data might be null so object destructuring is not possible
