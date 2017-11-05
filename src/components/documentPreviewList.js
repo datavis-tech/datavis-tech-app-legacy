@@ -4,7 +4,7 @@ import DocumentPreview from './documentPreview'
 
 export default ({title, documents}) => {
 
-  if (documents.length) {
+  if (documents && documents.length) {
     return (
       <div>
         <Divider horizontal>{title}</Divider>

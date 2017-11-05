@@ -36,7 +36,7 @@ class VisViewPage extends React.Component {
       <Subscription subscription={this.subscription} parameters={{id}}>
         {
           ({data, isReady}) => {
-            const {doc, profile, references} = data || {} // data might be null so object destructuring is not possible
+            const {doc, profile, referenceDocs} = data || {} // data might be null so object destructuring is not possible
             return (
               <Loader ready={isReady}>
                 <ViewPageLayout
@@ -44,7 +44,7 @@ class VisViewPage extends React.Component {
                   user={user}
                   ownerProfile={profile ? profile.data : null} // TODO need accessors to avoid access to sharedb specific data field
                   doc={doc}
-                  referenceDocs={references}
+                  referenceDocs={referenceDocs}
                   Content={Runner}
                   References={({referenceDocs}) => <DocumentPreviewList title='Datasets' documents={referenceDocs} />}
                 />

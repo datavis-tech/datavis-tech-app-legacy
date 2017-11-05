@@ -1,6 +1,7 @@
 import DocumentSubscription from './documentSubscription'
 import ProfileSubscription from './profileSubscription'
 import ReferencesSubscription from './documentSubscriptions'
+import {referenceIds, allReferencesLoaded} from '../accessors'
 
 export default () => {
 
@@ -20,19 +21,19 @@ export default () => {
       onUpdate (doc) {
 
         let profile
-        let references
+        let referenceDocs
 
         profileSubscription.init({id: doc.data.owner}, {
           onUpdate (receivedProfile) {
             profile = receivedProfile
-            notifyAboutUpdates(doc, profile, references, onUpdate)
+            notifyAboutUpdates(doc, profile, referenceDocs, onUpdate)
           }
         })
 
-        referencesSubscription.init({ids: doc.data.references.map(({id}) => id)}, {
-          onUpdate (receivedReferences) {
-            references = receivedReferences
-            notifyAboutUpdates(doc, profile, references, onUpdate)
+        referencesSubscription.init({ids: referenceIds(doc)}, {
+          onUpdate (receivedReferenceDocs) {
+            referenceDocs = receivedReferenceDocs
+            notifyAboutUpdates(doc, profile, referenceDocs, onUpdate)
           }
         })
 
@@ -46,9 +47,9 @@ export default () => {
     referencesSubscription.tearDown()
   }
 
-  function notifyAboutUpdates (doc, profile, references, onUpdate) {
-    if (doc && profile && references) {
-      onUpdate({doc, profile, references})
+  function notifyAboutUpdates (doc, profile, referenceDocs, onUpdate) {
+    if (doc && profile && allReferencesLoaded(doc, referenceDocs)) {
+      onUpdate({doc, profile, referenceDocs})
     }
   }
 
