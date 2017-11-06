@@ -23,10 +23,6 @@ class VisViewPage extends React.Component {
     }
   }
 
-  constructor (props) {
-    super(props)
-  }
-
   render () {
 
     const {id, user} = this.props

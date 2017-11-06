@@ -138,10 +138,6 @@ class EditPage extends React.Component {
     }
   }
 
-  constructor (props) {
-    super(props)
-  }
-
   // This gets called after the user clicks through the delete confirm modal.
   deleteDocument (doc) {
     if (doc) {
@@ -170,7 +166,7 @@ class EditPage extends React.Component {
           ({data, isReady, error}) => {
             const {
               doc,
-              profile,
+              // TODO refactor subscription to optionally omit profile - not necessary here!
               referenceDocs
             } = data || {} // data might be null
 
