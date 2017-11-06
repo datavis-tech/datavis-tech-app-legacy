@@ -14,7 +14,7 @@ describe('db accessors', () => {
     expect(references({})).toEqual([])
   })
   it('references should return references if references defined', () => {
-    expect(references({ data: { references: ['a', 'b'] }})).toEqual(['a', 'b'])
+    expect(references({ data: { references: ['a', 'b'] } })).toEqual(['a', 'b'])
   })
 
   // referenceIds
@@ -26,7 +26,7 @@ describe('db accessors', () => {
   })
   it('referenceIds should return ids of references if references defined', () => {
     const references = [{ id: '1' }, { id: '2' }]
-    expect(referenceIds({ data: { references }})).toEqual(['1', '2'])
+    expect(referenceIds({ data: { references } })).toEqual(['1', '2'])
   })
 
   // allReferencesLoaded
@@ -37,17 +37,17 @@ describe('db accessors', () => {
     expect(allReferencesLoaded({})).toEqual(true)
   })
   it('allReferencesLoaded should return true if references and referenceDocs defined', () => {
-    const doc = { data: { references: [{ id: '1' }, { id: '2' }]}}
+    const doc = { data: { references: [{ id: '1' }, { id: '2' }] } }
     const referenceDocs = [{}, {}]
     expect(allReferencesLoaded(doc, referenceDocs)).toEqual(true)
   })
   it('allReferencesLoaded should return false if references and referenceDocs is []', () => {
-    const doc = { data: { references: [{ id: '1' }, { id: '2' }]}}
+    const doc = { data: { references: [{ id: '1' }, { id: '2' }] } }
     const referenceDocs = []
     expect(allReferencesLoaded(doc, referenceDocs)).toEqual(false)
   })
   it('allReferencesLoaded should return false if references and referenceDocs is null', () => {
-    const doc = { data: { references: [{ id: '1' }, { id: '2' }]}}
+    const doc = { data: { references: [{ id: '1' }, { id: '2' }] } }
     const referenceDocs = null
     expect(allReferencesLoaded(doc, referenceDocs)).toBeFalsy()
   })
