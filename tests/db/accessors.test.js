@@ -1,6 +1,7 @@
 import {
   references,
-  referenceIds
+  referenceIds,
+  allReferencesLoaded
 } from '../../src/db/accessors'
 
 describe('db accessors', () => {
@@ -26,6 +27,29 @@ describe('db accessors', () => {
   it('referenceIds should return ids of references if references defined', () => {
     const references = [{ id: '1' }, { id: '2' }]
     expect(referenceIds({ data: { references }})).toEqual(['1', '2'])
+  })
+
+  // allReferencesLoaded
+  it('allReferencesLoaded should return true if null passed as document', () => {
+    expect(allReferencesLoaded(null)).toEqual(true)
+  })
+  it('allReferencesLoaded should return true if no references defined', () => {
+    expect(allReferencesLoaded({})).toEqual(true)
+  })
+  it('allReferencesLoaded should return true if references and referenceDocs defined', () => {
+    const doc = { data: { references: [{ id: '1' }, { id: '2' }]}}
+    const referenceDocs = [{}, {}]
+    expect(allReferencesLoaded(doc, referenceDocs)).toEqual(true)
+  })
+  it('allReferencesLoaded should return false if references and referenceDocs is []', () => {
+    const doc = { data: { references: [{ id: '1' }, { id: '2' }]}}
+    const referenceDocs = []
+    expect(allReferencesLoaded(doc, referenceDocs)).toEqual(false)
+  })
+  it('allReferencesLoaded should return false if references and referenceDocs is null', () => {
+    const doc = { data: { references: [{ id: '1' }, { id: '2' }]}}
+    const referenceDocs = null
+    expect(allReferencesLoaded(doc, referenceDocs)).toBeFalsy()
   })
 
 })
