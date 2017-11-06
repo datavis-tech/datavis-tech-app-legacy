@@ -1,13 +1,10 @@
 import DocumentSubscriptions from '../../../src/db/subscriptions/documentSubscriptions'
 import fakeDoc from '../../utils/fakeDoc'
+import fakeSubscription from '../../utils/fakeSubscription'
 
-const mockInit = jest.fn()
-const mockTearDown = jest.fn()
+const mockSubscription = fakeSubscription()
 jest.mock('../../../src/db/subscriptions/documentSubscription', () => {
-  return jest.fn(() => ({
-    init: mockInit,
-    tearDown: mockTearDown
-  }))
+  return jest.fn(() => mockSubscription)
 })
 
 import DocumentSubscription from '../../../src/db/subscriptions/documentSubscription'
@@ -30,9 +27,9 @@ describe('document subscriptions', () => {
   })
 
   it('should init multiple document subscriptions', () => {
-    expect(mockInit).toHaveBeenCalledTimes(ids.length)
+    expect(mockSubscription.init).toHaveBeenCalledTimes(ids.length)
     ids.forEach((id, i) => {
-      expect(mockInit.mock.calls[i][0]).toMatchObject({ id: ids[i] })
+      expect(mockSubscription.init.mock.calls[i][0]).toMatchObject({ id: ids[i] })
     })
   })
 
@@ -41,7 +38,7 @@ describe('document subscriptions', () => {
     // calling subscribe callback
     const mockDocs = ids.map((id, i) => {
       const mockDoc = fakeDoc({id, data: {}})
-      mockInit.mock.calls[i][1].onUpdate([mockDoc])
+      mockSubscription.init.mock.calls[i][1].onUpdate(mockDoc)
       return mockDoc
     })
 
@@ -50,8 +47,9 @@ describe('document subscriptions', () => {
   })
 
   it('should tear down multiple document subscriptions', () => {
-    expect(mockTearDown).toHaveBeenCalledTimes(0)
+    expect(mockSubscription.tearDown).toHaveBeenCalledTimes(0)
     sut.tearDown()
-    expect(mockTearDown).toHaveBeenCalledTimes(ids.length)
+    expect(mockSubscription.tearDown).toHaveBeenCalledTimes(ids.length)
   })
+
 })

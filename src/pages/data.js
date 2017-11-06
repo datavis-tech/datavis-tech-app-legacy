@@ -19,7 +19,7 @@ class DataViewPage extends React.Component {
           <ViewPageLayout
             id={this.props.id}
             user={this.props.user}
-            ownerProfile={ownerProfile}
+            ownerProfile={ownerProfile ? ownerProfile.data : null}
             doc={doc}
             Content={DataViewer}
           />

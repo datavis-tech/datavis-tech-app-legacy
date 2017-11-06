@@ -18,7 +18,7 @@ export default () => {
       const subscription = DocumentSubscription()
 
       subscription.init({id}, {
-        onUpdate: ([doc]) => {
+        onUpdate: (doc) => {
           docs[i] = doc
           if (allDocsSubscribed(ids)) {
             onUpdate(docs)

@@ -1,7 +1,11 @@
 import React from 'react'
+import VisSubscription from '../db/subscriptions/visSubscription'
 import Page from '../components/page'
-import {ViewPage, ViewPageLayout} from '../components/viewPage'
-import Runner from '../components/runner'
+import Subscription from '../components/subscription'
+import {ViewPageLayout} from '../components/viewPage'
+import Loader from '../components/loader'
+import Runner from '../components/runner/runner'
+import DocumentPreviewList from '../components/documentPreviewList'
 
 class VisViewPage extends React.Component {
 
@@ -20,18 +24,30 @@ class VisViewPage extends React.Component {
   }
 
   render () {
+
+    const {id, user} = this.props
+
     return (
-      <ViewPage id={this.props.id}>
-        { ({ownerProfile, doc}) => (
-          <ViewPageLayout
-            id={this.props.id}
-            user={this.props.user}
-            ownerProfile={ownerProfile}
-            doc={doc}
-            Content={Runner}
-          />
-        )}
-      </ViewPage>
+      <Subscription subscription={VisSubscription()} parameters={{id}}>
+        {
+          ({data, isReady}) => {
+            const {doc, profile, referenceDocs} = data || {} // data might be null so object destructuring is not possible
+            return (
+              <Loader ready={isReady}>
+                <ViewPageLayout
+                  id={id}
+                  user={user}
+                  ownerProfile={profile ? profile.data : null} // TODO need accessors to avoid access to sharedb specific data field
+                  doc={doc}
+                  referenceDocs={referenceDocs}
+                  Content={Runner}
+                  References={({referenceDocs}) => <DocumentPreviewList title='Datasets' documents={referenceDocs} />}
+                />
+              </Loader>
+            )
+          }
+        }
+      </Subscription>
     )
   }
 }

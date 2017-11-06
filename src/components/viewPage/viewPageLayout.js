@@ -21,17 +21,18 @@ const OwnerAvatarLink = ({ user }) => {
 
 /**
  * Component which represents layout for components of View Page family.
- * It has two slots -- Content and Description which allows to fill in with appropriate sections
+ * It has 3 slots -- Content, Description and References which allows to fill in with appropriate sections
  */
-const ViewPageLayout = ({id, user, ownerProfile, doc, Content, Description}) => (
+const ViewPageLayout = ({id, user, ownerProfile, doc, referenceDocs, ...slots}) => (
   <Layout title={(doc.data.title || 'Loading...') + ' | Datavis.tech'} user={user}>
     <div>
       <Header as='h1'>{doc.data.title}</Header>
-      <Content doc={doc} />
+      <slots.Content doc={doc} referenceDocs={referenceDocs} />
       <Grid columns={2} divided>
         <Grid.Row>
           <Grid.Column width={12}>
-            <Description doc={doc} />
+            <slots.Description doc={doc} />
+            <slots.References referenceDocs={referenceDocs} />
           </Grid.Column>
           <Grid.Column width={4}>
             <OwnerAvatarLink user={ownerProfile} />
@@ -48,7 +49,8 @@ const ViewPageLayout = ({id, user, ownerProfile, doc, Content, Description}) => 
 )
 
 ViewPageLayout.defaultProps = {
-  Description: ViewPageDescription
+  Description: ViewPageDescription,
+  References: () => null
 }
 
 ViewPageLayout.propTypes = {

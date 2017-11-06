@@ -26,7 +26,7 @@ describe('avatar link', () => {
     let user
 
     beforeEach(() => {
-      user = fakeUser()
+      user = fakeUser().data
       sut.setProps({user})
     })
 
