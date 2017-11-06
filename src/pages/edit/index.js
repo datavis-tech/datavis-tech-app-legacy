@@ -36,7 +36,7 @@ const PreviewField = ({doc, referenceDocs}) => {
   return null
 }
 
-const ReferencesField= ({doc}) => {
+const ReferencesField = ({doc}) => {
   if (type(doc) === VIS_DOC_TYPE) {
     return [
       <Form.Field key='references-label'>
