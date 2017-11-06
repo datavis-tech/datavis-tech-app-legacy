@@ -1,7 +1,11 @@
 import React from 'react'
 import { List } from 'semantic-ui-react'
-import AddCollaboratorModal from './addCollaboratorModal'
+import CustomModal from './../../components/customModal'
+import AutoCompleter from './../../components/autoCompleter'
 import CollaboratorListItem from './collaboratorListItem'
+
+import userRenderer from '../../components/autoCompleter/rendrer/userRenderer'
+import createUsersQuery from '../../db/createUsersQuery'
 
 class Collaborators extends React.Component {
 
@@ -26,7 +30,11 @@ class Collaborators extends React.Component {
   }
 
   // This gets invoked when the user clicks the "Add" button.
-  addCollaborator (id) {
+  addCollaborator (data) {
+    if (!data.collaborator) {
+      return
+    }
+
     const doc = this.props.doc
 
     // If collaborators is undefined, then create an empty array.
@@ -40,7 +48,7 @@ class Collaborators extends React.Component {
     // Push an empty reference object onto the collaborators array.
     doc.submitOp([{
       p: ['collaborators', doc.data.collaborators.length],
-      li: { id }
+      li: data.collaborator.id
     }])
 
   }
@@ -68,7 +76,9 @@ class Collaborators extends React.Component {
             ))
           }
         </List>
-        <AddCollaboratorModal addCollaborator={this.addCollaborator} />
+        <CustomModal title='Add Collaborator' onSubmit={this.addCollaborator} >
+          <AutoCompleter field='collaborator' resultRendrer={userRenderer} resultSource={createUsersQuery} />
+        </CustomModal>
       </div>
     )
   }

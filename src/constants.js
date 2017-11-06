@@ -19,6 +19,8 @@ const DB_USERS_COLLECTION = 'users'
 // The collection containing feedback entries.
 const DB_FEEDBACK_COLLECTION = 'feedback'
 
+const AUTOCOMPLETER_LIMIT = 10
+
 module.exports = {
   AUTH_PATH,
   AUTH_PATH_GITHUB,
@@ -28,5 +30,6 @@ module.exports = {
   DB_DOCUMENTS_COLLECTION,
   DB_DOCUMENTS_PROJECTION,
   DB_USERS_COLLECTION,
-  DB_FEEDBACK_COLLECTION
+  DB_FEEDBACK_COLLECTION,
+  AUTOCOMPLETER_LIMIT
 }
