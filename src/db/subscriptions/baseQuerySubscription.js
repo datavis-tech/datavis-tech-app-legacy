@@ -8,6 +8,7 @@ export default (collectionName, queryFactory) => {
     tearDown
   }
 
+  // TODO: add usage of onError
   function init (parameters, {onUpdate, onError}) {
     query = connection.createSubscribeQuery(collectionName, queryFactory(parameters))
 

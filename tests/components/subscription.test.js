@@ -1,6 +1,7 @@
 import React from 'react'
 import {mount} from 'enzyme'
 
+import fakeSubscription from '../utils/fakeSubscription'
 import Subscription from '../../src/components/subscription'
 
 describe('subscription', () => {
@@ -26,10 +27,7 @@ describe('subscription', () => {
       b: Symbol('b')
     }
 
-    subscription = {
-      init: jest.fn(),
-      tearDown: jest.fn()
-    }
+    subscription = fakeSubscription()
 
     props = {
       subscription,
@@ -56,21 +54,21 @@ describe('subscription', () => {
       expect(subscriptionParameters).toEqual(parameters)
     })
 
-    it('should render children with empty docs', () => {
-      expect(children).toHaveBeenCalledWith({docs: []})
+    it('should render children with empty state', () => {
+      expect(children).toHaveBeenCalledWith({data: null, isReady: false})
     })
 
     describe('when some changes are arrived', () => {
 
-      let docs
+      let update
 
       beforeEach(() => {
-        docs = [Symbol('doc')]
-        subscriptionCallbacks.onUpdate(docs)
+        update = Symbol('update')
+        subscriptionCallbacks.onUpdate(update)
       })
 
       it('should render children with received docs', () => {
-        expect(children).toHaveBeenCalledWith({docs})
+        expect(children).toHaveBeenCalledWith({data: update, isReady: true})
       })
 
     })

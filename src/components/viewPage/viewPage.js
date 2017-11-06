@@ -16,13 +16,12 @@ class ViewPage extends React.Component {
     return (
       <Subscription subscription={DocumentSubscription()} parameters={{id: this.props.id}}>
         {
-          ({docs: [doc]}) => (
+          ({data: doc}) => (
             doc
               ? (
                 <Subscription subscription={ProfileSubscription()} parameters={{id: doc.owner}}>
                   {
-                    ({docs}) => {
-                      const ownerProfile = docs[0] ? docs[0].data : null
+                    ({data: ownerProfile}) => {
                       return this.props.children({doc, ownerProfile})
                     }
                   }

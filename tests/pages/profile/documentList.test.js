@@ -1,44 +1,54 @@
 import React from 'react'
 import {shallow} from 'enzyme'
-import {random, range} from 'lodash'
-
-import DocumentPreview from '../../../src/components/documentPreview'
+import fakeDoc from '../../utils/fakeDoc'
+import Loader from '../../../src/components/loader'
 import DocumentsList from '../../../src/pages/profile/documentsList'
 
 describe('document list', () => {
 
   let sut
   let documents
+  let documentsLoading
 
-  describe('data documents', () => {
-    testDocumentPreviews('data')
+  beforeEach(() => {
+    documents = []
+    sut = shallow(<DocumentsList documents={documents} />)
   })
 
-  describe('vis documents', () => {
-    testDocumentPreviews('vis')
+  it('should render nothing when there are no documents', () => {
+    expect(sut.html()).toEqual(null)
   })
 
-  function testDocumentPreviews (type) {
+  describe('when documents are present', () => {
+
+    let visDoc
+    let dataDoc
+
     beforeEach(() => {
-      documents = createRandomDocumentArray(type)
-      sut = shallow(<DocumentsList documents={documents} />)
+      documentsLoading = true
+      visDoc = fakeDoc({data: {type: 'vis'}})
+      dataDoc = fakeDoc({data: {type: 'data'}})
+      documents = [visDoc, dataDoc]
+
+      sut.setProps({documents, documentsLoading})
     })
 
-    it('should create N document previews', () => {
-      expect(sut.find(DocumentPreview).length).toEqual(documents.length)
+    it('should contain loader', () => {
+      expect(sut.find(Loader).prop('ready')).toEqual(!documentsLoading)
     })
 
-    it('should render N document previews with proper document', () => {
-      sut.find(DocumentPreview).forEach((doc, i) => {
-        expect(doc.props()).toMatchObject(documents[i])
+    it('should contain datasets', () => {
+      expect(sut.findWhere(n => n.prop('title') === 'Datasets').props()).toMatchObject({
+        documents: [dataDoc]
       })
     })
-  }
+
+    it('should contain visualiztions', () => {
+      expect(sut.findWhere(n => n.prop('title') === 'Visualizations').props()).toMatchObject({
+        documents: [visDoc]
+      })
+    })
+
+  })
 
 })
-
-function createRandomDocumentArray (type) {
-  return range(random(2, 10)).map(_ => (
-    {id: String(Math.random()), data: {type, description: String(Math.random())}})
-  )
-}
