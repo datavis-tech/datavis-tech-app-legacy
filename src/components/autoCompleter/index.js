@@ -1,102 +1,110 @@
 /**
  * Auto Completer Component to display list on the basis of user input 
- * using rendrer and query
+ * using provided renderer and query
  */
 
 import React from 'react'
-import { Form, Search } from 'semantic-ui-react'
+import PropTypes from 'prop-types'
 
-import _ from 'lodash'
-
+import { Form, Search, Label } from 'semantic-ui-react'
 import { AUTOCOMPLETER_LIMIT } from '../../constants'
 
 export default class AutoCompleter extends React.Component {
 
   constructor (props) {
     super(props)
-  }
- 
-  //Initialize search filter with default as close
-  componentWillMount() {
-    this.resetComponent()
+
+    this.state = this.getInitialState()
+
+    this.reset = this.reset.bind(this)
+    this.sendResult = this.sendResult.bind(this)
+
+    this.handleResultSelect = this.handleResultSelect.bind(this)
+    this.handleSearchChange = this.handleSearchChange.bind(this)
   }
 
-  //Reset the Search Filter
-  resetComponent = (settings = {}) => {
-    const { field } = this.props
-    
-    this.setState({
-      isLoading: false, 
-      results: [], 
+  getInitialState () {
+    return {
+      loading: false,
+      results: [],
       value: ''
+    }
+  }
+
+  // Reset the Search Filter
+  reset () {
+    this.setState(this.getInitialState())
+  }
+
+  // sending result back to parent component
+  sendResult (result) {
+    const { field, onInput } = this.props
+    onInput({field, result})
+  }
+
+  // Handling Result selection
+  handleResultSelect (e, { result }) {
+    this.setState({
+      value: result.title
     })
 
-    this.props.onSelect({field, result: null})
+    this.sendResult(result)
   }
 
-  //open the modal
-  open = (event) => {
-    event.preventDefault() // Prevent form submission.
+  handleSearchChange (e, { value }) {
+
+    // Setting Loader
     this.setState({
-      show: true
+      loading: true,
+      value
     })
-  }
 
-  // Close the modal
-  close = () => {
-    this.setState({
-      show: false
-    });
-  }
+    if (value.length < 1) {
+      this.sendResult(null)
+      return this.reset()
+    }
 
-  //Handling Result selection
-  handleResultSelect = (e, { result }) => {
-    const { field } = this.props
-    
-    this.setState({ 
-      value: result.title 
-    }) 
-    
-    this.props.onSelect({field, result})
-  }
-  
-  handleSearchChange = (e, { value }) => {
-    this.setState({ isLoading: true, value })
-    if (value.length < 1) return this.resetComponent()
-    
-    this.props.resultSource({
-        username: {$regex: `^${this.state.value}`}, 
-        $limit: AUTOCOMPLETER_LIMIT
-      }, (results) => {
-      this.setState({
-        isLoading: false,
-        results: results,
-      })
-    });
+    console.log(this.props.resultSource)
+    this.props.resultSource.init({value}, {
+      onUpdate: (results) => {
+        console.log(results)
+        // Rendering the fetched results
+        this.setState({
+          loading: false,
+          results: results
+        })
+      }
+    })
   }
 
   render () {
-    const {
-      open,
-      close,
-      state: { isLoading, show, results, value, selected }
-    } = this
 
-    const { title, resultRenderer } = this.props;
-    
+    const { resultRenderer, label } = this.props
+
     return (
       <Form.Field>
-        <label>Username</label>
+        <label>{label}</label>
         <Search
-          resultRenderer = {resultRenderer}
-          loading={isLoading}
-          fluid
+          {...this.state}
+          resultRenderer={resultRenderer}
           onResultSelect={this.handleResultSelect}
           onSearchChange={this.handleSearchChange}
-          results={results}
-          value={value}
+          fluid
         />
       </Form.Field>
     )
   }
+}
+
+AutoCompleter.propTypes = {
+  label: PropTypes.string,
+  field: PropTypes.string.isRequired,
+  resultRenderer: PropTypes.func,
+  resultSource: PropTypes.func.isRequired,
+  onInput: PropTypes.func.isRequired
+}
+
+AutoCompleter.defaultProps = {
+  label: '',
+  resultRenderer: ({ title }) => <Label content={title} />
 }
