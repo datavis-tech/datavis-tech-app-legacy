@@ -36,4 +36,4 @@ export const type = doc => data(doc).type || 'vis'
 export const content = doc => data(doc).content || ''
 
 // Access the id of a document.
-export const id = doc => doc && doc.id || ''
+export const id = doc => (doc && doc.id) || ''
