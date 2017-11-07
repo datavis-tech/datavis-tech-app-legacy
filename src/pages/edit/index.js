@@ -1,10 +1,5 @@
 import React from 'react'
-import {
-  Form,
-  Grid,
-  Button,
-  Message
-} from 'semantic-ui-react'
+import { Form, Grid, Button } from 'semantic-ui-react'
 import { Link, Router } from '../../routes'
 import Page from '../../components/page'
 import Layout from '../../components/layout'
@@ -12,44 +7,14 @@ import StringBinding from '../../components/stringBinding'
 import CodeMirrorBinding from '../../components/codeMirrorBinding'
 import Subscription from '../../components/subscription'
 import DeleteConfirmModal from './deleteConfirmModal'
-import References from './references'
 import Collaborators from './collaborators'
 import DocTypeEditor from './docTypeEditor'
 import Loader from '../../components/loader'
-import Runner from '../../components/runner/runner'
 import VisSubscription from '../../db/subscriptions/visSubscription'
-import {title, type, id} from '../../db/accessors.js'
-
-// TODO move this into src/constants, and do the same for DATA_DOC_TYPE
-const VIS_DOC_TYPE = 'vis'
-
-const PreviewField = ({doc, referenceDocs}) => {
-  if (type(doc) === VIS_DOC_TYPE) {
-    return (
-      <Form.Field>
-        <label>Preview</label>
-        <Runner doc={doc} referenceDocs={referenceDocs} />
-      </Form.Field>
-    )
-  }
-
-  return null
-}
-
-const ReferencesField = ({doc}) => {
-  if (type(doc) === VIS_DOC_TYPE) {
-    return [
-      <Form.Field key='references-label'>
-        <label>References</label>
-      </Form.Field>,
-      <Form.Field key='references' inline>
-        <References doc={doc} />
-      </Form.Field>
-    ]
-  }
-
-  return null
-}
+import { title, type, id } from '../../db/accessors.js'
+import ErrorMessage from './errorMessage'
+import PreviewField from './previewField'
+import ReferencesField from './referencesField'
 
 // The Form in the body of the page.
 const Body = ({doc, referenceDocs, deleteDocument}) => (
@@ -110,26 +75,6 @@ const Body = ({doc, referenceDocs, deleteDocument}) => (
     </Form.Field>
   </Form>
 )
-
-const ErrorMessage = ({error}) => {
-  if (error) {
-    return (
-      <Message
-        error
-        style={{
-          position: 'fixed',
-          bottom: '0px',
-          zIndex: 6 // Make this appear above CodeMirror editor.
-        }}
-      >
-        <Message.Header>Error</Message.Header>
-        <p>{error}</p>
-      </Message>
-    )
-  }
-
-  return null
-}
 
 class EditPage extends React.Component {
   static async getInitialProps ({query}) {
