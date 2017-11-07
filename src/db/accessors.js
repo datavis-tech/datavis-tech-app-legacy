@@ -23,17 +23,17 @@ export const allReferencesLoaded = (doc, referenceDocs) => {
 }
 
 // Access the title of a document.
-export const title = doc => data(doc).title
+export const title = doc => data(doc).title || ''
 
 // Access the description of a document.
-export const description = doc => data(doc).description
+export const description = doc => data(doc).description || ''
 
 // Access the type of a document.
 // If type is undefined, treat it as 'vis'.
 export const type = doc => data(doc).type || 'vis'
 
 // Access the content of a document.
-export const content = doc => data(doc).content
+export const content = doc => data(doc).content || ''
 
 // Access the id of a document.
-export const id = doc => doc.id
+export const id = doc => (doc && doc.id) || ''

@@ -18,7 +18,7 @@ import DocTypeEditor from './docTypeEditor'
 import Loader from '../../components/loader'
 import Runner from '../../components/runner/runner'
 import VisSubscription from '../../db/subscriptions/visSubscription'
-import {title, type, id} from '../../db/accessors.js'
+import { title, type, id } from '../../db/accessors'
 
 // TODO move this into src/constants, and do the same for DATA_DOC_TYPE
 const VIS_DOC_TYPE = 'vis'
