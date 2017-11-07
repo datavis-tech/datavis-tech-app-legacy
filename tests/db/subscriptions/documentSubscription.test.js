@@ -19,7 +19,9 @@ describe('document subscription', () => {
 
   beforeEach(() => {
 
-    mockDoc.on.mockImplementation((_, callback) => callback())
+    mockDoc.on.mockImplementation((event, callback) => {
+      callback(event === 'error' ? new Error() : undefined)
+    })
 
     id = String(Math.random())
     onUpdate = jest.fn()
@@ -59,7 +61,7 @@ describe('document subscription', () => {
         mockDoc.subscribe.mock.calls[0][0]()
       })
 
-      it.skip('should listen to ops', () => {
+      it('should listen to ops', () => {
         expect(mockDoc.on.mock.calls[0][0]).toEqual('op')
         expect(onUpdate).toHaveBeenCalledWith(mockDoc)
       })
@@ -76,11 +78,11 @@ describe('document subscription', () => {
       sut.tearDown()
     })
 
-    it.skip('should remove on update listener', () => {
+    it('should remove on update listener', () => {
       expect(mockDoc.removeListener).toHaveBeenCalled()
     })
 
-    it.skip('should destroy connection with document', () => {
+    it('should destroy connection with document', () => {
       expect(mockDoc.destroy).toHaveBeenCalled()
     })
 
