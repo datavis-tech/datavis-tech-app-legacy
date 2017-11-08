@@ -19,6 +19,12 @@ const DB_USERS_COLLECTION = 'users'
 // The collection containing feedback entries.
 const DB_FEEDBACK_COLLECTION = 'feedback'
 
+// The value of the 'type' field in documents
+// when the document is a visualization.
+const VIS_DOC_TYPE = 'vis'
+
+// We're not using nice ES6 exports
+// because this file needs to be 'require'd in Node.
 module.exports = {
   AUTH_PATH,
   AUTH_PATH_GITHUB,
@@ -28,5 +34,6 @@ module.exports = {
   DB_DOCUMENTS_COLLECTION,
   DB_DOCUMENTS_PROJECTION,
   DB_USERS_COLLECTION,
-  DB_FEEDBACK_COLLECTION
+  DB_FEEDBACK_COLLECTION,
+  VIS_DOC_TYPE
 }
