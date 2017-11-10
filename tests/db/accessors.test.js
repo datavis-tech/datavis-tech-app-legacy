@@ -1,14 +1,38 @@
 import {
+  id,
+  hasData,
   references,
   referenceIds,
   allReferencesLoaded,
   title,
   description,
   content,
-  id
+  owner,
+  collaborators
 } from '../../src/db/accessors'
 
 describe('accessors', () => {
+
+  describe('id', () => {
+    it('should return empty string if id not defined', () => {
+      expect(id(null)).toEqual('')
+    })
+    it('should return id if id is defined', () => {
+      expect(id({ id: 'foo' })).toEqual('foo')
+    })
+  })
+
+  describe('hasData', () => {
+    it('should return false if null passed as document', () => {
+      expect(hasData(null)).toEqual(false)
+    })
+    it('should return false if no data defined', () => {
+      expect(hasData({})).toEqual(false)
+    })
+    it('should return true if data defined', () => {
+      expect(hasData({ data: {} })).toEqual(true)
+    })
+  })
 
   describe('references', () => {
     it('should return empty array if null passed as document', () => {
@@ -86,12 +110,24 @@ describe('accessors', () => {
     })
   })
 
-  describe('id', () => {
-    it('should return empty string if id not defined', () => {
-      expect(id(null)).toEqual('')
+  describe('owner', () => {
+    it('should return empty string if owner not defined', () => {
+      expect(owner(null)).toEqual('')
     })
-    it('should return id if id is defined', () => {
-      expect(id({ id: 'foo' })).toEqual('foo')
+    it('should return owner if owner is defined', () => {
+      expect(owner({ data: { owner: 'foo' } })).toEqual('foo')
+    })
+  })
+
+  describe('collaborators', () => {
+    it('should return empty array if null passed as document', () => {
+      expect(collaborators(null)).toEqual([])
+    })
+    it('should return empty array if no collaborators defined', () => {
+      expect(collaborators({})).toEqual([])
+    })
+    it('should return collaborators if collaborators defined', () => {
+      expect(collaborators({ data: { collaborators: ['a', 'b'] } })).toEqual(['a', 'b'])
     })
   })
 })

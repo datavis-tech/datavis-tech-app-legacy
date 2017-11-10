@@ -6,8 +6,8 @@
 // returning an empty object if passed undefined as doc.
 const data = doc => (doc && doc.data) ? doc.data : {}
 
-// Returns true if the given document has data loaded.
-export const hasData = doc => !!data(doc)
+// Returns true if the given document has data loaded, false otherwise.
+export const hasData = doc => !!(doc && doc.data)
 
 // Access the id of a document.
 export const id = doc => (doc && doc.id) || ''
@@ -54,7 +54,3 @@ export const owner = doc => data(doc).owner || ''
 
 // Access the collaborators of a document.
 export const collaborators = doc => data(doc).collaborators || []
-
-/**************
- * For Users. *
- **************/
