@@ -40,6 +40,8 @@ export default (Page) => {
     }
 
     render () {
+      // TODO subscribe to the user as a ShareDB document,
+      // and pass the ShareDB document down through children.
       return <Page {...this.props} />
     }
   }
