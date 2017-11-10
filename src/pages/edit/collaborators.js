@@ -2,6 +2,7 @@ import React from 'react'
 import { List } from 'semantic-ui-react'
 import AddCollaboratorModal from './addCollaboratorModal'
 import CollaboratorListItem from './collaboratorListItem'
+import { collaborators, id } from '../../db/accessors'
 
 class Collaborators extends React.Component {
 
@@ -10,12 +11,12 @@ class Collaborators extends React.Component {
     const doc = this.props.doc
 
     this.state = {
-      collaborators: doc.data.collaborators || []
+      collaborators: collaborators(doc)
     }
 
     const updateState = () => {
       this.setState({
-        collaborators: doc.data.collaborators || []
+        collaborators: collaborators(doc)
       })
     }
 
@@ -26,6 +27,7 @@ class Collaborators extends React.Component {
   }
 
   // This gets invoked when the user clicks the "Add" button.
+  // TODO refactor this into an "action"
   addCollaborator (id) {
     const doc = this.props.doc
 
@@ -47,10 +49,12 @@ class Collaborators extends React.Component {
 
   // When the user clicks the "Remove" button,
   // remove the clicked element from the array.
+  // TODO refactor this into an "action"
   removeCollaborator (index) {
-    this.props.doc.submitOp([{
+    const doc = this.props.doc
+    doc.submitOp([{
       p: ['collaborators', index],
-      ld: this.props.doc.data.collaborators[index]
+      ld: collaborators(doc)[index]
     }])
   }
 
@@ -62,7 +66,7 @@ class Collaborators extends React.Component {
             this.state.collaborators.map((collaborator, i) => (
               <CollaboratorListItem
                 key={i}
-                id={collaborator.id}
+                id={id(collaborator)}
                 remove={() => this.removeCollaborator(i)}
               />
             ))
