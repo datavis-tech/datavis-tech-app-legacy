@@ -5,7 +5,7 @@ jest.mock('../../../src/db/subscribeToDocument')
 
 import subscribeToDocument from '../../../src/db/subscribeToDocument'
 import References from '../../../src/pages/edit/references'
-import Runner from '../../../src/components/runner'
+import Runner from '../../../src/components/runner/runner'
 import Edit from '../../../src/pages/edit'
 
 describe('edit page', () => {
