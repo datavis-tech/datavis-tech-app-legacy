@@ -40,19 +40,6 @@ class DataViewPage extends React.Component {
         }
       </Subscription>
     )
-    // return (
-    //  <ViewPage id={this.props.id}>
-    //    { ({ownerProfile, doc}) => (
-    //      <ViewPageLayout
-    //        id={this.props.id}
-    //        user={this.props.user}
-    //        ownerProfile={ownerProfile ? ownerProfile.data : null}
-    //        doc={doc}
-    //        Content={DataViewer}
-    //      />
-    //    )}
-    //  </ViewPage>
-    // )
   }
 }
 
