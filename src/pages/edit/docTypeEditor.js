@@ -1,5 +1,6 @@
 import React from 'react'
 import { Form } from 'semantic-ui-react'
+import { type } from '../../db/accessors'
 
 class DocTypeEditor extends React.Component {
 
@@ -8,12 +9,12 @@ class DocTypeEditor extends React.Component {
     const doc = this.props.doc
 
     this.state = {
-      docType: doc.data.type || 'vis'
+      docType: type(doc)
     }
 
     const updateState = () => {
       this.setState({
-        docType: doc.data.type || 'vis'
+        docType: type(doc)
       })
     }
 
@@ -25,7 +26,7 @@ class DocTypeEditor extends React.Component {
       doc.submitOp([{
         p: ['type'],
         oi: value,
-        od: doc.data.type
+        od: type(doc)
       }])
     }
 

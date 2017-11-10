@@ -1,6 +1,7 @@
 import React from 'react'
 import { Table, Button } from 'semantic-ui-react'
 import StringBinding from '../../components/stringBinding'
+import { references } from '../../db/accessors'
 
 class References extends React.Component {
 
@@ -9,12 +10,12 @@ class References extends React.Component {
     const doc = this.props.doc
 
     this.state = {
-      references: doc.data.references || []
+      references: references(doc)
     }
 
     const updateState = () => {
       this.setState({
-        references: doc.data.references || []
+        references: references(doc)
       })
     }
 
@@ -23,6 +24,7 @@ class References extends React.Component {
   }
 
   // This gets invoked when the user clicks the "Add" button.
+  // TODO refactor into "action"
   addReference () {
     const doc = this.props.doc
 
@@ -45,6 +47,8 @@ class References extends React.Component {
   }
 
   // This gets invoked when the user clicks the "Remove" button.
+  // This gets invoked when the user clicks the "Add" button.
+  // TODO refactor into "action"
   removeReference (index) {
     const doc = this.props.doc
 

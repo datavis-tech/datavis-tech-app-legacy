@@ -2,6 +2,7 @@ import React from 'react'
 import partition from 'lodash/partition'
 import Loader from '../../components/loader'
 import DocumentPreviewList from '../../components/documentPreviewList'
+import { type } from '../../db/accessors'
 
 const DocumentsList = ({ documents, documentsLoading }) => {
 
@@ -9,7 +10,7 @@ const DocumentsList = ({ documents, documentsLoading }) => {
     return null
   }
 
-  const [dataDocuments, visDocuments] = partition(documents, d => d.data.type === 'data')
+  const [dataDocuments, visDocuments] = partition(documents, doc => type(doc) === 'data')
 
   return (
     <Loader ready={!documentsLoading}>

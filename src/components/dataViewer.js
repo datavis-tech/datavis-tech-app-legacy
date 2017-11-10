@@ -1,11 +1,12 @@
 import React from 'react'
+import { content } from '../db/accessors'
 
 // This component is the thing that displays a dataset.
 class DataViewer extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      dataContent: props.doc.data.content
+      dataContent: content(props.doc)
     }
 
     // An array of functions to be invoked on unmount.
@@ -15,10 +16,11 @@ class DataViewer extends React.Component {
   componentDidMount () {
     if (process.browser) {
       const doc = this.props.doc
+
       // TODO only execute this if the content changes (ignore title and description changes)
       const updateDataContent = () => {
         this.setState({
-          dataContent: doc.data.content
+          dataContent: content(doc)
         })
       }
       doc.on('op', updateDataContent)

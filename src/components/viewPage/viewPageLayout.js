@@ -1,10 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {Header, Grid, Button} from 'semantic-ui-react'
+import { Header, Grid, Button } from 'semantic-ui-react'
 import { Link } from '../../routes'
 import Layout from '../layout'
 import AvatarLink from '../avatarLink'
 import ViewPageDescription from './viewPageDescription'
+import { title } from '../../db/accessors'
 
 // A wrapper around AvatarLink that adds some spacing and the text "By".
 const OwnerAvatarLink = ({ user }) => {
@@ -24,9 +25,9 @@ const OwnerAvatarLink = ({ user }) => {
  * It has 3 slots -- Content, Description and References which allows to fill in with appropriate sections
  */
 const ViewPageLayout = ({id, user, ownerProfile, doc, referenceDocs, ...slots}) => (
-  <Layout title={(doc.data.title || 'Loading...') + ' | Datavis.tech'} user={user}>
+  <Layout title={(title(doc) || 'Loading...') + ' | Datavis.tech'} user={user}>
     <div>
-      <Header as='h1'>{doc.data.title}</Header>
+      <Header as='h1'>{title(doc)}</Header>
       <slots.Content doc={doc} referenceDocs={referenceDocs} />
       <Grid columns={2} divided>
         <Grid.Row>

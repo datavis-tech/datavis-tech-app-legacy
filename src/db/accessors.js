@@ -1,6 +1,20 @@
+/****************************
+ * For any ShareDB document *
+ ****************************/
+
 // Gets the data inside a doc,
 // returning an empty object if passed undefined as doc.
 const data = doc => (doc && doc.data) ? doc.data : {}
+
+// Returns true if the given document has data loaded, false otherwise.
+export const hasData = doc => !!(doc && doc.data)
+
+// Access the id of a document.
+export const id = doc => (doc && doc.id) || ''
+
+/**********************************
+ * For "vis" and "data" Documents *
+ **********************************/
 
 // This accessor returns the references for the given document,
 // or an empty array if there are no references.
@@ -35,5 +49,8 @@ export const type = doc => data(doc).type || 'vis'
 // Access the content of a document.
 export const content = doc => data(doc).content || ''
 
-// Access the id of a document.
-export const id = doc => (doc && doc.id) || ''
+// Access the owner of a document.
+export const owner = doc => data(doc).owner || ''
+
+// Access the collaborators of a document.
+export const collaborators = doc => data(doc).collaborators || []
