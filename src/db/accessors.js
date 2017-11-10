@@ -2,6 +2,14 @@
 // returning an empty object if passed undefined as doc.
 const data = doc => (doc && doc.data) ? doc.data : {}
 
+// Returns true if the given document has data loaded.
+export const hasData = doc => !!data(doc)
+
+
+/***********************************
+ * For Documents (e.g. data, vis). *
+ ***********************************/
+
 // This accessor returns the references for the given document,
 // or an empty array if there are no references.
 export const references = doc => data(doc).references || []
@@ -35,5 +43,14 @@ export const type = doc => data(doc).type || 'vis'
 // Access the content of a document.
 export const content = doc => data(doc).content || ''
 
+// Access the owner of a document.
+export const owner = doc => data(doc).owner || ''
+
 // Access the id of a document.
 export const id = doc => (doc && doc.id) || ''
+
+
+
+/**************
+ * For Users. *
+ **************/
