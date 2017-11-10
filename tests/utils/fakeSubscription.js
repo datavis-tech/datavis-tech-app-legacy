@@ -1,5 +1,4 @@
-export default (initImpl, tearDownImpl, isReady) => ({
+export default (initImpl, tearDownImpl) => ({
   init: jest.fn(initImpl),
-  tearDown: jest.fn(tearDownImpl),
-  isReady: jest.fn(isReady)
+  tearDown: jest.fn(tearDownImpl)
 })
