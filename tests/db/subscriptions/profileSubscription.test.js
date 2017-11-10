@@ -16,9 +16,8 @@ describe('profile subscription', () => {
 
     mockSubscription = fakeSubsription()
     BaseQuerySubscription.mockReturnValue(mockSubscription)
-
-    subscription = sut()
     args = BaseQuerySubscription.mock.calls
+    subscription = sut({}, {})
   })
 
   it('should use users collection', () => {
@@ -49,13 +48,15 @@ describe('profile subscription', () => {
     })
 
     it('should return only first available profile', () => {
-      subscription.init({id: 1}, {onUpdate})
+      subscription = sut({id: 1})
+      subscription.init({onUpdate})
       updateTrigger.trigger()
       expect(onUpdate).toHaveBeenCalledWith(profiles[0])
     })
 
     it('should return none if profile was not found', () => {
-      subscription.init({}, {onUpdate})
+      subscription = sut({})
+      subscription.init({onUpdate})
       updateTrigger.trigger()
       expect(onUpdate).toHaveBeenCalledWith(null)
     })
@@ -63,6 +64,7 @@ describe('profile subscription', () => {
   })
 
   it('should use base  query subscription tear down', () => {
+    subscription = sut({})
     expect(subscription.tearDown).toBe(mockSubscription.tearDown)
   })
 

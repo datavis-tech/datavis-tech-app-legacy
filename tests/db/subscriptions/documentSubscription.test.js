@@ -26,8 +26,8 @@ describe('document subscription', () => {
     id = String(Math.random())
     onUpdate = jest.fn()
     onError = jest.fn()
-    sut = DocumentSubscription()
-    sut.init({id}, {onUpdate, onError})
+    sut = DocumentSubscription({id})
+    sut.init({onUpdate, onError})
   })
 
   afterEach(() => {

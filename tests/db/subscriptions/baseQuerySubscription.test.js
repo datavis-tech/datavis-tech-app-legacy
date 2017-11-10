@@ -51,8 +51,8 @@ describe('base query subscription', () => {
 
     })
 
-    sut = BaseQuerySubscription(collectionName, queryFactory)
-    sut.init(parameters, {onUpdate, onError})
+    sut = BaseQuerySubscription(parameters, collectionName, queryFactory)
+    sut.init({onUpdate, onError})
   })
 
   describe('after init', () => {

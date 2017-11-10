@@ -1,6 +1,7 @@
 import connection from '../connection'
 
-export default (collectionName, queryFactory) => {
+// TODO: add usage of onError
+export default (parameters, collectionName, queryFactory) => {
   let query
 
   return {
@@ -8,8 +9,7 @@ export default (collectionName, queryFactory) => {
     tearDown
   }
 
-  // TODO: add usage of onError
-  function init (parameters, {onUpdate, onError}) {
+  function init ({onUpdate, onError}) {
     query = connection.createSubscribeQuery(collectionName, queryFactory(parameters))
 
     const onUpdateListener = () => {

@@ -1,7 +1,7 @@
 import DocumentSubscription from './documentSubscription'
 
 // Manages subscriptions to multiple ShareDB documents.
-export default () => {
+export default ({ids}) => {
   let subscriptions = []
   const docs = []
 
@@ -13,11 +13,11 @@ export default () => {
     tearDown
   }
 
-  function init ({ids}, {onUpdate, onError}) {
+  function init ({onUpdate, onError}) {
     subscriptions = ids.map((id, i) => {
-      const subscription = DocumentSubscription()
+      const subscription = DocumentSubscription({id})
 
-      subscription.init({id}, {
+      subscription.init({
         onUpdate: (doc) => {
           docs[i] = doc
           if (allDocsSubscribed(ids)) {

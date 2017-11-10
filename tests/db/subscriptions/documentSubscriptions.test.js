@@ -18,19 +18,19 @@ describe('document subscriptions', () => {
   beforeAll(() => {
     onUpdate = jest.fn()
     onError = jest.fn()
-    sut = DocumentSubscriptions()
-    sut.init({ids}, {onUpdate, onError})
+    sut = DocumentSubscriptions({ids})
+    sut.init({onUpdate, onError})
   })
 
   it('should create multiple document subscriptions', () => {
     expect(DocumentSubscription).toHaveBeenCalledTimes(ids.length)
+    ids.forEach((id, i) => {
+      expect(DocumentSubscription.mock.calls[i][0]).toMatchObject({ id: ids[i] })
+    })
   })
 
   it('should init multiple document subscriptions', () => {
     expect(mockSubscription.init).toHaveBeenCalledTimes(ids.length)
-    ids.forEach((id, i) => {
-      expect(mockSubscription.init.mock.calls[i][0]).toMatchObject({ id: ids[i] })
-    })
   })
 
   it('should listen to ops for all documents', () => {
@@ -38,7 +38,7 @@ describe('document subscriptions', () => {
     // calling subscribe callback
     const mockDocs = ids.map((id, i) => {
       const mockDoc = fakeDoc({id, data: {}})
-      mockSubscription.init.mock.calls[i][1].onUpdate(mockDoc)
+      mockSubscription.init.mock.calls[i][0].onUpdate(mockDoc)
       return mockDoc
     })
 
