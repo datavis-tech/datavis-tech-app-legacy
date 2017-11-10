@@ -43,7 +43,7 @@ describe('data page', () => {
     referenceDocs = Symbol('referenceDocs')
 
     updateTrigger = new CallbackTrigger()
-    subscription = fakeSubscription((_, {onUpdate}) => updateTrigger.set(onUpdate, null, {doc, profile, referenceDocs}))
+    subscription = fakeSubscription(({onUpdate}) => updateTrigger.set(onUpdate, null, {doc, profile, referenceDocs}))
     VisSubscription.mockReturnValue(subscription)
     sut = mount(<Data id={id} user={user} />)
   })

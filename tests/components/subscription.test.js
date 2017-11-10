@@ -9,7 +9,6 @@ describe('subscription', () => {
   let sut
   let props
   let subscription
-  let parameters
   let children
 
   beforeAll(() => {
@@ -22,16 +21,10 @@ describe('subscription', () => {
 
   beforeEach(() => {
 
-    parameters = {
-      a: Symbol('a'),
-      b: Symbol('b')
-    }
-
     subscription = fakeSubscription()
 
     props = {
-      subscription,
-      parameters
+      subscription
     }
 
     children = jest.fn(() => null)
@@ -46,12 +39,7 @@ describe('subscription', () => {
     let subscriptionCallbacks
 
     beforeEach(() => {
-      subscriptionParameters = subscription.init.mock.calls[0][0]
-      subscriptionCallbacks = subscription.init.mock.calls[0][1]
-    })
-
-    it('should init subscription with proper params', () => {
-      expect(subscriptionParameters).toEqual(parameters)
+      subscriptionCallbacks = subscription.init.mock.calls[0][0]
     })
 
     it('should render children with empty state', () => {

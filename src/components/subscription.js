@@ -14,9 +14,8 @@ export default class Subscription extends React.Component {
 
     if (process.browser) {
 
-      const {subscription, parameters} = this.props
+      const {subscription} = this.props
       subscription.init(
-        parameters,
         {
           onUpdate: data => {
             // possibly we might need more sophisticated method to define readiness

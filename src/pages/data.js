@@ -20,7 +20,7 @@ class DataViewPage extends React.Component {
     const {id, user} = this.props
 
     return (
-      <Subscription subscription={VisSubscription()} parameters={{id}}>
+      <Subscription subscription={VisSubscription({id})} >
         {
           ({data, isReady}) => {
             const {doc, profile, referenceDocs} = data || {} // data might be null so object destructuring is not possible

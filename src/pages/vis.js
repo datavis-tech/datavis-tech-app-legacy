@@ -1,5 +1,9 @@
 import React from 'react'
-import VisSubscription from '../db/subscriptions/visSubscription'
+import DocumentSubscription from '../db/subscriptions/documentSubscription'
+import ReferencesSubscription from '../db/subscriptions/documentSubscriptions'
+import ProfileSubscription from '../db/subscriptions/profileSubscription'
+import CompositeSubscription from '../db/subscriptions/compositeSubscription'
+import {referenceIds} from '../db/accessors'
 import Page from '../components/page'
 import Subscription from '../components/subscription'
 import { ViewPageLayout } from '../components/viewPage'
@@ -28,21 +32,31 @@ class VisViewPage extends React.Component {
     const {id, user} = this.props
 
     return (
-      <Subscription subscription={VisSubscription()} parameters={{id}}>
+      <Subscription subscription={DocumentSubscription({id})}>
         {
           ({data, isReady}) => {
-            const {doc, profile, referenceDocs} = data || {} // data might be null so object destructuring is not possible
+            const {doc} = data || {} // data might be null so object destructuring is not possible
             return (
               <Loader ready={isReady}>
-                <ViewPageLayout
-                  id={id}
-                  user={user}
-                  ownerProfile={profile ? profile.data : null} // TODO need accessors to avoid access to sharedb specific data field
-                  doc={doc}
-                  referenceDocs={referenceDocs}
-                  Content={Runner}
-                  References={({referenceDocs}) => <DocumentPreviewList title='Datasets' documents={referenceDocs} />}
-                />
+
+                <Subscription
+                  subscription={
+                    CompositeSubscription({
+                      profile: ProfileSubscription({id: doc.data.owner}),
+                      referenceDocs: ReferencesSubscription({ids: referenceIds(doc)})
+                    })
+                  }
+                >
+                  <ViewPageLayout
+                    id={id}
+                    user={user}
+                    ownerProfile={profile ? profile.data : null} // TODO need accessors to avoid access to sharedb specific data field
+                    doc={doc}
+                    referenceDocs={referenceDocs}
+                    Content={Runner}
+                    References={({referenceDocs}) => <DocumentPreviewList title='Datasets' documents={referenceDocs} />}
+                  />
+                </Subscription>
               </Loader>
             )
           }

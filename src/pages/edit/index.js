@@ -39,7 +39,7 @@ class EditPage extends React.Component {
     const {id, user} = this.props
 
     return (
-      <Subscription subscription={VisSubscription()} parameters={{id}}>
+      <Subscription subscription={VisSubscription({id})}>
         {
           ({data, isReady, error}) => {
             const {
