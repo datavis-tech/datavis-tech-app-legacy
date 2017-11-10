@@ -5,7 +5,6 @@ const data = doc => (doc && doc.data) ? doc.data : {}
 // Returns true if the given document has data loaded.
 export const hasData = doc => !!data(doc)
 
-
 /***********************************
  * For Documents (e.g. data, vis). *
  ***********************************/
@@ -48,8 +47,6 @@ export const owner = doc => data(doc).owner || ''
 
 // Access the id of a document.
 export const id = doc => (doc && doc.id) || ''
-
-
 
 /**************
  * For Users. *

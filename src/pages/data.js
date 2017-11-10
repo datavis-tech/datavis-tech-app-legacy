@@ -16,7 +16,7 @@ class DataViewPage extends React.Component {
   }
 
   render () {
-    
+
     const {id, user} = this.props
 
     return (
@@ -40,7 +40,7 @@ class DataViewPage extends React.Component {
         }
       </Subscription>
     )
-    //return (
+    // return (
     //  <ViewPage id={this.props.id}>
     //    { ({ownerProfile, doc}) => (
     //      <ViewPageLayout
@@ -52,7 +52,7 @@ class DataViewPage extends React.Component {
     //      />
     //    )}
     //  </ViewPage>
-    //)
+    // )
   }
 }
 
