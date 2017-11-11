@@ -13,5 +13,8 @@ module.exports = {
   setupFiles: [
     './tests/rafPolyfill',
     './tests/setupTests.js'
+  ],
+  snapshotSerializers: [
+    'enzyme-to-json/serializer'
   ]
 }
