@@ -2,7 +2,7 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import fakeUser from '../utils/fakeUser'
 
-jest.mock('../../src/components/loginControl')//, () => jest.fn(() => null))
+jest.mock('../../src/components/loginControl')
 
 import Navbar from '../../src/components/navbar'
 
