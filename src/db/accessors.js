@@ -54,3 +54,8 @@ export const owner = doc => data(doc).owner || ''
 
 // Access the collaborators of a document.
 export const collaborators = doc => data(doc).collaborators || []
+
+/**********************************
+ * For "profile" Documents *
+ **********************************/
+export const profile = doc => (doc && doc.data) ? doc.data : null
