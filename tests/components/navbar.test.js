@@ -15,7 +15,7 @@ describe('navbar', () => {
 
   it(`should match snapshot with user`, () => {
     const mockUserData = fakeUser().data
-    const sut = shallow(<Navbar user={mockUserData}/>)
+    const sut = shallow(<Navbar user={mockUserData} />)
     expect(sut).toMatchSnapshot()
   })
 
