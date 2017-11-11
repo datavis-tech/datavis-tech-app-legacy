@@ -2,9 +2,11 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import fakeUser from '../utils/fakeUser'
 
-import Navbar from '../../src/components/spacer'
+jest.mock('../../src/components/loginControl')//, () => jest.fn(() => null))
 
-describe('spacer', () => {
+import Navbar from '../../src/components/navbar'
+
+describe('navbar', () => {
 
   it(`should match snapshot without user`, () => {
     const sut = shallow(<Navbar />)
@@ -12,7 +14,8 @@ describe('spacer', () => {
   })
 
   it(`should match snapshot with user`, () => {
-    const sut = shallow(<Navbar user={fakeUser}/>)
+    const mockUserData = fakeUser().data
+    const sut = shallow(<Navbar user={mockUserData}/>)
     expect(sut).toMatchSnapshot()
   })
 
