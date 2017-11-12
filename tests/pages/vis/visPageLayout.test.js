@@ -7,7 +7,6 @@ import DocumentPreviewList from '../../../src/components/documentPreviewList'
 
 import VisPageLayout from '../../../src/pages/vis/visPageLayout'
 
-
 describe('vis page layout', () => {
 
   let sut
@@ -38,7 +37,7 @@ describe('vis page layout', () => {
 
   it('should render view page layout with references', () => {
     const ReferencesProp = sut.find(ViewPageLayout).prop('References')
-    const References = shallow(<ReferencesProp referenceDocs={props.referenceDocs}/>)
+    const References = shallow(<ReferencesProp referenceDocs={props.referenceDocs} />)
     expect(References.find(DocumentPreviewList).props()).toMatchObject({
       title: 'Datasets',
       documents: props.referenceDocs

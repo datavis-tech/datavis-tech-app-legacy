@@ -17,7 +17,7 @@ describe('vis page', () => {
     id = Symbol('id')
     user = Symbol('user')
     props = {id, user}
-    sut = shallow(<VisViewPage {...props}/>).dive()
+    sut = shallow(<VisViewPage {...props} />).dive()
   })
 
   it('should render view page with id and user', () => {

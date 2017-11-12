@@ -16,7 +16,6 @@ describe('base query subscription', () => {
   let sut
 
   let collectionName
-  let parameters
   let mongoQuery
 
   let onUpdate
@@ -28,7 +27,6 @@ describe('base query subscription', () => {
   beforeEach(() => {
 
     collectionName = String(Math.random())
-    parameters = Symbol('parameters')
     mongoQuery = Symbol('mongoQuery')
 
     onUpdate = jest.fn()

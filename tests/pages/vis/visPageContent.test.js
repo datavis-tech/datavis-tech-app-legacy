@@ -59,11 +59,11 @@ describe('vis page content', () => {
 
     id = String(Math.random())
     user = fakeUser()
-    doc =fakeDoc({data: {references: referenceDocs}})
+    doc = fakeDoc({data: {references: referenceDocs}})
 
     props = {id, user, doc}
 
-    sut = mount(<VisPageContent {...props}/>)
+    sut = mount(<VisPageContent {...props} />)
   })
 
   it('should create profile subscription', () => {
@@ -83,6 +83,19 @@ describe('vis page content', () => {
 
   it('should render view page layout', () => {
     expect(sut.find(VisPageLayout).props()).toMatchObject({id, user, doc, profile: profile.data, referenceDocs})
+  })
+
+  describe('when references are not populated', () => {
+
+    beforeEach(() => {
+      compositeSubscription.init.mockImplementation(({onUpdate}) => onUpdate({profile, referenceDocs: undefined}))
+      sut = mount(<VisPageContent {...props} />)
+    })
+
+    it('should provide empty list', () => {
+      expect(sut.find(VisPageLayout).prop('referenceDocs')).toEqual([])
+    })
+
   })
 
 })

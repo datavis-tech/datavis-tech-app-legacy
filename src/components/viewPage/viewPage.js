@@ -5,15 +5,14 @@ import DocumentSubscription from '../../db/subscriptions/documentSubscription'
 import Subscription from '../subscription'
 import Loader from '../loader'
 
-
 export default class VisViewPage extends React.Component {
 
-  constructor(props) {
+  constructor (props) {
     super(props)
     this.subscription = DocumentSubscription({id: props.id})
   }
 
-  render() {
+  render () {
 
     const {id, user, children} = this.props
 

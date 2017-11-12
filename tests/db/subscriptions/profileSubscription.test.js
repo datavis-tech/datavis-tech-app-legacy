@@ -2,26 +2,25 @@ jest.mock('../../../src/db/subscriptions/baseQuerySubscription')
 
 import {DB_USERS_COLLECTION} from '../../../src/constants'
 import BaseQuerySubscription from '../../../src/db/subscriptions/baseQuerySubscription'
-import fakeSubsription from '../../utils/fakeSubscription'
-import CallbackTrigger from '../../utils/callbackTrigger'
+import fakeSubscription from '../../utils/fakeSubscription'
 import sut from '../../../src/db/subscriptions/profileSubscription'
 
 describe('profile subscription', () => {
 
   let subscription
-  let args
   let mockSubscription
   let id
+  let args
 
   beforeEach(() => {
     id = Symbol('id')
-    mockSubscription = fakeSubsription()
+    mockSubscription = fakeSubscription()
     BaseQuerySubscription.mockReturnValue(mockSubscription)
     args = BaseQuerySubscription.mock.calls
     subscription = sut({id}, {})
   })
 
-  it('should use query factory which just return id as is', () => {
+  it('should use query which just return id as is', () => {
     expect(args[0][0]).toMatchObject({id})
   })
 
@@ -32,38 +31,28 @@ describe('profile subscription', () => {
   describe('init', () => {
 
     let onUpdate
-    let updateTrigger
     let profiles
 
     beforeEach(() => {
-
       profiles = [Symbol('profile1'), Symbol('profile2'), Symbol('profile3')]
-
-      updateTrigger = new CallbackTrigger()
-      mockSubscription.init.mockImplementation(({id}, callbacks) => {
-        updateTrigger.set(callbacks.onUpdate, null, id ? profiles : [])
-      })
-
       onUpdate = jest.fn()
     })
 
     it('should return only first available profile', () => {
-      subscription = sut({id: 1})
+      mockSubscription.init.mockImplementationOnce(({onUpdate}) => onUpdate(profiles))
       subscription.init({onUpdate})
-      updateTrigger.trigger()
       expect(onUpdate).toHaveBeenCalledWith(profiles[0])
     })
 
     it('should return none if profile was not found', () => {
-      subscription = sut({})
+      mockSubscription.init.mockImplementationOnce(({onUpdate}) => onUpdate([]))
       subscription.init({onUpdate})
-      updateTrigger.trigger()
       expect(onUpdate).toHaveBeenCalledWith(null)
     })
 
   })
 
-  it('should use base  query subscription tear down', () => {
+  it('should use base query subscription tear down', () => {
     subscription = sut({})
     expect(subscription.tearDown).toBe(mockSubscription.tearDown)
   })

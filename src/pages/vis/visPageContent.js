@@ -19,7 +19,7 @@ export default ({id, user, doc}) => {
       {
         ({data}) => {
           const profileDoc = data ? data.profile : null
-          const referenceDocs = data ? data.referenceDocs : []
+          const referenceDocs = data ? data.referenceDocs || [] : []
 
           return (
             <VisPageLayout
@@ -27,7 +27,7 @@ export default ({id, user, doc}) => {
               user={user}
               doc={doc}
               profile={profile(profileDoc)}
-              referenceDocs={referenceDocs}
+              referenceDocs={referenceDocs || []}
             />
           )
         }

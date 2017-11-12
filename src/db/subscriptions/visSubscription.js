@@ -3,11 +3,11 @@ import ProfileSubscription from './profileSubscription'
 import ReferencesSubscription from './documentSubscriptions'
 import {referenceIds, allReferencesLoaded} from '../accessors'
 
-export default () => {
+export default ({id}) => {
 
-  let documentSubscription = DocumentSubscription()
-  let profileSubscription = ProfileSubscription()
-  let referencesSubscription = ReferencesSubscription()
+  let documentSubscription = DocumentSubscription({id})
+  let profileSubscription
+  let referencesSubscription
 
   return {
     init,
@@ -15,22 +15,25 @@ export default () => {
   }
 
   // ToDo use onError
-  function init ({id}, {onUpdate, onError}) {
+  function init ({onUpdate, onError}) {
 
-    documentSubscription.init({id}, {
+    documentSubscription.init({
       onUpdate (doc) {
+
+        profileSubscription = ProfileSubscription({id: doc.data.owner})
+        referencesSubscription = ReferencesSubscription({ids: referenceIds(doc)})
 
         let profile
         let referenceDocs
 
-        profileSubscription.init({id: doc.data.owner}, {
+        profileSubscription.init({
           onUpdate (receivedProfile) {
             profile = receivedProfile
             notifyAboutUpdates(doc, profile, referenceDocs, onUpdate)
           }
         })
 
-        referencesSubscription.init({ids: referenceIds(doc)}, {
+        referencesSubscription.init({
           onUpdate (receivedReferenceDocs) {
             referenceDocs = receivedReferenceDocs
             notifyAboutUpdates(doc, profile, referenceDocs, onUpdate)

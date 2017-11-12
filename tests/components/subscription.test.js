@@ -35,7 +35,6 @@ describe('subscription', () => {
 
   describe('after mount', () => {
 
-    let subscriptionParameters
     let subscriptionCallbacks
 
     beforeEach(() => {

@@ -7,7 +7,7 @@ export default(subscriptions) => {
     tearDown
   }
 
-  function init({onUpdate}) {
+  function init ({onUpdate}) {
 
     const results = {}
 
@@ -15,7 +15,7 @@ export default(subscriptions) => {
 
       subscriptions[name].init({
         onUpdate: result => {
-          results[name] = result;
+          results[name] = result
           onUpdate(results)
         }
       })
@@ -23,7 +23,7 @@ export default(subscriptions) => {
     })
   }
 
-  function tearDown() {
+  function tearDown () {
     subscriptionNames.forEach(name => subscriptions[name].tearDown())
   }
 
