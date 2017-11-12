@@ -26,8 +26,14 @@ describe('data page', () => {
     })
   })
 
-  it.skip('should render view page with vis content', () => {
-    expect(sut.prop('children')).toBe(DataPageContent)
+  it('should render view page with vis content', () => {
+    const doc = Symbol('doc')
+    const Children = sut.prop('children')
+    expect(shallow(<Children doc={doc} />).find(DataPageContent).props()).toMatchObject({
+      id,
+      user,
+      doc: {doc}
+    })
   })
 
 })
