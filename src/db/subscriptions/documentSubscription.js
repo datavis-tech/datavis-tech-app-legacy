@@ -2,7 +2,7 @@ import {DB_DOCUMENTS_COLLECTION} from '../../constants'
 import connection from '../connection'
 
 // Manages subscription to a single ShareDB document.
-export default () => {
+export default ({id}) => {
   let cleanup
 
   return {
@@ -10,7 +10,7 @@ export default () => {
     tearDown
   }
 
-  function init ({id}, {onUpdate, onError}) {
+  function init ({onUpdate, onError}) {
 
     const doc = connection.get(DB_DOCUMENTS_COLLECTION, id)
     doc.subscribe((err) => {

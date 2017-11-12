@@ -8,7 +8,8 @@ import {
   description,
   content,
   owner,
-  collaborators
+  collaborators,
+  profile
 } from '../../src/db/accessors'
 
 describe('accessors', () => {
@@ -128,6 +129,22 @@ describe('accessors', () => {
     })
     it('should return collaborators if collaborators defined', () => {
       expect(collaborators({ data: { collaborators: ['a', 'b'] } })).toEqual(['a', 'b'])
+    })
+  })
+
+  describe('profile', () => {
+
+    it('should return nothing if nothing was passed', () => {
+      expect(profile()).toBeNull()
+    })
+
+    it('should return nothing if profile doc does not contain data', () => {
+      expect(profile({})).toBeNull()
+    })
+
+    it('should return profile data', () => {
+      const data = Symbol('data')
+      expect(profile({data})).toEqual(data)
     })
   })
 })

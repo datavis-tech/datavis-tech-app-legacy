@@ -53,8 +53,8 @@ describe('vis subscription', () => {
     onUpdate = jest.fn()
     onError = jest.fn()
 
-    sut = VisSubscription()
-    sut.init({id}, {onUpdate, onError})
+    sut = VisSubscription({id})
+    sut.init({onUpdate, onError})
   })
 
   describe('init', () => {
@@ -111,8 +111,8 @@ function createSubscriptionMocks (SubscriptionCls, mockFactory) {
   const trigger = new CallbackTrigger()
 
   const mockSubscription = fakeSubscription(
-    (params, callbacks) => {
-      trigger.set(callbacks.onUpdate, null, mock)
+    ({onUpdate}) => {
+      trigger.set(onUpdate, null, mock)
     }
   )
   SubscriptionCls.mockImplementation(() => mockSubscription)
