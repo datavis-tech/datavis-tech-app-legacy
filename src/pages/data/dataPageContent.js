@@ -1,9 +1,9 @@
 import React from 'react'
 import ProfileSubscription from '../../db/subscriptions/profileSubscription'
-import ReferencesSubscription from '../../db/subscriptions/documentSubscriptions'
+import ReferencedBySubscription from '../../db/subscriptions/referencedBySubscription'
 import CompositeSubscription from '../../db/subscriptions/compositeSubscription'
 
-import {referenceIds, owner, profile} from '../../db/accessors'
+import {id as docID, owner, profile} from '../../db/accessors'
 
 import Subscription from '../../components/subscription'
 import DataPageLayout from './dataPageLayout'
@@ -11,7 +11,7 @@ import DataPageLayout from './dataPageLayout'
 export default ({id, user, doc}) => {
   const subscription = CompositeSubscription({
     profile: ProfileSubscription({id: owner(doc)}),
-    referenceDocs: ReferencesSubscription({ids: referenceIds(doc)})
+    referenceDocs: ReferencedBySubscription({id: docID(doc)})
   })
 
   return (
@@ -19,7 +19,7 @@ export default ({id, user, doc}) => {
       {
         ({data}) => {
           const profileDoc = data ? data.profile : null
-          const referenceDocs = data ? data.referenceDocs : []
+          const referenceDocs = data ? data.referenceDocs || [] : []
 
           return (
             <DataPageLayout

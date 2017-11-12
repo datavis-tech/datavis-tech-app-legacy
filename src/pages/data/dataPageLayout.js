@@ -1,5 +1,6 @@
 import React from 'react'
 import DataViewer from '../../components/dataViewer'
+import DocumentPreviewList from '../../components/documentPreviewList'
 import { ViewPageLayout } from '../../components/viewPage'
 
 export default ({id, user, doc, profile, referenceDocs}) => (
@@ -10,5 +11,8 @@ export default ({id, user, doc, profile, referenceDocs}) => (
     doc={doc}
     referenceDocs={referenceDocs}
     Content={DataViewer}
+    References={
+      ({referenceDocs}) => <DocumentPreviewList title='Referenced By' documents={referenceDocs} />
+    }
   />
 )
