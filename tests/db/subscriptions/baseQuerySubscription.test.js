@@ -17,7 +17,6 @@ describe('base query subscription', () => {
 
   let collectionName
   let parameters
-  let queryFactory
   let mongoQuery
 
   let onUpdate
@@ -30,7 +29,6 @@ describe('base query subscription', () => {
 
     collectionName = String(Math.random())
     parameters = Symbol('parameters')
-    queryFactory = jest.fn(() => mongoQuery)
     mongoQuery = Symbol('mongoQuery')
 
     onUpdate = jest.fn()
@@ -51,15 +49,11 @@ describe('base query subscription', () => {
 
     })
 
-    sut = BaseQuerySubscription(parameters, collectionName, queryFactory)
+    sut = BaseQuerySubscription(mongoQuery, collectionName)
     sut.init({onUpdate, onError})
   })
 
   describe('after init', () => {
-
-    it('should create query', () => {
-      expect(queryFactory).toHaveBeenCalledWith(parameters)
-    })
 
     it('should subscribe on references', () => {
       expect(connection.createSubscribeQuery).toHaveBeenCalledWith(

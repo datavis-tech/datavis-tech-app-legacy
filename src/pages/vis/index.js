@@ -1,10 +1,7 @@
 import React from 'react'
 
-import DocumentSubscription from '../../db/subscriptions/documentSubscription'
-
 import Page from '../../components/page'
-import Subscription from '../../components/subscription'
-import Loader from '../../components/loader'
+import ViewPage from '../../components/viewPage/viewPage'
 import VisPageContent from './visPageContent'
 
 class VisViewPage extends React.Component {
@@ -16,36 +13,17 @@ class VisViewPage extends React.Component {
   //   const props = await Component.getInitialProps({query: {id}})
   //   expect(props).toEqual({id})
   // })
-  //
+
   static async getInitialProps ({query}) {
     return {
       id: query.id
     }
   }
 
-  constructor(props) {
-    super(props)
-
-    this.subscription = DocumentSubscription({id: props.id})
-  }
-
   render() {
-
     const {id, user} = this.props
-
-    return (
-      <Subscription subscription={this.subscription}>
-        {
-          ({data: doc, isReady}) => (
-            <Loader ready={isReady}>
-              <VisPageContent id={id} user={user} doc={doc}/>
-            </Loader>
-          )
-        }
-      </Subscription>
-    )
+    return <ViewPage id={id} user={user}>{VisPageContent}</ViewPage>
   }
-
 }
 
 export default Page(VisViewPage)

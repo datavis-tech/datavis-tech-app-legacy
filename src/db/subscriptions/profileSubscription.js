@@ -2,7 +2,7 @@ import {DB_USERS_COLLECTION} from '../../constants'
 import BaseQuerySubscription from './baseQuerySubscription'
 
 export default (params) => {
-  const subscription = BaseQuerySubscription(DB_USERS_COLLECTION, ({id}) => ({id}))
+  const subscription = BaseQuerySubscription(params, DB_USERS_COLLECTION)
 
   return {...subscription, init}
 

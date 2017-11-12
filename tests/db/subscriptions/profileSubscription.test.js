@@ -11,22 +11,22 @@ describe('profile subscription', () => {
   let subscription
   let args
   let mockSubscription
+  let id
 
   beforeEach(() => {
-
+    id = Symbol('id')
     mockSubscription = fakeSubsription()
     BaseQuerySubscription.mockReturnValue(mockSubscription)
     args = BaseQuerySubscription.mock.calls
-    subscription = sut({}, {})
-  })
-
-  it('should use users collection', () => {
-    expect(args[0][0]).toEqual(DB_USERS_COLLECTION)
+    subscription = sut({id}, {})
   })
 
   it('should use query factory which just return id as is', () => {
-    const id = Symbol('id')
-    expect(args[0][1]({id})).toMatchObject({id})
+    expect(args[0][0]).toMatchObject({id})
+  })
+
+  it('should use users collection', () => {
+    expect(args[0][1]).toEqual(DB_USERS_COLLECTION)
   })
 
   describe('init', () => {

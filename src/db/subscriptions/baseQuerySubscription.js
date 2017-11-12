@@ -1,7 +1,7 @@
 import connection from '../connection'
 
 // TODO: add usage of onError
-export default (parameters, collectionName, queryFactory) => {
+export default (q, collectionName) => {
   let query
 
   return {
@@ -10,7 +10,7 @@ export default (parameters, collectionName, queryFactory) => {
   }
 
   function init ({onUpdate, onError}) {
-    query = connection.createSubscribeQuery(collectionName, queryFactory(parameters))
+    query = connection.createSubscribeQuery(collectionName, q)
 
     const onUpdateListener = () => {
       onUpdate(query.results)
