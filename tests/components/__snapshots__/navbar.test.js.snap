@@ -1,0 +1,79 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`navbar should match snapshot with user 1`] = `
+<Menu
+  secondary={true}
+>
+  <Link
+    href="/"
+  >
+    <MenuItem
+      fitted={true}
+      header={true}
+    >
+      <Image
+        as="img"
+        height="36px"
+        src="/static/images/Logo_Nav.png"
+        ui={true}
+        verticalAlign="middle"
+      />
+    </MenuItem>
+  </Link>
+  <CreateButton
+    user={
+      Object {
+        "_json": Object {
+          "avatar_url": "https://avatars2.githubusercontent.com/u/156229?v=4",
+        },
+        "displayName": "Fred",
+        "username": "fred",
+      }
+    }
+  />
+  <MenuItem
+    position="right"
+  >
+    <mockConstructor
+      user={
+        Object {
+          "_json": Object {
+            "avatar_url": "https://avatars2.githubusercontent.com/u/156229?v=4",
+          },
+          "displayName": "Fred",
+          "username": "fred",
+        }
+      }
+    />
+  </MenuItem>
+</Menu>
+`;
+
+exports[`navbar should match snapshot without user 1`] = `
+<Menu
+  secondary={true}
+>
+  <Link
+    href="/"
+  >
+    <MenuItem
+      fitted={true}
+      header={true}
+    >
+      <Image
+        as="img"
+        height="36px"
+        src="/static/images/Logo_Nav.png"
+        ui={true}
+        verticalAlign="middle"
+      />
+    </MenuItem>
+  </Link>
+  <CreateButton />
+  <MenuItem
+    position="right"
+  >
+    <mockConstructor />
+  </MenuItem>
+</Menu>
+`;

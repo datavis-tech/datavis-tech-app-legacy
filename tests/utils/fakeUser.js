@@ -2,10 +2,10 @@
 // in any tests where a user object is required.
 export default () => ({
   data: {
-    username: String(Math.random()),
-    displayName: String(Math.random()),
+    username: 'fred',
+    displayName: 'Fred',
     _json: {
-      avatar_url: String(Math.random())
+      avatar_url: 'https://avatars2.githubusercontent.com/u/156229?v=4'
     }
   }
 })
