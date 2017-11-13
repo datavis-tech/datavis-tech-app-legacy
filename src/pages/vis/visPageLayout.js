@@ -12,7 +12,12 @@ export default ({id, user, doc, profile, referenceDocs}) => (
     referenceDocs={referenceDocs}
     Content={Runner}
     References={
-      ({referenceDocs}) => <DocumentPreviewList title='Datasets' documents={referenceDocs} />
+      ({referenceDocs}) => (
+        <DocumentPreviewList
+          title='Data'
+          documents={referenceDocs}
+        />
+      )
     }
   />
 )
