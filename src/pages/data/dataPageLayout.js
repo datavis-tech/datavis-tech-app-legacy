@@ -12,7 +12,12 @@ export default ({id, user, doc, profile, referenceDocs}) => (
     referenceDocs={referenceDocs}
     Content={DataViewer}
     References={
-      ({referenceDocs}) => <DocumentPreviewList title='Referenced By' documents={referenceDocs} />
+      ({referenceDocs}) => (
+        <DocumentPreviewList
+          title='Visualizations'
+          documents={referenceDocs}
+        />
+      )
     }
   />
 )

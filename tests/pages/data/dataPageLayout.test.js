@@ -39,7 +39,7 @@ describe('data page layout', () => {
     const ReferencesProp = sut.find(ViewPageLayout).prop('References')
     const References = shallow(<ReferencesProp referenceDocs={props.referenceDocs} />)
     expect(References.find(DocumentPreviewList).props()).toMatchObject({
-      title: 'Referenced By',
+      title: 'Visualizations',
       documents: props.referenceDocs
     })
   })
