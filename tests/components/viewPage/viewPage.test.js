@@ -78,11 +78,7 @@ describe('view page', () => {
     })
 
     it('should have content', () => {
-      expect(Children).toHaveBeenCalledWith({
-        id,
-        user,
-        doc
-      })
+      expect(Children).toHaveBeenCalledWith(doc)
     })
   })
 

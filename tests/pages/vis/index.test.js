@@ -22,13 +22,18 @@ describe('vis page', () => {
 
   it('should render view page with id and user', () => {
     expect(sut.find(ViewPage).props()).toMatchObject({
-      id,
-      user
+      id
     })
   })
 
   it('should render view page with vis content', () => {
-    expect(sut.prop('children')).toBe(VisPageContent)
+    const doc = Symbol('doc')
+    const Children = sut.prop('children')
+    expect(shallow(<Children doc={doc} />).find(VisPageContent).props()).toMatchObject({
+      id,
+      user,
+      doc: {doc}
+    })
   })
 
 })
