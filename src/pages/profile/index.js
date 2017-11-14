@@ -28,6 +28,8 @@ class ProfilePage extends React.Component {
 
   componentDidMount () {
     const username = this.props.username
+
+    // TODO refactor to use <Subscription ... >
     this.profileQuery = createProfileQuery({ username }, (profile) => {
       this.setState({
         profile,
@@ -35,6 +37,8 @@ class ProfilePage extends React.Component {
       })
       if (profile && !this.documentsQuery) {
         const owner = profile.id
+
+        // TODO refactor to use <Subscription ... >
         this.documentsQuery = createDocumentsQuery(owner, (documents) => {
           this.setState({
             documents,
@@ -45,6 +49,8 @@ class ProfilePage extends React.Component {
     })
   }
 
+  // TODO refactor to use <Subscription ... >,
+  // so we won't need this logic here.
   componentWillUnmount () {
     if (this.profileQuery) {
       this.profileQuery.destroy()
