@@ -41,7 +41,7 @@ class Collaborators extends React.Component {
             ))
           }
         </List>
-        <AddCollaboratorModal doc={doc}/>
+        <AddCollaboratorModal doc={doc} />
       </div>
     )
   }
