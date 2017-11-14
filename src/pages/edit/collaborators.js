@@ -3,6 +3,7 @@ import { List } from 'semantic-ui-react'
 import AddCollaboratorModal from './addCollaboratorModal'
 import CollaboratorListItem from './collaboratorListItem'
 import { collaborators, id } from '../../db/accessors'
+import { removeCollaborator } from '../../db/actions'
 
 class Collaborators extends React.Component {
 
@@ -21,22 +22,12 @@ class Collaborators extends React.Component {
     }
 
     // TODO only call updateState if the op may have changed the "collaborators" array.
+    // TODO remove this listener on component unmount
     doc.on('op', updateState)
   }
 
-
-  // When the user clicks the "Remove" button,
-  // remove the clicked element from the array.
-  // TODO refactor this into an "action"
-  removeCollaborator (index) {
-    const doc = this.props.doc
-    doc.submitOp([{
-      p: ['collaborators', index],
-      ld: collaborators(doc)[index]
-    }])
-  }
-
   render () {
+    const doc = this.props.doc
     return (
       <div>
         <List verticalAlign='middle'>
@@ -45,12 +36,12 @@ class Collaborators extends React.Component {
               <CollaboratorListItem
                 key={i}
                 id={id(collaborator)}
-                remove={() => this.removeCollaborator(i)}
+                remove={() => removeCollaborator(doc, i)}
               />
             ))
           }
         </List>
-        <AddCollaboratorModal doc={this.props.doc}/>
+        <AddCollaboratorModal doc={doc}/>
       </div>
     )
   }
