@@ -2,7 +2,7 @@ import React from 'react'
 import { Table, Button } from 'semantic-ui-react'
 import StringBinding from '../../components/stringBinding'
 import { references } from '../../db/accessors'
-import { addReference } from '../../db/actions'
+import { addReference, removeReference } from '../../db/actions'
 
 class References extends React.Component {
 
@@ -22,19 +22,6 @@ class References extends React.Component {
 
     // TODO only call updateState if the op may have changed the "references" array.
     doc.on('op', updateState)
-  }
-
-  // This gets invoked when the user clicks the "Remove" button.
-  // This gets invoked when the user clicks the "Add" button.
-  // TODO refactor into "action"
-  removeReference (index) {
-    const doc = this.props.doc
-
-    // Remove the element from the array.
-    doc.submitOp([{
-      p: ['references', index],
-      ld: doc.data.references[index]
-    }])
   }
 
   render () {
@@ -86,7 +73,7 @@ class References extends React.Component {
                   <Button floated='right' negative size='small' compact
                     onClick={(event) => {
                       event.preventDefault() // Prevent form submission
-                      this.removeReference(i)
+                      removeReference(doc, i)
                     }}
                   >
                     Remove

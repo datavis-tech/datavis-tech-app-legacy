@@ -1,6 +1,6 @@
 // Adds the given reference (fileName and id)
 // to the given document.
-export const addReference = (doc, fileName='', id='') => {
+export const addReference = (doc, fileName = '', id = '') => {
 
   // If references is undefined, then create an empty array.
   if (!doc.data.references) {
