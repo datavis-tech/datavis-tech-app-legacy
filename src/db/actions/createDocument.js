@@ -1,6 +1,6 @@
-import connection from './connection'
-import { DB_DOCUMENTS_COLLECTION } from '../constants'
-import generateId from './generateId'
+import connection from '../connection'
+import { DB_DOCUMENTS_COLLECTION } from '../../constants'
+import generateId from '../generateId'
 
 // Creates a new document in the ShareDB backend,
 // returns the document ID.

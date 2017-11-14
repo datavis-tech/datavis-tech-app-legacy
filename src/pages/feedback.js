@@ -3,7 +3,7 @@ import Page from '../components/page'
 import Layout from '../components/layout'
 import { Form, Button, Container } from 'semantic-ui-react'
 import { Router } from '../routes'
-import createFeedbackEntry from '../db/createFeedbackEntry'
+import { createFeedbackEntry } from '../db/actions'
 
 class FeedbackPage extends React.Component {
   onSubmit (event) {
