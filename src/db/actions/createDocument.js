@@ -4,7 +4,7 @@ import generateId from '../generateId'
 
 // Creates a new document in the ShareDB backend,
 // returns the document ID.
-const createDocument = ({ title, description, owner }) => {
+export const createDocument = ({ title, description, owner }) => {
   const id = generateId()
   const doc = connection.get(DB_DOCUMENTS_COLLECTION, id)
   const content = ''
@@ -39,5 +39,3 @@ const createDocument = ({ title, description, owner }) => {
 
   return id
 }
-
-export default createDocument

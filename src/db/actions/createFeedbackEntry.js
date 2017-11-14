@@ -3,7 +3,7 @@ import { DB_FEEDBACK_COLLECTION } from '../../constants'
 import generateId from '../generateId'
 
 // Creates an entry in the feedback collection.
-const createFeedbackEntry = ({ feedback, user }) => {
+export const createFeedbackEntry = ({ feedback, user }) => {
   const id = generateId()
   const doc = connection.get(DB_FEEDBACK_COLLECTION, id)
   doc.create({
@@ -15,5 +15,3 @@ const createFeedbackEntry = ({ feedback, user }) => {
     user
   })
 }
-
-export default createFeedbackEntry
