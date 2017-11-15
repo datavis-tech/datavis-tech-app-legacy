@@ -37,5 +37,5 @@ export const createDocument = ({ title, description, owner }) => {
     // If not present, the value is treated as "vis".
   })
 
-  return id
+  return doc
 }
