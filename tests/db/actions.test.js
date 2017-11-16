@@ -1,4 +1,5 @@
 import ShareDB from 'sharedb'
+import { DB_DOCUMENTS_COLLECTION, DB_FEEDBACK_COLLECTION } from '../../src/constants'
 
 // Connect to an in-memory ShareDB instance (without query support)
 const mockConnection = (new ShareDB()).connect()
@@ -8,8 +9,8 @@ jest.mock('../../src/db/connection', () => ({
 
 import {
   createDocument,
-  // deleteDocument,
-  // createFeedbackEntry,
+  deleteDocument,
+  createFeedbackEntry,
   addCollaborator,
   removeCollaborator,
   addReference,
@@ -37,6 +38,8 @@ describe('[integration test] actions', () => {
         owner: '78943278',
         content: ''
       })
+      expect(doc.collection).toEqual(DB_DOCUMENTS_COLLECTION)
+      expect(doc.type.name).toEqual('json0')
     })
   })
 
@@ -116,4 +119,26 @@ describe('[integration test] actions', () => {
     })
   })
 
+  describe('deleteDocument', () => {
+    it('should delete a document', () => {
+      deleteDocument(doc)
+      expect(doc.data).toBeUndefined()
+      expect(doc.type).toBeNull()
+    })
+  })
+
+  describe('createFeedbackEntry', () => {
+    it('should initialize a feedback entry', () => {
+      const doc = createFeedbackEntry({
+        feedback: 'This is my feedback',
+        user: '007'
+      })
+      expect(doc.data).toMatchObject({
+        feedback: 'This is my feedback',
+        user: '007'
+      })
+      expect(doc.collection).toEqual(DB_FEEDBACK_COLLECTION)
+      expect(doc.type.name).toEqual('json0')
+    })
+  })
 })

@@ -14,4 +14,5 @@ export const createFeedbackEntry = ({ feedback, user }) => {
     // The user who left this feedback.
     user
   })
+  return doc
 }
