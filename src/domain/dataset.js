@@ -23,7 +23,7 @@ export const Dataset = shareDBDoc => ({
   owner: () => owner(shareDBDoc),
   collaborators: () => collaborators(shareDBDoc),
 
-  delete: callback => deleteDocument(shareDBDoc, callback),
-  addCollaborator: () => addCollaborator(shareDBDoc),
+  deleteDocument: callback => deleteDocument(shareDBDoc, callback),
+  addCollaborator: collaboratorUserId => addCollaborator(shareDBDoc, collaboratorUserId),
   removeCollaborator: () => removeCollaborator(shareDBDoc)
 })
