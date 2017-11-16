@@ -41,5 +41,4 @@ export const Visualization = shareDBDoc => ({
   removeReference: referenceIndex => removeReference(shareDBDoc, referenceIndex)
 })
 
-// TODO think this through
-// Visualization.create = () => createDocument({type: VIZ_TYPE})
+Visualization.create = createDocument
