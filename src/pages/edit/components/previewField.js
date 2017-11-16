@@ -1,7 +1,7 @@
 import { Form } from 'semantic-ui-react'
-import { type } from '../../db/accessors.js'
-import { VIS_DOC_TYPE } from '../../constants'
-import Runner from '../../components/runner/runner'
+import { type } from '../../../db/accessors.js'
+import { VIS_DOC_TYPE } from '../../../constants'
+import Runner from '../../../components/runner/runner'
 
 // This component defines the form field in the edit page
 // where the running preview of a visualization is shown.

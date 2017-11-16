@@ -10,6 +10,7 @@ jest.mock('../../../src/db/subscriptions/documentSubscription')
 import DocumentSubscription from '../../../src/db/subscriptions/documentSubscription'
 
 import Loader from '../../../src/components/loader'
+import ErrorMessage from '../../../src/components/errorMessage'
 
 import ViewPage from '../../../src/components/viewPage/viewPage'
 
@@ -22,9 +23,11 @@ describe('view page', () => {
   let id
   let user
   let doc
+  let error
 
   let subscription
   let updateTrigger
+  let errorTrigger
 
   beforeAll(() => {
     process.browser = true
@@ -41,7 +44,16 @@ describe('view page', () => {
     doc = fakeDoc()
 
     updateTrigger = new CallbackTrigger()
-    subscription = fakeSubscription(({onUpdate}) => updateTrigger.set(onUpdate, null, doc))
+    errorTrigger = new CallbackTrigger()
+
+    error = Symbol('error')
+
+    subscription = fakeSubscription(
+      ({onUpdate, onError}) => {
+        updateTrigger.set(onUpdate, null, doc)
+        errorTrigger.set(onError, null, error)
+      }
+    )
     DocumentSubscription.mockReturnValue(subscription)
 
     Children = jest.fn(() => null)
@@ -82,4 +94,16 @@ describe('view page', () => {
     })
   })
 
+  describe('when error occurred', () => {
+
+    beforeEach(() => {
+      errorTrigger.trigger()
+      sut.update()
+    })
+
+    it('should show error message', () => {
+      expect(sut.find(ErrorMessage).props()).toMatchObject({error})
+    })
+
+  })
 })
