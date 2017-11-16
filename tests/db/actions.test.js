@@ -7,10 +7,10 @@ jest.mock('../../src/db/connection', () => ({
 }))
 
 import {
-  createDocument
+  createDocument,
   // deleteDocument,
   // createFeedbackEntry,
-  // addCollaborator,
+  addCollaborator
   // removeCollaborator,
   // addReference,
   // removeReference
@@ -18,13 +18,18 @@ import {
 
 describe('actions', () => {
 
+  let doc
+
+  beforeAll(() => {
+    doc = createDocument({
+      title: 'My Title',
+      description: 'Some description',
+      owner: '78943278'
+    })
+  })
+
   describe('createDocument', () => {
     it('should initialize a document', () => {
-      const doc = createDocument({
-        title: 'My Title',
-        description: 'Some description',
-        owner: '78943278'
-      })
       expect(doc.data).toMatchObject({
         schemaVersion: 1,
         title: 'My Title',
@@ -32,6 +37,18 @@ describe('actions', () => {
         owner: '78943278',
         content: ''
       })
+    })
+  })
+
+  describe('addCollaborator', () => {
+    it('should initialize array and add one collaborator', () => {
+      expect(doc.data.collaborators).toBeUndefined()
+      addCollaborator(doc, '007')
+      expect(doc.data.collaborators).toMatchObject([{ id: '007' }])
+    })
+    it('should add a second collaborator', () => {
+      addCollaborator(doc, '500')
+      expect(doc.data.collaborators).toMatchObject([{ id: '007' }, { id: '500' }])
     })
   })
 
