@@ -1,4 +1,5 @@
 import fakeDoc from '../utils/fakeDoc'
+import { methodTester } from '../utils/methodTester'
 
 jest.mock('../../src/db/accessors', () => ({
   id: jest.fn(),
@@ -47,29 +48,7 @@ describe('domain', () => {
   const mockDoc = fakeDoc()
   const vis = Visualization(mockDoc)
 
-  // Tests a method with zero arguments.
-  const testMethod = (method, fn) => {
-    it(`should expose ${method} method`, () => {
-      vis[method]()
-      expect(fn).toHaveBeenCalledWith(mockDoc)
-    })
-  }
-
-  // Tests a method with a single argument.
-  const testMethod1 = (method, fn, arg) => {
-    it(`should expose ${method} method`, () => {
-      vis[method](arg)
-      expect(fn).toHaveBeenCalledWith(mockDoc, arg)
-    })
-  }
-
-  // Tests a method with two arguments.
-  const testMethod2 = (method, fn, arg1, arg2) => {
-    it(`should expose ${method} method`, () => {
-      vis[method](arg1, arg2)
-      expect(fn).toHaveBeenCalledWith(mockDoc, arg1, arg2)
-    })
-  }
+  const { testMethod, testMethod1, testMethod2 } = methodTester(vis, mockDoc)
 
   describe('Visualization', () => {
     describe('accessors', () => {
