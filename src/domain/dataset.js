@@ -8,7 +8,8 @@ import {
   description,
   content,
   owner,
-  collaborators
+  collaborators,
+  profile
 } from '../../src/db/accessors'
 
 import {
@@ -31,6 +32,7 @@ export const Visualization = shareDBDoc => ({
   content: () => content(shareDBDoc),
   owner: () => owner(shareDBDoc),
   collaborators: () => collaborators(shareDBDoc),
+  profile: () => profile(shareDBDoc),
 
   delete: callback => deleteDocument(shareDBDoc, callback),
   addCollaborator: () => addCollaborator(shareDBDoc),
