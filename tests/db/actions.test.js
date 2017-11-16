@@ -11,9 +11,9 @@ import {
   // deleteDocument,
   // createFeedbackEntry,
   addCollaborator,
-  removeCollaborator
-  // addReference,
-  // removeReference
+  removeCollaborator,
+  addReference,
+  removeReference
 } from '../../src/db/actions'
 
 describe('[integration test] actions', () => {
@@ -68,6 +68,51 @@ describe('[integration test] actions', () => {
     it('should remove a third collaborator', () => {
       removeCollaborator(doc, 0)
       expect(doc.data.collaborators).toMatchObject([])
+    })
+  })
+
+  describe('addReference', () => {
+    it('should initialize array and add one reference', () => {
+      expect(doc.data.references).toBeUndefined()
+      addReference(doc, 'data.csv', '1')
+      expect(doc.data.references).toMatchObject([
+        { fileName: 'data.csv', id: '1' }
+      ])
+    })
+    it('should add a second reference, using default values', () => {
+      addReference(doc)
+      expect(doc.data.references).toMatchObject([
+        { fileName: 'data.csv', id: '1' },
+        { fileName: '', id: '' }
+      ])
+    })
+    it('should add a third reference', () => {
+      addReference(doc, 'shapes.json', '3')
+      expect(doc.data.references).toMatchObject([
+        { fileName: 'data.csv', id: '1' },
+        { fileName: '', id: '' },
+        { fileName: 'shapes.json', id: '3' }
+      ])
+    })
+  })
+
+  describe('removeReference', () => {
+    it('should remove a reference', () => {
+      removeReference(doc, 1)
+      expect(doc.data.references).toMatchObject([
+        { fileName: 'data.csv', id: '1' },
+        { fileName: 'shapes.json', id: '3' }
+      ])
+    })
+    it('should remove a second reference', () => {
+      removeReference(doc, 1)
+      expect(doc.data.references).toMatchObject([
+        { fileName: 'data.csv', id: '1' }
+      ])
+    })
+    it('should remove a third reference', () => {
+      removeReference(doc, 0)
+      expect(doc.data.references).toMatchObject([])
     })
   })
 

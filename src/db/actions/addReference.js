@@ -13,9 +13,6 @@ export const addReference = (doc, fileName = '', id = '') => {
   // Push an empty reference object onto the references array.
   doc.submitOp([{
     p: ['references', doc.data.references.length],
-    li: {
-      fileName: '',
-      id: ''
-    }
+    li: { fileName, id }
   }])
 }
