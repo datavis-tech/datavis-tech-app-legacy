@@ -3,6 +3,7 @@ import { List } from 'semantic-ui-react'
 import AddCollaboratorModal from './addCollaboratorModal'
 import CollaboratorListItem from './collaboratorListItem'
 import { collaborators, id } from '../../db/accessors'
+import { removeCollaborator } from '../../db/actions'
 
 class Collaborators extends React.Component {
 
@@ -21,44 +22,12 @@ class Collaborators extends React.Component {
     }
 
     // TODO only call updateState if the op may have changed the "collaborators" array.
+    // TODO remove this listener on component unmount
     doc.on('op', updateState)
-
-    this.addCollaborator = this.addCollaborator.bind(this)
-  }
-
-  // This gets invoked when the user clicks the "Add" button.
-  // TODO refactor this into an "action"
-  addCollaborator (id) {
-    const doc = this.props.doc
-
-    // If collaborators is undefined, then create an empty array.
-    if (!doc.data.collaborators) {
-      doc.submitOp([{
-        p: ['collaborators'],
-        oi: []
-      }])
-    }
-
-    // Push an empty reference object onto the collaborators array.
-    doc.submitOp([{
-      p: ['collaborators', doc.data.collaborators.length],
-      li: { id }
-    }])
-
-  }
-
-  // When the user clicks the "Remove" button,
-  // remove the clicked element from the array.
-  // TODO refactor this into an "action"
-  removeCollaborator (index) {
-    const doc = this.props.doc
-    doc.submitOp([{
-      p: ['collaborators', index],
-      ld: collaborators(doc)[index]
-    }])
   }
 
   render () {
+    const doc = this.props.doc
     return (
       <div>
         <List verticalAlign='middle'>
@@ -67,12 +36,12 @@ class Collaborators extends React.Component {
               <CollaboratorListItem
                 key={i}
                 id={id(collaborator)}
-                remove={() => this.removeCollaborator(i)}
+                remove={() => removeCollaborator(doc, i)}
               />
             ))
           }
         </List>
-        <AddCollaboratorModal addCollaborator={this.addCollaborator} />
+        <AddCollaboratorModal doc={doc} />
       </div>
     )
   }

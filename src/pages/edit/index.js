@@ -8,6 +8,7 @@ import Loader from '../../components/loader'
 import VisSubscription from '../../db/subscriptions/visSubscription'
 import ErrorMessage from './errorMessage'
 import EditPageForm from './editPageForm'
+import { deleteDocument } from '../../db/actions'
 
 class EditPage extends React.Component {
   static async getInitialProps ({query}) {
@@ -17,10 +18,9 @@ class EditPage extends React.Component {
   }
 
   // This gets called after the user clicks through the delete confirm modal.
-  deleteDocument (doc) {
+  deleteDocumentAndNavigate (doc) {
     if (doc) {
-      // TODO refactor this into an action under src/db/actions
-      doc.del((err) => {
+      deleteDocument(doc, err => {
         if (err) {
           return console.error(err)
         }
@@ -58,7 +58,7 @@ class EditPage extends React.Component {
                   <EditPageForm
                     doc={doc}
                     referenceDocs={referenceDocs}
-                    deleteDocument={() => this.deleteDocument(doc)}
+                    deleteDocument={() => this.deleteDocumentAndNavigate(doc)}
                   />
                   <ErrorMessage error={error} />
                 </Layout>

@@ -2,6 +2,7 @@ import React from 'react'
 import { Table, Button } from 'semantic-ui-react'
 import StringBinding from '../../components/stringBinding'
 import { references } from '../../db/accessors'
+import { addReference, removeReference } from '../../db/actions'
 
 class References extends React.Component {
 
@@ -23,43 +24,8 @@ class References extends React.Component {
     doc.on('op', updateState)
   }
 
-  // This gets invoked when the user clicks the "Add" button.
-  // TODO refactor into "action"
-  addReference () {
-    const doc = this.props.doc
-
-    // If references is undefined, then create an empty array.
-    if (!doc.data.references) {
-      doc.submitOp([{
-        p: ['references'],
-        oi: []
-      }])
-    }
-
-    // Push an empty reference object onto the references array.
-    doc.submitOp([{
-      p: ['references', doc.data.references.length],
-      li: {
-        fileName: '',
-        id: ''
-      }
-    }])
-  }
-
-  // This gets invoked when the user clicks the "Remove" button.
-  // This gets invoked when the user clicks the "Add" button.
-  // TODO refactor into "action"
-  removeReference (index) {
-    const doc = this.props.doc
-
-    // Remove the element from the array.
-    doc.submitOp([{
-      p: ['references', index],
-      ld: doc.data.references[index]
-    }])
-  }
-
   render () {
+    const doc = this.props.doc
     return (
       <Table>
         <Table.Header>
@@ -70,7 +36,7 @@ class References extends React.Component {
               <Button floated='right' primary size='small' compact
                 onClick={(event) => {
                   event.preventDefault() // Prevent form submission
-                  this.addReference()
+                  addReference(doc)
                 }}
               >
                 Add
@@ -87,7 +53,7 @@ class References extends React.Component {
                   <div className='ui fluid transparent input'>
                     <StringBinding
                       type='input'
-                      doc={this.props.doc}
+                      doc={doc}
                       path={['references', i, 'fileName']}
                       placeholder='Type file name (local alias) here.'
                     />
@@ -97,7 +63,7 @@ class References extends React.Component {
                   <div className='ui fluid transparent input'>
                     <StringBinding
                       type='input'
-                      doc={this.props.doc}
+                      doc={doc}
                       path={['references', i, 'id']}
                       placeholder='Paste document ID here.'
                     />
@@ -107,7 +73,7 @@ class References extends React.Component {
                   <Button floated='right' negative size='small' compact
                     onClick={(event) => {
                       event.preventDefault() // Prevent form submission
-                      this.removeReference(i)
+                      removeReference(doc, i)
                     }}
                   >
                     Remove

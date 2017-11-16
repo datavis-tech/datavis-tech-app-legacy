@@ -1,10 +1,10 @@
-import connection from './connection'
-import { DB_DOCUMENTS_COLLECTION } from '../constants'
-import generateId from './generateId'
+import connection from '../connection'
+import { DB_DOCUMENTS_COLLECTION } from '../../constants'
+import generateId from '../generateId'
 
 // Creates a new document in the ShareDB backend,
 // returns the document ID.
-const createDocument = ({ title, description, owner }) => {
+export const createDocument = ({ title, description, owner }) => {
   const id = generateId()
   const doc = connection.get(DB_DOCUMENTS_COLLECTION, id)
   const content = ''
@@ -37,7 +37,5 @@ const createDocument = ({ title, description, owner }) => {
     // If not present, the value is treated as "vis".
   })
 
-  return id
+  return doc
 }
-
-export default createDocument

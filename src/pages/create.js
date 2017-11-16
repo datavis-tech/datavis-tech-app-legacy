@@ -4,7 +4,8 @@ import Layout from '../components/layout'
 import LoginButton from '../components/loginButton'
 import { Form, Button, Container } from 'semantic-ui-react'
 import { Router } from '../routes'
-import createDocument from '../db/createDocument'
+import { id } from '../db/accessors'
+import { createDocument } from '../db/actions'
 
 class CreatePage extends React.Component {
 
@@ -19,7 +20,7 @@ class CreatePage extends React.Component {
     event.preventDefault() // Prevent form submission
 
     // Create a new document in the ShareDB backend.
-    const id = createDocument({
+    const doc = createDocument({
       title: this.titleInput.value,
       description: this.descriptionInput.value,
       owner: this.props.user.id
@@ -32,7 +33,7 @@ class CreatePage extends React.Component {
     })
 
     // Redirect to the edit page after creation.
-    Router.pushRoute('edit', { id })
+    Router.pushRoute('edit', { id: id(doc) })
   }
 
   renderBody () {

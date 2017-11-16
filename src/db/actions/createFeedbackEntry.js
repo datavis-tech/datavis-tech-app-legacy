@@ -1,9 +1,9 @@
-import connection from './connection'
-import { DB_FEEDBACK_COLLECTION } from '../constants'
-import generateId from './generateId'
+import connection from '../connection'
+import { DB_FEEDBACK_COLLECTION } from '../../constants'
+import generateId from '../generateId'
 
 // Creates an entry in the feedback collection.
-const createFeedbackEntry = ({ feedback, user }) => {
+export const createFeedbackEntry = ({ feedback, user }) => {
   const id = generateId()
   const doc = connection.get(DB_FEEDBACK_COLLECTION, id)
   doc.create({
@@ -14,6 +14,5 @@ const createFeedbackEntry = ({ feedback, user }) => {
     // The user who left this feedback.
     user
   })
+  return doc
 }
-
-export default createFeedbackEntry

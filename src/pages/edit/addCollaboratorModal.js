@@ -1,6 +1,7 @@
 import React from 'react'
 import { Button, Modal, Header, Icon, Form, Message } from 'semantic-ui-react'
 import createProfileQuery from '../../db/createProfileQuery'
+import { addCollaborator } from '../../db/actions'
 
 // This component defines the modal dialog that pops up
 // in the editor page when the user clicks "Add Collaborator".
@@ -31,29 +32,30 @@ export default class AddCollaboratorModal extends React.Component {
 
     // Add the given user as a collaborator.
     // Called when the user clicks "add collaborator" button.
-    this.addCollaborator = () => {
+    this.collaboratorSubmitted = () => {
       const username = this.usernameInput.value
+
       this.setState({
         loading: true
       })
-      setTimeout(() => {
-        const profileQuery = createProfileQuery({ username }, (profile) => {
-          if (profile) {
-            this.setState({
-              loading: false,
-              notFound: false,
-              show: false
-            })
-            this.props.addCollaborator(profile.id)
-          } else {
-            this.setState({
-              loading: false,
-              notFound: true
-            })
-          }
-          profileQuery.destroy()
-        })
-      }, 1000)
+
+      const profileQuery = createProfileQuery({ username }, (profile) => {
+        if (profile) {
+          addCollaborator(this.props.doc, profile.id)
+          this.setState({
+            loading: false,
+            notFound: false,
+            show: false
+          })
+        } else {
+          this.setState({
+            loading: false,
+            notFound: true
+          })
+        }
+        profileQuery.destroy()
+      })
+
     }
   }
 
@@ -72,7 +74,7 @@ export default class AddCollaboratorModal extends React.Component {
         <Modal open={show} onClose={close} size='small'>
           <Header content='Add Collaborator' />
           <Modal.Content>
-            <Form onSubmit={this.addCollaborator}>
+            <Form onSubmit={this.collaboratorSubmitted}>
               <Form.Field>
                 <label>Username</label>
                 <input
@@ -94,7 +96,7 @@ export default class AddCollaboratorModal extends React.Component {
             <Button onClick={close}>
               <Icon name='remove' />Cancel
             </Button>
-            <Button primary onClick={this.addCollaborator} disabled={loading} loading={loading} >
+            <Button primary onClick={this.collaboratorSubmitted} disabled={loading} loading={loading} >
               <Icon name='checkmark' />Add Collaborator
             </Button>
           </Modal.Actions>
