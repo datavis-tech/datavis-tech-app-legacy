@@ -31,8 +31,8 @@ export const Visualization = shareDBDoc => ({
   owner: () => owner(shareDBDoc),
   collaborators: () => collaborators(shareDBDoc),
 
-  delete: callback => deleteDocument(shareDBDoc, callback),
-  addCollaborator: () => addCollaborator(shareDBDoc),
+  deleteDocument: callback => deleteDocument(shareDBDoc, callback),
+  addCollaborator: collaboratorUserId => addCollaborator(shareDBDoc, collaboratorUserId),
   removeCollaborator: () => removeCollaborator(shareDBDoc),
   addReference: (fileName, id) => addReference(shareDBDoc, fileName, id),
   removeReference: referenceIndex => removeReference(shareDBDoc, referenceIndex)
