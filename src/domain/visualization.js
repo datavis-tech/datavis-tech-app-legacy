@@ -12,7 +12,6 @@ import {
 } from '../../src/db/accessors'
 
 import {
-  createDocument,
   deleteDocument,
   addCollaborator,
   removeCollaborator,
@@ -38,5 +37,3 @@ export const Visualization = shareDBDoc => ({
   addReference: (fileName, id) => addReference(shareDBDoc, fileName, id),
   removeReference: referenceIndex => removeReference(shareDBDoc, referenceIndex)
 })
-
-Visualization.create = createDocument
