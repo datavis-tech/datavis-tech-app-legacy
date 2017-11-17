@@ -8,7 +8,7 @@ import {referenceIds, owner, profile} from '../../db/accessors'
 import Subscription from '../../components/subscription'
 import VisPageLayout from './visPageLayout'
 
-export default ({id, user, doc}) => {
+export default ({id, user, doc, onFork}) => {
   const subscription = CompositeSubscription({
     profile: ProfileSubscription({id: owner(doc)}),
     referenceDocs: ReferencesSubscription({ids: referenceIds(doc)})
@@ -26,6 +26,7 @@ export default ({id, user, doc}) => {
               id={id}
               user={user}
               doc={doc}
+              onFork={onFork}
               profile={profile(profileDoc)}
               referenceDocs={referenceDocs || []}
             />

@@ -3,7 +3,7 @@ import Runner from '../../components/runner/runner'
 import DocumentPreviewList from '../../components/documentPreviewList'
 import { ViewPageLayout } from '../../components/viewPage'
 
-export default ({id, user, doc, profile, referenceDocs}) => (
+export default ({id, user, doc, profile, referenceDocs, onFork}) => (
   <ViewPageLayout
     id={id}
     user={user}
@@ -11,6 +11,7 @@ export default ({id, user, doc, profile, referenceDocs}) => (
     doc={doc}
     referenceDocs={referenceDocs}
     Content={Runner}
+    onFork={onFork}
     References={
       ({referenceDocs}) => (
         <DocumentPreviewList

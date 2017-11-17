@@ -3,6 +3,7 @@ import React from 'react'
 import Page from '../../components/page'
 import ViewPage from '../../components/viewPage/viewPage'
 import VisPageContent from './visPageContent'
+import { fork } from '../../db/actions'
 
 class VisViewPage extends React.Component {
 
@@ -20,12 +21,23 @@ class VisViewPage extends React.Component {
     }
   }
 
+  onFork (doc) {
+    const forkedDoc = fork(doc)
+    console.log('original id ' + doc.id)
+    console.log('forked id ' + forkedDoc.id)
+  }
+
   render () {
     const {id, user} = this.props
     return (
       <ViewPage id={id}>
         {doc => (
-          <VisPageContent id={id} user={user} doc={doc} />
+          <VisPageContent
+            id={id}
+            user={user}
+            doc={doc}
+            onFork={() => this.onFork(doc)}
+          />
         )}
       </ViewPage>
     )
