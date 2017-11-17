@@ -1,9 +1,11 @@
 import { createDocument } from './createDocument'
 import {
+  id,
   title,
   description,
   content,
-  references
+  references,
+  type
 } from '../accessors'
 
 export const fork = (doc, owner) => {
@@ -12,6 +14,8 @@ export const fork = (doc, owner) => {
     description: description(doc),
     owner,
     content: content(doc),
-    references: references(doc)
+    references: references(doc),
+    type: type(doc),
+    forkedFrom: id(doc)
   })
 }
