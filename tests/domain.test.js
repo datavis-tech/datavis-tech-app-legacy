@@ -46,7 +46,7 @@ import { Visualization, Dataset } from '../src/domain'
 const methodTester = (domainObject, doc) => ({
 
   // Tests a method with zero arguments.
-  testMethod: (method, fn) => {
+  testMethodWith0Args: (method, fn) => {
     it(`should expose ${method} method`, () => {
       domainObject[method]()
       expect(fn).toHaveBeenCalledWith(doc)
@@ -54,7 +54,7 @@ const methodTester = (domainObject, doc) => ({
   },
 
   // Tests a method with a single argument.
-  testMethod1: (method, fn, arg) => {
+  testMethodWith1Arg: (method, fn, arg) => {
     it(`should expose ${method} method`, () => {
       domainObject[method](arg)
       expect(fn).toHaveBeenCalledWith(doc, arg)
@@ -62,7 +62,7 @@ const methodTester = (domainObject, doc) => ({
   },
 
   // Tests a method with two arguments.
-  testMethod2: (method, fn, arg1, arg2) => {
+  testMethodWith2Args: (method, fn, arg1, arg2) => {
     it(`should expose ${method} method`, () => {
       domainObject[method](arg1, arg2)
       expect(fn).toHaveBeenCalledWith(doc, arg1, arg2)
@@ -75,51 +75,56 @@ describe('domain', () => {
   describe('Visualization', () => {
     const mockDoc = fakeDoc()
     const visualization = Visualization(mockDoc)
-    const { testMethod, testMethod1, testMethod2 } = methodTester(visualization, mockDoc)
+    const {
+      testMethodWith0Args,
+      testMethodWith1Arg,
+      testMethodWith2Args
+    } = methodTester(visualization, mockDoc)
 
     describe('accessors', () => {
-      testMethod('id', id)
-      testMethod('hasData', hasData)
-      testMethod('references', references)
-      testMethod1('allReferencesLoaded', allReferencesLoaded, [fakeDoc()])
-      testMethod('title', title)
-      testMethod('description', description)
-      testMethod('content', content)
-      testMethod('owner', owner)
-      testMethod('collaborators', collaborators)
+      testMethodWith0Args('id', id)
+      testMethodWith0Args('hasData', hasData)
+      testMethodWith0Args('references', references)
+      testMethodWith1Arg('allReferencesLoaded', allReferencesLoaded, [fakeDoc()])
+      testMethodWith0Args('title', title)
+      testMethodWith0Args('description', description)
+      testMethodWith0Args('content', content)
+      testMethodWith0Args('owner', owner)
+      testMethodWith0Args('collaborators', collaborators)
     })
 
     describe('actions', () => {
-      testMethod1('deleteDocument', deleteDocument, () => {})
-      testMethod1('addCollaborator', addCollaborator, '007')
-      testMethod('removeCollaborator', removeCollaborator)
-      testMethod2('addReference', addReference, 'data.csv', '123')
-      testMethod1('removeReference', removeReference, 3)
+      testMethodWith1Arg('deleteDocument', deleteDocument, () => {})
+      testMethodWith1Arg('addCollaborator', addCollaborator, '007')
+      testMethodWith0Args('removeCollaborator', removeCollaborator)
+      testMethodWith2Args('addReference', addReference, 'data.csv', '123')
+      testMethodWith1Arg('removeReference', removeReference, 3)
     })
-
   })
 
   describe('Dataset', () => {
     const mockDoc = fakeDoc()
     const dataset = Dataset(mockDoc)
-    const { testMethod, testMethod1 } = methodTester(dataset, mockDoc)
+    const {
+      testMethodWith0Args,
+      testMethodWith1Arg
+    } = methodTester(dataset, mockDoc)
 
     describe('accessors', () => {
-      testMethod('id', id)
-      testMethod('hasData', hasData)
-      testMethod('title', title)
-      testMethod('description', description)
-      testMethod('content', content)
-      testMethod('owner', owner)
-      testMethod('collaborators', collaborators)
+      testMethodWith0Args('id', id)
+      testMethodWith0Args('hasData', hasData)
+      testMethodWith0Args('title', title)
+      testMethodWith0Args('description', description)
+      testMethodWith0Args('content', content)
+      testMethodWith0Args('owner', owner)
+      testMethodWith0Args('collaborators', collaborators)
     })
 
     describe('actions', () => {
-      testMethod1('deleteDocument', deleteDocument, () => {})
-      testMethod1('addCollaborator', addCollaborator, '007')
-      testMethod('removeCollaborator', removeCollaborator)
+      testMethodWith1Arg('deleteDocument', deleteDocument, () => {})
+      testMethodWith1Arg('addCollaborator', addCollaborator, '007')
+      testMethodWith0Args('removeCollaborator', removeCollaborator)
     })
-
   })
 
 })
