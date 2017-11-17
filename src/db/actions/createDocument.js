@@ -13,7 +13,7 @@ export const createDocument = options => {
     title,
     description,
     owner,
-    
+
     // Optional
     content,
     references,
