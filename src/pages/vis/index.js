@@ -4,6 +4,8 @@ import Page from '../../components/page'
 import ViewPage from '../../components/viewPage/viewPage'
 import VisPageContent from './visPageContent'
 import { fork } from '../../db/actions'
+import { id } from '../../db/accessors'
+import { Router } from '../../routes'
 
 class VisViewPage extends React.Component {
 
@@ -22,9 +24,14 @@ class VisViewPage extends React.Component {
   }
 
   onFork (doc) {
-    const forkedDoc = fork(doc)
-    console.log('original id ' + doc.id)
-    console.log('forked id ' + forkedDoc.id)
+    // Fork the document to the current user's account.
+    const owner = this.props.user.id
+    const forkedDoc = fork(doc, owner)
+
+    // Redirect to the edit page after creation.
+    Router.pushRoute('edit', {
+      id: id(forkedDoc)
+    })
   }
 
   render () {

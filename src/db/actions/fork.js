@@ -1,13 +1,17 @@
 import { createDocument } from './createDocument'
 import {
   title,
-  description
+  description,
+  content,
+  references
 } from '../accessors'
 
 export const fork = (doc, owner) => {
   return createDocument({
-    title: title(doc),
+    title: `Fork of ${title(doc)}`,
     description: description(doc),
-    owner
+    owner,
+    content: content(doc),
+    references: references(doc)
   })
 }
