@@ -96,6 +96,7 @@ describe('domain', () => {
       testMethod2('addReference', addReference, 'data.csv', '123')
       testMethod1('removeReference', removeReference, 3)
     })
+
   })
 
   describe('Dataset', () => {
@@ -118,6 +119,7 @@ describe('domain', () => {
       testMethod1('addCollaborator', addCollaborator, '007')
       testMethod('removeCollaborator', removeCollaborator)
     })
+
   })
 
 })
