@@ -14,7 +14,8 @@ import {
   addCollaborator,
   removeCollaborator,
   addReference,
-  removeReference
+  removeReference,
+  fork
 } from '../../src/db/actions'
 
 describe('[integration test] actions', () => {
@@ -59,21 +60,6 @@ describe('[integration test] actions', () => {
     })
   })
 
-  describe('removeCollaborator', () => {
-    it('should remove a collaborator', () => {
-      removeCollaborator(doc, 1)
-      expect(doc.data.collaborators).toMatchObject([{ id: '007' }, { id: '999' }])
-    })
-    it('should remove a second collaborator', () => {
-      removeCollaborator(doc, 1)
-      expect(doc.data.collaborators).toMatchObject([{ id: '007' }])
-    })
-    it('should remove a third collaborator', () => {
-      removeCollaborator(doc, 0)
-      expect(doc.data.collaborators).toMatchObject([])
-    })
-  })
-
   describe('addReference', () => {
     it('should initialize array and add one reference', () => {
       expect(doc.data.references).toBeUndefined()
@@ -96,6 +82,43 @@ describe('[integration test] actions', () => {
         { fileName: '', id: '' },
         { fileName: 'shapes.json', id: '3' }
       ])
+    })
+  })
+
+  describe('fork', () => {
+    it('should fork a document', () => {
+      const forkedDoc = fork(doc, '007')
+      expect(forkedDoc.data).toMatchObject({
+        schemaVersion: 1,
+        title: 'Fork of My Title',
+        description: 'Some description',
+        owner: '007',
+        content: '',
+        references: [
+          { fileName: 'data.csv', id: '1' },
+          { fileName: '', id: '' },
+          { fileName: 'shapes.json', id: '3' }
+        ],
+        type: 'vis',
+        forkedFrom: doc.id
+      })
+      expect(doc.collection).toEqual(DB_DOCUMENTS_COLLECTION)
+      expect(doc.type.name).toEqual('json0')
+    })
+  })
+
+  describe('removeCollaborator', () => {
+    it('should remove a collaborator', () => {
+      removeCollaborator(doc, 1)
+      expect(doc.data.collaborators).toMatchObject([{ id: '007' }, { id: '999' }])
+    })
+    it('should remove a second collaborator', () => {
+      removeCollaborator(doc, 1)
+      expect(doc.data.collaborators).toMatchObject([{ id: '007' }])
+    })
+    it('should remove a third collaborator', () => {
+      removeCollaborator(doc, 0)
+      expect(doc.data.collaborators).toMatchObject([])
     })
   })
 
