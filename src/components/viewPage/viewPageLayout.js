@@ -42,6 +42,7 @@ const ViewPageLayout = ({id, user, ownerProfile, doc, referenceDocs, ...slots}) 
                 <Button fluid>Edit</Button>
               </a>
             </Link>
+            <Button style={{marginTop: '5px'}} fluid>Fork</Button>
           </Grid.Column>
         </Grid.Row>
       </Grid>
