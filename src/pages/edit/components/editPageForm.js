@@ -1,16 +1,16 @@
 import { Form, Grid, Button } from 'semantic-ui-react'
-import { Link } from '../../routes'
-import StringBinding from '../../components/stringBinding'
-import CodeMirrorBinding from '../../components/codeMirrorBinding'
+import { Link } from '../../../routes'
+import StringBinding from '../../../components/stringBinding'
+import CodeMirrorBinding from '../../../components/codeMirrorBinding'
 import DeleteConfirmModal from './deleteConfirmModal'
 import Collaborators from './collaborators'
 import DocTypeEditor from './docTypeEditor'
 import PreviewField from './previewField'
 import ReferencesField from './referencesField'
-import { title, type, id } from '../../db/accessors.js'
+import { title, type, id } from '../../../db/accessors.js'
 
 // The Form in the body of the page.
-export default ({doc, referenceDocs, deleteDocument}) => (
+export default ({doc, referenceDocs, onDocumentDelete}) => (
   <Form>
     <Form.Field>
       <label>Title</label>
@@ -62,7 +62,7 @@ export default ({doc, referenceDocs, deleteDocument}) => (
     </Form.Field>
     <Form.Field>
       <DeleteConfirmModal
-        deleteDocument={deleteDocument}
+        onDocumentDelete={onDocumentDelete}
         title={title(doc)}
       />
     </Form.Field>

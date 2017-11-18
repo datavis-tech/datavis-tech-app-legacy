@@ -38,7 +38,7 @@ export default class DeleteConfirmModal extends React.Component {
       })
 
       this.close()
-      this.props.deleteDocument()
+      this.props.onDocumentDelete()
     }
   }
 

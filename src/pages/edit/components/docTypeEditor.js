@@ -1,6 +1,6 @@
 import React from 'react'
 import { Form } from 'semantic-ui-react'
-import { type } from '../../db/accessors'
+import { type } from '../../../db/accessors'
 
 class DocTypeEditor extends React.Component {
 
