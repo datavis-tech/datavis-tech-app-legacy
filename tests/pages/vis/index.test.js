@@ -32,7 +32,7 @@ describe('vis page', () => {
     expect(shallow(<Children doc={doc} />).find(VisPageContent).props()).toMatchObject({
       id,
       user,
-      doc: {doc}
+      doc
     })
   })
 

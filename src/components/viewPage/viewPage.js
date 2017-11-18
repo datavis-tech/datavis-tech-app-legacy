@@ -8,9 +8,9 @@ import Loader from '../loader'
 export default ({id, children}) => (
   <Subscription subscription={DocumentSubscription({id})}>
     {
-      ({data: doc, isReady}) => (
+      ({data, isReady, error}) => (
         <Loader ready={isReady}>
-          {children(doc)}
+          {children({doc: data, error})}
         </Loader>
       )
     }

@@ -1,7 +1,7 @@
-import { type } from '../../db/accessors.js'
+import { type } from '../../../db/accessors.js'
 import { Form } from 'semantic-ui-react'
 import References from './references'
-import { VIS_DOC_TYPE } from '../../constants'
+import { VIS_DOC_TYPE } from '../../../constants'
 
 // This component defines the field in the edit page form
 // that contains the editable listing of references

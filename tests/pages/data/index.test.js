@@ -26,13 +26,13 @@ describe('data page', () => {
     })
   })
 
-  it('should render view page with vis content', () => {
+  it('should render view page with data content', () => {
     const doc = Symbol('doc')
     const Children = sut.prop('children')
     expect(shallow(<Children doc={doc} />).find(DataPageContent).props()).toMatchObject({
       id,
       user,
-      doc: {doc}
+      doc
     })
   })
 

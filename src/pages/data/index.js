@@ -38,7 +38,7 @@ class VisViewPage extends React.Component {
     const {id, user} = this.props
     return (
       <ViewPage id={id}>
-        {doc => (
+        {({doc}) => (
           <DataPageContent
             id={id}
             user={user}

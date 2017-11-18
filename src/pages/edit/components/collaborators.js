@@ -2,8 +2,8 @@ import React from 'react'
 import { List } from 'semantic-ui-react'
 import AddCollaboratorModal from './addCollaboratorModal'
 import CollaboratorListItem from './collaboratorListItem'
-import { collaborators, id } from '../../db/accessors'
-import { removeCollaborator } from '../../db/actions'
+import { collaborators, id } from '../../../db/accessors'
+import { removeCollaborator } from '../../../db/actions'
 
 class Collaborators extends React.Component {
 

@@ -22,9 +22,11 @@ describe('view page', () => {
   let id
   let user
   let doc
+  let error
 
   let subscription
   let updateTrigger
+  let errorTrigger
 
   beforeAll(() => {
     process.browser = true
@@ -41,7 +43,16 @@ describe('view page', () => {
     doc = fakeDoc()
 
     updateTrigger = new CallbackTrigger()
-    subscription = fakeSubscription(({onUpdate}) => updateTrigger.set(onUpdate, null, doc))
+    errorTrigger = new CallbackTrigger()
+
+    error = Symbol('error')
+
+    subscription = fakeSubscription(
+      ({onUpdate, onError}) => {
+        updateTrigger.set(onUpdate, null, doc)
+        errorTrigger.set(onError, null, error)
+      }
+    )
     DocumentSubscription.mockReturnValue(subscription)
 
     Children = jest.fn(() => null)
@@ -78,8 +89,20 @@ describe('view page', () => {
     })
 
     it('should have content', () => {
-      expect(Children).toHaveBeenCalledWith(doc)
+      expect(Children).toHaveBeenCalledWith({doc})
     })
   })
 
+  describe('when error occurred', () => {
+
+    beforeEach(() => {
+      errorTrigger.trigger()
+      sut.update()
+    })
+
+    it('should pass error to children', () => {
+      expect(Children).toHaveBeenLastCalledWith({doc: null, error})
+    })
+
+  })
 })
