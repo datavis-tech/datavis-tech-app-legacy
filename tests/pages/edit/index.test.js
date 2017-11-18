@@ -48,7 +48,7 @@ describe('edit page', () => {
       expect(editPageContentProps).toMatchObject({
         id,
         user,
-        doc: {doc}
+        doc
       })
     })
 
@@ -60,7 +60,7 @@ describe('edit page', () => {
       })
 
       it('should delete document', () => {
-        expect(deleteDocument.mock.calls[0][0].doc).toBe(doc)
+        expect(deleteDocument.mock.calls[0][0]).toBe(doc)
       })
 
       it('should change route to profile on success', () => {

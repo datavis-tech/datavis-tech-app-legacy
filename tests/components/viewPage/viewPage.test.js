@@ -10,7 +10,6 @@ jest.mock('../../../src/db/subscriptions/documentSubscription')
 import DocumentSubscription from '../../../src/db/subscriptions/documentSubscription'
 
 import Loader from '../../../src/components/loader'
-import ErrorMessage from '../../../src/components/errorMessage'
 
 import ViewPage from '../../../src/components/viewPage/viewPage'
 
@@ -90,7 +89,7 @@ describe('view page', () => {
     })
 
     it('should have content', () => {
-      expect(Children).toHaveBeenCalledWith(doc)
+      expect(Children).toHaveBeenCalledWith({doc})
     })
   })
 
@@ -101,8 +100,8 @@ describe('view page', () => {
       sut.update()
     })
 
-    it('should show error message', () => {
-      expect(sut.find(ErrorMessage).props()).toMatchObject({error})
+    it('should pass error to children', () => {
+      expect(Children).toHaveBeenLastCalledWith({doc: null, error})
     })
 
   })

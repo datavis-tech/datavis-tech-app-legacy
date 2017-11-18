@@ -31,11 +31,12 @@ class EditPage extends React.Component {
     const {id, user} = this.props
     return (
       <ViewPage id={id}>
-        {doc => (
+        {({doc, error}) => (
           <EditPageContent
             id={id}
             user={user}
             doc={doc}
+            error={error}
             onDocumentDelete={() => this.deleteDocumentAndNavigate(doc)}
           />
         )}
