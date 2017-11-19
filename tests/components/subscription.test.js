@@ -10,6 +10,7 @@ describe('subscription', () => {
   let props
   let subscription
   let children
+  let onUpdate
 
   beforeAll(() => {
     process.browser = true
@@ -22,9 +23,11 @@ describe('subscription', () => {
   beforeEach(() => {
 
     subscription = fakeSubscription()
+    onUpdate = jest.fn()
 
     props = {
-      subscription
+      subscription,
+      onUpdate
     }
 
     children = jest.fn(() => null)
@@ -56,6 +59,10 @@ describe('subscription', () => {
 
       it('should render children with received docs', () => {
         expect(children).toHaveBeenCalledWith({data: update, isReady: true})
+      })
+
+      it('should notify on update listener', () => {
+        expect(onUpdate).toHaveBeenCalledWith({data: update})
       })
 
     })

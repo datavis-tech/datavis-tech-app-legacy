@@ -9,15 +9,20 @@ import CallbackTrigger from '../../utils/callbackTrigger'
 jest.mock('../../../src/db/subscriptions/documentSubscription')
 import DocumentSubscription from '../../../src/db/subscriptions/documentSubscription'
 
+jest.mock('../../../src/components/layout')
+import Layout from '../../../src/components/layout'
+
 import Loader from '../../../src/components/loader'
+import ErrorMessage from '../../../src/components/errorMessage'
 
-import ViewPage from '../../../src/components/viewPage/viewPage'
+import BaseViewPage from '../../../src/components/viewPage/baseViewPage'
 
-describe('view page', () => {
+describe('base view page', () => {
 
   let sut
   let props
   let Children
+  let layoutProps
 
   let id
   let user
@@ -55,10 +60,19 @@ describe('view page', () => {
     )
     DocumentSubscription.mockReturnValue(subscription)
 
+    Layout.mockImplementation(({children}) => children)
     Children = jest.fn(() => null)
 
-    props = {id, user}
-    sut = mount(<ViewPage {...props}>{Children}</ViewPage>)
+    layoutProps = Symbol('layoutProps')
+    props = {id, user, layoutProps}
+    sut = mount(<BaseViewPage {...props}>{Children}</BaseViewPage>)
+  })
+
+  it('should have layout and default title', () => {
+    expect(sut.find(Layout).props()).toMatchObject({
+      title: 'Loading... | Datavis.tech',
+      layoutProps
+    })
   })
 
   it('should create document subscription', () => {
@@ -91,6 +105,10 @@ describe('view page', () => {
     it('should have content', () => {
       expect(Children).toHaveBeenCalledWith({doc})
     })
+
+    it('should have title based on document title', () => {
+      expect(sut.find(Layout).prop('title')).toEqual(`${doc.data.title} | Datavis.tech`)
+    })
   })
 
   describe('when error occurred', () => {
@@ -100,8 +118,8 @@ describe('view page', () => {
       sut.update()
     })
 
-    it('should pass error to children', () => {
-      expect(Children).toHaveBeenLastCalledWith({doc: null, error})
+    it('should show error', () => {
+      expect(sut.find(ErrorMessage).prop('error')).toBe(error)
     })
 
   })

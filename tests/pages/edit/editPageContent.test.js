@@ -1,9 +1,6 @@
 import React from 'react'
 import {mount} from 'enzyme'
 
-jest.mock('../../../src/components/layout')
-import Layout from '../../../src/components/layout'
-
 jest.mock('../../../src/pages/edit/components/editPageForm')
 import EditPageForm from '../../../src/pages/edit/components/editPageForm'
 
@@ -57,21 +54,12 @@ describe('edit page content', () => {
     props = {id, user, doc, onDocumentDelete}
 
     EditPageForm.mockImplementation(() => null)
-    Layout.mockImplementation(({children}) => children)
 
     sut = mount(<EditPageContent {...props} />)
   })
 
   it('should create references subscription', () => {
     expect(ReferencesSubscription).toHaveBeenCalledWith({ids: referenceDocs.map(r => r.id)})
-  })
-
-  it('should render page layout', () => {
-    expect(sut.find(Layout).props()).toMatchObject({
-      title: `${(doc.data.title || 'Loading...')} (editing) | Datavis.tech`,
-      user,
-      includeCSS: '/static/codemirror/codemirror.min.css'
-    })
   })
 
   describe('edit page form', () => {

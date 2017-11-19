@@ -1,75 +1,64 @@
 import React from 'react'
 import {shallow} from 'enzyme'
 
-import fakeUser from '../../utils/fakeUser'
+jest.mock('../../../src/components/page', () => args => args)
+jest.mock('../../../src/components/viewPage/viewPageComponentFactory', () => DataViewPage => DataViewPage)
 
 jest.mock('../../../src/routes')
-import {Router} from '../../../src/routes'
+import { Router } from '../../../src/routes'
 
 jest.mock('../../../src/db/actions')
-import {deleteDocument} from '../../../src/db/actions'
+import { deleteDocument } from '../../../src/db/actions'
 
-import ViewPage from '../../../src/components/viewPage/viewPage'
-jest.mock('../../../src/pages/edit/editPageContent')
+import fakeUser from '../../utils/fakeUser'
+import fakeDoc from '../../utils/fakeDoc'
+
 import EditPageContent from '../../../src/pages/edit/editPageContent'
 import EditPage from '../../../src/pages/edit'
 
-describe('edit page', () => {
+describe('data page', () => {
 
   let sut
-  let props
   let id
   let user
+  let doc
+  let props
 
   beforeEach(() => {
-    id = Symbol('id')
+
+    id = String(Math.random())
     user = fakeUser()
-    props = {id, user}
-    sut = shallow(<EditPage {...props} />).dive()
+    doc = fakeDoc()
+
+    props = {
+      id,
+      user,
+      doc
+    }
+
+    sut = shallow(<EditPage {...props} />)
+
   })
 
-  it('should render view page with id', () => {
-    expect(sut.find(ViewPage).props()).toMatchObject({id})
+  it('should render edit page content', () => {
+    expect(sut.find(EditPageContent).props()).toMatchObject({
+      id, user, doc
+    })
   })
 
-  describe('edit page content', () => {
-
-    let doc
-    let Children
-    let editPageContentProps
+  describe('on document delete', () => {
 
     beforeEach(() => {
-      doc = Symbol('doc')
-      Children = sut.prop('children')
-      editPageContentProps = shallow(<Children doc={doc} />).find(EditPageContent).props()
+      deleteDocument.mockImplementation((doc, callback) => callback())
+      sut.find(EditPageContent).prop('onDocumentDelete')(doc)
     })
 
-    it('should render view page with edit page content', () => {
-      expect(editPageContentProps).toMatchObject({
-        id,
-        user,
-        doc
-      })
+    it('should delete document', () => {
+      expect(deleteDocument.mock.calls[0][0]).toBe(doc)
     })
 
-    describe('doc deletion', () => {
-
-      beforeEach(() => {
-        deleteDocument.mockImplementation((doc, callback) => callback())
-        editPageContentProps['onDocumentDelete']()
-      })
-
-      it('should delete document', () => {
-        expect(deleteDocument.mock.calls[0][0]).toBe(doc)
-      })
-
-      it('should change route to profile on success', () => {
-        expect(Router.pushRoute).toHaveBeenCalledWith(
-          'profile',
-          {username: user.data.username}
-        )
-      })
-
+    it('should change route to forked document view page', () => {
+      expect(Router.pushRoute).toHaveBeenCalledWith('profile', {username: user.data.username})
     })
 
   })

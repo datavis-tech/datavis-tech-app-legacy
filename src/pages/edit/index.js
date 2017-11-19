@@ -1,18 +1,12 @@
 import React from 'react'
-import {Router} from '../../routes'
+import { Router } from '../../routes'
 import Page from '../../components/page'
-import ViewPage from '../../components/viewPage/viewPage'
-import {deleteDocument} from '../../db/actions'
-import {profile} from '../../db/accessors'
+import { deleteDocument } from '../../db/actions'
+import { profile } from '../../db/accessors'
+import { createViewPage } from '../../components/viewPage'
 import EditPageContent from './editPageContent'
 
 class EditPage extends React.Component {
-
-  static async getInitialProps ({query}) {
-    return {
-      id: query.id
-    }
-  }
 
   // This gets called after the user clicks through the delete confirm modal.
   deleteDocumentAndNavigate (doc) {
@@ -28,21 +22,13 @@ class EditPage extends React.Component {
   }
 
   render () {
-    const {id, user} = this.props
     return (
-      <ViewPage id={id}>
-        {({doc, error}) => (
-          <EditPageContent
-            id={id}
-            user={user}
-            doc={doc}
-            error={error}
-            onDocumentDelete={() => this.deleteDocumentAndNavigate(doc)}
-          />
-        )}
-      </ViewPage>
+      <EditPageContent
+        {...this.props}
+        onDocumentDelete={() => this.deleteDocumentAndNavigate(this.props.doc)}
+      />
     )
   }
 }
 
-export default Page(EditPage)
+export default Page(createViewPage(EditPage, {includeCSS: '/static/codemirror/codemirror.min.css'}))
