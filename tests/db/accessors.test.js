@@ -9,6 +9,7 @@ import {
   content,
   owner,
   collaborators,
+  forkedFrom,
   profile
 } from '../../src/db/accessors'
 
@@ -129,6 +130,18 @@ describe('accessors', () => {
     })
     it('should return collaborators if collaborators defined', () => {
       expect(collaborators({ data: { collaborators: ['a', 'b'] } })).toEqual(['a', 'b'])
+    })
+  })
+
+  describe('forkedFrom', () => {
+    it('should return undefined if null passed as document', () => {
+      expect(forkedFrom(null)).toBeUndefined()
+    })
+    it('should return undefined if no forkedFrom defined', () => {
+      expect(forkedFrom({})).toBeUndefined()
+    })
+    it('should return forkedFrom if forkedFrom defined', () => {
+      expect(forkedFrom({ data: { forkedFrom: 'foo' } })).toEqual('foo')
     })
   })
 

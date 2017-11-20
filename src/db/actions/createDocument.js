@@ -4,16 +4,31 @@ import generateId from '../generateId'
 
 // Creates a new document in the ShareDB backend,
 // returns the document ID.
-export const createDocument = ({ title, description, owner }) => {
+export const createDocument = options => {
+
+  // options
+  const {
+
+    // Required
+    title,
+    description,
+    owner,
+
+    // Optional
+    content,
+    references,
+    type,
+    forkedFrom
+
+  } = options
+
   const id = generateId()
   const doc = connection.get(DB_DOCUMENTS_COLLECTION, id)
-  const content = ''
 
-  const schemaVersion = 1
   doc.create({
 
     // Tracks versions of the document schema, for handling migrations.
-    schemaVersion,
+    schemaVersion: 1,
 
     // Human readable title, String.
     title,
@@ -25,16 +40,21 @@ export const createDocument = ({ title, description, owner }) => {
     owner,
 
     // The content of this document, String.
-    content
+    content: content || '',
 
-    // Another field "references" may be added later,
-    // which will be an array of objects containing:
+    // The datasets referenced by a visualization.
+    // Array of objects containing:
     //  * fileName:String The local alias for the reference.
     //  * id:String The id of the referenced document.
+    references,
 
-    // Another field "type" may be added later.
-    // It can be either "data", "vis", or "tech".
-    // If not present, the value is treated as "vis".
+    // The type of content the document contains.
+    // It can be either "data", "vis", or (maybe later) "tech".
+    // If not defined, the value is treated as "vis".
+    type,
+
+    // The id of the document that this one was forked from, if any.
+    forkedFrom
   })
 
   return doc

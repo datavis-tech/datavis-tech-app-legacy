@@ -24,7 +24,7 @@ const OwnerAvatarLink = ({ user }) => {
  * Component which represents layout for components of View Page family.
  * It has 3 slots -- Content, Description and References which allows to fill in with appropriate sections
  */
-const ViewPageLayout = ({id, user, ownerProfile, doc, referenceDocs, ...slots}) => (
+const ViewPageLayout = ({id, user, ownerProfile, doc, referenceDocs, onFork, ...slots}) => (
   <Layout title={(title(doc) || 'Loading...') + ' | Datavis.tech'} user={user}>
     <div>
       <Header as='h1'>{title(doc)}</Header>
@@ -42,6 +42,9 @@ const ViewPageLayout = ({id, user, ownerProfile, doc, referenceDocs, ...slots}) 
                 <Button fluid>Edit</Button>
               </a>
             </Link>
+            <Button onClick={onFork} style={{marginTop: '5px'}} fluid >
+              Fork
+            </Button>
           </Grid.Column>
         </Grid.Row>
       </Grid>

@@ -52,8 +52,11 @@ export const content = doc => data(doc).content || ''
 // Access the owner of a document.
 export const owner = doc => data(doc).owner || ''
 
-// Access the collaborators of a document.
+// access the collaborators of a document.
 export const collaborators = doc => data(doc).collaborators || []
+
+// access the id of the document this one was forked from, if any.
+export const forkedFrom = doc => data(doc).forkedFrom
 
 /**********************************
  * For "profile" Documents *
