@@ -18,6 +18,11 @@ import {
   fork
 } from '../../src/db/actions'
 
+import {
+  push,
+  listDelete
+} from '../../src/db/actions/primitives'
+
 describe('[integration test] actions', () => {
 
   let doc
@@ -43,13 +48,21 @@ describe('[integration test] actions', () => {
       expect(doc.type.name).toEqual('json0')
     })
   })
-
-  describe('addCollaborator', () => {
+  describe('push', () => {
     it('should initialize array and add one collaborator', () => {
       expect(doc.data.collaborators).toBeUndefined()
-      addCollaborator(doc, '007')
+      push({
+        shareDBDoc: doc,
+        property: 'collaborators',
+        item: {
+          id: '007'
+        }
+      })
       expect(doc.data.collaborators).toMatchObject([{ id: '007' }])
     })
+  })
+
+  describe('addCollaborator', () => {
     it('should add a second collaborator', () => {
       addCollaborator(doc, '500')
       expect(doc.data.collaborators).toMatchObject([{ id: '007' }, { id: '500' }])
@@ -107,11 +120,18 @@ describe('[integration test] actions', () => {
     })
   })
 
-  describe('removeCollaborator', () => {
+  describe('listDelete', () => {
     it('should remove a collaborator', () => {
-      removeCollaborator(doc, 1)
+      listDelete({
+        shareDBDoc: doc,
+        property: 'collaborators',
+        index: 1
+      })
       expect(doc.data.collaborators).toMatchObject([{ id: '007' }, { id: '999' }])
     })
+  })
+
+  describe('removeCollaborator', () => {
     it('should remove a second collaborator', () => {
       removeCollaborator(doc, 1)
       expect(doc.data.collaborators).toMatchObject([{ id: '007' }])

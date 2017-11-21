@@ -1,9 +1,10 @@
-import { collaborators } from '../accessors'
+import { listDelete } from './primitives'
 
 // Removes the collaborator at the given index from the given document.
-export const removeCollaborator = (doc, collaboratorIndex) => {
-  doc.submitOp([{
-    p: ['collaborators', collaboratorIndex],
-    ld: collaborators(doc)[collaboratorIndex]
-  }])
-}
+export const removeCollaborator = (shareDBDoc, index) => (
+  listDelete({
+    shareDBDoc,
+    property: 'collaborators',
+    index
+  })
+)

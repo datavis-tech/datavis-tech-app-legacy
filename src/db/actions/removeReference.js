@@ -1,9 +1,10 @@
-// Removes the reference at the given index from the given document.
-export const removeReference = (doc, referenceIndex) => {
+import { listDelete } from './primitives'
 
-  // Remove the element from the array.
-  doc.submitOp([{
-    p: ['references', referenceIndex],
-    ld: doc.data.references[referenceIndex]
-  }])
-}
+// Removes the reference at the given index from the given document.
+export const removeReference = (shareDBDoc, index) => (
+  listDelete({
+    shareDBDoc,
+    property: 'references',
+    index
+  })
+)
