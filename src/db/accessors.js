@@ -4,7 +4,8 @@
 
 // Gets the data inside a doc,
 // returning an empty object if passed undefined as doc.
-const data = doc => (doc && doc.data) ? doc.data : {}
+// TODO test
+export const data = doc => (doc && doc.data) ? doc.data : {}
 
 // Returns true if the given document has data loaded, false otherwise.
 export const hasData = doc => !!(doc && doc.data)
