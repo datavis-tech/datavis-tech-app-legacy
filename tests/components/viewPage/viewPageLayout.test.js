@@ -19,6 +19,7 @@ describe('view page layout', () => {
   let Content
   let Description
   let References
+  let onFork
 
   beforeEach(() => {
     id = String(Math.random())
@@ -29,6 +30,7 @@ describe('view page layout', () => {
     Content = () => <div>{String(Math.random())}</div>
     Description = () => <div>{String(Math.random())}</div>
     References = () => <div>{String(Math.random())}</div>
+    onFork = jest.fn()
 
     props = {
       id,
@@ -38,7 +40,8 @@ describe('view page layout', () => {
       referenceDocs,
       Content,
       Description,
-      References
+      References,
+      onFork
     }
 
     sut = shallow(<ViewPageLayout {...props}> <span>TEST</span> </ViewPageLayout>)

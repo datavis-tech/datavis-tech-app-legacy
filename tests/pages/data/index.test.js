@@ -1,39 +1,65 @@
 import React from 'react'
 import {shallow} from 'enzyme'
 
-import ViewPage from '../../../src/components/viewPage/viewPage'
-jest.mock('../../../src/pages/data/dataPageContent')
+jest.mock('../../../src/components/page', () => args => args)
+jest.mock('../../../src/components/viewPage/viewPageComponentFactory', () => DataViewPage => DataViewPage)
+
+jest.mock('../../../src/db/actions/fork')
+import { fork } from '../../../src/db/actions/fork'
+
+jest.mock('../../../src/routes')
+import {Router} from '../../../src/routes'
+
+import fakeUser from '../../utils/fakeUser'
+import fakeDoc from '../../utils/fakeDoc'
+
 import DataPageContent from '../../../src/pages/data/dataPageContent'
 import DataViewPage from '../../../src/pages/data/index'
 
 describe('data page', () => {
 
   let sut
-  let props
   let id
   let user
+  let doc
+  let props
 
   beforeEach(() => {
-    id = Symbol('id')
-    user = Symbol('user')
-    props = {id, user}
-    sut = shallow(<DataViewPage {...props} />).dive()
-  })
 
-  it('should render view page with id', () => {
-    expect(sut.find(ViewPage).props()).toMatchObject({
-      id
-    })
-  })
+    id = String(Math.random())
+    user = fakeUser()
+    doc = fakeDoc()
 
-  it('should render view page with data content', () => {
-    const doc = Symbol('doc')
-    const Children = sut.prop('children')
-    expect(shallow(<Children doc={doc} />).find(DataPageContent).props()).toMatchObject({
+    props = {
       id,
       user,
       doc
+    }
+
+    sut = shallow(<DataViewPage {...props} />)
+
+  })
+
+  it('should render data page content', () => {
+    expect(sut.find(DataPageContent).props()).toMatchObject({
+      id, user, doc
     })
+  })
+
+  describe('fork', () => {
+
+    let forked
+
+    beforeEach(() => {
+      forked = fakeDoc()
+      fork.mockReturnValue(forked)
+      sut.find(DataPageContent).prop('onFork')(doc)
+    })
+
+    it('should change route to forked document view page', () => {
+      expect(Router.pushRoute).toHaveBeenCalledWith('edit', {id: forked.id})
+    })
+
   })
 
 })
