@@ -1,14 +1,12 @@
 import React from 'react'
 import {shallow} from 'enzyme'
 import fakeDoc from '../../utils/fakeDoc'
-import Loader from '../../../src/components/loader'
 import DocumentsList from '../../../src/pages/profile/documentsList'
 
 describe('document list', () => {
 
   let sut
   let documents
-  let documentsLoading
 
   beforeEach(() => {
     documents = []
@@ -25,16 +23,11 @@ describe('document list', () => {
     let dataDoc
 
     beforeEach(() => {
-      documentsLoading = true
       visDoc = fakeDoc({data: {type: 'vis'}})
       dataDoc = fakeDoc({data: {type: 'data'}})
       documents = [visDoc, dataDoc]
 
-      sut.setProps({documents, documentsLoading})
-    })
-
-    it('should contain loader', () => {
-      expect(sut.find(Loader).prop('ready')).toEqual(!documentsLoading)
+      sut.setProps({documents})
     })
 
     it('should contain datasets', () => {
