@@ -16,7 +16,7 @@ class EditPage extends React.Component {
       }
 
       Router.pushRoute('profile', {
-        username: profile(this.props.user).username
+        username: this.props.user.username
       })
     })
   }
