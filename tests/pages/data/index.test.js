@@ -1,14 +1,11 @@
 import React from 'react'
-import {shallow} from 'enzyme'
+import { mount } from 'enzyme'
 
 jest.mock('../../../src/components/page', () => args => args)
 jest.mock('../../../src/components/viewPage/viewPageComponentFactory', () => DataViewPage => DataViewPage)
 
-jest.mock('../../../src/db/actions/fork')
-import { fork } from '../../../src/db/actions/fork'
-
-jest.mock('../../../src/routes')
-import {Router} from '../../../src/routes'
+const mockOnFork = () => null
+jest.mock('../../../src/components/fork', () => ({children}) => children({onFork: mockOnFork}))
 
 import fakeUser from '../../utils/fakeUser'
 import fakeDoc from '../../utils/fakeDoc'
@@ -36,30 +33,14 @@ describe('data page', () => {
       doc
     }
 
-    sut = shallow(<DataViewPage {...props} />)
+    sut = mount(<DataViewPage {...props} />)
 
   })
 
   it('should render data page content', () => {
     expect(sut.find(DataPageContent).props()).toMatchObject({
-      id, user, doc
+      id, user, doc, onFork: mockOnFork
     })
-  })
-
-  describe('fork', () => {
-
-    let forked
-
-    beforeEach(() => {
-      forked = fakeDoc()
-      fork.mockReturnValue(forked)
-      sut.find(DataPageContent).prop('onFork')(doc)
-    })
-
-    it('should change route to forked document view page', () => {
-      expect(Router.pushRoute).toHaveBeenCalledWith('edit', {id: forked.id})
-    })
-
   })
 
 })
