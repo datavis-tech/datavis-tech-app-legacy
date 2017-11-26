@@ -28,7 +28,7 @@ export default class BaseViewPage extends React.Component {
           {
             ({data, isReady, error}) => (
               <div>
-                <Loader ready={isReady}>{children({doc: data, error})}</Loader>
+                <Loader ready={isReady}>{children({doc: data})}</Loader>
                 <ErrorMessage error={error} />
               </div>
             )

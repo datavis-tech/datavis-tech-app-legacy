@@ -4,7 +4,7 @@ import ReferencesSubscription from '../../db/subscriptions/documentSubscriptions
 import {referenceIds} from '../../db/accessors'
 import EditPageForm from './components/editPageForm'
 
-export default ({id, user, doc, onDocumentDelete, error}) => (
+export default ({id, user, doc, onDocumentDelete}) => (
   <Subscription subscription={ReferencesSubscription({ids: referenceIds(doc)})}>
     {({data: referenceDocs}) => {
       return (
