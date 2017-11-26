@@ -27,9 +27,10 @@ export default class BaseViewPage extends React.Component {
         <Subscription subscription={DocumentSubscription({id})} onUpdate={this.handleDocumentUpdate}>
           {
             ({data, isReady, error}) => (
-              error
-                ? <ErrorMessage error={error} />
-                : <Loader ready={isReady}>{children({doc: data, error})}</Loader>
+              <div>
+                <Loader ready={isReady}>{children({doc: data, error})}</Loader>
+                <ErrorMessage error={error} />
+              </div>
             )
           }
         </Subscription>
