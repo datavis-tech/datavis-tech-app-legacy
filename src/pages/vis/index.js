@@ -7,9 +7,9 @@ import VisPageContent from './visPageContent'
 class VisViewPage extends React.Component {
 
   render () {
-    const {id, user, doc} = this.props
+    const {id, user, doc, onError} = this.props
     return (
-      <Fork user={user} doc={doc}>
+      <Fork user={user} doc={doc} onError={onError}>
         {
           ({onFork}) => (
             <VisPageContent

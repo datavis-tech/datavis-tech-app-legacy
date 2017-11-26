@@ -14,7 +14,18 @@ export default class BaseViewPage extends React.Component {
     this.state = {
       title: formatTitle('Loading...')
     }
-    this.handleDocumentUpdate = ({data: document}) => this.setState({title: formatTitle(title(document))})
+
+    this.handleDocumentUpdate = ({data: document}) => {
+      this.setState({
+        title: formatTitle(title(document))
+      })
+    }
+
+    // Displays an error message to the user.
+    // The argument `error` here is expected to be a String.
+    this.onError = error => {
+      this.setState({error})
+    }
   }
 
   render () {
@@ -26,10 +37,17 @@ export default class BaseViewPage extends React.Component {
       <Layout title={title} {...layoutProps}>
         <Subscription subscription={DocumentSubscription({id})} onUpdate={this.handleDocumentUpdate}>
           {
-            ({data, isReady, error}) => (
+            subscription => (
               <div>
-                <Loader ready={isReady}>{children({doc: data})}</Loader>
-                <ErrorMessage error={error} />
+                <Loader ready={subscription.isReady}>
+                  {
+                    children({
+                      doc: subscription.data,
+                      onError: this.onError
+                    })
+                  }
+                </Loader>
+                <ErrorMessage error={subscription.error || this.state.error} />
               </div>
             )
           }
