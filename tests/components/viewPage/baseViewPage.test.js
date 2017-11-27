@@ -103,7 +103,8 @@ describe('base view page', () => {
     })
 
     it('should have content', () => {
-      expect(Children).toHaveBeenCalledWith({doc})
+      expect(Children.mock.calls[2][0].doc).toEqual(doc)
+      expect(typeof Children.mock.calls[2][0].onError).toEqual('function')
     })
 
     it('should have title based on document title', () => {
@@ -111,7 +112,7 @@ describe('base view page', () => {
     })
   })
 
-  describe('when error occurred', () => {
+  describe('when error occurred from subscription', () => {
 
     beforeEach(() => {
       errorTrigger.trigger()
@@ -120,6 +121,20 @@ describe('base view page', () => {
 
     it('should show error', () => {
       expect(sut.find(ErrorMessage).prop('error')).toBe(error)
+    })
+
+  })
+
+  describe('when error occurred from within children', () => {
+
+    beforeEach(() => {
+      sut.update()
+      Children.mock.calls[0][0].onError('foo')
+      sut.update()
+    })
+
+    it('should show error', () => {
+      expect(sut.find(ErrorMessage).prop('error')).toBe('foo')
     })
 
   })
