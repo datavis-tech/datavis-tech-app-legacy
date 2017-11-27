@@ -2,7 +2,6 @@ import React from 'react'
 import { Router } from '../../routes'
 import Page from '../../components/page'
 import { deleteDocument } from '../../db/actions'
-import { profile } from '../../db/accessors'
 import { createViewPage } from '../../components/viewPage'
 import EditPageContent from './editPageContent'
 

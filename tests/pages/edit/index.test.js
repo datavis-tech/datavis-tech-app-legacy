@@ -27,7 +27,7 @@ describe('data page', () => {
   beforeEach(() => {
 
     id = String(Math.random())
-    user = fakeUser()
+    user = fakeUser().data
     doc = fakeDoc()
 
     props = {
@@ -58,7 +58,7 @@ describe('data page', () => {
     })
 
     it('should change route to forked document view page', () => {
-      expect(Router.pushRoute).toHaveBeenCalledWith('profile', {username: user.data.username})
+      expect(Router.pushRoute).toHaveBeenCalledWith('profile', {username: user.username})
     })
 
   })
