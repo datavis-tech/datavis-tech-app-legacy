@@ -18,7 +18,8 @@ export const createDocument = options => {
     content,
     references,
     type,
-    forkedFrom
+    forkedFrom,
+    isPrivate
 
   } = options
 
@@ -54,7 +55,9 @@ export const createDocument = options => {
     type,
 
     // The id of the document that this one was forked from, if any.
-    forkedFrom
+    forkedFrom,
+
+    isPrivate: isPrivate || false
   })
 
   return doc

@@ -1,9 +1,9 @@
 import ShareDB from 'sharedb'
-import { DB_DOCUMENTS_COLLECTION, DB_FEEDBACK_COLLECTION } from '../../src/constants'
+import { DB_DOCUMENTS_COLLECTION, DB_FEEDBACK_COLLECTION } from '../../../src/constants'
 
 // Connect to an in-memory ShareDB instance (without query support)
 const mockConnection = (new ShareDB()).connect()
-jest.mock('../../src/db/connection', () => ({
+jest.mock('../../../src/db/connection', () => ({
   get: (collection, id) => mockConnection.get(collection, id)
 }))
 
@@ -16,12 +16,12 @@ import {
   addReference,
   removeReference,
   fork
-} from '../../src/db/actions'
+} from '../../../src/db/actions/index'
 
 import {
   push,
   listDelete
-} from '../../src/db/actions/primitives'
+} from '../../../src/db/actions/primitives'
 
 describe('[integration test] actions', () => {
 
