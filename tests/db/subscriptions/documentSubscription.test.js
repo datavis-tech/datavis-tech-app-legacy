@@ -7,7 +7,7 @@ jest.mock('../../../src/db/connection', () => ({
 }))
 
 import connection from '../../../src/db/connection'
-import {DB_DOCUMENTS_COLLECTION} from '../../../src/constants'
+import { DB_DOCUMENTS_COLLECTION, DB_DOCUMENTS_PROJECTION } from '../../../src/constants'
 import DocumentSubscription from '../../../src/db/subscriptions/documentSubscription'
 
 describe('document subscription', () => {
@@ -36,7 +36,7 @@ describe('document subscription', () => {
 
   describe('init', () => {
 
-    it('should establish connection with documents', () => {
+    it('should establish connection with document', () => {
       expect(connection.get).toHaveBeenCalledWith(DB_DOCUMENTS_COLLECTION, id)
     })
 
@@ -86,5 +86,16 @@ describe('document subscription', () => {
       expect(mockDoc.destroy).toHaveBeenCalled()
     })
 
+  })
+
+  describe('projection mode', () => {
+    beforeEach(() => {
+      sut = DocumentSubscription({id}, {projection: true})
+      sut.init({onUpdate, onError})
+    })
+
+    it('should establish connection with document\'s projection', () => {
+      expect(connection.get).toHaveBeenCalledWith(DB_DOCUMENTS_PROJECTION, id)
+    })
   })
 })

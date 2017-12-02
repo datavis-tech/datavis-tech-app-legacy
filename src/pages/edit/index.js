@@ -2,7 +2,7 @@ import React from 'react'
 import { Router } from '../../routes'
 import Page from '../../components/page'
 import { deleteDocument } from '../../db/actions'
-import { createViewPage } from '../../components/viewPage'
+import createViewPage from '../views/viewPageComponentFactory'
 import EditPageContent from './editPageContent'
 
 class EditPage extends React.Component {
