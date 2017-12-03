@@ -1,8 +1,8 @@
 import React from 'react'
-import {shallow} from 'enzyme'
+import { shallow } from 'enzyme'
 
 jest.mock('../../../src/components/page', () => args => args)
-jest.mock('../../../src/components/viewPage/viewPageComponentFactory', () => DataViewPage => DataViewPage)
+jest.mock('../../../src/pages/views/viewPageComponentFactory', () => args => args)
 
 jest.mock('../../../src/routes')
 import { Router } from '../../../src/routes'

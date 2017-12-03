@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`owner avatar link should be properly styled and formatted 1`] = `
+<div
+  style={
+    Object {
+      "marginBottom": "0.3em",
+    }
+  }
+>
+  <span
+    style={
+      Object {
+        "marginRight": "4px",
+      }
+    }
+  >
+    By
+  </span>
+  <span>
+    avatar
+  </span>
+</div>
+`;

@@ -1,8 +1,8 @@
-import {DB_DOCUMENTS_COLLECTION} from '../../constants'
+import { DB_DOCUMENTS_COLLECTION, DB_DOCUMENTS_PROJECTION } from '../../constants'
 import connection from '../connection'
 
 // Manages subscription to a single ShareDB document.
-export default ({id}) => {
+export default ({id}, {projection = false} = {}) => {
   let cleanup
 
   return {
@@ -12,7 +12,7 @@ export default ({id}) => {
 
   function init ({onUpdate, onError}) {
 
-    const doc = connection.get(DB_DOCUMENTS_COLLECTION, id)
+    const doc = connection.get(projection ? DB_DOCUMENTS_PROJECTION : DB_DOCUMENTS_COLLECTION, id)
     doc.subscribe((err) => {
 
       if (err) {

@@ -1,6 +1,6 @@
 import React from 'react'
 import partition from 'lodash/partition'
-import DocumentPreviewList from '../../components/documentPreviewList'
+import DocumentPreviewList from '../views/slots/documentPreviewList'
 import { type } from '../../db/accessors'
 
 const DocumentsList = ({ documents }) => {

@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`view page layout should render correct layout 1`] = `
+<div>
+  <div
+    data-test="Header"
+  />
+  <div
+    data-test="Content"
+  />
+  <div
+    className="ui divided two column grid"
+  >
+    <div
+      className="row"
+    >
+      <div
+        className="twelve wide column"
+      >
+        <div
+          data-test="Description"
+        />
+        <div
+          data-test="References"
+        />
+        <div
+          data-test="ForkedFrom"
+        />
+      </div>
+      <div
+        className="four wide column"
+      >
+        <div
+          data-test="Avatar"
+        />
+        <div
+          data-test="EditButton"
+        />
+        <div
+          data-test="ForkButton"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+`;
