@@ -35,7 +35,11 @@ export default class BaseViewPage extends React.Component {
 
     return (
       <Layout title={title} {...layoutProps}>
-        <Subscription subscription={DocumentSubscription({id})} onUpdate={this.handleDocumentUpdate}>
+        <Subscription
+          key={id} // Use key here to force lifecycle when ID changes.
+          subscription={DocumentSubscription({id})}
+          onUpdate={this.handleDocumentUpdate}
+        >
           {
             subscription => (
               <div>
