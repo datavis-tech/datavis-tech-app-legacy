@@ -7,6 +7,8 @@ routes.add('associates', '/associates')
 routes.add('create', '/create')
 routes.add('feedback', '/feedback')
 routes.add('feedback-thanks', '/feedback-thanks')
+routes.add('pricing', '/pricing')
+
 routes.add('data', '/data/:id', 'views/data')
 routes.add('vis', '/vis/:id', 'views/vis')
 routes.add('edit', '/edit/:id')
