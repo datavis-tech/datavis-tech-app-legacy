@@ -5,6 +5,7 @@ import CodeMirrorBinding from '../../../components/codeMirrorBinding'
 import DeleteConfirmModal from './deleteConfirmModal'
 import Collaborators from './collaborators'
 import DocTypeEditor from './docTypeEditor'
+import DocPrivacyEditor from './docPrivacyEditor'
 import PreviewField from './previewField'
 import ReferencesField from './referencesField'
 import { title, type, id } from '../../../db/accessors.js'
@@ -44,6 +45,10 @@ export default ({doc, referenceDocs, onDocumentDelete}) => (
     <Form.Field>
       <label>Document Type</label>
       <DocTypeEditor doc={doc} />
+    </Form.Field>
+    <Form.Field>
+      <label>Document Privacy</label>
+      <DocPrivacyEditor doc={doc} />
     </Form.Field>
     <PreviewField doc={doc} referenceDocs={referenceDocs} />
     <Form.Field>

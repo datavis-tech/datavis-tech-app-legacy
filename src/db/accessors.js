@@ -59,6 +59,8 @@ export const collaborators = doc => data(doc).collaborators || []
 // access the id of the document this one was forked from, if any.
 export const forkedFrom = doc => data(doc).forkedFrom
 
+export const isPrivate = doc => data(doc).isPrivate || false
+
 /**********************************
  * For "profile" Documents *
  **********************************/

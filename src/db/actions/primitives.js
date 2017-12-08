@@ -1,12 +1,17 @@
+export const set = ({shareDBDoc, property, item}) => (
+  shareDBDoc.submitOp([{
+    p: [property],
+    oi: item,
+    od: shareDBDoc.data[property]
+  }])
+)
+
 // Pushes an item onto to end of the array at the given property.
 export const push = ({shareDBDoc, property, item}) => {
 
   // If property is undefined, then create an empty array.
   if (!shareDBDoc.data[property]) {
-    shareDBDoc.submitOp([{
-      p: [property],
-      oi: []
-    }])
+    set({shareDBDoc, property, item: []})
   }
 
   // Push item onto the end of the array.

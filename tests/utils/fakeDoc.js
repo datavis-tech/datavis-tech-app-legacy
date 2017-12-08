@@ -13,5 +13,6 @@ export default ({id, data: {type, title, description, owner, references, forkedF
   subscribe: jest.fn(),
   on: jest.fn(),
   destroy: jest.fn(),
-  removeListener: jest.fn()
+  removeListener: jest.fn(),
+  submitOp: jest.fn()
 })
