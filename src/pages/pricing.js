@@ -2,94 +2,66 @@ import React from 'react'
 import { Icon, Table, Header } from 'semantic-ui-react'
 import Page from '../components/page'
 import Layout from '../components/layout'
-import Spacer from '../components/spacer'
+
+const features = [
+  { key: 'realtime', title: 'Real-time Collaboration' },
+  { key: 'public', title: 'Public Content' },
+  { key: 'private', title: 'Private Content' },
+  { key: 'onsite', title: 'On-site Deployment' }
+]
+
+const plans = [
+  { name: 'Free', realtime: true, public: true },
+  { name: 'Early Adopter', realtime: true, public: true, private: true },
+  { name: 'Paid', realtime: true, public: true, private: true },
+  { name: 'Enterprise', realtime: true, public: true, private: true, onsite: true }
+]
 
 const PricingTable = () => (
   <Table definition celled>
     <Table.Header>
       <Table.Row>
         <Table.HeaderCell />
-        <Table.HeaderCell>Free</Table.HeaderCell>
-        <Table.HeaderCell>Early Adopter</Table.HeaderCell>
-        <Table.HeaderCell>Basic</Table.HeaderCell>
-        <Table.HeaderCell>Enterprise</Table.HeaderCell>
+        {
+          plans.map(({name}) => (
+            <Table.HeaderCell key={name}>{name}</Table.HeaderCell>
+          ))
+        }
       </Table.Row>
     </Table.Header>
-
     <Table.Body>
-      <Table.Row>
-        <Table.Cell>Real-time Collaboration</Table.Cell>
-        <Table.Cell textAlign='center'>
-          <Icon color='green' name='checkmark' size='large' />
-        </Table.Cell>
-        <Table.Cell textAlign='center'>
-          <Icon color='green' name='checkmark' size='large' />
-        </Table.Cell>
-        <Table.Cell textAlign='center'>
-          <Icon color='green' name='checkmark' size='large' />
-        </Table.Cell>
-        <Table.Cell textAlign='center'>
-          <Icon color='green' name='checkmark' size='large' />
-        </Table.Cell>
-      </Table.Row>
-      <Table.Row>
-        <Table.Cell>Public Content</Table.Cell>
-        <Table.Cell textAlign='center'>
-          <Icon color='green' name='checkmark' size='large' />
-        </Table.Cell>
-        <Table.Cell textAlign='center'>
-          <Icon color='green' name='checkmark' size='large' />
-        </Table.Cell>
-        <Table.Cell textAlign='center'>
-          <Icon color='green' name='checkmark' size='large' />
-        </Table.Cell>
-        <Table.Cell textAlign='center'>
-          <Icon color='green' name='checkmark' size='large' />
-        </Table.Cell>
-      </Table.Row>
-      <Table.Row>
-        <Table.Cell>Private Content</Table.Cell>
-        <Table.Cell textAlign='center'>
-          <Icon color='red' name='x' size='large' />
-        </Table.Cell>
-        <Table.Cell textAlign='center'>
-          <Icon color='green' name='checkmark' size='large' />
-        </Table.Cell>
-        <Table.Cell textAlign='center'>
-          <Icon color='green' name='checkmark' size='large' />
-        </Table.Cell>
-        <Table.Cell textAlign='center'>
-          <Icon color='green' name='checkmark' size='large' />
-        </Table.Cell>
-      </Table.Row>
-      <Table.Row>
-        <Table.Cell>On-site Deployment</Table.Cell>
-        <Table.Cell textAlign='center'>
-          <Icon color='red' name='x' size='large' />
-        </Table.Cell>
-        <Table.Cell textAlign='center'>
-          <Icon color='red' name='x' size='large' />
-        </Table.Cell>
-        <Table.Cell textAlign='center'>
-          <Icon color='red' name='x' size='large' />
-        </Table.Cell>
-        <Table.Cell textAlign='center'>
-          <Icon color='green' name='checkmark' size='large' />
-        </Table.Cell>
-      </Table.Row>
+      {
+        features.map(({key, title}) => (
+          <Table.Row key={key}>
+            <Table.Cell>{title}</Table.Cell>
+            {
+              plans.map(plan => (
+                <Table.Cell key={plan.name} textAlign='center'>
+                  {
+                    plan[key]
+                      ? <Icon color='green' name='checkmark' size='large' />
+                      : <Icon color='red' name='x' size='large' />
+                  }
+                </Table.Cell>
+              ))
+            }
+          </Table.Row>
+        ))
+      }
     </Table.Body>
   </Table>
 )
 
 export default Page(({ user }) => (
-  <Layout title='Associates | Datavis.tech' user={user} hideNav>
+  <Layout title='Pricing | Datavis.tech' user={user} >
     <Header as='h1'>Pricing</Header>
 
     <p>Datavis.tech is free to use for public content.</p>
-
-    <p>If you log in now, you'll automatically be part of the "Early Adopter" plan.</p>
+    <p>If you log in now, you'll automatically be part of the "Early Adopter" plan (for a limited time only).</p>
 
     <PricingTable />
+
+    <p>Paid plan coming soon!</p>
 
   </Layout>
 ))
