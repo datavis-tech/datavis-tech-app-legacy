@@ -13,8 +13,8 @@ const features = [
 const plans = [
   { name: 'Free', realtime: true, public: true },
   { name: 'Early Adopter', realtime: true, public: true, private: true },
-  { name: 'Paid', realtime: true, public: true, private: true },
-  { name: 'Enterprise', realtime: true, public: true, private: true, onsite: true }
+  { name: 'Paid ($7/mo)', disabled: true, realtime: true, public: true, private: true },
+  { name: 'Enterprise', disabled: true, realtime: true, public: true, private: true, onsite: true }
 ]
 
 const PricingTable = () => (
@@ -61,7 +61,7 @@ export default Page(({ user }) => (
 
     <PricingTable />
 
-    <p>Paid plan coming soon!</p>
+    <p>Paid and Enterprise offerings are coming soon!</p>
 
   </Layout>
 ))
