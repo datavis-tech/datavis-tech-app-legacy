@@ -16,6 +16,7 @@ describe('base subscription', () => {
   let collection
   let onUpdate
   let onError
+  let onPermissionDenied
 
   beforeEach(() => {
 
@@ -27,8 +28,9 @@ describe('base subscription', () => {
     collection = String(Math.random())
     onUpdate = jest.fn()
     onError = jest.fn()
+    onPermissionDenied = jest.fn()
     sut = BaseSubscription({id}, {collection})
-    sut.init({onUpdate, onError})
+    sut.init({onUpdate, onError, onPermissionDenied})
   })
 
   afterEach(() => {
@@ -47,10 +49,18 @@ describe('base subscription', () => {
 
     describe('after unsuccessful subscribe', () => {
 
+      let err
+
       it('should notify about error', () => {
-        const err = new Error()
+        err = new Error()
         mockDoc.subscribe.mock.calls[0][0](err)
         expect(onError).toHaveBeenCalledWith(err)
+      })
+
+      it('should notify about permission denied', () => {
+        err = new Error('403: Permission denied (read), collection')
+        mockDoc.subscribe.mock.calls[0][0](err)
+        expect(onPermissionDenied).toHaveBeenCalled()
       })
 
     })

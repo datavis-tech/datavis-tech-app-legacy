@@ -11,6 +11,7 @@ describe('subscription', () => {
   let subscription
   let children
   let onUpdate
+  let onPermissionDenied
 
   beforeAll(() => {
     process.browser = true
@@ -23,11 +24,13 @@ describe('subscription', () => {
   beforeEach(() => {
 
     subscription = fakeSubscription()
+    onPermissionDenied = jest.fn()
     onUpdate = jest.fn()
 
     props = {
       subscription,
-      onUpdate
+      onUpdate,
+      onPermissionDenied
     }
 
     children = jest.fn(() => null)
@@ -63,6 +66,18 @@ describe('subscription', () => {
 
       it('should notify on update listener', () => {
         expect(onUpdate).toHaveBeenCalledWith({data: update})
+      })
+
+    })
+
+    describe('on permission denied', () => {
+
+      beforeEach(() => {
+        subscriptionCallbacks.onPermissionDenied()
+      })
+
+      it('should notify', () => {
+        expect(onPermissionDenied).toHaveBeenCalled()
       })
 
     })

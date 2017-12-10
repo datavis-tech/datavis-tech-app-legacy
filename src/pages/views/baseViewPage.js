@@ -1,10 +1,11 @@
 import React from 'react'
 import DocumentSubscription from '../../db/subscriptions/documentSubscription'
-import {title} from '../../db/accessors'
+import { title } from '../../db/accessors'
 import Layout from '../../components/layout'
 import Subscription from '../../components/subscription'
 import Loader from '../../components/loader'
 import ErrorMessage from '../../components/errorMessage'
+import { redirectTo404 } from '../../components/router'
 
 export default class BaseViewPage extends React.Component {
 
@@ -39,6 +40,7 @@ export default class BaseViewPage extends React.Component {
           key={id} // Use key here to force lifecycle when ID changes.
           subscription={DocumentSubscription({id})}
           onUpdate={this.handleDocumentUpdate}
+          onPermissionDenied={redirectTo404}
         >
           {
             subscription => (

@@ -7,6 +7,7 @@ import {profile} from '../../db/accessors'
 import Layout from '../../components/layout'
 import Loader from '../../components/loader'
 import ProfileBody from './profileBody'
+import resolveDocumentsSubscription from './resolveDocumentsSubscription'
 
 class ProfilePage extends React.Component {
 
@@ -29,9 +30,16 @@ class ProfilePage extends React.Component {
       <Layout title={`${username} | Datavis.tech`} user={user}>
         <Subscription subscription={this.subscription} >
           {
-            ({data: profileDoc, isReady}) => (
+            ({data, isReady}) => (
               <Loader ready={isReady}>
-                <ProfileBody profile={profile(profileDoc)} />
+                {
+                  data
+                    ? <ProfileBody
+                      profile={profile(data)}
+                      documentsSubscription={resolveDocumentsSubscription(user, data)}
+                    />
+                    : <div data-test='notFound'>User not found</div>
+                }
               </Loader>
             )
           }

@@ -12,6 +12,9 @@ import DocumentSubscription from '../../../src/db/subscriptions/documentSubscrip
 jest.mock('../../../src/components/layout')
 import Layout from '../../../src/components/layout'
 
+jest.mock('../../../src/components/router/redirectTo404')
+import redirectTo404 from '../../../src/components/router/redirectTo404'
+
 import Loader from '../../../src/components/loader'
 import ErrorMessage from '../../../src/components/errorMessage'
 
@@ -32,6 +35,7 @@ describe('base view page', () => {
   let subscription
   let updateTrigger
   let errorTrigger
+  let permissionDeniedTrigger
 
   beforeAll(() => {
     process.browser = true
@@ -49,13 +53,15 @@ describe('base view page', () => {
 
     updateTrigger = new CallbackTrigger()
     errorTrigger = new CallbackTrigger()
+    permissionDeniedTrigger = new CallbackTrigger()
 
     error = Symbol('error')
 
     subscription = fakeSubscription(
-      ({onUpdate, onError}) => {
+      ({onUpdate, onError, onPermissionDenied}) => {
         updateTrigger.set(onUpdate, null, doc)
         errorTrigger.set(onError, null, error)
+        permissionDeniedTrigger.set(onPermissionDenied, null)
       }
     )
     DocumentSubscription.mockReturnValue(subscription)
@@ -138,4 +144,17 @@ describe('base view page', () => {
     })
 
   })
+
+  describe('when permission denied', () => {
+
+    beforeEach(() => {
+      permissionDeniedTrigger.trigger()
+    })
+
+    it('should redirect to 404', () => {
+      expect(redirectTo404).toHaveBeenCalled()
+    })
+
+  })
+
 })

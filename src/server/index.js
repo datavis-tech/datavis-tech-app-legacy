@@ -10,7 +10,7 @@ const routes = require('../routes')
 const session = require('./session')
 const shareDB = require('./shareDB')
 const authorization = require('./authorization')
-const accessControl = require('./accessControl')
+const accessControl = require('./_accessControl')
 const addUserToOps = require('./addUserToOps')
 
 const expressApp = express()

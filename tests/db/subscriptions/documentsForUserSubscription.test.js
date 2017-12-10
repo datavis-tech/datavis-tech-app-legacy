@@ -2,12 +2,13 @@ import { DB_DOCUMENTS_PROJECTION } from '../../../src/constants'
 jest.mock('../../../src/db/subscriptions/baseQuerySubscription')
 import BaseQuerySubscription from '../../../src/db/subscriptions/baseQuerySubscription'
 
-import DocumentsForOwnerSubscription from '../../../src/db/subscriptions/documentsForOwnerSubscription'
+import DocumentsForUserSubscription from '../../../src/db/subscriptions/documentsForUserSubscription'
 
-describe('documents for owner subscription', () => {
+describe('documents for user subscription', () => {
 
   let sut
   let owner
+  let id
   let subscription
 
   beforeEach(() => {
@@ -16,14 +17,25 @@ describe('documents for owner subscription', () => {
     BaseQuerySubscription.mockReturnValue(subscription)
 
     owner = Symbol('owner')
-    sut = DocumentsForOwnerSubscription({owner})
+    id = Symbol('id')
+    sut = DocumentsForUserSubscription({owner, id})
   })
 
   it('should create base query subscription instance', () => {
     const query = {
       $or: [
-        {owner},
-        {collaborators: {$elemMatch: {id: owner}}}
+        {
+          $and: [
+            {owner},
+            {isPrivate: {$ne: true}}
+          ]
+        },
+        {
+          $and: [
+            {owner},
+            {collaborators: {$elemMatch: {id}}}
+          ]
+        }
       ]
     }
     expect(BaseQuerySubscription).toHaveBeenCalledWith(query, DB_DOCUMENTS_PROJECTION)

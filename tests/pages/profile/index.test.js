@@ -1,6 +1,11 @@
 import React from 'react'
 import { mount } from 'enzyme'
 
+import fakeUser from '../../utils/fakeUser'
+import fakeSubscription from '../../utils/fakeSubscription'
+import CallbackTrigger from '../../utils/callbackTrigger'
+import nodeSelector from '../../utils/nodeSelector'
+
 jest.mock('../../../src/components/page', () => Page => Page)
 
 jest.mock('../../../src/components/layout', () => ({children}) => children)
@@ -9,14 +14,14 @@ import Layout from '../../../src/components/layout'
 jest.mock('../../../src/db/subscriptions/profileQuerySubscription')
 import ProfileQuerySubscription from '../../../src/db/subscriptions/profileQuerySubscription'
 
-import fakeUser from '../../utils/fakeUser'
-import fakeSubscription from '../../utils/fakeSubscription'
-import CallbackTrigger from '../../utils/callbackTrigger'
-
 import Loader from '../../../src/components/loader'
 
 jest.mock('../../../src/pages/profile/profileBody', () => () => null)
 import ProfileBody from '../../../src/pages/profile/profileBody'
+
+jest.mock('../../../src/pages/profile/resolveDocumentsSubscription')
+import resolveDocumentsSubscription from '../../../src/pages/profile/resolveDocumentsSubscription'
+
 import ProfilePage from '../../../src/pages/profile'
 
 describe('profile page', () => {
@@ -27,6 +32,7 @@ describe('profile page', () => {
   let username
   let profile
   let subscription
+  let resolvedDocumentsSubscription
   let updateTrigger
 
   beforeAll(() => {
@@ -42,6 +48,9 @@ describe('profile page', () => {
     profile = fakeUser()
     subscription = fakeSubscription(({onUpdate}) => updateTrigger.set(onUpdate, null, profile))
     ProfileQuerySubscription.mockReturnValue(subscription)
+
+    resolvedDocumentsSubscription = Symbol('resolvedDocumentsSubscription')
+    resolveDocumentsSubscription.mockReturnValue(resolvedDocumentsSubscription)
 
     user = fakeUser()
     username = String(Math.random())
@@ -83,19 +92,46 @@ describe('profile page', () => {
 
     describe('on update', () => {
 
-      beforeEach(() => {
-        updateTrigger.trigger()
-        sut.update()
-      })
+      describe('profile exists', () => {
 
-      it('should not contain a loader', () => {
-        expect(sut.find(Loader).prop('ready')).toBeTruthy()
-      })
-
-      it('should contain profile body', () => {
-        expect(sut.find(ProfileBody).props()).toMatchObject({
-          profile: profile.data
+        beforeEach(() => {
+          updateTrigger.trigger()
+          sut.update()
         })
+
+        it('should not contain a loader', () => {
+          expect(sut.find(Loader).prop('ready')).toBeTruthy()
+        })
+
+        it('should resolve documents subscription', () => {
+
+          expect(resolveDocumentsSubscription).toHaveBeenCalledWith(user, profile)
+
+        })
+
+        it('should contain profile body', () => {
+          expect(sut.find(ProfileBody).props()).toMatchObject({
+            profile: profile.data,
+            documentsSubscription: resolvedDocumentsSubscription
+          })
+        })
+
+      })
+
+      describe('profile does not exists', () => {
+
+        beforeEach(() => {
+          subscription = fakeSubscription(({onUpdate}) => updateTrigger.set(onUpdate, null, undefined))
+          ProfileQuerySubscription.mockReturnValue(subscription)
+          sut = mount(<ProfilePage {...props} />)
+          updateTrigger.trigger()
+          sut.update()
+        })
+
+        it('should show message that profile user not found', () => {
+          expect(sut.find(nodeSelector('notFound')).text()).toEqual('User not found')
+        })
+
       })
 
     })
