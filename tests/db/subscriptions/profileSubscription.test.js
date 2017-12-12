@@ -1,60 +1,31 @@
-jest.mock('../../../src/db/subscriptions/baseQuerySubscription')
+jest.mock('../../../src/db/subscriptions/baseSubscription')
 
-import {DB_USERS_COLLECTION} from '../../../src/constants'
-import BaseQuerySubscription from '../../../src/db/subscriptions/baseQuerySubscription'
-import fakeSubscription from '../../utils/fakeSubscription'
-import sut from '../../../src/db/subscriptions/profileSubscription'
+import BaseSubscription from '../../../src/db/subscriptions/baseSubscription'
+import { DB_USERS_COLLECTION } from '../../../src/constants'
+import ProfileSubscription from '../../../src/db/subscriptions/profileSubscription'
 
-describe('profile subscription', () => {
+describe('document subscription', () => {
 
-  let subscription
-  let mockSubscription
+  let sut
   let id
-  let args
+  let subscription
 
   beforeEach(() => {
-    id = Symbol('id')
-    mockSubscription = fakeSubscription()
-    BaseQuerySubscription.mockReturnValue(mockSubscription)
-    args = BaseQuerySubscription.mock.calls
-    subscription = sut({id}, {})
+    subscription = Symbol('subscription')
+    BaseSubscription.mockReturnValue(subscription)
+    sut = ProfileSubscription({id})
   })
 
-  it('should use query which just return id as is', () => {
-    expect(args[0][0]).toMatchObject({id})
+  afterEach(() => {
+    BaseSubscription.mockClear()
   })
 
-  it('should use users collection', () => {
-    expect(args[0][1]).toEqual(DB_USERS_COLLECTION)
+  it('should create base subscription', () => {
+    expect(BaseSubscription).toHaveBeenCalledWith({id}, {collection: DB_USERS_COLLECTION})
   })
 
-  describe('init', () => {
-
-    let onUpdate
-    let profiles
-
-    beforeEach(() => {
-      profiles = [Symbol('profile1'), Symbol('profile2'), Symbol('profile3')]
-      onUpdate = jest.fn()
-    })
-
-    it('should return only first available profile', () => {
-      mockSubscription.init.mockImplementationOnce(({onUpdate}) => onUpdate(profiles))
-      subscription.init({onUpdate})
-      expect(onUpdate).toHaveBeenCalledWith(profiles[0])
-    })
-
-    it('should return none if profile was not found', () => {
-      mockSubscription.init.mockImplementationOnce(({onUpdate}) => onUpdate([]))
-      subscription.init({onUpdate})
-      expect(onUpdate).toHaveBeenCalledWith(null)
-    })
-
-  })
-
-  it('should use base query subscription tear down', () => {
-    subscription = sut({})
-    expect(subscription.tearDown).toBe(mockSubscription.tearDown)
+  it('should return created base subscription', () => {
+    expect(sut).toBe(subscription)
   })
 
 })

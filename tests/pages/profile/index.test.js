@@ -6,8 +6,8 @@ jest.mock('../../../src/components/page', () => Page => Page)
 jest.mock('../../../src/components/layout', () => ({children}) => children)
 import Layout from '../../../src/components/layout'
 
-jest.mock('../../../src/db/subscriptions/profileSubscription')
-import ProfileSubscription from '../../../src/db/subscriptions/profileSubscription'
+jest.mock('../../../src/db/subscriptions/profileQuerySubscription')
+import ProfileQuerySubscription from '../../../src/db/subscriptions/profileQuerySubscription'
 
 import fakeUser from '../../utils/fakeUser'
 import fakeSubscription from '../../utils/fakeSubscription'
@@ -41,7 +41,7 @@ describe('profile page', () => {
     updateTrigger = new CallbackTrigger()
     profile = fakeUser()
     subscription = fakeSubscription(({onUpdate}) => updateTrigger.set(onUpdate, null, profile))
-    ProfileSubscription.mockReturnValue(subscription)
+    ProfileQuerySubscription.mockReturnValue(subscription)
 
     user = fakeUser()
     username = String(Math.random())
@@ -64,7 +64,7 @@ describe('profile page', () => {
   })
 
   it('should subscribe to profile', () => {
-    expect(ProfileSubscription).toHaveBeenCalledWith({username})
+    expect(ProfileQuerySubscription).toHaveBeenCalledWith({username})
   })
 
   it('should init profile subscription', () => {

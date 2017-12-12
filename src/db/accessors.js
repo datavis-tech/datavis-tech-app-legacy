@@ -56,6 +56,8 @@ export const owner = doc => data(doc).owner || ''
 // access the collaborators of a document.
 export const collaborators = doc => data(doc).collaborators || []
 
+export const collaboratorIds = doc => collaborators(doc).map(c => c.id)
+
 // access the id of the document this one was forked from, if any.
 export const forkedFrom = doc => data(doc).forkedFrom
 
