@@ -3,12 +3,12 @@ import { shallow } from 'enzyme'
 
 import fakeDoc from '../../../utils/fakeDoc'
 
-jest.mock('../../../../src/db/subscriptions/profileSubscription')
+jest.mock('../../../../src/db/subscriptions/profileQuerySubscription')
 jest.mock('../../../../src/db/subscriptions/documentSubscriptions')
 jest.mock('../../../../src/db/subscriptions/documentSubscription')
 jest.mock('../../../../src/db/subscriptions/compositeSubscription')
 
-import ProfileSubscription from '../../../../src/db/subscriptions/profileSubscription'
+import ProfileQuerySubscription from '../../../../src/db/subscriptions/profileQuerySubscription'
 import ReferencesSubscription from '../../../../src/db/subscriptions/documentSubscriptions'
 import ForkedFromSubscription from '../../../../src/db/subscriptions/documentSubscription'
 import CompositeSubscription from '../../../../src/db/subscriptions/compositeSubscription'
@@ -26,19 +26,19 @@ describe('vis page content', () => {
   let onFork
   let referenceDocs
 
-  let profileSubscription
+  let profileQuerySubscription
   let referencesSubscription
   let forkedFromSubscription
   let compositeSubscription
 
   beforeEach(() => {
 
-    profileSubscription = Symbol('profileSubscription')
+    profileQuerySubscription = Symbol('profileQuerySubscription')
     referencesSubscription = Symbol('referencesSubscription')
     forkedFromSubscription = Symbol('forkedFromSubscription')
     compositeSubscription = Symbol('compositeSubscription')
 
-    ProfileSubscription.mockReturnValue(profileSubscription)
+    ProfileQuerySubscription.mockReturnValue(profileQuerySubscription)
     ReferencesSubscription.mockReturnValue(referencesSubscription)
     ForkedFromSubscription.mockReturnValue(forkedFromSubscription)
     CompositeSubscription.mockReturnValue(compositeSubscription)
@@ -54,7 +54,7 @@ describe('vis page content', () => {
   })
 
   it('should create profile subscription', () => {
-    expect(ProfileSubscription).toHaveBeenCalledWith({id: doc.data.owner})
+    expect(ProfileQuerySubscription).toHaveBeenCalledWith({id: doc.data.owner})
   })
 
   it('should create references subscription', () => {
@@ -67,7 +67,7 @@ describe('vis page content', () => {
 
   it('should create composite subscription of profile and references', () => {
     expect(CompositeSubscription).toHaveBeenCalledWith({
-      profile: profileSubscription,
+      profile: profileQuerySubscription,
       referenceDocs: referencesSubscription,
       forkedFrom: forkedFromSubscription
     })

@@ -1,4 +1,4 @@
-import DocumentSubscription from './documentSubscription'
+import ProfileSubscription from './profileSubscription'
 
 export default ({ids}) => {
   let subscriptions = []
@@ -14,7 +14,7 @@ export default ({ids}) => {
 
   function init ({onUpdate, onError}) {
     subscriptions = ids.map((id, i) => {
-      const subscription = DocumentSubscription({id})
+      const subscription = ProfileSubscription({id})
 
       subscription.init({
         onUpdate: (doc) => {

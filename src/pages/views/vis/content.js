@@ -1,5 +1,5 @@
 import React from 'react'
-import ProfileSubscription from '../../../db/subscriptions/profileSubscription'
+import ProfileQuerySubscription from '../../../db/subscriptions/profileQuerySubscription'
 import ReferencesSubscription from '../../../db/subscriptions/documentSubscriptions'
 import ForkedFromSubscription from '../../../db/subscriptions/documentSubscription'
 import CompositeSubscription from '../../../db/subscriptions/compositeSubscription'
@@ -13,7 +13,7 @@ export default class VisViewPageContent extends React.Component {
     super(props)
 
     this.subscription = CompositeSubscription({
-      profile: ProfileSubscription({id: owner(props.doc)}),
+      profile: ProfileQuerySubscription({id: owner(props.doc)}),
       referenceDocs: ReferencesSubscription({ids: referenceIds(props.doc)}),
       forkedFrom: ForkedFromSubscription({id: forkedFrom(props.doc)}, {projection: true})
     })
