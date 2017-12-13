@@ -79,6 +79,7 @@ export default class EditPageContent extends React.Component {
   onCollaboratorSubmit (username) {
     this.setState({loadingCollaboratorProfile: true})
 
+    // TODO make sure this subscription gets cleaned up, ideally via React lifecycle.
     const subscription = ProfileQuerySubscription({username})
     subscription.init({
       onUpdate: (profile) => {

@@ -9,7 +9,7 @@ export default class Collaborators extends React.Component {
 
   constructor (props) {
     super(props)
-    this.subscription = ProfileSubscriptions({ids: this.props.ids})
+    this.subscription = ProfileSubscriptions({ids: props.ids})
   }
 
   componentWillReceiveProps ({ids}) {

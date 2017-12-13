@@ -8,7 +8,7 @@ export default (params) => {
 
   function init ({onUpdate, onError}) {
     subscription.init({
-      onUpdate: (profiles) => profiles.length ? onUpdate(profiles[0]) : onUpdate(null),
+      onUpdate: profiles => onUpdate(profiles.length ? profiles[0] : null),
       onError
     })
   }
