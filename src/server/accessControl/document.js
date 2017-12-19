@@ -5,12 +5,14 @@ function checkUserPermissionOnDocument (doc, user) {
     return true
   }
 
-  if (doc.owner === user.id) {
-    return true
-  }
+  if (user) {
+    if (doc.owner === user.id) {
+      return true
+    }
 
-  if (doc.collaborators && user && doc.collaborators.find(c => c.id === user.id)) {
-    return true
+    if (doc.collaborators && doc.collaborators.find(c => c.id === user.id)) {
+      return true
+    }
   }
 
   return false
