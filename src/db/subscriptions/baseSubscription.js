@@ -9,10 +9,15 @@ export default ({id}, {collection}) => {
     tearDown
   }
 
-  function init ({onUpdate, onError}) {
+  function init ({onUpdate, onError, onPermissionDenied}) {
 
     const doc = connection.get(collection, id)
     doc.subscribe((err) => {
+
+      if (err && err.message.match(/^403: Permission denied/)) {
+        onPermissionDenied()
+        return
+      }
 
       if (err) {
         onError(err)
