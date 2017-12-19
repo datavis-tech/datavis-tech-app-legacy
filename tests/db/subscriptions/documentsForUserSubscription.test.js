@@ -23,16 +23,11 @@ describe('documents for user subscription', () => {
 
   it('should create base query subscription instance', () => {
     const query = {
-      $or: [
+      $and: [
+        {owner},
         {
-          $and: [
-            {owner},
-            {isPrivate: {$ne: true}}
-          ]
-        },
-        {
-          $and: [
-            {owner},
+          $or: [
+            {isPrivate: {$ne: true}},
             {collaborators: {$elemMatch: {id}}}
           ]
         }
