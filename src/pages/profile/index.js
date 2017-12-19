@@ -36,7 +36,7 @@ class ProfilePage extends React.Component {
                   data
                     ? <ProfileBody
                       profile={profile(data)}
-                      documentsSubscription={resolveDocumentsSubscription(user, data)}
+                      documentsSubscription={resolveDocumentsSubscription(user, profile(data))}
                     />
                     : <div data-test='notFound'>User not found</div>
                 }
