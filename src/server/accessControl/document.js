@@ -1,3 +1,5 @@
+const get = require('lodash/get')
+
 function checkUserPermissionOnDocument (doc, user) {
   if (!doc.isPrivate) {
     return true
@@ -7,7 +9,7 @@ function checkUserPermissionOnDocument (doc, user) {
     return true
   }
 
-  if (doc.collaborators && doc.collaborators.find(c => c.id === user.id)) {
+  if (doc.collaborators && user && doc.collaborators.find(c => c.id === user.id)) {
     return true
   }
 
@@ -16,16 +18,20 @@ function checkUserPermissionOnDocument (doc, user) {
 
 const allowCreate = async () => true
 
-const allowRead = async (_, doc, __, {agent: {session: {passport: {user}}}}) => {
-  return checkUserPermissionOnDocument(doc, user)
+// Accesses the user from the session,
+// returns falsy if user is not authenticated.
+const user = agent => get(agent, 'session.passport.user')
+
+const allowRead = async (_, doc, __, {agent}) => {
+  return checkUserPermissionOnDocument(doc, user(agent))
 }
 
-const allowDelete = async (_, doc, __, {agent: {session: {passport: {user}}}}) => {
-  return checkUserPermissionOnDocument(doc, user)
+const allowDelete = async (_, doc, __, {agent}) => {
+  return checkUserPermissionOnDocument(doc, user(agent))
 }
 
-const allowUpdate = async (_, doc, __, ___, ____, {agent: {session: {passport: {user}}}}) => {
-  return checkUserPermissionOnDocument(doc, user)
+const allowUpdate = async (_, doc, __, ___, ____, {agent}) => {
+  return checkUserPermissionOnDocument(doc, user(agent))
 }
 
 module.exports = {

@@ -104,9 +104,7 @@ describe('profile page', () => {
         })
 
         it('should resolve documents subscription', () => {
-
-          expect(resolveDocumentsSubscription).toHaveBeenCalledWith(user, profile)
-
+          expect(resolveDocumentsSubscription).toHaveBeenCalledWith(user, profile.data)
         })
 
         it('should contain profile body', () => {
