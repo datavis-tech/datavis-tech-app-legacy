@@ -1,6 +1,9 @@
 import React from 'react'
 import { mount } from 'enzyme'
 
+jest.mock('../../../src/db/serializers')
+import { serializeDocument } from '../../../src/db/serializers'
+
 import fakeUser from '../../utils/fakeUser'
 import fakeDoc from '../../utils/fakeDoc'
 import fakeSubscription from '../../utils/fakeSubscription'
@@ -9,6 +12,8 @@ import CallbackTrigger from '../../utils/callbackTrigger'
 import { Grid } from 'semantic-ui-react'
 import Loader from '../../../src/components/loader'
 import ProfileCard from '../../../src/pages/profile/profileCard'
+
+jest.mock('../../../src/pages/profile/documentsList', () => () => null)
 import DocumentsList from '../../../src/pages/profile/documentsList'
 import ProfileBody from '../../../src/pages/profile/profileBody'
 
@@ -21,8 +26,14 @@ describe('profile body', () => {
   let documentsSubscription
   let updateTrigger
 
+  let serialized
+
   beforeAll(() => {
     process.browser = true
+
+    serialized = String(Math.random())
+    serializeDocument.mockReturnValue(serialized)
+
   })
 
   afterAll(() => {
@@ -79,8 +90,13 @@ describe('profile body', () => {
             expect(sut.find(Loader).prop('ready')).toBeTruthy()
           })
 
+          it('should serialize documents', () => {
+            expect(serializeDocument).toHaveBeenCalledWith(documents[0], 0, documents)
+            expect(serializeDocument).toHaveBeenCalledWith(documents[1], 1, documents)
+          })
+
           it('should have a documents list', () => {
-            expect(sut.find(DocumentsList).prop('documents')).toEqual(documents)
+            expect(sut.find(DocumentsList).prop('documents')).toEqual([serialized, serialized])
           })
 
         })

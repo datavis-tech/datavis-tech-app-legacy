@@ -1,14 +1,13 @@
 import React from 'react'
 import marked from 'marked'
-import { description } from '../../../db/accessors'
 
 /**
  * This component provides default description for view pages
  */
-export default function ({doc}) {
+export default function ({description}) {
   return (
     <div dangerouslySetInnerHTML={{
-      __html: marked(description(doc))
+      __html: marked(description)
     }} />
   )
 }

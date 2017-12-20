@@ -1,8 +1,7 @@
 import React from 'react'
-import {shallow} from 'enzyme'
-import {random, range} from 'lodash'
-import {Divider} from 'semantic-ui-react'
-import fakeDoc from '../../../utils/fakeDoc'
+import { shallow } from 'enzyme'
+import { random, range } from 'lodash'
+import { Divider } from 'semantic-ui-react'
 import DocumentPreview from '../../../../src/pages/views/slots/documentPreview'
 import DocumentPreviewList from '../../../../src/pages/views/slots/documentPreviewList'
 
@@ -38,8 +37,8 @@ describe('document preview list', () => {
     })
 
     it('should render N document previews with proper document', () => {
-      sut.find(DocumentPreview).forEach((doc, i) => {
-        expect(doc.props()).toMatchObject({ doc: documents[i] })
+      sut.find(DocumentPreview).forEach((d, i) => {
+        expect(d.props()).toMatchObject({ ...documents[i] })
       })
     })
 
@@ -48,5 +47,14 @@ describe('document preview list', () => {
 })
 
 function createRandomDocumentArray () {
-  return range(random(2, 10)).map(_ => fakeDoc())
+  return range(random(2, 10)).map(_ => createRandomDocumentRepresenation())
+}
+
+function createRandomDocumentRepresenation () {
+  return {
+    id: String(Math.random()),
+    type: String(Math.random()),
+    title: String(Math.random()),
+    description: String(Math.random())
+  }
 }

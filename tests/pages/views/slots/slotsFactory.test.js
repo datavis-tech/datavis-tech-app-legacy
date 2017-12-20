@@ -16,8 +16,7 @@ describe('slots factory', () => {
   let id
   let user
   let ownerProfile
-  let doc
-  let referenceDocs
+  let document
   let forkedFrom
   let onFork
 
@@ -25,11 +24,15 @@ describe('slots factory', () => {
     id = Symbol('id')
     user = Symbol('user')
     ownerProfile = Symbol('ownerProfile')
-    doc = Symbol('doc')
-    referenceDocs = Symbol('referenceDocs')
+    document = {
+      id: String(Math.random()),
+      title: String(Math.random()),
+      description: String(Math.random()),
+      content: String(Math.random())
+    }
     forkedFrom = Symbol('forkedFrom')
     onFork = Symbol('onFork')
-    props = {id, user, ownerProfile, doc, referenceDocs, forkedFrom, onFork}
+    props = {id, user, ownerProfile, document, forkedFrom, onFork}
   })
 
   describe('defaults', () => {
@@ -40,12 +43,12 @@ describe('slots factory', () => {
 
     it('should contain header', () => {
       expect(slots.Header.type).toBe(Header)
-      expect(slots.Header.props).toMatchObject({doc})
+      expect(slots.Header.props).toMatchObject({title: document.title})
     })
 
     it('should contain description', () => {
       expect(slots.Description.type).toBe(Description)
-      expect(slots.Description.props).toMatchObject({doc})
+      expect(slots.Description.props).toMatchObject({description: document.description})
     })
 
     it('should contain forked from', () => {

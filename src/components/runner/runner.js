@@ -1,10 +1,9 @@
 import RunnerRenderer from './runnerRenderer'
 import files from './files'
-import {references, content} from '../../db/accessors'
 
-export default ({doc, referenceDocs}) => (
+export default ({content, references, referenceDocuments}) => (
   <RunnerRenderer
-    template={content(doc)}
-    files={files(references(doc), referenceDocs)}
+    template={content}
+    files={files(references, referenceDocuments)}
   />
 )

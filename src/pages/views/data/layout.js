@@ -3,13 +3,13 @@ import DataViewer from '../../../components/dataViewer'
 import ViewPageLayout from '../viewPageLayout'
 import { createSlots, DocumentPreviewList } from '../slots'
 
-export default ({id, doc, ownerProfile, referenceDocs, forkedFrom, onFork}) => {
+export default ({id, document, ownerProfile, referenceDocuments, forkedFrom, onFork}) => {
 
   const slots = createSlots(
-    {id, doc, ownerProfile, forkedFrom, onFork},
+    {id, document, ownerProfile, forkedFrom, onFork},
     {
-      Content: <DataViewer doc={doc} />,
-      References: <DocumentPreviewList title='Visualizations' documents={referenceDocs} />
+      Content: <DataViewer content={document.content} />,
+      References: <DocumentPreviewList title='Visualizations' documents={referenceDocuments} />
     }
   )
 

@@ -6,10 +6,10 @@ import DocumentPreviewList from './documentPreviewList'
 import EditButton from './editButton'
 import ForkButton from './forkButton'
 
-export default ({id, ownerProfile, doc, forkedFrom, onFork}, overrideSlots = {}) => {
+export default ({id, ownerProfile, document, forkedFrom, onFork}, overrideSlots = {}) => {
   const slots = {
-    Header: <Header doc={doc} />,
-    Description: <Description doc={doc} />,
+    Header: <Header title={document.title} />,
+    Description: <Description description={document.description} />,
     ForkedFrom: forkedFrom ? <DocumentPreviewList title='Forked from' documents={[forkedFrom]} /> : null,
     Avatar: <OwnerAvatarLink user={ownerProfile} />,
     EditButton: <EditButton id={id} />,

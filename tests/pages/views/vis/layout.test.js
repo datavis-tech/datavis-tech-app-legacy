@@ -21,10 +21,10 @@ describe('vis page layout', () => {
 
     props = {
       id: Symbol('id'),
-      doc: Symbol('doc'),
+      document: {content: Symbol('content'), references: Symbol('references')},
       ownerProfile: Symbol('profile'),
       forkedFrom: Symbol('forkedFrom'),
-      referenceDocs: Symbol('referenceDocs'),
+      referenceDocuments: Symbol('referenceDocs'),
       onFork: Symbol('onFork')
     }
     slots = {
@@ -50,7 +50,7 @@ describe('vis page layout', () => {
     it('should create slots based on passed parameters', () => {
       expect(slotsParams).toMatchObject({
         id: props.id,
-        doc: props.doc,
+        document: props.document,
         ownerProfile: props.ownerProfile,
         forkedFrom: props.forkedFrom,
         onFork: props.onFork
@@ -60,8 +60,9 @@ describe('vis page layout', () => {
     it('should override content', () => {
       expect(overrideSlots.Content.type).toBe(Runner)
       expect(overrideSlots.Content.props).toMatchObject({
-        doc: props.doc,
-        referenceDocs: props.referenceDocs
+        content: props.document.content,
+        references: props.document.references,
+        referenceDocuments: props.referenceDocuments
       })
     })
 
@@ -69,7 +70,7 @@ describe('vis page layout', () => {
       expect(overrideSlots.References.type).toBe(DocumentPreviewList)
       expect(overrideSlots.References.props).toMatchObject({
         title: 'Data',
-        documents: props.referenceDocs
+        documents: props.referenceDocuments
       })
     })
 

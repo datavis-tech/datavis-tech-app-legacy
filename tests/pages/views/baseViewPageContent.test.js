@@ -1,6 +1,9 @@
 import React from 'react'
 import { mount } from 'enzyme'
 
+jest.mock('../../../src/db/serializers')
+import { serializeDocument } from '../../../src/db/serializers'
+
 import Subscription from '../../../src/components/subscription'
 
 import fakeUser from '../../utils/fakeUser'
@@ -15,6 +18,7 @@ describe('base view page content', () => {
   let props
   let Layout
   let profile
+  let referenceDocument
   let referenceDocs
   let forkedFrom
 
@@ -31,7 +35,8 @@ describe('base view page content', () => {
     Layout = () => null
 
     profile = fakeUser()
-    referenceDocs = Symbol('referenceDocs')
+    referenceDocument = Symbol('referenceDocs')
+    referenceDocs = [referenceDocument]
     forkedFrom = fakeDoc()
 
     props = {
@@ -51,14 +56,34 @@ describe('base view page content', () => {
 
   describe('when profile and referenced docs are present', () => {
 
+    let serialized
+
+    beforeEach(() => {
+      serialized = String(Math.random())
+      serializeDocument.mockReturnValue(serialized)
+      sut.setProps({})
+    })
+
+    it('should serialize document', () => {
+      expect(serializeDocument).toHaveBeenCalledWith(props.doc)
+    })
+
+    it('should serialize referenced documents', () => {
+      expect(serializeDocument).toHaveBeenCalledWith(referenceDocument, 0, referenceDocs)
+    })
+
+    it('should serialize forked from', () => {
+      expect(serializeDocument).toHaveBeenCalledWith(forkedFrom)
+    })
+
     it('should render layout', () => {
       expect(sut.find(Layout).props()).toMatchObject({
         id: props.id,
-        doc: props.doc,
+        document: serialized,
         onFork: props.onFork,
         ownerProfile: profile.data,
-        referenceDocs,
-        forkedFrom
+        referenceDocuments: [serialized],
+        forkedFrom: serialized
       })
     })
 
@@ -75,11 +100,7 @@ describe('base view page content', () => {
 
     it('should render layout', () => {
       expect(sut.find(Layout).props()).toMatchObject({
-        id: props.id,
-        doc: props.doc,
-        onFork: props.onFork,
-        ownerProfile: null,
-        referenceDocs: [],
+        referenceDocuments: [],
         forkedFrom: null
       })
     })
