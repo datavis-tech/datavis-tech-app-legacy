@@ -6,7 +6,6 @@ import DeleteConfirmModal from './deleteConfirmModal'
 import DocTypeEditor from './docTypeEditor'
 import DocPrivacyEditor from './docPrivacyEditor'
 import PreviewField from './previewField'
-import ReferencesField from './referencesField'
 import { title, type, id } from '../../../db/accessors.js'
 
 // The Form in the body of the page.
@@ -57,13 +56,25 @@ export default ({doc, referenceDocs, onDocumentDelete, ...slots}) => (
         path={['content']}
       />
     </Form.Field>
-    <ReferencesField doc={doc} />
+
+    {
+      slots.References
+        ? (
+          <Form.Field>
+            <label>References</label>
+            {slots.References}
+          </Form.Field>
+        )
+        : null
+    }
+
     <Form.Field>
       <label>Collaborators</label>
     </Form.Field>
     <Form.Field inline>
       {slots.Collaborators}
     </Form.Field>
+
     <Form.Field>
       <DeleteConfirmModal
         onDocumentDelete={onDocumentDelete}

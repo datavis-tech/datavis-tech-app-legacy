@@ -1,15 +1,18 @@
 import React from 'react'
+import { VIS_DOC_TYPE } from '../../constants'
 import Subscription from '../../components/subscription'
-import ProfileQuerySubscription from '../../db/subscriptions/profileQuerySubscription'
 import ReferencesSubscription from '../../db/subscriptions/documentSubscriptions'
-import { referenceIds, collaboratorIds } from '../../db/accessors'
-import { removeCollaborator } from '../../db/actions/removeCollaborator'
-import { addCollaborator } from '../../db/actions/addCollaborator'
+import { type, references, referenceIds, collaboratorIds } from '../../db/accessors'
+import {
+  removeCollaborator, addCollaborator,
+  addReference, removeReference, updateReference
+} from '../../db/actions'
 import EditPageForm from './components/editPageForm'
 import Collaborators from './collaborators'
 import AddCollaboratorModal from './addCollaboratorModal'
+import getProfileByUsername from './getProfileByUsername'
+import References from './references'
 
-// TODO add tests after onCollaboratorSubmit refactoring
 export default class EditPageContent extends React.Component {
 
   constructor (props) {
@@ -23,12 +26,16 @@ export default class EditPageContent extends React.Component {
 
     this.showAddCollaboratorModal = this.showAddCollaboratorModal.bind(this)
     this.closeAddCollaboratorModal = this.closeAddCollaboratorModal.bind(this)
-    this.onCollaboratorRemove = this.onCollaboratorRemove.bind(this)
-    this.onCollaboratorSubmit = this.onCollaboratorSubmit.bind(this)
+    this.submitCollaborator = this.submitCollaborator.bind(this)
+
+    this.removeCollaborator = removeCollaborator.bind(null, props.doc)
+
+    this.updateReference = updateReference.bind(null, props.doc)
+    this.removeReference = removeReference.bind(null, props.doc)
+    this.addReference = addReference.bind(null, props.doc)
   }
 
   render () {
-
     const {doc, onDocumentDelete} = this.props
 
     return (
@@ -44,8 +51,20 @@ export default class EditPageContent extends React.Component {
                   <Collaborators
                     ids={collaboratorIds(doc)}
                     onCollaboratorAdd={this.showAddCollaboratorModal}
-                    onCollaboratorRemove={this.onCollaboratorRemove}
+                    onCollaboratorRemove={this.removeCollaborator}
                   />
+                }
+                References={
+                  type(doc) === VIS_DOC_TYPE
+                    ? (
+                      <References
+                        references={references(doc)}
+                        onReferenceAdd={this.addReference}
+                        onReferenceUpdate={this.updateReference}
+                        onReferenceRemove={this.removeReference}
+                      />
+                    )
+                    : null
                 }
               />
             )
@@ -56,7 +75,7 @@ export default class EditPageContent extends React.Component {
           loading={this.state.loadingCollaboratorProfile}
           notFound={this.state.profileNotFound}
           onClose={this.closeAddCollaboratorModal}
-          onCollaboratorSubmit={this.onCollaboratorSubmit}
+          onCollaboratorSubmit={this.submitCollaborator}
         />
       </React.Fragment>
     )
@@ -70,42 +89,27 @@ export default class EditPageContent extends React.Component {
     this.setState({showAddCollaboratorModal: false})
   }
 
-  onCollaboratorRemove (index) {
-    removeCollaborator(this.props.doc, index)
-  }
+  async submitCollaborator (username) {
 
-  // TODO: this function requires re-design, this was extracted from children as part of clean up
-  // possibly promisify subscriptions callbacks
-  onCollaboratorSubmit (username) {
     this.setState({loadingCollaboratorProfile: true})
 
-    // TODO make sure this subscription gets cleaned up, ideally via React lifecycle.
-    const subscription = ProfileQuerySubscription({username})
-    subscription.init({
-      onUpdate: (profile) => {
+    try {
+      const profile = await getProfileByUsername(username)
 
-        const state = {
-          loadingCollaboratorProfile: false
-        }
+      addCollaborator(this.props.doc, profile.id)
 
-        if (profile) {
-          state.profileNotFound = false
-          state.showAddCollaboratorModal = false
-          addCollaborator(this.props.doc, profile.id)
-        } else {
-          state.profileNotFound = true
-        }
+      this.setState({
+        showAddCollaboratorModal: false,
+        loadingCollaboratorProfile: false,
+        profileNotFound: false
+      })
+    } catch (e) {
+      this.setState({
+        showAddCollaboratorModal: true,
+        loadingCollaboratorProfile: false,
+        profileNotFound: true
+      })
+    }
 
-        this.setState(state)
-        subscription.tearDown()
-      },
-      onError: () => {
-        this.setState({
-          loadingCollaboratorProfile: false,
-          profileNotFound: true
-        })
-        subscription.tearDown()
-      }
-    })
   }
 }
