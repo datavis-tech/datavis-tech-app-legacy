@@ -1,7 +1,6 @@
 import React from 'react'
 import partition from 'lodash/partition'
 import DocumentPreviewList from '../views/slots/documentPreviewList'
-import { type } from '../../db/accessors'
 
 const DocumentsList = ({ documents }) => {
 
@@ -9,7 +8,7 @@ const DocumentsList = ({ documents }) => {
     return null
   }
 
-  const [dataDocuments, visDocuments] = partition(documents, doc => type(doc) === 'data')
+  const [dataDocuments, visDocuments] = partition(documents, doc => doc.type === 'data')
 
   return (
     <div>

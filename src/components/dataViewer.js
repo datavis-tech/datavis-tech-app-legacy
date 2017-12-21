@@ -1,47 +1,7 @@
 import React from 'react'
-import { content } from '../db/accessors'
 
-// This component is the thing that displays a dataset.
-class DataViewer extends React.Component {
-  constructor (props) {
-    super(props)
-    this.state = {
-      dataContent: content(props.doc)
-    }
-
-    // An array of functions to be invoked on unmount.
-    this.cleanupFunctions = []
-  }
-
-  componentDidMount () {
-    if (process.browser) {
-      const doc = this.props.doc
-
-      // TODO only execute this if the content changes (ignore title and description changes)
-      const updateDataContent = () => {
-        this.setState({
-          dataContent: content(doc)
-        })
-      }
-      doc.on('op', updateDataContent)
-      this.cleanupFunctions.push(() => {
-        doc.removeListener('op', updateDataContent)
-      })
-    }
-  }
-
-  // Invoke each cleanup function on unmount.
-  componentWillUnmount () {
-    this.cleanupFunctions.forEach(f => f())
-  }
-
-  render () {
-    return (
-      <div style={{ maxHeight: '500px', overflow: 'auto', border: 'solid 1px #ddd' }} >
-        <pre>{this.state.dataContent}</pre>
-      </div>
-    )
-  }
-}
-
-export default DataViewer
+export default ({content}) => (
+  <div style={{ maxHeight: '500px', overflow: 'auto', border: 'solid 1px #ddd' }} >
+    <pre>{content}</pre>
+  </div>
+)

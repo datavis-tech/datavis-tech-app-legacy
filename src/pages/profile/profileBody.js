@@ -4,6 +4,7 @@ import Subscription from '../../components/subscription'
 import Loader from '../../components/loader'
 import ProfileCard from './profileCard'
 import DocumentsList from './documentsList'
+import { serializeDocument } from '../../db/serializers'
 
 export default ({profile, documentsSubscription}) => (
   <Grid>
@@ -15,7 +16,7 @@ export default ({profile, documentsSubscription}) => (
         {
           ({data, isReady}) => (
             <Loader ready={isReady}>
-              <DocumentsList documents={data || []} />
+              <DocumentsList documents={(data || []).map(serializeDocument)} />
             </Loader>
           )
         }

@@ -62,11 +62,8 @@ describe('accessors', () => {
   })
 
   describe('allReferencesLoaded', () => {
-    it('should return true if null passed as document', () => {
-      expect(allReferencesLoaded(null)).toEqual(true)
-    })
     it('should return true if no references defined', () => {
-      expect(allReferencesLoaded({})).toEqual(true)
+      expect(allReferencesLoaded([])).toEqual(true)
     })
     it('should return true if references and referenceDocs defined', () => {
       const doc = { data: { references: [{ id: '1' }, { id: '2' }] } }

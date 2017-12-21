@@ -1,4 +1,5 @@
 import files from '../../../src/components/runner/files'
+
 describe('files', () => {
   it('should construct the "files" object expected by MagicSandbox.js', () => {
     const references = [
@@ -6,8 +7,8 @@ describe('files', () => {
       { fileName: 'bar' }
     ]
     const docs = [
-      { data: { content: 'fooContent' } },
-      { data: { content: 'barContent' } }
+      { content: 'fooContent' },
+      { content: 'barContent' }
     ]
     expect(files(references, docs)).toMatchObject({
       foo: { content: 'fooContent' },

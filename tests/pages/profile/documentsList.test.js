@@ -1,6 +1,5 @@
 import React from 'react'
-import {shallow} from 'enzyme'
-import fakeDoc from '../../utils/fakeDoc'
+import { shallow } from 'enzyme'
 import DocumentsList from '../../../src/pages/profile/documentsList'
 
 describe('document list', () => {
@@ -23,8 +22,8 @@ describe('document list', () => {
     let dataDoc
 
     beforeEach(() => {
-      visDoc = fakeDoc({data: {type: 'vis'}})
-      dataDoc = fakeDoc({data: {type: 'data'}})
+      visDoc = {type: 'vis'}
+      dataDoc = {type: 'data'}
       documents = [visDoc, dataDoc]
 
       sut.setProps({documents})

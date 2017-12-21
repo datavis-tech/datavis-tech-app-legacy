@@ -24,19 +24,6 @@ export const references = doc => data(doc).references || []
 // Returns the ids of the references for the given document.
 export const referenceIds = doc => references(doc).map(reference => reference.id)
 
-// This function returns true if all references have been loaded.
-export const allReferencesLoaded = (doc, referenceDocs) => {
-
-  // If there are no references, return true.
-  if (referenceIds(doc).length === 0) {
-    return true
-  }
-
-  // If there are references, return true if there are any elements,
-  // because DocumentSubscriptions only passes documents after all are loaded.
-  return referenceDocs && referenceDocs.length > 0
-}
-
 // Access the title of a document.
 export const title = doc => data(doc).title || ''
 
@@ -62,6 +49,21 @@ export const collaboratorIds = doc => collaborators(doc).map(c => c.id)
 export const forkedFrom = doc => data(doc).forkedFrom
 
 export const isPrivate = doc => data(doc).isPrivate || false
+
+// This function returns true if all references have been loaded.
+// references is the array of reference objects stored in the ShareDB document
+// referenceDocuments is the array of serialized documents for references.
+export const allReferencesLoaded = (references, referenceDocuments) => {
+
+  // If there are no references, return true.
+  if (references.length === 0) {
+    return true
+  }
+
+  // If there are references, return true if there are any elements,
+  // because DocumentSubscriptions only passes documents after all are loaded.
+  return referenceDocuments && referenceDocuments.length > 0
+}
 
 /**********************************
  * For "profile" Documents *
