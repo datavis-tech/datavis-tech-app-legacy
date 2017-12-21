@@ -8,8 +8,19 @@ export default ({id, document, ownerProfile, referenceDocuments, forkedFrom, onF
   const slots = createSlots(
     {id, document, ownerProfile, forkedFrom, onFork},
     {
-      Content: <Runner content={document.content} references={document.references} referenceDocuments={referenceDocuments} />,
-      References: <DocumentPreviewList title='Data' documents={referenceDocuments} />
+      Content: (
+        <Runner
+          content={document.content}
+          references={document.references}
+          referenceDocuments={referenceDocuments}
+        />
+      ),
+      References: (
+        <DocumentPreviewList
+          title='Data'
+          documents={referenceDocuments}
+        />
+      )
     }
   )
 
