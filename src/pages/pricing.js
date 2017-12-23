@@ -1,20 +1,20 @@
 import React from 'react'
-import { Icon, Table, Header } from 'semantic-ui-react'
+import { Icon, Table, Header, Button } from 'semantic-ui-react'
 import Page from '../components/page'
 import Layout from '../components/layout'
 
 const features = [
   { key: 'realtime', title: 'Real-time Collaboration' },
-  { key: 'public', title: 'Public Content' },
-  { key: 'private', title: 'Private Content' },
-  { key: 'onsite', title: 'On-site Deployment' }
+  { key: 'public', title: 'Unlimited Public Content' },
+  { key: 'private', title: 'Unlimited Private Content' },
+//  { key: 'onsite', title: 'On-site Deployment' }
 ]
 
 const plans = [
-  { name: 'Free', realtime: true, public: true },
-  { name: 'Early Adopter', realtime: true, public: true, private: true },
-  { name: 'Paid ($7/mo)', disabled: true, realtime: true, public: true, private: true },
-  { name: 'Enterprise', disabled: true, realtime: true, public: true, private: true, onsite: true }
+  { name: 'Free Plan', realtime: true, public: true },
+  { name: 'Early Adopter Plan ($5.99 per month)', realtime: true, public: true, private: true },
+  //{ name: 'Paid ($7/mo)', disabled: true, realtime: true, public: true, private: true },
+  //{ name: 'Enterprise', disabled: true, realtime: true, public: true, private: true, onsite: true }
 ]
 
 const PricingTable = () => (
@@ -24,7 +24,9 @@ const PricingTable = () => (
         <Table.HeaderCell />
         {
           plans.map(({name}) => (
-            <Table.HeaderCell key={name}>{name}</Table.HeaderCell>
+            <Table.HeaderCell textAlign='center' key={name}>
+              {name}
+            </Table.HeaderCell>
           ))
         }
       </Table.Row>
@@ -33,7 +35,7 @@ const PricingTable = () => (
       {
         features.map(({key, title}) => (
           <Table.Row key={key}>
-            <Table.Cell>{title}</Table.Cell>
+            <Table.Cell textAlign='center'>{title}</Table.Cell>
             {
               plans.map(plan => (
                 <Table.Cell key={plan.name} textAlign='center'>
@@ -56,12 +58,11 @@ export default Page(({ user }) => (
   <Layout title='Pricing | Datavis.tech' user={user} >
     <Header as='h1'>Pricing</Header>
 
-    <p>Datavis.tech is free to use for public content.</p>
-    <p>If you log in now, you'll automatically be part of the "Early Adopter" plan (for a limited time only).</p>
+    <p>Datavis.tech is free to use for public content, paid for private content.</p>
 
     <PricingTable />
 
-    <p>Paid and Enterprise offerings are coming soon!</p>
+    <Button primary>Upgrade to the Early Adopter Plan</Button>
 
   </Layout>
 ))
