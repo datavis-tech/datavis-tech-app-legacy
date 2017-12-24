@@ -6,15 +6,15 @@ import Layout from '../components/layout'
 const features = [
   { key: 'realtime', title: 'Real-time Collaboration' },
   { key: 'public', title: 'Unlimited Public Content' },
-  { key: 'private', title: 'Unlimited Private Content' },
-//  { key: 'onsite', title: 'On-site Deployment' }
+  { key: 'private', title: 'Unlimited Private Content' }
+  //  { key: 'onsite', title: 'On-site Deployment' }
 ]
 
 const plans = [
   { name: 'Free Plan', realtime: true, public: true },
-  { name: 'Early Adopter Plan ($5.99 per month)', realtime: true, public: true, private: true },
-  //{ name: 'Paid ($7/mo)', disabled: true, realtime: true, public: true, private: true },
-  //{ name: 'Enterprise', disabled: true, realtime: true, public: true, private: true, onsite: true }
+  { name: 'Early Adopter Plan ($5.99 per month)', realtime: true, public: true, private: true }
+  // { name: 'Paid ($7/mo)', disabled: true, realtime: true, public: true, private: true },
+  // { name: 'Enterprise', disabled: true, realtime: true, public: true, private: true, onsite: true }
 ]
 
 const PricingTable = () => (
