@@ -1,6 +1,5 @@
 import RunnerRenderer from './runnerRenderer'
-import files from './files'
-import { allReferencesLoaded } from '../../db/accessors'
+import { allReferencesLoaded, files } from '../../db/accessors'
 import Loader from '../loader'
 
 // Renders the running visualization if all references are defined.
