@@ -12,6 +12,7 @@ const shareDB = require('./shareDB')
 const authorization = require('./authorization')
 const accessControl = require('./_accessControl')
 const addUserToOps = require('./addUserToOps')
+const createEmbedDocsHandler = require('./embed/handler')
 
 const expressApp = express()
 expressApp.use(session.middleware)
@@ -32,6 +33,9 @@ const nextApp = next({
 expressApp.use('/static', express.static('static'))
 
 // Set up the NextJS Express handler.
+
+expressApp.get('/vis/:id/embed', createEmbedDocsHandler(shareDB.backend))
+
 const handler = routes.getRequestHandler(nextApp)
 expressApp.get('*', handler)
 

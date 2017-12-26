@@ -1,6 +1,6 @@
-import * as accessors from './accessors'
+const accessors = require('./accessors')
 
-export const serializeDocument = (document) => (
+const serializeDocument = (document) => (
   {
     id: accessors.id(document),
     type: accessors.type(document),
@@ -15,3 +15,7 @@ export const serializeDocument = (document) => (
     forkedFrom: accessors.forkedFrom(document)
   }
 )
+
+module.exports = {
+  serializeDocument
+}
