@@ -6,12 +6,13 @@ import Runner from '../../../components/runner/runner'
 
 // This component defines the form field in the edit page
 // where the running preview of a visualization is shown.
+// TODO  lift accessors and serialization
 export default ({doc, referenceDocs}) => {
   if (type(doc) === VIS_DOC_TYPE) {
     return (
       <Form.Field>
         <label>Preview</label>
-        <Runner content={content(doc)} references={references(doc)} referenceDocuments={referenceDocs.map(serializeDocument)} /> // TODO  lift accessors and serialization
+        <Runner content={content(doc)} references={references(doc)} referenceDocuments={referenceDocs.map(serializeDocument)} />
       </Form.Field>
     )
   }
