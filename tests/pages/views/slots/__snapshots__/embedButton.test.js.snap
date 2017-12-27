@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`embed button should be a button with a popup 1`] = `
+<button
+  className="ui fluid button"
+  disabled={undefined}
+  onBlur={[Function]}
+  onClick={[Function]}
+  onFocus={[Function]}
+  onMouseEnter={[Function]}
+  onMouseLeave={[Function]}
+  role="button"
+  style={
+    Object {
+      "marginTop": "5px",
+    }
+  }
+  tabIndex={undefined}
+>
+  Embed
+</button>
+`;

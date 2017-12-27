@@ -22,7 +22,7 @@ function withBodyTag (src) {
 
 function injectLogo (src) {
   const styles = `position:fixed;right:0;bottom:0;width:64px;height:64px;background-image:url(data:image/png;base64,${logo.base64})`
-  const logoELement = `<div style="${styles}"></div>`
+  const logoELement = `<a href="https://datavis.tech/" style="${styles}" />`
   const bodyAsInSrc = findOpeningTag(src, 'body')
   const insertionPosition = src.indexOf(`</${bodyAsInSrc}>`)
   return `${src.slice(0, insertionPosition)}${logoELement}${src.slice(insertionPosition)}`
