@@ -20,7 +20,13 @@ describe('documents for owner subscription', () => {
   })
 
   it('should create base query subscription instance', () => {
-    expect(BaseQuerySubscription).toHaveBeenCalledWith({owner}, DB_DOCUMENTS_PROJECTION)
+    const query = {
+      $or: [
+        {owner},
+        {collaborators: {$elemMatch: {id: owner}}}
+      ]
+    }
+    expect(BaseQuerySubscription).toHaveBeenCalledWith(query, DB_DOCUMENTS_PROJECTION)
   })
 
   it('should be an instance of base subscription', () => {

@@ -1,6 +1,5 @@
 import DocumentSubscription from './documentSubscription'
 
-// Manages subscriptions to multiple ShareDB documents.
 export default ({ids}) => {
   let subscriptions = []
   const docs = []

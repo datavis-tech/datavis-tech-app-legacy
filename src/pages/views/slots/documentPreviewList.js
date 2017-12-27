@@ -1,7 +1,6 @@
 import React from 'react'
 import {List, Divider} from 'semantic-ui-react'
 import DocumentPreview from './documentPreview'
-import {id} from '../../../db/accessors'
 
 export default ({title, documents}) => {
 
@@ -11,8 +10,8 @@ export default ({title, documents}) => {
         <Divider horizontal>{title}</Divider>
         <List divided relaxed>
           {
-            documents.map(doc => (
-              <DocumentPreview key={id(doc)} doc={doc} />
+            documents.map(({id, ...documentAttributes}) => (
+              <DocumentPreview key={id} id={id} {...documentAttributes} />
             ))
           }
         </List>

@@ -5,6 +5,7 @@ const routes = module.exports = nextRoutes()
 routes.add('consulting', '/consulting')
 routes.add('associates', '/associates')
 routes.add('about', '/about')
+routes.add('pricing', '/pricing')
 
 // The Create page, for authenticated users to create documents.
 routes.add('create', '/create')

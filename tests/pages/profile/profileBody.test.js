@@ -1,18 +1,19 @@
 import React from 'react'
-import {mount} from 'enzyme'
+import { mount } from 'enzyme'
 
-jest.mock('../../../src/db/subscriptions/documentsForOwnerSubscription')
-import DocumentsForOwnerSubscription from '../../../src/db/subscriptions/documentsForOwnerSubscription'
+jest.mock('../../../src/db/serializers')
+import { serializeDocument } from '../../../src/db/serializers'
 
 import fakeUser from '../../utils/fakeUser'
 import fakeDoc from '../../utils/fakeDoc'
 import fakeSubscription from '../../utils/fakeSubscription'
 import CallbackTrigger from '../../utils/callbackTrigger'
-import nodeSelector from '../../utils/nodeSelector'
 
 import { Grid } from 'semantic-ui-react'
 import Loader from '../../../src/components/loader'
 import ProfileCard from '../../../src/pages/profile/profileCard'
+
+jest.mock('../../../src/pages/profile/documentsList', () => () => null)
 import DocumentsList from '../../../src/pages/profile/documentsList'
 import ProfileBody from '../../../src/pages/profile/profileBody'
 
@@ -22,11 +23,17 @@ describe('profile body', () => {
   let props
   let profile
   let documents
-  let subscription
+  let documentsSubscription
   let updateTrigger
+
+  let serialized
 
   beforeAll(() => {
     process.browser = true
+
+    serialized = String(Math.random())
+    serializeDocument.mockReturnValue(serialized)
+
   })
 
   afterAll(() => {
@@ -37,11 +44,11 @@ describe('profile body', () => {
     updateTrigger = new CallbackTrigger()
     profile = fakeUser()
     documents = [fakeDoc(), fakeDoc()]
-    subscription = fakeSubscription(({onUpdate}) => updateTrigger.set(onUpdate, null, documents))
-    DocumentsForOwnerSubscription.mockImplementation(() => subscription)
+    documentsSubscription = fakeSubscription(({onUpdate}) => updateTrigger.set(onUpdate, null, documents))
 
     props = {
-      profile: profile.data
+      profile: profile.data,
+      documentsSubscription
     }
 
     sut = mount(<ProfileBody {...props} />)
@@ -58,12 +65,8 @@ describe('profile body', () => {
 
     describe('documents list', () => {
 
-      it('should subscribe on owner\'s documents', () => {
-        expect(DocumentsForOwnerSubscription).toHaveBeenCalledWith({owner: profile.id})
-      })
-
-      it('should init subscription', () => {
-        expect(subscription.init).toHaveBeenCalled()
+      it('should init documentsSubscription', () => {
+        expect(documentsSubscription.init).toHaveBeenCalled()
       })
 
       describe('after init', () => {
@@ -87,30 +90,19 @@ describe('profile body', () => {
             expect(sut.find(Loader).prop('ready')).toBeTruthy()
           })
 
+          it('should serialize documents', () => {
+            expect(serializeDocument).toHaveBeenCalledWith(documents[0], 0, documents)
+            expect(serializeDocument).toHaveBeenCalledWith(documents[1], 1, documents)
+          })
+
           it('should have a documents list', () => {
-            expect(sut.find(DocumentsList).prop('documents')).toEqual(documents)
+            expect(sut.find(DocumentsList).prop('documents')).toEqual([serialized, serialized])
           })
 
         })
 
       })
 
-    })
-
-  })
-
-  describe('profile does not exist', () => {
-
-    beforeEach(() => {
-      sut.setProps({profile: undefined})
-    })
-
-    it('should not have grid', () => {
-      expect(sut.find(Grid).exists()).toBeFalsy()
-    })
-
-    it('should have \'not found\' message', () => {
-      expect(sut.find(nodeSelector('notFound')).text()).toEqual('User not found')
     })
 
   })

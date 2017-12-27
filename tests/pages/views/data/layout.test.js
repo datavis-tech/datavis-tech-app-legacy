@@ -21,10 +21,10 @@ describe('data page layout', () => {
 
     props = {
       id: Symbol('id'),
-      doc: Symbol('doc'),
+      document: {content: Symbol('content')},
       ownerProfile: Symbol('profile'),
       forkedFrom: Symbol('forkedFrom'),
-      referenceDocs: Symbol('referenceDocs'),
+      referenceDocuments: Symbol('referenceDocs'),
       onFork: Symbol('onFork')
     }
     slots = {
@@ -50,7 +50,7 @@ describe('data page layout', () => {
     it('should create slots based on passed parameters', () => {
       expect(slotsParams).toMatchObject({
         id: props.id,
-        doc: props.doc,
+        document: props.document,
         ownerProfile: props.ownerProfile,
         forkedFrom: props.forkedFrom,
         onFork: props.onFork
@@ -60,7 +60,7 @@ describe('data page layout', () => {
     it('should override content', () => {
       expect(overrideSlots.Content.type).toBe(DataViewer)
       expect(overrideSlots.Content.props).toMatchObject({
-        doc: props.doc
+        content: props.document.content
       })
     })
 
@@ -68,7 +68,7 @@ describe('data page layout', () => {
       expect(overrideSlots.References.type).toBe(DocumentPreviewList)
       expect(overrideSlots.References.props).toMatchObject({
         title: 'Visualizations',
-        documents: props.referenceDocs
+        documents: props.referenceDocuments
       })
     })
 

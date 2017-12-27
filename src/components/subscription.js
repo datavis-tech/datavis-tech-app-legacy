@@ -14,7 +14,7 @@ export default class Subscription extends React.Component {
 
     if (process.browser) {
 
-      const {subscription, onUpdate} = this.props
+      const {subscription, onUpdate, onPermissionDenied} = this.props
       subscription.init(
         {
           onUpdate: data => {
@@ -31,7 +31,8 @@ export default class Subscription extends React.Component {
           },
           onError: error => {
             this.setState({ error })
-          }
+          },
+          onPermissionDenied
         }
       )
 

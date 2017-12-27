@@ -2,11 +2,12 @@ import React from 'react'
 
 import Page from '../../components/page'
 import Subscription from '../../components/subscription'
-import ProfileSubscription from '../../db/subscriptions/profileSubscription'
+import ProfileQuerySubscription from '../../db/subscriptions/profileQuerySubscription'
 import {profile} from '../../db/accessors'
 import Layout from '../../components/layout'
 import Loader from '../../components/loader'
 import ProfileBody from './profileBody'
+import resolveDocumentsSubscription from './resolveDocumentsSubscription'
 
 class ProfilePage extends React.Component {
 
@@ -18,7 +19,7 @@ class ProfilePage extends React.Component {
 
   constructor (props) {
     super(props)
-    this.subscription = ProfileSubscription({username: this.props.username})
+    this.subscription = ProfileQuerySubscription({username: this.props.username})
   }
 
   render () {
@@ -29,9 +30,16 @@ class ProfilePage extends React.Component {
       <Layout title={`${username} | Datavis.tech`} user={user}>
         <Subscription subscription={this.subscription} >
           {
-            ({data: profileDoc, isReady}) => (
+            ({data, isReady}) => (
               <Loader ready={isReady}>
-                <ProfileBody profile={profile(profileDoc)} />
+                {
+                  data
+                    ? <ProfileBody
+                      profile={profile(data)}
+                      documentsSubscription={resolveDocumentsSubscription(user, profile(data))}
+                    />
+                    : <div data-test='notFound'>User not found</div>
+                }
               </Loader>
             )
           }

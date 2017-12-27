@@ -17,6 +17,7 @@ describe('view page layout', () => {
   let Avatar
   let EditButton
   let ForkButton
+  let EmbedButton
 
   beforeEach(() => {
     Header = <div data-test='Header' />
@@ -27,6 +28,7 @@ describe('view page layout', () => {
     Avatar = <div data-test='Avatar' />
     EditButton = <div data-test='EditButton' />
     ForkButton = <div data-test='ForkButton' />
+    EmbedButton = <div data-test='EmbedButton' />
 
     props = {
       Header,
@@ -36,7 +38,8 @@ describe('view page layout', () => {
       ForkedFrom,
       Avatar,
       EditButton,
-      ForkButton
+      ForkButton,
+      EmbedButton
     }
 
     sut = mount(<ViewPageLayout {...props} />)
@@ -72,6 +75,10 @@ describe('view page layout', () => {
 
   it('should render fork button', () => {
     expect(sut.find(nodeSelector('ForkButton')).exists()).toBeTruthy()
+  })
+
+  it('should render embed button', () => {
+    expect(sut.find(nodeSelector('EmbedButton')).exists()).toBeTruthy()
   })
 
   it('should render correct layout', () => {

@@ -3,14 +3,13 @@ import { Link } from '../../../routes'
 import StringBinding from '../../../components/stringBinding'
 import CodeMirrorBinding from '../../../components/codeMirrorBinding'
 import DeleteConfirmModal from './deleteConfirmModal'
-import Collaborators from './collaborators'
 import DocTypeEditor from './docTypeEditor'
+import DocPrivacyEditor from './docPrivacyEditor'
 import PreviewField from './previewField'
-import ReferencesField from './referencesField'
 import { title, type, id } from '../../../db/accessors.js'
 
 // The Form in the body of the page.
-export default ({doc, referenceDocs, onDocumentDelete}) => (
+export default ({doc, referenceDocs, onDocumentDelete, ...slots}) => (
   <Form>
     <Form.Field>
       <label>Title</label>
@@ -45,6 +44,10 @@ export default ({doc, referenceDocs, onDocumentDelete}) => (
       <label>Document Type</label>
       <DocTypeEditor doc={doc} />
     </Form.Field>
+    <Form.Field>
+      <label>Document Privacy</label>
+      <DocPrivacyEditor doc={doc} />
+    </Form.Field>
     <PreviewField doc={doc} referenceDocs={referenceDocs} />
     <Form.Field>
       <label>Content</label>
@@ -53,13 +56,25 @@ export default ({doc, referenceDocs, onDocumentDelete}) => (
         path={['content']}
       />
     </Form.Field>
-    <ReferencesField doc={doc} />
+
+    {
+      slots.References
+        ? (
+          <Form.Field>
+            <label>References</label>
+            {slots.References}
+          </Form.Field>
+        )
+        : null
+    }
+
     <Form.Field>
       <label>Collaborators</label>
     </Form.Field>
     <Form.Field inline>
-      <Collaborators doc={doc} />
+      {slots.Collaborators}
     </Form.Field>
+
     <Form.Field>
       <DeleteConfirmModal
         onDocumentDelete={onDocumentDelete}

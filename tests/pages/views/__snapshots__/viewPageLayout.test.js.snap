@@ -39,6 +39,9 @@ exports[`view page layout should render correct layout 1`] = `
         <div
           data-test="ForkButton"
         />
+        <div
+          data-test="EmbedButton"
+        />
       </div>
     </div>
   </div>

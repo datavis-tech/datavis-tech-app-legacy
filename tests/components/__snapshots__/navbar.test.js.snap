@@ -27,6 +27,7 @@ exports[`navbar should match snapshot with user 1`] = `
           "avatar_url": "https://avatars2.githubusercontent.com/u/156229?v=4",
         },
         "displayName": "Fred",
+        "id": undefined,
         "username": "fred",
       }
     }
@@ -41,6 +42,7 @@ exports[`navbar should match snapshot with user 1`] = `
             "avatar_url": "https://avatars2.githubusercontent.com/u/156229?v=4",
           },
           "displayName": "Fred",
+          "id": undefined,
           "username": "fred",
         }
       }
