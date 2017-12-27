@@ -4,6 +4,7 @@ import OwnerAvatarLink from '../../../../src/pages/views/slots/ownerAvatarLink'
 import DocumentPreviewList from '../../../../src/pages/views/slots/documentPreviewList'
 import EditButton from '../../../../src/pages/views/slots/editButton'
 import ForkButton from '../../../../src/pages/views/slots/forkButton'
+import EmbedButton from '../../../../src/pages/views/slots/embedButton'
 
 import sut from '../../../../src/pages/views/slots/slotsFactory'
 
@@ -74,6 +75,11 @@ describe('slots factory', () => {
       expect(slots.ForkButton.props).toMatchObject({onFork})
     })
 
+    it('should contain embed button', () => {
+      expect(slots.EmbedButton.type).toBe(EmbedButton)
+      expect(slots.EmbedButton.props).toMatchObject({id})
+    })
+
   })
 
   describe('overrides', () => {
@@ -86,6 +92,7 @@ describe('slots factory', () => {
     let CustomAvatar
     let CustomEditButton
     let CustomForkButton
+    let CustomEmbedButton
 
     beforeEach(() => {
       CustomHeader = Symbol('Header')
@@ -96,6 +103,7 @@ describe('slots factory', () => {
       CustomAvatar = Symbol('Avatar')
       CustomEditButton = Symbol('EditButton')
       CustomForkButton = Symbol('ForkButton')
+      CustomEmbedButton = Symbol('EmbedButton')
 
       slots = sut(props, {
         Header: CustomHeader,
@@ -105,7 +113,8 @@ describe('slots factory', () => {
         ForkedFrom: CustomForkedFrom,
         Avatar: CustomAvatar,
         EditButton: CustomEditButton,
-        ForkButton: CustomForkButton
+        ForkButton: CustomForkButton,
+        EmbedButton: CustomEmbedButton
       })
 
     })
@@ -114,32 +123,36 @@ describe('slots factory', () => {
       expect(slots.Header).toBe(CustomHeader)
     })
 
-    it('should allow to override ', () => {
+    it('should allow to override content', () => {
       expect(slots.Content).toBe(CustomContent)
     })
 
-    it('should allow to override ', () => {
+    it('should allow to override description', () => {
       expect(slots.Description).toBe(CustomDescription)
     })
 
-    it('should allow to override ', () => {
+    it('should allow to override references', () => {
       expect(slots.References).toBe(CustomReferences)
     })
 
-    it('should allow to override ', () => {
+    it('should allow to override forked from', () => {
       expect(slots.ForkedFrom).toBe(CustomForkedFrom)
     })
 
-    it('should allow to override ', () => {
+    it('should allow to override avatar', () => {
       expect(slots.Avatar).toBe(CustomAvatar)
     })
 
-    it('should allow to override ', () => {
+    it('should allow to override edit button', () => {
       expect(slots.EditButton).toBe(CustomEditButton)
     })
 
-    it('should allow to override ', () => {
+    it('should allow to override fork button', () => {
       expect(slots.ForkButton).toBe(CustomForkButton)
+    })
+
+    it('should allow to override embed button', () => {
+      expect(slots.EmbedButton).toBe(CustomEmbedButton)
     })
 
   })

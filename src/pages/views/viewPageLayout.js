@@ -16,6 +16,7 @@ export default (slots) => (
           {slots.Avatar}
           {slots.EditButton}
           {slots.ForkButton}
+          {slots.EmbedButton}
         </Grid.Column>
       </Grid.Row>
     </Grid>
