@@ -22,10 +22,7 @@ class EditPage extends React.Component {
 
   render () {
     return (
-      <EditPageContent
-        {...this.props}
-        onDocumentDelete={() => this.deleteDocumentAndNavigate(this.props.doc)}
-      />
+      <EditPageContent {...this.props} onDocumentDelete={() => this.deleteDocumentAndNavigate(this.props.doc)}/>
     )
   }
 }

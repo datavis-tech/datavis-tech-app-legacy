@@ -1,8 +1,9 @@
 import React from 'react'
+import { Button } from 'semantic-ui-react'
 import { VIS_DOC_TYPE } from '../../constants'
 import Subscription from '../../components/subscription'
 import ReferencesSubscription from '../../db/subscriptions/documentSubscriptions'
-import { type, references, referenceIds, collaboratorIds } from '../../db/accessors'
+import { title, type, references, referenceIds, collaboratorIds } from '../../db/accessors'
 import {
   removeCollaborator, addCollaborator,
   addReference, removeReference, updateReference
@@ -10,8 +11,9 @@ import {
 import EditPageForm from './components/editPageForm'
 import Collaborators from './collaborators'
 import AddCollaboratorModal from './addCollaboratorModal'
-import getProfileByUsername from './getProfileByUsername'
+import DeleteConfirmModal from './deleteConfirmModal'
 import References from './references'
+import getProfileByUsername from './getProfileByUsername'
 
 export default class EditPageContent extends React.Component {
 
@@ -19,6 +21,8 @@ export default class EditPageContent extends React.Component {
     super(props)
 
     this.state = {
+      showDeleteConfirmModal: false,
+      deletingDocument: false,
       showAddCollaboratorModal: false,
       loadingCollaboratorProfile: false,
       profileNotFound: false
@@ -33,40 +37,54 @@ export default class EditPageContent extends React.Component {
     this.updateReference = updateReference.bind(null, props.doc)
     this.removeReference = removeReference.bind(null, props.doc)
     this.addReference = addReference.bind(null, props.doc)
+
+    this.showDeleteConfirmModal = this.showDeleteConfirmModal.bind(this)
+    this.hideDeleteConfirmModal = this.hideDeleteConfirmModal.bind(this)
+    this.deleteDocument = this.deleteDocument.bind(this)
   }
 
   render () {
-    const {doc, onDocumentDelete} = this.props
+    const {doc} = this.props
 
     return (
       <React.Fragment>
         <Subscription subscription={ReferencesSubscription({ids: referenceIds(doc)})}>
           {
             ({data: referenceDocs}) => (
-              <EditPageForm
-                doc={doc}
-                referenceDocs={referenceDocs || []}
-                onDocumentDelete={onDocumentDelete}
-                Collaborators={
-                  <Collaborators
-                    ids={collaboratorIds(doc)}
-                    onCollaboratorAdd={this.showAddCollaboratorModal}
-                    onCollaboratorRemove={this.removeCollaborator}
-                  />
-                }
-                References={
-                  type(doc) === VIS_DOC_TYPE
-                    ? (
-                      <References
-                        references={references(doc)}
-                        onReferenceAdd={this.addReference}
-                        onReferenceUpdate={this.updateReference}
-                        onReferenceRemove={this.removeReference}
-                      />
-                    )
-                    : null
-                }
-              />
+              <React.Fragment>
+                <EditPageForm
+                  doc={doc}
+                  referenceDocs={referenceDocs || []}
+                  Collaborators={
+                    <Collaborators
+                      ids={collaboratorIds(doc)}
+                      onCollaboratorAdd={this.showAddCollaboratorModal}
+                      onCollaboratorRemove={this.removeCollaborator}
+                    />
+                  }
+                  References={
+                    type(doc) === VIS_DOC_TYPE
+                      ? (
+                        <References
+                          references={references(doc)}
+                          onReferenceAdd={this.addReference}
+                          onReferenceUpdate={this.updateReference}
+                          onReferenceRemove={this.removeReference}
+                        />
+                      )
+                      : null
+                  }
+                />
+                <Button
+                  negative
+                  disabled={this.deletingDocument}
+                  loading={this.deletingDocument}
+                  onClick={this.showDeleteConfirmModal}
+                  style={{marginTop:'1em'}}
+                >
+                  Delete this document
+                </Button>
+              </React.Fragment>
             )
           }
         </Subscription>
@@ -76,6 +94,12 @@ export default class EditPageContent extends React.Component {
           notFound={this.state.profileNotFound}
           onClose={this.closeAddCollaboratorModal}
           onCollaboratorSubmit={this.submitCollaborator}
+        />
+        <DeleteConfirmModal
+          show={this.state.showDeleteConfirmModal}
+          title={title(doc)}
+          onClose={this.hideDeleteConfirmModal}
+          onDelete={this.deleteDocument}
         />
       </React.Fragment>
     )
@@ -111,5 +135,22 @@ export default class EditPageContent extends React.Component {
       })
     }
 
+  }
+
+  showDeleteConfirmModal () {
+    this.setState({
+      showDeleteConfirmModal: true
+    })
+  }
+
+  hideDeleteConfirmModal () {
+    this.setState({
+      showDeleteConfirmModal: false
+    })
+  }
+
+  deleteDocument() {
+    this.setState({showDeleteConfirmModal: false, deletingDocument: true})  
+    this.props.onDocumentDelete()
   }
 }
