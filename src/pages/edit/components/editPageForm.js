@@ -1,14 +1,13 @@
-import { Form, Grid, Button } from 'semantic-ui-react'
+import { Form, Grid, Button, Input, TextArea } from 'semantic-ui-react'
 import { Link } from '../../../routes'
 import StringBinding from '../../../components/stringBinding'
 import CodeMirrorBinding from '../../../components/codeMirrorBinding'
 import DocTypeEditor from './docTypeEditor'
 import DocPrivacyEditor from './docPrivacyEditor'
-import PreviewField from './previewField'
 import { title, type, id } from '../../../db/accessors.js'
 
 // The Form in the body of the page.
-export default ({doc, referenceDocs, onDocumentDelete, ...slots}) => (
+export default ({document, __shareDbDoc, onTitleChange, onDescriptionChange, ...slots}) => (
   <Form>
 
     <Form.Field>
@@ -16,14 +15,10 @@ export default ({doc, referenceDocs, onDocumentDelete, ...slots}) => (
       <Grid columns={2} divided>
         <Grid.Row>
           <Grid.Column width={12}>
-            <StringBinding
-              type='input'
-              doc={doc}
-              path={['title']}
-            />
+            <Input value={document.title} onChange={({target: {value}}) => onTitleChange(value)}/>
           </Grid.Column>
           <Grid.Column width={4}>
-            <Link route={type(doc)} params={{id: id(doc)}}>
+            <Link route={document.type} params={{id: document.id}}>
               <a>
                 <Button type='button' fluid>View</Button>
               </a>
@@ -35,29 +30,34 @@ export default ({doc, referenceDocs, onDocumentDelete, ...slots}) => (
     
     <Form.Field>
       <label>Description</label>
-      <StringBinding
-        type='textarea'
-        doc={doc}
-        path={['description']}
-      />
+      <TextArea value={document.description} onChange={({target: {value}}) => onDescriptionChange(value)} />  
     </Form.Field>
     
     <Form.Field>
       <label>Document Type</label>
-      <DocTypeEditor doc={doc} />
+      <DocTypeEditor doc={__shareDbDoc} />
     </Form.Field>
     
     <Form.Field>
       <label>Document Privacy</label>
-      <DocPrivacyEditor doc={doc} />
+      <DocPrivacyEditor doc={__shareDbDoc} />
     </Form.Field>
-    
-    <PreviewField doc={doc} referenceDocs={referenceDocs} />
-    
+        
+    {
+      slots.Preview
+       ? (
+        <Form.Field>
+          <label>Preview</label>
+          { slots.Preview }
+        </Form.Field>
+       )
+       : null
+    }
+
     <Form.Field>
       <label>Content</label>
       <CodeMirrorBinding
-        doc={doc}
+        doc={__shareDbDoc}
         path={['content']}
       />
     </Form.Field>
@@ -67,7 +67,7 @@ export default ({doc, referenceDocs, onDocumentDelete, ...slots}) => (
         ? (
           <Form.Field>
             <label>References</label>
-            {slots.References}
+            { slots.References }
           </Form.Field>
         )
         : null
@@ -75,7 +75,7 @@ export default ({doc, referenceDocs, onDocumentDelete, ...slots}) => (
 
     <Form.Field inline>
       <label>Collaborators</label>
-      {slots.Collaborators}
+      { slots.Collaborators }
     </Form.Field>
 
   </Form>

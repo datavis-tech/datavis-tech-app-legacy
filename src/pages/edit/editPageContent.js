@@ -1,13 +1,11 @@
 import React from 'react'
 import { Button } from 'semantic-ui-react'
 import { VIS_DOC_TYPE } from '../../constants'
-import Subscription from '../../components/subscription'
 import ReferencesSubscription from '../../db/subscriptions/documentSubscriptions'
-import { title, type, references, referenceIds, collaboratorIds } from '../../db/accessors'
-import {
-  removeCollaborator, addCollaborator,
-  addReference, removeReference, updateReference
-} from '../../db/actions'
+import { serializeDocument } from '../../db/serializers'
+import * as actions from '../../db/actions'
+import Subscription from '../../components/subscription'
+import Runner from '../../components/runner/runner'
 import EditPageForm from './components/editPageForm'
 import Collaborators from './collaborators'
 import AddCollaboratorModal from './addCollaboratorModal'
@@ -32,44 +30,63 @@ export default class EditPageContent extends React.Component {
     this.closeAddCollaboratorModal = this.closeAddCollaboratorModal.bind(this)
     this.submitCollaborator = this.submitCollaborator.bind(this)
 
-    this.removeCollaborator = removeCollaborator.bind(null, props.doc)
-
-    this.updateReference = updateReference.bind(null, props.doc)
-    this.removeReference = removeReference.bind(null, props.doc)
-    this.addReference = addReference.bind(null, props.doc)
-
     this.showDeleteConfirmModal = this.showDeleteConfirmModal.bind(this)
     this.hideDeleteConfirmModal = this.hideDeleteConfirmModal.bind(this)
     this.deleteDocument = this.deleteDocument.bind(this)
+
+    this.removeCollaborator = actions.removeCollaborator.bind(null, props.doc)
+
+    this.updateReference = actions.updateReference.bind(null, props.doc)
+    this.removeReference = actions.removeReference.bind(null, props.doc)
+    this.addReference = actions.addReference.bind(null, props.doc)
+    this.setTitle = actions.setDocumentTitle.bind(null, props.doc)
+    this.setDescription = actions.setDocumentDescription.bind(null, props.doc)
+  
+    this.document = serializeDocument(props.doc)
+  }
+
+  componentWillReceiveProps({doc}) {
+    this.document = serializeDocument(doc)
   }
 
   render () {
-    const {doc} = this.props
-
     return (
       <React.Fragment>
-        <Subscription subscription={ReferencesSubscription({ids: referenceIds(doc)})}>
+        <Subscription subscription={ReferencesSubscription({ids: this.document.referencesIds})}>
           {
-            ({data: referenceDocs}) => (
+            ({data: referenceDocuments}) => (
               <React.Fragment>
                 <EditPageForm
-                  doc={doc}
-                  referenceDocs={referenceDocs || []}
+                  document={this.document}
+                  __shareDbDoc={this.props.doc}
+                  onTitleChange={this.setTitle}
+                  onDescriptionChange={this.setDescription}
                   Collaborators={
                     <Collaborators
-                      ids={collaboratorIds(doc)}
+                      ids={this.document.collaboratorsIds}
                       onCollaboratorAdd={this.showAddCollaboratorModal}
                       onCollaboratorRemove={this.removeCollaborator}
                     />
                   }
                   References={
-                    type(doc) === VIS_DOC_TYPE
+                    this.document.type === VIS_DOC_TYPE
                       ? (
                         <References
-                          references={references(doc)}
+                          references={this.document.references}
                           onReferenceAdd={this.addReference}
                           onReferenceUpdate={this.updateReference}
                           onReferenceRemove={this.removeReference}
+                        />
+                      )
+                      : null
+                  }
+                  Preview={
+                    this.document.type === VIS_DOC_TYPE
+                      ? (
+                        <Runner
+                          content={this.document.content}
+                          references={this.document.references}
+                          referenceDocuments={(referenceDocuments || []).map(serializeDocument)}
                         />
                       )
                       : null
@@ -97,7 +114,7 @@ export default class EditPageContent extends React.Component {
         />
         <DeleteConfirmModal
           show={this.state.showDeleteConfirmModal}
-          title={title(doc)}
+          title={this.document.title}
           onClose={this.hideDeleteConfirmModal}
           onDelete={this.deleteDocument}
         />
