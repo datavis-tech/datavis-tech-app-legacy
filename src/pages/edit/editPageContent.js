@@ -6,7 +6,7 @@ import { serializeDocument } from '../../db/serializers'
 import * as actions from '../../db/actions'
 import Subscription from '../../components/subscription'
 import Runner from '../../components/runner/runner'
-import EditPageForm from './components/editPageForm'
+import EditPageForm from './editPageForm'
 import Collaborators from './collaborators'
 import AddCollaboratorModal from './addCollaboratorModal'
 import DeleteConfirmModal from './deleteConfirmModal'
@@ -41,6 +41,8 @@ export default class EditPageContent extends React.Component {
     this.addReference = actions.addReference.bind(null, props.doc)
     this.setTitle = actions.setDocumentTitle.bind(null, props.doc)
     this.setDescription = actions.setDocumentDescription.bind(null, props.doc)
+    this.setType = actions.setDocumentType.bind(null, props.doc)
+    this.setPrivacy = actions.setDocumentPrivacy.bind(null, props.doc)
   
     this.document = serializeDocument(props.doc)
   }
@@ -60,6 +62,8 @@ export default class EditPageContent extends React.Component {
                   document={this.document}
                   __shareDbDoc={this.props.doc}
                   onTitleChange={this.setTitle}
+                  onTypeChange={this.setType}
+                  onPrivacyChange={this.setPrivacy}
                   onDescriptionChange={this.setDescription}
                   Collaborators={
                     <Collaborators
