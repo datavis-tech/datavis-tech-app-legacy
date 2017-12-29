@@ -1,11 +1,12 @@
 import React from 'react'
-import { Form, Grid, Button, Input, TextArea, Radio } from 'semantic-ui-react'
+import { Form, Grid, Button, Radio } from 'semantic-ui-react'
 import { Link } from '../../routes'
 import CodeMirrorBinding from '../../components/codeMirrorBinding'
+import StringBinding from '../../components/stringBinding'
 
 // The Form in the body of the page.
 export default (
-  {document, __shareDbDoc, onTitleChange, onTypeChange, onPrivacyChange, onDescriptionChange, ...slots}
+  {document, __shareDbDoc, onTypeChange, onPrivacyChange, ...slots}
 ) => (
   <Form>
 
@@ -14,24 +15,30 @@ export default (
       <Grid columns={2} divided>
         <Grid.Row>
           <Grid.Column width={12}>
-            <Input value={document.title} onChange={({target: {value}}) => onTitleChange(value)}/>
+            <StringBinding
+              type='input'
+              doc={__shareDbDoc}
+              path={['title']}
+            />
           </Grid.Column>
           <Grid.Column width={4}>
             <Link route={document.type} params={{id: document.id}}>
-              <a>
-                <Button type='button' fluid>View</Button>
-              </a>
+              <Button type='button' fluid>View</Button>
             </Link>
           </Grid.Column>
         </Grid.Row>
       </Grid>
     </Form.Field>
-    
+
     <Form.Field>
       <label>Description</label>
-      <TextArea value={document.description} onChange={({target: {value}}) => onDescriptionChange(value)} />  
+      <StringBinding
+        type='input'
+        doc={__shareDbDoc}
+        path={['description']}
+      />
     </Form.Field>
-    
+
     <Form.Field>
       <label>Document Type</label>
       <Form.Group inline>
@@ -41,6 +48,7 @@ export default (
           value='vis'
           checked={document.type === 'vis'}
           onChange={() => onTypeChange('vis')}
+          data-test='type-visualization'
         />
         <Radio
           label='Dataset'
@@ -48,10 +56,11 @@ export default (
           value='data'
           checked={document.type === 'data'}
           onChange={() => onTypeChange('data')}
+          data-test='type-data'
         />
       </Form.Group>
     </Form.Field>
-    
+
     <Form.Field>
       <label>Document Privacy</label>
       <Form.Group inline>
@@ -61,6 +70,7 @@ export default (
           value='public'
           checked={!document.isPrivate}
           onChange={() => onPrivacyChange(false)}
+          data-test='privacy-public'
         />
         <Radio
           label='Private'
@@ -68,19 +78,20 @@ export default (
           value='private'
           checked={document.isPrivate}
           onChange={() => onPrivacyChange(true)}
+          data-test='privacy-private'
         />
       </Form.Group>
     </Form.Field>
-        
+
     {
       slots.Preview
-       ? (
-        <Form.Field>
-          <label>Preview</label>
-          { slots.Preview }
-        </Form.Field>
-       )
-       : null
+        ? (
+          <Form.Field>
+            <label>Preview</label>
+            { slots.Preview }
+          </Form.Field>
+        )
+        : null
     }
 
     <Form.Field>

@@ -21,7 +21,7 @@ import {
 jest.mock('../../../src/pages/edit/getProfileByUsername')
 import getProfileByUsername from '../../../src/pages/edit/getProfileByUsername'
 
-import { serializeDocument } from '../../../src/db/serializers' 
+import { serializeDocument } from '../../../src/db/serializers'
 
 jest.mock('../../../src/pages/edit/addCollaboratorModal', () => () => null)
 import AddCollaboratorModal from '../../../src/pages/edit/addCollaboratorModal'
@@ -84,7 +84,7 @@ describe('edit page content', () => {
   })
 
   afterEach(() => {
-    setState.mockReset()    
+    setState.mockReset()
     EditPageForm.mockClear()
   })
 
@@ -119,28 +119,28 @@ describe('edit page content', () => {
       })
 
       describe('collaborators', () => {
-  
+
         it('should render edit form with collaborators', () => {
           expect(CollaboratorsElement.type).toBe(Collaborators)
-  
+
           const ids = doc.data.collaborators.map(c => c.id)
           expect(CollaboratorsElement.props.ids).toEqual(ids)
         })
-  
+
         it('should open modal when user tries to add collaborator', () => {
           CollaboratorsElement.props.onCollaboratorAdd()
           sut.update()
           expect(sut.find(AddCollaboratorModal).prop('show')).toBeTruthy()
         })
-  
+
         it('should remove collaborator when user tries to remove one', () => {
           const index = String(Math.random())
           CollaboratorsElement.props.onCollaboratorRemove(index)
           expect(removeCollaborator).toHaveBeenCalledWith(doc, index)
         })
-  
+
       })
- 
+
       it('should not contain references if doc type is not equal to vis', () => {
         expect(ReferencesElement).toBeNull()
       })
@@ -148,10 +148,10 @@ describe('edit page content', () => {
       it('should not contain preview if doc type is not equal to vis', () => {
         expect(PreviewElement).toBeNull()
       })
-  
+
     })
 
-    describe('doc of vis type',() => {
+    describe('doc of vis type', () => {
 
       beforeEach(() => {
         doc.data.type = 'vis'
@@ -218,9 +218,9 @@ describe('edit page content', () => {
     })
 
     it('should notify about deletion', () => {
-       sut.find(DeleteConfirmModal).prop('onDelete')()
-       expect(onDocumentDelete).toHaveBeenCalled()
-     })
+      sut.find(DeleteConfirmModal).prop('onDelete')()
+      expect(onDocumentDelete).toHaveBeenCalled()
+    })
 
   })
 

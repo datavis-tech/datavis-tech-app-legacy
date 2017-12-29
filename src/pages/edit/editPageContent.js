@@ -39,15 +39,13 @@ export default class EditPageContent extends React.Component {
     this.updateReference = actions.updateReference.bind(null, props.doc)
     this.removeReference = actions.removeReference.bind(null, props.doc)
     this.addReference = actions.addReference.bind(null, props.doc)
-    this.setTitle = actions.setDocumentTitle.bind(null, props.doc)
-    this.setDescription = actions.setDocumentDescription.bind(null, props.doc)
     this.setType = actions.setDocumentType.bind(null, props.doc)
     this.setPrivacy = actions.setDocumentPrivacy.bind(null, props.doc)
-  
+
     this.document = serializeDocument(props.doc)
   }
 
-  componentWillReceiveProps({doc}) {
+  componentWillReceiveProps ({doc}) {
     this.document = serializeDocument(doc)
   }
 
@@ -61,10 +59,8 @@ export default class EditPageContent extends React.Component {
                 <EditPageForm
                   document={this.document}
                   __shareDbDoc={this.props.doc}
-                  onTitleChange={this.setTitle}
                   onTypeChange={this.setType}
                   onPrivacyChange={this.setPrivacy}
-                  onDescriptionChange={this.setDescription}
                   Collaborators={
                     <Collaborators
                       ids={this.document.collaboratorsIds}
@@ -101,7 +97,7 @@ export default class EditPageContent extends React.Component {
                   disabled={this.deletingDocument}
                   loading={this.deletingDocument}
                   onClick={this.showDeleteConfirmModal}
-                  style={{marginTop:'1em'}}
+                  style={{marginTop: '1em'}}
                 >
                   Delete this document
                 </Button>
@@ -169,8 +165,8 @@ export default class EditPageContent extends React.Component {
     })
   }
 
-  deleteDocument() {
-    this.setState({showDeleteConfirmModal: false, deletingDocument: true})  
+  deleteDocument () {
+    this.setState({showDeleteConfirmModal: false, deletingDocument: true})
     this.props.onDocumentDelete()
   }
 }
