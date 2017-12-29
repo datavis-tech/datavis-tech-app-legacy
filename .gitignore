@@ -3,6 +3,9 @@
 # dependencies
 node_modules
 
+# We commit yarn.lock, and ignore package-lock.json
+package-lock.json
+
 # testing
 coverage
 
