@@ -140,8 +140,7 @@ export default class EditPageContent extends React.Component {
 
     try {
       const profile = await getProfileByUsername(username)
-
-      addCollaborator(this.props.doc, profile.id)
+      actions.addCollaborator(this.props.doc, profile.id)
 
       this.setState({
         showAddCollaboratorModal: false,

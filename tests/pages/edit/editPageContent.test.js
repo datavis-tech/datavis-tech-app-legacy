@@ -1,8 +1,9 @@
 import React from 'react'
 import { mount } from 'enzyme'
+import { Button } from 'semantic-ui-react'
 
-jest.mock('../../../src/pages/edit/components/editPageForm')
-import EditPageForm from '../../../src/pages/edit/components/editPageForm'
+jest.mock('../../../src/pages/edit/editPageForm')
+import EditPageForm from '../../../src/pages/edit/editPageForm'
 
 jest.mock('../../../src/db/subscriptions/documentSubscriptions')
 import ReferencesSubscription from '../../../src/db/subscriptions/documentSubscriptions'
@@ -17,13 +18,19 @@ import {
   addReference, removeReference, updateReference
 } from '../../../src/db/actions'
 
-jest.mock('../../../src/pages/edit/addCollaboratorModal', () => () => null)
-import AddCollaboratorModal from '../../../src/pages/edit/addCollaboratorModal'
-
 jest.mock('../../../src/pages/edit/getProfileByUsername')
 import getProfileByUsername from '../../../src/pages/edit/getProfileByUsername'
 
+import { serializeDocument } from '../../../src/db/serializers' 
+
+jest.mock('../../../src/pages/edit/addCollaboratorModal', () => () => null)
+import AddCollaboratorModal from '../../../src/pages/edit/addCollaboratorModal'
+
+import DeleteConfirmModal from '../../../src/pages/edit/deleteConfirmModal'
+
 import Collaborators from '../../../src/pages/edit/collaborators'
+
+import Runner from '../../../src/components/runner/runner'
 
 import EditPageContent from '../../../src/pages/edit/editPageContent'
 
@@ -31,6 +38,7 @@ describe('edit page content', () => {
 
   let sut
   let props
+  let setState
   let id
   let user
   let doc
@@ -71,9 +79,12 @@ describe('edit page content', () => {
     EditPageForm.mockImplementation(() => null)
 
     sut = mount(<EditPageContent {...props} />)
+
+    setState = jest.spyOn(sut.instance(), 'setState')
   })
 
   afterEach(() => {
+    setState.mockReset()    
     EditPageForm.mockClear()
   })
 
@@ -82,7 +93,11 @@ describe('edit page content', () => {
   })
 
   describe('edit page form', () => {
+
     let editPageFormProps
+    let CollaboratorsElement
+    let ReferencesElement
+    let PreviewElement
 
     beforeEach(() => {
       editPageFormProps = sut.find(EditPageForm).props()
@@ -90,64 +105,62 @@ describe('edit page content', () => {
 
     it('should render edit page form', () => {
       expect(editPageFormProps).toMatchObject({
-        doc,
-        referenceDocs
+        document: serializeDocument(doc),
+        __shareDbDoc: doc
       })
     })
 
-    it('should notify about deletion', () => {
-      editPageFormProps.onDocumentDelete()
-      expect(onDocumentDelete).toHaveBeenCalled()
-    })
-
-    describe('collaborators', () => {
-
-      let CollaboratorsElement
-
-      beforeEach(() => {
-        CollaboratorsElement = EditPageForm.mock.calls[0][0].Collaborators
-      })
-
-      it('should render edit form with collaborators', () => {
-        expect(CollaboratorsElement.type).toBe(Collaborators)
-
-        const ids = doc.data.collaborators.map(c => c.id)
-        expect(CollaboratorsElement.props.ids).toEqual(ids)
-      })
-
-      it('should open modal when user tries to add collaborator', () => {
-        CollaboratorsElement.props.onCollaboratorAdd()
-        sut.update()
-        expect(sut.find(AddCollaboratorModal).prop('show')).toBeTruthy()
-      })
-
-      it('should remove collaborator when user tries to remove one', () => {
-        const index = String(Math.random())
-        CollaboratorsElement.props.onCollaboratorRemove(index)
-        expect(removeCollaborator).toHaveBeenCalledWith(doc, index)
-      })
-
-    })
-
-    describe('references', () => {
-
-      let ReferencesElement
+    describe('doc of data type', () => {
 
       beforeEach(() => {
         ReferencesElement = EditPageForm.mock.calls[0][0].References
+        CollaboratorsElement = EditPageForm.mock.calls[0][0].Collaborators
+        PreviewElement = EditPageForm.mock.calls[0][0].Preview
       })
 
+      describe('collaborators', () => {
+  
+        it('should render edit form with collaborators', () => {
+          expect(CollaboratorsElement.type).toBe(Collaborators)
+  
+          const ids = doc.data.collaborators.map(c => c.id)
+          expect(CollaboratorsElement.props.ids).toEqual(ids)
+        })
+  
+        it('should open modal when user tries to add collaborator', () => {
+          CollaboratorsElement.props.onCollaboratorAdd()
+          sut.update()
+          expect(sut.find(AddCollaboratorModal).prop('show')).toBeTruthy()
+        })
+  
+        it('should remove collaborator when user tries to remove one', () => {
+          const index = String(Math.random())
+          CollaboratorsElement.props.onCollaboratorRemove(index)
+          expect(removeCollaborator).toHaveBeenCalledWith(doc, index)
+        })
+  
+      })
+ 
       it('should not contain references if doc type is not equal to vis', () => {
         expect(ReferencesElement).toBeNull()
       })
 
-      describe('doc is of vis type', () => {
+      it('should not contain preview if doc type is not equal to vis', () => {
+        expect(PreviewElement).toBeNull()
+      })
+  
+    })
 
-        beforeEach(() => {
-          doc.data.type = 'vis'
-          sut.setState({})
-          ReferencesElement = EditPageForm.mock.calls[2][0].References
-        })
+    describe('doc of vis type',() => {
+
+      beforeEach(() => {
+        doc.data.type = 'vis'
+        sut.setProps({doc: doc})
+        ReferencesElement = EditPageForm.mock.calls[2][0].References
+        PreviewElement = EditPageForm.mock.calls[2][0].Preview
+      })
+
+      describe('references', () => {
 
         it('should contain references', () => {
           expect(ReferencesElement.props.references).toBe(doc.data.references)
@@ -174,7 +187,40 @@ describe('edit page content', () => {
 
       })
 
+      describe('preview', () => {
+
+        it('should be a runner', () => {
+          expect(PreviewElement.type).toBe(Runner)
+        })
+
+        it('should render runner with content, references adn references documents', () => {
+          const serialized = serializeDocument(doc)
+          expect(PreviewElement.props).toMatchObject({
+            content: serialized.content,
+            references: serialized.references,
+            referenceDocuments: referenceDocs.map(serializeDocument)
+          })
+        })
+
+      })
+
     })
+
+  })
+
+  describe('delete document', () => {
+
+    it('should show delete confirmation modal on delete button click', () => {
+      sut.find(Button).simulate('click')
+      expect(setState).toHaveBeenCalledWith({
+        showDeleteConfirmModal: true
+      })
+    })
+
+    it('should notify about deletion', () => {
+       sut.find(DeleteConfirmModal).prop('onDelete')()
+       expect(onDocumentDelete).toHaveBeenCalled()
+     })
 
   })
 
@@ -200,18 +246,15 @@ describe('edit page content', () => {
 
     describe('on collaborator submit', () => {
 
-      let setState
       let username
 
       beforeEach(() => {
-        setState = jest.spyOn(sut.instance(), 'setState')
         username = String(Math.random())
       })
 
       describe('profile exists', () => {
 
         let profile = fakeUser()
-
         beforeEach(async (done) => {
           getProfileByUsername.mockReturnValueOnce(Promise.resolve(profile))
           await AddCollaboratorModalWrapper.prop('onCollaboratorSubmit')(username)

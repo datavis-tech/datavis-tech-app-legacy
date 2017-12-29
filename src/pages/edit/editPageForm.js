@@ -1,7 +1,7 @@
 import React from 'react'
 import { Form, Grid, Button, Input, TextArea, Radio } from 'semantic-ui-react'
-import { Link } from '../../../routes'
-import CodeMirrorBinding from '../../../components/codeMirrorBinding'
+import { Link } from '../../routes'
+import CodeMirrorBinding from '../../components/codeMirrorBinding'
 
 // The Form in the body of the page.
 export default (
