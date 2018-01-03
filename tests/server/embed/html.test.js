@@ -98,17 +98,19 @@ describe('html', () => {
 
     let bodyTagName
     let someContent
+    let href
 
     beforeEach(() => {
       someContent = String(Math.random())
+      href = String(Math.random())
       bodyTagName = randomCase('body')
     })
 
     it('should inser logo before body closing tag', () => {
       src = `<${bodyTagName}>${someContent}</${bodyTagName}>`
-      result = injectLogo(src)
+      result = injectLogo(src, href)
       const styles = `position:fixed;right:0;bottom:0;width:64px;height:64px;background-image:url(data:image/png;base64,${logo.base64})`
-      expect(result).toEqual(`<${bodyTagName}>${someContent}<a href="https://datavis.tech/" style="${styles}" /></${bodyTagName}>`)
+      expect(result).toEqual(`<${bodyTagName}>${someContent}<a href="${href}" style="${styles}" /></${bodyTagName}>`)
     })
 
   })

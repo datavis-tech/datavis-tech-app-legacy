@@ -20,12 +20,12 @@ function withBodyTag (src) {
   return wrapWithTag(src, 'body')
 }
 
-function injectLogo (src) {
+function injectLogo (src, href) {
   const styles = `position:fixed;right:0;bottom:0;width:64px;height:64px;background-image:url(data:image/png;base64,${logo.base64})`
-  const logoELement = `<a href="https://datavis.tech/" style="${styles}" />`
+  const logoElement = `<a href="${href}" style="${styles}" />`
   const bodyAsInSrc = findOpeningTag(src, 'body')
   const insertionPosition = src.indexOf(`</${bodyAsInSrc}>`)
-  return `${src.slice(0, insertionPosition)}${logoELement}${src.slice(insertionPosition)}`
+  return `${src.slice(0, insertionPosition)}${logoElement}${src.slice(insertionPosition)}`
 }
 
 function wrapWithTag (src, tag) {

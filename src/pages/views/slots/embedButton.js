@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button, Input, Popup } from 'semantic-ui-react'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
-import routes from '../../../routes'
+import { getHrefForRoute } from '../../../routesUtils'
 
 // TODO: test
 export default class EmbedButton extends React.Component {
@@ -11,7 +11,7 @@ export default class EmbedButton extends React.Component {
 
     this.state = {
       copied: false,
-      url: `<iframe src="https://datavis.tech${routes.findByName('vis').getAs({id: props.id})}/embed" width="960" height="500"></iframe>`
+      url: `<iframe src="${getHrefForRoute('embed', {id: props.id})}" width="960" height="500"></iframe>`
     }
 
     this.copy = this.copy.bind(this)
