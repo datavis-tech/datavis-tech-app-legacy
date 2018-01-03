@@ -1,15 +1,60 @@
 import React from 'react'
+import { Button, Input, Popup } from 'semantic-ui-react'
+import { CopyToClipboard } from 'react-copy-to-clipboard'
 import routes from '../../../routes'
-import { Button, Popup } from 'semantic-ui-react'
 
 // TODO: test
+export default class EmbedButton extends React.Component {
 
-const Trigger = <Button content='Embed' style={{marginTop: '5px'}} fluid />
+  constructor (props) {
+    super(props)
 
-export default ({id}) => (
-  <Popup flowing trigger={Trigger} on='click'>
-    <Popup.Header>Embed visualization</Popup.Header>
-    <Popup.Content />
-    <code>{`<iframe src="https://datavis.tech${routes.findByName('vis').getAs({id})}/embed" width="960" height="500"></iframe>`}</code>
-  </Popup>
-)
+    this.state = {
+      copied: false,
+      url: `<iframe src="https://datavis.tech${routes.findByName('vis').getAs({id: props.id})}/embed" width="960" height="500"></iframe>`
+    }
+
+    this.copy = this.copy.bind(this)
+  }
+
+  render () {
+    return (
+      <Popup flowing trigger={this.renderEmbedTrigger()} on='click'>
+        <Popup.Header>Embed visualization</Popup.Header>
+        <Popup.Content >
+          <Input ref={ref => { this.urlContainer = ref }} value={this.state.url} />
+          <Popup position='bottom right' open={this.state.copied} trigger={this.renderCopyTrigger()}>
+            Copied
+          </Popup>
+        </Popup.Content>
+      </Popup>
+
+    )
+  }
+
+  renderEmbedTrigger () {
+    return <Button content='Embed' style={{marginTop: '5px'}} fluid />
+  }
+
+  renderCopyTrigger () {
+    return (
+      <CopyToClipboard text={this.state.url} onCopy={this.copy}>
+        <Button icon='copy' />
+      </CopyToClipboard>
+    )
+  }
+
+  copy () {
+
+    if (this.urlContainer) {
+      this.urlContainer.inputRef.select()
+    }
+
+    this.setState({ copied: true })
+
+    setTimeout(() => {
+      this.setState({ copied: false })
+    }, 2500)
+  }
+
+}
