@@ -1,6 +1,5 @@
 import ProfileQuerySubscription from '../../db/subscriptions/profileQuerySubscription'
 
-// TODO: test
 export default (username) => {
   const subscription = ProfileQuerySubscription({username})
   return new Promise((resolve, reject) => {

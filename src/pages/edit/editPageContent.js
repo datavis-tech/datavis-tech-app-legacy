@@ -1,17 +1,17 @@
 import React from 'react'
+import { Button } from 'semantic-ui-react'
 import { VIS_DOC_TYPE } from '../../constants'
-import Subscription from '../../components/subscription'
 import ReferencesSubscription from '../../db/subscriptions/documentSubscriptions'
-import { type, references, referenceIds, collaboratorIds } from '../../db/accessors'
-import {
-  removeCollaborator, addCollaborator,
-  addReference, removeReference, updateReference
-} from '../../db/actions'
-import EditPageForm from './components/editPageForm'
+import { serializeDocument } from '../../db/serializers'
+import * as actions from '../../db/actions'
+import Subscription from '../../components/subscription'
+import Runner from '../../components/runner/runner'
+import EditPageForm from './editPageForm'
 import Collaborators from './collaborators'
 import AddCollaboratorModal from './addCollaboratorModal'
-import getProfileByUsername from './getProfileByUsername'
+import DeleteConfirmModal from './deleteConfirmModal'
 import References from './references'
+import getProfileByUsername from './getProfileByUsername'
 
 export default class EditPageContent extends React.Component {
 
@@ -19,6 +19,8 @@ export default class EditPageContent extends React.Component {
     super(props)
 
     this.state = {
+      showDeleteConfirmModal: false,
+      deletingDocument: false,
       showAddCollaboratorModal: false,
       loadingCollaboratorProfile: false,
       profileNotFound: false
@@ -28,45 +30,78 @@ export default class EditPageContent extends React.Component {
     this.closeAddCollaboratorModal = this.closeAddCollaboratorModal.bind(this)
     this.submitCollaborator = this.submitCollaborator.bind(this)
 
-    this.removeCollaborator = removeCollaborator.bind(null, props.doc)
+    this.showDeleteConfirmModal = this.showDeleteConfirmModal.bind(this)
+    this.hideDeleteConfirmModal = this.hideDeleteConfirmModal.bind(this)
+    this.deleteDocument = this.deleteDocument.bind(this)
 
-    this.updateReference = updateReference.bind(null, props.doc)
-    this.removeReference = removeReference.bind(null, props.doc)
-    this.addReference = addReference.bind(null, props.doc)
+    this.removeCollaborator = actions.removeCollaborator.bind(null, props.doc)
+
+    this.updateReference = actions.updateReference.bind(null, props.doc)
+    this.removeReference = actions.removeReference.bind(null, props.doc)
+    this.addReference = actions.addReference.bind(null, props.doc)
+    this.setType = actions.setDocumentType.bind(null, props.doc)
+    this.setPrivacy = actions.setDocumentPrivacy.bind(null, props.doc)
+
+    this.document = serializeDocument(props.doc)
+  }
+
+  componentWillReceiveProps ({doc}) {
+    this.document = serializeDocument(doc)
   }
 
   render () {
-    const {doc, onDocumentDelete} = this.props
-
     return (
       <React.Fragment>
-        <Subscription subscription={ReferencesSubscription({ids: referenceIds(doc)})}>
+        <Subscription subscription={ReferencesSubscription({ids: this.document.referencesIds})}>
           {
-            ({data: referenceDocs}) => (
-              <EditPageForm
-                doc={doc}
-                referenceDocs={referenceDocs || []}
-                onDocumentDelete={onDocumentDelete}
-                Collaborators={
-                  <Collaborators
-                    ids={collaboratorIds(doc)}
-                    onCollaboratorAdd={this.showAddCollaboratorModal}
-                    onCollaboratorRemove={this.removeCollaborator}
-                  />
-                }
-                References={
-                  type(doc) === VIS_DOC_TYPE
-                    ? (
-                      <References
-                        references={references(doc)}
-                        onReferenceAdd={this.addReference}
-                        onReferenceUpdate={this.updateReference}
-                        onReferenceRemove={this.removeReference}
-                      />
-                    )
-                    : null
-                }
-              />
+            ({data: referenceDocuments}) => (
+              <React.Fragment>
+                <EditPageForm
+                  document={this.document}
+                  __shareDbDoc={this.props.doc}
+                  onTypeChange={this.setType}
+                  onPrivacyChange={this.setPrivacy}
+                  Collaborators={
+                    <Collaborators
+                      ids={this.document.collaboratorsIds}
+                      onCollaboratorAdd={this.showAddCollaboratorModal}
+                      onCollaboratorRemove={this.removeCollaborator}
+                    />
+                  }
+                  References={
+                    this.document.type === VIS_DOC_TYPE
+                      ? (
+                        <References
+                          references={this.document.references}
+                          onReferenceAdd={this.addReference}
+                          onReferenceUpdate={this.updateReference}
+                          onReferenceRemove={this.removeReference}
+                        />
+                      )
+                      : null
+                  }
+                  Preview={
+                    this.document.type === VIS_DOC_TYPE
+                      ? (
+                        <Runner
+                          content={this.document.content}
+                          references={this.document.references}
+                          referenceDocuments={(referenceDocuments || []).map(serializeDocument)}
+                        />
+                      )
+                      : null
+                  }
+                />
+                <Button
+                  negative
+                  disabled={this.deletingDocument}
+                  loading={this.deletingDocument}
+                  onClick={this.showDeleteConfirmModal}
+                  style={{marginTop: '1em'}}
+                >
+                  Delete this document
+                </Button>
+              </React.Fragment>
             )
           }
         </Subscription>
@@ -76,6 +111,12 @@ export default class EditPageContent extends React.Component {
           notFound={this.state.profileNotFound}
           onClose={this.closeAddCollaboratorModal}
           onCollaboratorSubmit={this.submitCollaborator}
+        />
+        <DeleteConfirmModal
+          show={this.state.showDeleteConfirmModal}
+          title={this.document.title}
+          onClose={this.hideDeleteConfirmModal}
+          onDelete={this.deleteDocument}
         />
       </React.Fragment>
     )
@@ -95,8 +136,7 @@ export default class EditPageContent extends React.Component {
 
     try {
       const profile = await getProfileByUsername(username)
-
-      addCollaborator(this.props.doc, profile.id)
+      actions.addCollaborator(this.props.doc, profile.id)
 
       this.setState({
         showAddCollaboratorModal: false,
@@ -111,5 +151,22 @@ export default class EditPageContent extends React.Component {
       })
     }
 
+  }
+
+  showDeleteConfirmModal () {
+    this.setState({
+      showDeleteConfirmModal: true
+    })
+  }
+
+  hideDeleteConfirmModal () {
+    this.setState({
+      showDeleteConfirmModal: false
+    })
+  }
+
+  deleteDocument () {
+    this.setState({showDeleteConfirmModal: false, deletingDocument: true})
+    this.props.onDocumentDelete()
   }
 }
