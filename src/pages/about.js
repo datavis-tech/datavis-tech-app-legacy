@@ -128,23 +128,28 @@ import Layout from '../components/layout'
 export default Page(({ user }) => (
   <Layout title='About Datavis.tech' user={user} >
     <Container text>
-      <Header as='h1'>About Datavis.tech</Header>
-      <p> Datavis Tech Inc. provides services and products relating to data visualization design, implementation, and training. </p>
-      <p> Datavis Tech INC was founded by Curran Kelleher in January 2016. For the first year, the corporation was a vehicle for data visualization consulting projects and freelance work. Since its inception, the idea of a platform for collaborative data visualization was brewing. The datavis.tech platform was prototyped many times throughout 2016 and 2017, and launched in its most basic form in June 2017.</p>
+      <Header>About us</Header>
 
-      <p>At the moment, here's what you can do with Datavis.tech:</p>
+      <p>Datavis Tech Inc. provides services and products relating to data visualization design, implementation, and training. Founded by Curran Kelleher in January 2016, the corporation was initially a vehicle for data visualization consulting projects and freelance work. Since its inception, the idea of a platform for collaborative data visualization was brewing. The datavis.tech platform was prototyped many times throughout 2016 and 2017, and launched in its most basic form in June 2017. Our small fully remote team is continually improving and adding new features to the platform, designing and building for longevity.</p>
+
+      <Header>Our Product</Header>
+
+      <p>Our software product is a collaborative data visualization platform that you can use to create and share data and visualizations, collaborating with others in real time. Heavily influenced by <a href="https://bl.ocks.org/">Bl.ocks.org</a> and <a href="http://blockbuilder.org/">Blockbuilder</a>, Datavis.tech aims to provide a collaborative social layer for data visualization. The ultimate product vision is that of a social hub for data visualization where anyone can create, share, discuss and iterate data and visualizations.</p>
+
+      <p>Here's what you can do now with datavis.tech:</p>
 
       <ul>
-        <li>Create datasets</li>
-        <li>Create visualizations</li>
-        <li>Collaborate with others in real-time on visualizations</li>
+        <li>Upload, describe, publish and share public datasets.</li>
+        <li>Create visualizations of published datasets using HTML and JavaScript.</li>
+        <li>Fork and modify existing visualizations.</li>
+        <li>Navigate the relationships between data, visualizations, and forks.</li>
+        <li>See a listing of visualizations for a given dataset.</li>
+        <li>See the data behind any visualization.</li>
+        <li>Add and remove collaborators to your visualizations.</li>
+        <li>Collaborate with others on visualizations via real-time synchronous editing.</li>
+        <li>Embed a visualization inside any Web page.</li>
         <li>Update visualizations automatically when data changes</li>
-        <li>Fork and modify existing visualizations</li>
-        <li>See all visualizations for a given dataset</li>
-        <li>See the data behind any visualization</li>
       </ul>
-
-      <p>We are continually adding new features to the platform in a long-term effort to build the premiere platform for creating, hosting, and leveraging the full potential of interactive data visualizations on the Web. The platform is heavily inspired by <a href='https://bl.ocks.org'>bl.ocks.org</a> and <a href='https://blockbuilder.org'>Blockbuilder</a>, which have blossomed as tools for creating and hosting visualization examples. We want to go beyond what those services provide in terms of supporting collaboration and wide dissemination of interactive data visualizations. When data visualizations are first-class citizens of the Web, there are many many opportunities to better serve visualization creators and visualization consumers.</p>
 
       <p>Here are some examples of people who could leverage datavis.tech:</p>
 
@@ -155,6 +160,45 @@ export default Page(({ user }) => (
         <li>Researchers who deal with data and want to explore and present it visually.</li>
         <li>Companies who want to do rapid prototyping of visual data presentation.</li>
       </ul>
+
+      {
+        // <Header>Features In the Pipeline</Header>
+        // <ul>
+        //   <li>Free for public content, paid subscription plan for private content.</li>
+        //   <li>Thumbnails throughout the app.</li>
+        //   <li>On-premise installation plans for enterprises.</li>
+        //   <li>Automatic data updating.</li>
+        //   <li>Integration with external data sources such as SQL databases.</li>
+        //   <li>Marketplace for buying and selling access to data, visualizations, and components.</li>
+        //   <li>Option to purchase prints (postcards, small prints, posters) of data visualizations and reports.</li>
+        //   <li>Paid access to live data analysis events, pairing visualization experts with domain experts.</li>
+        // </ul>
+      }
+
+      <Header>Consulting Services</Header>
+      
+      <p>We offer consulting services for design and development of interactive data visualizations. We specialize in creative, collaborative projects in which your data is visualized using D3.js and other Open Source technologies. Given a data set or API to work with, and an understanding of the tasks you'd like visualization to facilitate, we can work with you to explore and present your data visually. Our ideal engagement length is 4 months, grounded in weekly meetings.</p>
+
+      <p>Through our consulting services we can help you with the following:</p>
+
+      <ul>
+        <li>Design and development of interactive data visualizations.</li>
+        <li>Rapid visualization prototyping.</li>
+        <li>Strategizing on data access and preprocessing for visualizations.</li>
+        <li>Creating visualizations for embedding into existing software or Web pages.</li>
+        <li>Exploratory data analysis using visualization.</li>
+      </ul>
+
+      <Header>Training</Header>
+
+      <p>We offer training in data visualization theory and practice.</p> 
+      <ul>
+        <li>Custom tailored short-courses (1 week, remote) on data visualization for organizations.</li>
+        <li>On-site training including lectures and interactive workshops.</li>
+        <li>One-on-one mentorship on visualization design and D3.js programming.</li>
+      </ul>
+
+      <p>If you're interested in working with us, please reach out to curran@datavis.tech.</p>
 
     </Container>
   </Layout>
