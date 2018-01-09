@@ -134,7 +134,7 @@ export default Page(({ user }) => (
 
       <Header>Our Product</Header>
 
-      <p>Our software product is a collaborative data visualization platform that you can use to create and share data and visualizations, collaborating with others in real time. Heavily influenced by <a href="https://bl.ocks.org/">Bl.ocks.org</a> and <a href="http://blockbuilder.org/">Blockbuilder</a>, Datavis.tech aims to provide a collaborative social layer for data visualization. The ultimate product vision is that of a social hub for data visualization where anyone can create, share, discuss and iterate data and visualizations.</p>
+      <p>Our software product is a collaborative data visualization platform that you can use to create and share data and visualizations, collaborating with others in real time. Heavily influenced by <a href='https://bl.ocks.org/'>Bl.ocks.org</a> and <a href='http://blockbuilder.org/'>Blockbuilder</a>, Datavis.tech aims to provide a collaborative social layer for data visualization. The ultimate product vision is that of a social hub for data visualization where anyone can create, share, discuss and iterate data and visualizations.</p>
 
       <p>Here's what you can do now with datavis.tech:</p>
 
@@ -176,7 +176,7 @@ export default Page(({ user }) => (
       }
 
       <Header>Consulting Services</Header>
-      
+
       <p>We offer consulting services for design and development of interactive data visualizations. We specialize in creative, collaborative projects in which your data is visualized using D3.js and other Open Source technologies. Given a data set or API to work with, and an understanding of the tasks you'd like visualization to facilitate, we can work with you to explore and present your data visually. Our ideal engagement length is 4 months, grounded in weekly meetings.</p>
 
       <p>Through our consulting services we can help you with the following:</p>
@@ -191,7 +191,7 @@ export default Page(({ user }) => (
 
       <Header>Training</Header>
 
-      <p>We offer training in data visualization theory and practice.</p> 
+      <p>We offer training in data visualization theory and practice.</p>
       <ul>
         <li>Custom tailored short-courses (1 week, remote) on data visualization for organizations.</li>
         <li>On-site training including lectures and interactive workshops.</li>
