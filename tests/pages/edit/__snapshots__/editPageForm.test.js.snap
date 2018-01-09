@@ -1,0 +1,373 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`edit page form layouts should contain slots if they were provided 1`] = `
+<form
+  action={undefined}
+  className="ui form"
+  onSubmit={[Function]}
+>
+  <div
+    className="field"
+  >
+    <label>
+      Title
+    </label>
+    <div
+      className="ui divided two column grid"
+    >
+      <div
+        className="row"
+      >
+        <div
+          className="twelve wide column"
+        >
+          <input />
+        </div>
+        <div
+          className="four wide column"
+        >
+          <button
+            className="ui fluid button"
+            disabled={undefined}
+            onClick={[Function]}
+            role="button"
+            tabIndex={undefined}
+            type="button"
+          >
+            View
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="field"
+  >
+    <label>
+      Description
+    </label>
+    <input />
+  </div>
+  <div
+    className="field"
+  >
+    <label>
+      Document Type
+    </label>
+    <div
+      className="inline fields"
+    >
+      <div
+        className="ui radio checkbox"
+        data-test="type-visualization"
+        onChange={[Function]}
+        onClick={[Function]}
+        onMouseDown={[Function]}
+      >
+        <input
+          checked={false}
+          className="hidden"
+          name="docTypeEditorRadioGroup"
+          readOnly={true}
+          tabIndex={0}
+          type="radio"
+          value="vis"
+        />
+        <label
+          htmlFor={undefined}
+        >
+          Visualization
+        </label>
+      </div>
+      <div
+        className="ui radio checkbox"
+        data-test="type-data"
+        onChange={[Function]}
+        onClick={[Function]}
+        onMouseDown={[Function]}
+      >
+        <input
+          checked={false}
+          className="hidden"
+          name="docTypeEditorRadioGroup"
+          readOnly={true}
+          tabIndex={0}
+          type="radio"
+          value="data"
+        />
+        <label
+          htmlFor={undefined}
+        >
+          Dataset
+        </label>
+      </div>
+    </div>
+  </div>
+  <div
+    className="field"
+  >
+    <label>
+      Document Privacy
+    </label>
+    <div
+      className="inline fields"
+    >
+      <div
+        className="ui checked radio checkbox"
+        data-test="privacy-public"
+        onChange={[Function]}
+        onClick={[Function]}
+        onMouseDown={[Function]}
+      >
+        <input
+          checked={true}
+          className="hidden"
+          name="docPrivacyEditorRadioGroup"
+          readOnly={true}
+          tabIndex={0}
+          type="radio"
+          value="public"
+        />
+        <label
+          htmlFor={undefined}
+        >
+          Public
+        </label>
+      </div>
+      <div
+        className="ui radio checkbox"
+        data-test="privacy-private"
+        onChange={[Function]}
+        onClick={[Function]}
+        onMouseDown={[Function]}
+      >
+        <input
+          checked={false}
+          className="hidden"
+          name="docPrivacyEditorRadioGroup"
+          readOnly={true}
+          tabIndex={0}
+          type="radio"
+          value="private"
+        />
+        <label
+          htmlFor={undefined}
+        >
+          Private
+        </label>
+      </div>
+    </div>
+  </div>
+  <div
+    className="field"
+  >
+    <label>
+      Preview
+    </label>
+    <div>
+      Preview
+    </div>
+  </div>
+  <div
+    className="field"
+  >
+    <label>
+      Content
+    </label>
+    <div />
+  </div>
+  <div
+    className="field"
+  >
+    <label>
+      References
+    </label>
+    <div>
+      References
+    </div>
+  </div>
+  <div
+    className="inline field"
+  >
+    <label>
+      Collaborators
+    </label>
+  </div>
+</form>
+`;
+
+exports[`edit page form layouts should not contain slots if they were not provided 1`] = `
+<form
+  action={undefined}
+  className="ui form"
+  onSubmit={[Function]}
+>
+  <div
+    className="field"
+  >
+    <label>
+      Title
+    </label>
+    <div
+      className="ui divided two column grid"
+    >
+      <div
+        className="row"
+      >
+        <div
+          className="twelve wide column"
+        >
+          <input />
+        </div>
+        <div
+          className="four wide column"
+        >
+          <button
+            className="ui fluid button"
+            disabled={undefined}
+            onClick={[Function]}
+            role="button"
+            tabIndex={undefined}
+            type="button"
+          >
+            View
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="field"
+  >
+    <label>
+      Description
+    </label>
+    <input />
+  </div>
+  <div
+    className="field"
+  >
+    <label>
+      Document Type
+    </label>
+    <div
+      className="inline fields"
+    >
+      <div
+        className="ui radio checkbox"
+        data-test="type-visualization"
+        onChange={[Function]}
+        onClick={[Function]}
+        onMouseDown={[Function]}
+      >
+        <input
+          checked={false}
+          className="hidden"
+          name="docTypeEditorRadioGroup"
+          readOnly={true}
+          tabIndex={0}
+          type="radio"
+          value="vis"
+        />
+        <label
+          htmlFor={undefined}
+        >
+          Visualization
+        </label>
+      </div>
+      <div
+        className="ui radio checkbox"
+        data-test="type-data"
+        onChange={[Function]}
+        onClick={[Function]}
+        onMouseDown={[Function]}
+      >
+        <input
+          checked={false}
+          className="hidden"
+          name="docTypeEditorRadioGroup"
+          readOnly={true}
+          tabIndex={0}
+          type="radio"
+          value="data"
+        />
+        <label
+          htmlFor={undefined}
+        >
+          Dataset
+        </label>
+      </div>
+    </div>
+  </div>
+  <div
+    className="field"
+  >
+    <label>
+      Document Privacy
+    </label>
+    <div
+      className="inline fields"
+    >
+      <div
+        className="ui checked radio checkbox"
+        data-test="privacy-public"
+        onChange={[Function]}
+        onClick={[Function]}
+        onMouseDown={[Function]}
+      >
+        <input
+          checked={true}
+          className="hidden"
+          name="docPrivacyEditorRadioGroup"
+          readOnly={true}
+          tabIndex={0}
+          type="radio"
+          value="public"
+        />
+        <label
+          htmlFor={undefined}
+        >
+          Public
+        </label>
+      </div>
+      <div
+        className="ui radio checkbox"
+        data-test="privacy-private"
+        onChange={[Function]}
+        onClick={[Function]}
+        onMouseDown={[Function]}
+      >
+        <input
+          checked={false}
+          className="hidden"
+          name="docPrivacyEditorRadioGroup"
+          readOnly={true}
+          tabIndex={0}
+          type="radio"
+          value="private"
+        />
+        <label
+          htmlFor={undefined}
+        >
+          Private
+        </label>
+      </div>
+    </div>
+  </div>
+  <div
+    className="field"
+  >
+    <label>
+      Content
+    </label>
+    <div />
+  </div>
+  <div
+    className="inline field"
+  >
+    <label>
+      Collaborators
+    </label>
+  </div>
+</form>
+`;

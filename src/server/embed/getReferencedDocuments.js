@@ -7,6 +7,6 @@ module.exports = curry((connection, referencesIds) => (
       DB_DOCUMENTS_COLLECTION,
       {_id: {$in: referencesIds}},
       {},
-      (err, referenceDocuments) => err ? reject(err) : resolve(referenceDocuments))
+      (err, referenceDocuments) => err ? reject(err) : resolve(referenceDocuments || []))
   })
 ))
