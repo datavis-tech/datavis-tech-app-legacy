@@ -11,7 +11,15 @@ export default class EmbedButton extends React.Component {
 
     this.state = {
       copied: false,
-      url: `<iframe src="${getHrefForRoute('embed', {id: props.id})}" width="960" height="500"></iframe>`
+      url: `
+        <iframe
+          src="${getHrefForRoute('embed', {id: props.id})}"
+          width="960"
+          height="500"
+          scrolling="no"
+          style="border: 'solid 1px #ddd'"
+        ></iframe>
+      `.replace('\n', '').replace(/ +/, ' ').trim()
     }
 
     this.copy = this.copy.bind(this)
