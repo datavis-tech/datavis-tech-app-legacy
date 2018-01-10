@@ -61,27 +61,29 @@ export default (
       </Form.Group>
     </Form.Field>
 
-    <Form.Field>
-      <label>Document Privacy</label>
-      <Form.Group inline>
-        <Radio
-          label='Public'
-          name='docPrivacyEditorRadioGroup'
-          value='public'
-          checked={!document.isPrivate}
-          onChange={() => onPrivacyChange(false)}
-          data-test='privacy-public'
-        />
-        <Radio
-          label='Private'
-          name='docPrivacyEditorRadioGroup'
-          value='private'
-          checked={document.isPrivate}
-          onChange={() => onPrivacyChange(true)}
-          data-test='privacy-private'
-        />
-      </Form.Group>
-    </Form.Field>
+    {
+      // <Form.Field>
+      //   <label>Document Privacy</label>
+      //   <Form.Group inline>
+      //     <Radio
+      //       label='Public'
+      //       name='docPrivacyEditorRadioGroup'
+      //       value='public'
+      //       checked={!document.isPrivate}
+      //       onChange={() => onPrivacyChange(false)}
+      //       data-test='privacy-public'
+      //     />
+      //     <Radio
+      //       label='Private'
+      //       name='docPrivacyEditorRadioGroup'
+      //       value='private'
+      //       checked={document.isPrivate}
+      //       onChange={() => onPrivacyChange(true)}
+      //       data-test='privacy-private'
+      //     />
+      //   </Form.Group>
+      // </Form.Field>
+    }
 
     {
       slots.Preview
