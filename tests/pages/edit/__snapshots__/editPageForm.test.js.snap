@@ -107,61 +107,6 @@ exports[`edit page form layouts should contain slots if they were provided 1`] =
     className="field"
   >
     <label>
-      Document Privacy
-    </label>
-    <div
-      className="inline fields"
-    >
-      <div
-        className="ui checked radio checkbox"
-        data-test="privacy-public"
-        onChange={[Function]}
-        onClick={[Function]}
-        onMouseDown={[Function]}
-      >
-        <input
-          checked={true}
-          className="hidden"
-          name="docPrivacyEditorRadioGroup"
-          readOnly={true}
-          tabIndex={0}
-          type="radio"
-          value="public"
-        />
-        <label
-          htmlFor={undefined}
-        >
-          Public
-        </label>
-      </div>
-      <div
-        className="ui radio checkbox"
-        data-test="privacy-private"
-        onChange={[Function]}
-        onClick={[Function]}
-        onMouseDown={[Function]}
-      >
-        <input
-          checked={false}
-          className="hidden"
-          name="docPrivacyEditorRadioGroup"
-          readOnly={true}
-          tabIndex={0}
-          type="radio"
-          value="private"
-        />
-        <label
-          htmlFor={undefined}
-        >
-          Private
-        </label>
-      </div>
-    </div>
-  </div>
-  <div
-    className="field"
-  >
-    <label>
       Preview
     </label>
     <div>
@@ -295,61 +240,6 @@ exports[`edit page form layouts should not contain slots if they were not provid
           htmlFor={undefined}
         >
           Dataset
-        </label>
-      </div>
-    </div>
-  </div>
-  <div
-    className="field"
-  >
-    <label>
-      Document Privacy
-    </label>
-    <div
-      className="inline fields"
-    >
-      <div
-        className="ui checked radio checkbox"
-        data-test="privacy-public"
-        onChange={[Function]}
-        onClick={[Function]}
-        onMouseDown={[Function]}
-      >
-        <input
-          checked={true}
-          className="hidden"
-          name="docPrivacyEditorRadioGroup"
-          readOnly={true}
-          tabIndex={0}
-          type="radio"
-          value="public"
-        />
-        <label
-          htmlFor={undefined}
-        >
-          Public
-        </label>
-      </div>
-      <div
-        className="ui radio checkbox"
-        data-test="privacy-private"
-        onChange={[Function]}
-        onClick={[Function]}
-        onMouseDown={[Function]}
-      >
-        <input
-          checked={false}
-          className="hidden"
-          name="docPrivacyEditorRadioGroup"
-          readOnly={true}
-          tabIndex={0}
-          type="radio"
-          value="private"
-        />
-        <label
-          htmlFor={undefined}
-        >
-          Private
         </label>
       </div>
     </div>
