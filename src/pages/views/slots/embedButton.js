@@ -13,7 +13,7 @@ export default class EmbedButton extends React.Component {
 
     this.state = {
       copied: false,
-      url: removeWhiteSpace(`
+      snippet: removeWhiteSpace(`
         <iframe
           src="${getHrefForRoute('embed', {id: props.id})}"
           width="8960"
@@ -32,7 +32,7 @@ export default class EmbedButton extends React.Component {
       <Popup flowing trigger={this.renderEmbedTrigger()} on='click'>
         <Popup.Header>Embed visualization</Popup.Header>
         <Popup.Content >
-          <Input ref={ref => { this.urlContainer = ref }} value={this.state.url} />
+          <Input ref={ref => { this.snippetContainer = ref }} value={this.state.snippet} />
           <Popup position='bottom right' open={this.state.copied} trigger={this.renderCopyTrigger()}>
             Copied
           </Popup>
@@ -48,7 +48,7 @@ export default class EmbedButton extends React.Component {
 
   renderCopyTrigger () {
     return (
-      <CopyToClipboard text={this.state.url} onCopy={this.copy}>
+      <CopyToClipboard text={this.state.snippet} onCopy={this.copy}>
         <Button icon='copy' />
       </CopyToClipboard>
     )
@@ -56,8 +56,8 @@ export default class EmbedButton extends React.Component {
 
   copy () {
 
-    if (this.urlContainer) {
-      this.urlContainer.inputRef.select()
+    if (this.snippetContainer) {
+      this.snippetContainer.inputRef.select()
     }
 
     this.setState({ copied: true })
