@@ -3,7 +3,7 @@ import { Button, Input, Popup } from 'semantic-ui-react'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { getHrefForRoute } from '../../../routesUtils'
 
-const removeWhiteSpace = str => str.replace('\n', '').replace(/ +/g, ' ').trim()
+const removeWhiteSpace = str => str.replace(/\n/g, '').replace(/ +/g, ' ').trim()
 
 // TODO: test
 export default class EmbedButton extends React.Component {
@@ -16,7 +16,7 @@ export default class EmbedButton extends React.Component {
       snippet: removeWhiteSpace(`
         <iframe
           src="${getHrefForRoute('embed', {id: props.id})}"
-          width="8960"
+          width="960"
           height="500"
           scrolling="no"
           style="border: 'solid 1px #ddd'"
