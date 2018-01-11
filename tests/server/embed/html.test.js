@@ -110,7 +110,7 @@ describe('html', () => {
       src = `<${bodyTagName}>${someContent}</${bodyTagName}>`
       result = injectLogo(src, href)
       const styles = `position:fixed;right:0;bottom:0;width:64px;height:64px;background-image:url(data:image/png;base64,${logo.base64})`
-      expect(result).toEqual(`<${bodyTagName}>${someContent}<a href="${href}" style="${styles}" /></${bodyTagName}>`)
+      expect(result).toEqual(`<${bodyTagName}>${someContent}<a href="${href}" style="${styles}" target="_parent" /></${bodyTagName}>`)
     })
 
   })
