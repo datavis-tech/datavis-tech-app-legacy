@@ -19,7 +19,7 @@ export default class EmbedButton extends React.Component {
           width="960"
           height="500"
           scrolling="no"
-          style="border: 'solid 1px #ddd'"
+          style="border: solid 1px #ddd"
         ></iframe>
       `)
     }
