@@ -33,7 +33,7 @@ export default (
     <Form.Field>
       <label>Description</label>
       <StringBinding
-        type='input'
+        type='textarea'
         doc={__shareDbDoc}
         path={['description']}
       />

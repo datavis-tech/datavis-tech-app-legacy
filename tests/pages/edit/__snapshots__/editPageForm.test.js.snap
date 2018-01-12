@@ -46,7 +46,7 @@ exports[`edit page form layouts should contain slots if they were provided 1`] =
     <label>
       Description
     </label>
-    <input />
+    <textarea />
   </div>
   <div
     className="field"
@@ -187,7 +187,7 @@ exports[`edit page form layouts should not contain slots if they were not provid
     <label>
       Description
     </label>
-    <input />
+    <textarea />
   </div>
   <div
     className="field"
