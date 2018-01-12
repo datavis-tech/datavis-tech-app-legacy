@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Grid, Button, Radio } from 'semantic-ui-react'
+import { Form, Grid, Button } from 'semantic-ui-react'
 import { Link } from '../../routes'
 import CodeMirrorBinding from '../../components/codeMirrorBinding'
 import StringBinding from '../../components/stringBinding'
@@ -42,7 +42,7 @@ export default (
     <Form.Field>
       <label>Document Type</label>
       <Form.Group inline>
-        <Radio
+        <Form.Radio
           label='Visualization'
           name='docTypeEditorRadioGroup'
           value='vis'
@@ -50,7 +50,7 @@ export default (
           onChange={() => onTypeChange('vis')}
           data-test='type-visualization'
         />
-        <Radio
+        <Form.Radio
           label='Dataset'
           name='docTypeEditorRadioGroup'
           value='data'

@@ -58,48 +58,60 @@ exports[`edit page form layouts should contain slots if they were provided 1`] =
       className="inline fields"
     >
       <div
-        className="ui radio checkbox"
-        data-test="type-visualization"
-        onChange={[Function]}
-        onClick={[Function]}
-        onMouseDown={[Function]}
+        className="field"
       >
-        <input
-          checked={false}
-          className="hidden"
-          name="docTypeEditorRadioGroup"
-          readOnly={true}
-          tabIndex={0}
-          type="radio"
-          value="vis"
-        />
-        <label
-          htmlFor={undefined}
+        <div
+          className="ui radio checkbox"
+          content={undefined}
+          data-test="type-visualization"
+          onChange={[Function]}
+          onClick={[Function]}
+          onMouseDown={[Function]}
         >
-          Visualization
-        </label>
+          <input
+            checked={false}
+            className="hidden"
+            name="docTypeEditorRadioGroup"
+            readOnly={true}
+            required={undefined}
+            tabIndex={0}
+            type="radio"
+            value="vis"
+          />
+          <label
+            htmlFor={undefined}
+          >
+            Visualization
+          </label>
+        </div>
       </div>
       <div
-        className="ui radio checkbox"
-        data-test="type-data"
-        onChange={[Function]}
-        onClick={[Function]}
-        onMouseDown={[Function]}
+        className="field"
       >
-        <input
-          checked={false}
-          className="hidden"
-          name="docTypeEditorRadioGroup"
-          readOnly={true}
-          tabIndex={0}
-          type="radio"
-          value="data"
-        />
-        <label
-          htmlFor={undefined}
+        <div
+          className="ui radio checkbox"
+          content={undefined}
+          data-test="type-data"
+          onChange={[Function]}
+          onClick={[Function]}
+          onMouseDown={[Function]}
         >
-          Dataset
-        </label>
+          <input
+            checked={false}
+            className="hidden"
+            name="docTypeEditorRadioGroup"
+            readOnly={true}
+            required={undefined}
+            tabIndex={0}
+            type="radio"
+            value="data"
+          />
+          <label
+            htmlFor={undefined}
+          >
+            Dataset
+          </label>
+        </div>
       </div>
     </div>
   </div>
@@ -199,48 +211,60 @@ exports[`edit page form layouts should not contain slots if they were not provid
       className="inline fields"
     >
       <div
-        className="ui radio checkbox"
-        data-test="type-visualization"
-        onChange={[Function]}
-        onClick={[Function]}
-        onMouseDown={[Function]}
+        className="field"
       >
-        <input
-          checked={false}
-          className="hidden"
-          name="docTypeEditorRadioGroup"
-          readOnly={true}
-          tabIndex={0}
-          type="radio"
-          value="vis"
-        />
-        <label
-          htmlFor={undefined}
+        <div
+          className="ui radio checkbox"
+          content={undefined}
+          data-test="type-visualization"
+          onChange={[Function]}
+          onClick={[Function]}
+          onMouseDown={[Function]}
         >
-          Visualization
-        </label>
+          <input
+            checked={false}
+            className="hidden"
+            name="docTypeEditorRadioGroup"
+            readOnly={true}
+            required={undefined}
+            tabIndex={0}
+            type="radio"
+            value="vis"
+          />
+          <label
+            htmlFor={undefined}
+          >
+            Visualization
+          </label>
+        </div>
       </div>
       <div
-        className="ui radio checkbox"
-        data-test="type-data"
-        onChange={[Function]}
-        onClick={[Function]}
-        onMouseDown={[Function]}
+        className="field"
       >
-        <input
-          checked={false}
-          className="hidden"
-          name="docTypeEditorRadioGroup"
-          readOnly={true}
-          tabIndex={0}
-          type="radio"
-          value="data"
-        />
-        <label
-          htmlFor={undefined}
+        <div
+          className="ui radio checkbox"
+          content={undefined}
+          data-test="type-data"
+          onChange={[Function]}
+          onClick={[Function]}
+          onMouseDown={[Function]}
         >
-          Dataset
-        </label>
+          <input
+            checked={false}
+            className="hidden"
+            name="docTypeEditorRadioGroup"
+            readOnly={true}
+            required={undefined}
+            tabIndex={0}
+            type="radio"
+            value="data"
+          />
+          <label
+            htmlFor={undefined}
+          >
+            Dataset
+          </label>
+        </div>
       </div>
     </div>
   </div>
