@@ -1,5 +1,5 @@
-import { DB_DOCUMENTS_COLLECTION } from '../../../src/constants'
-import sut from '../../../src/server/embed/getDocument'
+import { constants } from 'dvt-core'
+import sut from '../src/getDocument'
 
 describe('get document', () => {
 
@@ -21,7 +21,7 @@ describe('get document', () => {
   })
 
   it('should get document from database', () => {
-    expect(connection.get).toHaveBeenCalledWith(DB_DOCUMENTS_COLLECTION, id)
+    expect(connection.get).toHaveBeenCalledWith(constants.DB_DOCUMENTS_COLLECTION, id)
   })
 
   it('should populate document fields with values', () => {

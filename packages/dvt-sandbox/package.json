@@ -1,0 +1,39 @@
+{
+  "name": "dvt-sandbox",
+  "version": "1.0.0",
+  "description": "visualization content sandbox",
+  "main": "./src/index.js",
+  "scripts": {
+    "test": "jest",
+    "test:coverage": "jest --coverage",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/curran/datavis-tech.git"
+  },
+  "author": "Curran Kelleher",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://gitlab.com/curran/datavis-tech/issues"
+  },
+  "dependencies": {
+    "dvt-core": "1.0.0",
+    "codemirror": "^5.33.0",
+    "codemirror-binding": "^0.1.0",
+    "lodash": "^4.17.4",
+    "magic-sandbox": "^1.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^4.14.0",
+    "eslint-config-standard": "^11.0.0-beta.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-node": "^5.2.1",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-react": "^7.5.1",
+    "eslint-plugin-standard": "^3.0.1",
+    "jest": "^22.0.4",
+    "random-case": "^1.0.0"
+  }
+}

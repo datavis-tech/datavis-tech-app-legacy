@@ -1,5 +1,5 @@
-import { DB_DOCUMENTS_COLLECTION } from '../../../src/constants'
-import sut from '../../../src/server/embed/getReferencedDocuments'
+import { constants } from 'dvt-core'
+import sut from '../src/getReferencedDocuments'
 
 describe('get referenced documents', () => {
 
@@ -22,7 +22,7 @@ describe('get referenced documents', () => {
 
   it('should fetch referenced documents by ids', () => {
     const [collectionName, query] = connection.createFetchQuery.mock.calls[0]
-    expect(collectionName).toEqual(DB_DOCUMENTS_COLLECTION)
+    expect(collectionName).toEqual(constants.DB_DOCUMENTS_COLLECTION)
     expect(query).toMatchObject({_id: {$in: referencesIds}})
   })
 

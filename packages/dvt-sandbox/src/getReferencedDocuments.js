@@ -1,5 +1,5 @@
 const curry = require('lodash/curry')
-const { DB_DOCUMENTS_COLLECTION } = require('../../constants')
+const { DB_DOCUMENTS_COLLECTION } = require('dvt-core').constants
 
 module.exports = curry((connection, referencesIds) => (
   new Promise((resolve, reject) => {

@@ -27,6 +27,7 @@
   },
   "homepage": "https://gitlab.com/curran/datavis-tech#README",
   "dependencies": {
+    "dvt-sandbox": "1.0.0",
     "codemirror": "^5.33.0",
     "codemirror-binding": "^0.1.0",
     "connect-redis": "^3.3.2",

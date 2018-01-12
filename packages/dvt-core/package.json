@@ -1,0 +1,9 @@
+{
+  "name": "dvt-core",
+  "version": "1.0.0",
+  "main": "./src/index.js",
+  "license": "MIT",
+  "files": [
+    "./src/constants.js"
+  ]
+}
