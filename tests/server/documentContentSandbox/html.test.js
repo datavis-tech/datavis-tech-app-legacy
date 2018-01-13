@@ -1,6 +1,6 @@
 import randomCase from 'random-case'
-import logo from '../../../src/server/embed/logo'
-import { withHtmlTag, withBodyTag, injectLogo } from '../../../src/server/embed/html'
+import logo from '../../../src/server/documentContentSandbox/logo'
+import { withHtmlTag, withBodyTag, injectLogo } from '../../../src/server/documentContentSandbox/html'
 
 describe('html', () => {
 

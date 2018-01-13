@@ -71,7 +71,9 @@ exports[`edit page form layouts should contain slots if they were provided 1`] =
           <input
             checked={false}
             className="hidden"
+            id={undefined}
             name="docTypeEditorRadioGroup"
+            onClick={[Function]}
             readOnly={true}
             required={undefined}
             tabIndex={0}
@@ -99,7 +101,9 @@ exports[`edit page form layouts should contain slots if they were provided 1`] =
           <input
             checked={false}
             className="hidden"
+            id={undefined}
             name="docTypeEditorRadioGroup"
+            onClick={[Function]}
             readOnly={true}
             required={undefined}
             tabIndex={0}
@@ -224,7 +228,9 @@ exports[`edit page form layouts should not contain slots if they were not provid
           <input
             checked={false}
             className="hidden"
+            id={undefined}
             name="docTypeEditorRadioGroup"
+            onClick={[Function]}
             readOnly={true}
             required={undefined}
             tabIndex={0}
@@ -252,7 +258,9 @@ exports[`edit page form layouts should not contain slots if they were not provid
           <input
             checked={false}
             className="hidden"
+            id={undefined}
             name="docTypeEditorRadioGroup"
+            onClick={[Function]}
             readOnly={true}
             required={undefined}
             tabIndex={0}
