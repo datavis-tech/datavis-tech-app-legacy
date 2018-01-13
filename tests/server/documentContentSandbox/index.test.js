@@ -63,7 +63,7 @@ describe('document content sandbox', () => {
 
     id = String(Math.random())
     href = String(Math.random())
-    origin = String(Math.random())   
+    origin = String(Math.random())
 
     result = await sut({
       id,
