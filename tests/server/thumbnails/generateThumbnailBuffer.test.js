@@ -1,6 +1,6 @@
 jest.mock('sharp')
 import sharp from 'sharp'
-import sut from '../../../src/server/thumbnails/generateThumbnail'
+import sut from '../../../src/server/thumbnails/generateThumbnailBuffer'
 
 describe('generate thumbnail for document', () => {
 

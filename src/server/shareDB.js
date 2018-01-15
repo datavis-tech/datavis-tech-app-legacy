@@ -6,6 +6,7 @@ const { getSession } = require('./session')
 const { mongoURL } = require('../config')
 const { DB_DOCUMENTS_PROJECTION, DB_DOCUMENTS_COLLECTION } = require('../constants')
 const { applyAccessControlMiddleware } = require('./accessControl')
+const { applyChangeTrackingMiddleware } = require('./changeTracking')
 
 const backend = ShareDB({
   db: ShareDBMongo(mongoURL)
@@ -26,6 +27,7 @@ backend.addProjection(DB_DOCUMENTS_PROJECTION, DB_DOCUMENTS_COLLECTION, {
 })
 
 applyAccessControlMiddleware(backend)
+applyChangeTrackingMiddleware(backend)
 
 const setup = (httpServer) => {
   const webSocketServer = new WebSocket.Server({
