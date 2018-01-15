@@ -12,8 +12,8 @@ const DocumentsList = ({ documents }) => {
 
   return (
     <div>
-      <DocumentPreviewList title='Datasets' documents={dataDocuments} dataTest='datasets' />
       <DocumentPreviewList title='Visualizations' documents={visDocuments} dataTest='visualizations' />
+      <DocumentPreviewList title='Datasets' documents={dataDocuments} dataTest='datasets' />
     </div>
   )
 }
