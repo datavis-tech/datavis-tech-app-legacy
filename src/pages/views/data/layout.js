@@ -9,7 +9,8 @@ export default ({id, document, ownerProfile, referenceDocuments, forkedFrom, onF
     {id, document, ownerProfile, forkedFrom, onFork},
     {
       Content: <DataViewer content={document.content} />,
-      References: <DocumentPreviewList title='Visualizations' documents={referenceDocuments} />
+      References: <DocumentPreviewList title='Visualizations' documents={referenceDocuments} />,
+      EmbedButton: null
     }
   )
 
