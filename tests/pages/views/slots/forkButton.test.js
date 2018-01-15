@@ -14,8 +14,20 @@ describe('fork button', () => {
     sut = shallow(<ForkButton onFork={onFork} />)
   })
 
-  it('should contain button with on fork handler', () => {
-    expect(sut.find(Button).prop('onClick')).toBe(onFork)
+  it('should invoke onFork and indicate loading', () => {
+    let button = sut.find(Button)
+
+    expect(onFork).not.toHaveBeenCalled()
+    expect(button.prop('disabled')).toEqual(false)
+    expect(button.prop('loading')).toEqual(false)
+
+    button.prop('onClick')()
+    sut.update()
+    button = sut.find(Button)
+
+    expect(onFork).toHaveBeenCalled()
+    expect(button.prop('disabled')).toEqual(true)
+    expect(button.prop('loading')).toEqual(true)
   })
 
 })
