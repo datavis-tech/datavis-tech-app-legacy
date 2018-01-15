@@ -14,11 +14,17 @@ export default ({profile, documentsSubscription}) => (
     <Grid.Column width={12}>
       <Subscription subscription={documentsSubscription}>
         {
-          ({data, isReady}) => (
-            <Loader ready={isReady}>
-              <DocumentsList documents={(data || []).map(serializeDocument)} />
-            </Loader>
-          )
+          ({data, isReady}) => {
+
+            // Reverse order so documents are ordered from most recent to least recent.
+            const documents = (data || []).reverse()
+
+            return (
+              <Loader ready={isReady}>
+                <DocumentsList documents={documents.map(serializeDocument)} />
+              </Loader>
+            )
+          }
         }
       </Subscription>
     </Grid.Column>
