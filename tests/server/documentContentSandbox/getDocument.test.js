@@ -1,5 +1,5 @@
 import { DB_DOCUMENTS_COLLECTION } from '../../../src/constants'
-import sut from '../../../src/server/embed/getDocument'
+import sut from '../../../src/server/documentContentSandbox/getDocument'
 
 describe('get document', () => {
 

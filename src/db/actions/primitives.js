@@ -1,4 +1,4 @@
-export const set = ({shareDBDoc, property, item}) => (
+const set = ({shareDBDoc, property, item}) => (
   shareDBDoc.submitOp([{
     p: [property],
     oi: item,
@@ -7,7 +7,7 @@ export const set = ({shareDBDoc, property, item}) => (
 )
 
 // TODO: test
-export const setInList = ({shareDBDoc, property, index, item}) => (
+const setInList = ({shareDBDoc, property, index, item}) => (
   shareDBDoc.submitOp([{
     p: [property, index],
     li: item,
@@ -16,7 +16,7 @@ export const setInList = ({shareDBDoc, property, index, item}) => (
 )
 
 // Pushes an item onto to end of the array at the given property.
-export const push = ({shareDBDoc, property, item}) => {
+const push = ({shareDBDoc, property, item}) => {
 
   // If property is undefined, then create an empty array.
   if (!shareDBDoc.data[property]) {
@@ -32,9 +32,16 @@ export const push = ({shareDBDoc, property, item}) => {
 }
 
 // Removes the item at the given index from list at the given property.
-export const listDelete = ({shareDBDoc, property, index}) => {
+const listDelete = ({shareDBDoc, property, index}) => {
   shareDBDoc.submitOp([{
     p: [property, index],
     ld: shareDBDoc.data[property][index]
   }])
+}
+
+module.exports = {
+  set,
+  setInList,
+  push,
+  listDelete
 }
