@@ -34,6 +34,7 @@ module.exports = (backend) => {
           ? console.log('Message sent. ID:', resp)
           : console.log(err)
       ))
+      done()
     }
 
     done()

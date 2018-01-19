@@ -50,6 +50,8 @@ const forkedFrom = doc => data(doc).forkedFrom
 
 const isPrivate = doc => data(doc).isPrivate || false
 
+const thumbnail = doc => data(doc).thumbnail
+
 // This function returns true if all references have been loaded.
 // references is the array of reference objects stored in the ShareDB document
 // referenceDocuments is the array of serialized documents for references.
@@ -96,5 +98,6 @@ module.exports = {
   isPrivate,
   allReferencesLoaded,
   files,
-  profile
+  profile,
+  thumbnail
 }
