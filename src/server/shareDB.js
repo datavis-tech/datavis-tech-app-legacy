@@ -23,7 +23,8 @@ backend.addProjection(DB_DOCUMENTS_PROJECTION, DB_DOCUMENTS_COLLECTION, {
   owner: true,
   type: true,
   collaborators: true,
-  isPrivate: true
+  isPrivate: true,
+  thumbnail: true
 })
 
 applyAccessControlMiddleware(backend)
