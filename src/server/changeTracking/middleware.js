@@ -1,5 +1,5 @@
 const RedisSMQ = require('rsmq')
-const isContentOp = require('../../db/actions/isContentOp')
+const { isContentOp } = require('../../db/accessors')
 const QUEUES = require('./queues')
 
 const rsmq = new RedisSMQ({host: process.env.DVT_REDIS_HOST, port: process.env.DVT_REDIS_PORT})
@@ -25,7 +25,7 @@ module.exports = (backend) => {
     .forEach(createQueue)
 
   backend.use('after submit', ({op, snapshot}, done) => {
-    if (isContentOp(op.op)) {
+    if (isContentOp(op)) {
       const qname = snapshot.data.type === 'vis' ? QUEUES.VISUALIZATION_UPDATED : QUEUES.DATASET_UPDATED
       const message = JSON.stringify({documentId: snapshot.id})
 
