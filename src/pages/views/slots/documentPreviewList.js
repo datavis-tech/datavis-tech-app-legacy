@@ -8,7 +8,7 @@ export default ({title, documents}) => {
     return (
       <div>
         <Divider horizontal>{title}</Divider>
-        <List divided relaxed>
+        <List verticalAlign='middle'>
           {
             documents.map(({id, ...documentAttributes}) => (
               <DocumentPreview key={id} id={id} {...documentAttributes} />
