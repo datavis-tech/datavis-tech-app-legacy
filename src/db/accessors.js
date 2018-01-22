@@ -1,3 +1,6 @@
+const get = require('lodash/get')
+// TODO split this into separate files for each accessor.
+
 /****************************
  * For any ShareDB document *
  ****************************/
@@ -82,6 +85,13 @@ const files = (references, referenceDocuments) => references
  **********************************/
 const profile = doc => (doc && doc.data) ? doc.data : null
 
+/**********************************
+ * For ShareDB Ops (operations)
+ **********************************/
+
+// Checks if the given op manipulates the content field of the document.
+const isContentOp = op => get(op, 'op[0].p[0]') === 'content'
+
 module.exports = {
   hasData,
   id,
@@ -99,5 +109,6 @@ module.exports = {
   allReferencesLoaded,
   files,
   profile,
-  thumbnail
+  thumbnail,
+  isContentOp
 }

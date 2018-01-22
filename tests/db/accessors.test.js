@@ -11,7 +11,8 @@ import {
   collaborators,
   forkedFrom,
   profile,
-  files
+  files,
+  isContentOp
 } from '../../src/db/accessors'
 
 describe('accessors', () => {
@@ -173,6 +174,34 @@ describe('accessors', () => {
     it('should return profile data', () => {
       const data = Symbol('data')
       expect(profile({data})).toEqual(data)
+    })
+  })
+
+  describe('isContentOp', () => {
+
+    it('should return false if nothing was passed', () => {
+      expect(isContentOp()).toEqual(false)
+    })
+
+    it('should return false if create op was passed', () => {
+      expect(isContentOp({
+        create: {
+          type: 'http://sharejs.org/types/JSONv0',
+          data: { title: 'Fork of Fork of Iris Scatter Plot' }
+        }
+      })).toEqual(false)
+    })
+
+    it('should return false if content modifying op was passed', () => {
+      expect(isContentOp({
+        op: [ { p: [ 'type' ], oi: 'vis', od: 'data' } ]
+      })).toEqual(false)
+    })
+
+    it('should return true if content modifying op was passed', () => {
+      expect(isContentOp({
+        op: [ { p: [ 'content', 365 ], si: 'h' } ]
+      })).toEqual(true)
     })
   })
 })
