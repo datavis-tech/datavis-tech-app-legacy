@@ -19,12 +19,8 @@ const updateVisOnReferenceChangeService = async () => {
         const message = JSON.parse(resp.message)
         const documents = await getReferencedByDocuments(connection, message.documentId)
 
-        documents.forEach(document => {
-
-          console.log('REFERENCE UPDATED', message, document.id)
-
-          const visUpdatedMessage = {documentId: document.id}
-
+        documents.forEach(({id}) => {
+          const visUpdatedMessage = {documentId: id}
           rsmq.sendMessage({qname: VISUALIZATION_UPDATED, message: JSON.stringify(visUpdatedMessage)}, (err, resp) => (
             resp
               ? console.log('Message sent. ID:', resp)
