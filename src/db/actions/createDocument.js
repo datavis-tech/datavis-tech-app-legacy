@@ -1,9 +1,10 @@
 import connection from '../connection'
-import { DB_DOCUMENTS_COLLECTION } from '../../constants'
+import { DB_DOCUMENTS_COLLECTION, VIS_DOC_TYPE } from '../../constants'
 import generateId from '../generateId'
 
 // Creates a new document in the ShareDB backend,
 // returns the document ID.
+// TODO integration test
 export const createDocument = options => {
 
   // options
@@ -50,9 +51,8 @@ export const createDocument = options => {
     references,
 
     // The type of content the document contains.
-    // It can be either "data", "vis", or (maybe later) "tech".
-    // If not defined, the value is treated as "vis".
-    type,
+    // It can be either "data", "vis", or (later) "tech".
+    type: type || VIS_DOC_TYPE,
 
     // The id of the document that this one was forked from, if any.
     forkedFrom,
