@@ -23,6 +23,10 @@ const DB_FEEDBACK_COLLECTION = 'feedback'
 // when the document is a visualization.
 const VIS_DOC_TYPE = 'vis'
 
+// The value of the 'type' field in documents
+// when the document is a dataset.
+const DATA_DOC_TYPE = 'data'
+
 // We're not using nice ES6 exports
 // because this file needs to be 'require'd in Node.
 module.exports = {
@@ -35,5 +39,6 @@ module.exports = {
   DB_DOCUMENTS_PROJECTION,
   DB_USERS_COLLECTION,
   DB_FEEDBACK_COLLECTION,
-  VIS_DOC_TYPE
+  VIS_DOC_TYPE,
+  DATA_DOC_TYPE
 }

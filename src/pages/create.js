@@ -6,8 +6,20 @@ import { Form, Button, Container } from 'semantic-ui-react'
 import { Router } from '../routes'
 import { id } from '../db/accessors'
 import { createDocument } from '../db/actions'
+import { VIS_DOC_TYPE, DATA_DOC_TYPE } from '../constants'
+
+const typeWords = {
+  [VIS_DOC_TYPE]: 'Visualization',
+  [DATA_DOC_TYPE]: 'Dataset'
+}
 
 class CreatePage extends React.Component {
+
+  static async getInitialProps ({query}) {
+    return {
+      type: query.type
+    }
+  }
 
   constructor (props) {
     super(props)
@@ -23,7 +35,8 @@ class CreatePage extends React.Component {
     const doc = createDocument({
       title: this.titleInput.value,
       description: this.descriptionInput.value,
-      owner: this.props.user.id
+      owner: this.props.user.id,
+      type: this.props.type
     })
 
     // Set the creating flag to provide visual feedback
@@ -44,6 +57,7 @@ class CreatePage extends React.Component {
           <Form.Field>
             <label>Title</label>
             <input
+              data-test='title-input'
               placeholder='Enter your title here.'
               ref={(el) => { this.titleInput = el }}
             />
@@ -51,6 +65,7 @@ class CreatePage extends React.Component {
           <Form.Field>
             <label>Description</label>
             <input
+              data-test='description-input'
               placeholder='Enter your description here (optional).'
               ref={(el) => { this.descriptionInput = el }}
             />
@@ -68,7 +83,9 @@ class CreatePage extends React.Component {
     return (
       <Layout title={'Create | Datavis.tech'} user={this.props.user}>
         <Container text>
-          <h1>Create</h1>
+          <h1 data-test='create-heading'>
+            Create a {typeWords[this.props.type]}
+          </h1>
           { this.renderBody() }
         </Container>
       </Layout>
