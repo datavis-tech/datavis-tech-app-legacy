@@ -8,7 +8,7 @@ routes.add('about', '/about')
 routes.add('pricing', '/pricing')
 
 // The Create page, for authenticated users to create documents.
-routes.add('create', '/create')
+routes.add('create', '/create/:type')
 
 // The flow for providing feedback on the site/product/service.
 routes.add('feedback', '/feedback')

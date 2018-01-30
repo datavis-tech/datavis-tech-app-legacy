@@ -1,15 +1,25 @@
-import Link from 'next/link'
-import { Image, Menu } from 'semantic-ui-react'
+import { Link } from '../routes'
+import { Image, Menu, Dropdown } from 'semantic-ui-react'
 import LoginControl from './loginControl'
+import { VIS_DOC_TYPE, DATA_DOC_TYPE } from '../constants'
 
-const CreateButton = ({user}) => {
+const CreateMenu = ({user}) => {
   if (user) {
     return (
-      <Menu.Item position='right' name='create'>
-        <Link href='/create'>
-          <a>Create</a>
-        </Link>
-      </Menu.Item>
+      <Dropdown item text='Create'>
+        <Dropdown.Menu>
+          <Dropdown.Item>
+            <Link route='create' params={{type: VIS_DOC_TYPE}}>
+              <a>Visualization</a>
+            </Link>
+          </Dropdown.Item>
+          <Dropdown.Item>
+            <Link route='create' params={{type: DATA_DOC_TYPE}}>
+              <a>Dataset</a>
+            </Link>
+          </Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>
     )
   }
   return null
@@ -24,10 +34,12 @@ const Navbar = ({user}) => (
         <Image height='36px' verticalAlign='middle' src='/static/images/Logo_Nav.png' />
       </Menu.Item>
     </Link>
-    <CreateButton user={user} />
-    <Menu.Item position='right'>
-      <LoginControl user={user} />
-    </Menu.Item>
+    <Menu.Menu position='right'>
+      <CreateMenu user={user} />
+      <Menu.Item >
+        <LoginControl user={user} />
+      </Menu.Item>
+    </Menu.Menu>
   </Menu>
 )
 

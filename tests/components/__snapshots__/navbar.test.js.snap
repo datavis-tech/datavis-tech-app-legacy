@@ -4,7 +4,7 @@ exports[`navbar should match snapshot with user 1`] = `
 <Menu
   secondary={true}
 >
-  <Link
+  <LinkRoutes
     href="/"
   >
     <MenuItem
@@ -19,23 +19,11 @@ exports[`navbar should match snapshot with user 1`] = `
         verticalAlign="middle"
       />
     </MenuItem>
-  </Link>
-  <CreateButton
-    user={
-      Object {
-        "_json": Object {
-          "avatar_url": "https://avatars2.githubusercontent.com/u/156229?v=4",
-        },
-        "displayName": "Fred",
-        "id": undefined,
-        "username": "fred",
-      }
-    }
-  />
-  <MenuItem
+  </LinkRoutes>
+  <MenuMenu
     position="right"
   >
-    <mockConstructor
+    <CreateMenu
       user={
         Object {
           "_json": Object {
@@ -47,7 +35,21 @@ exports[`navbar should match snapshot with user 1`] = `
         }
       }
     />
-  </MenuItem>
+    <MenuItem>
+      <mockConstructor
+        user={
+          Object {
+            "_json": Object {
+              "avatar_url": "https://avatars2.githubusercontent.com/u/156229?v=4",
+            },
+            "displayName": "Fred",
+            "id": undefined,
+            "username": "fred",
+          }
+        }
+      />
+    </MenuItem>
+  </MenuMenu>
 </Menu>
 `;
 
@@ -55,7 +57,7 @@ exports[`navbar should match snapshot without user 1`] = `
 <Menu
   secondary={true}
 >
-  <Link
+  <LinkRoutes
     href="/"
   >
     <MenuItem
@@ -70,12 +72,14 @@ exports[`navbar should match snapshot without user 1`] = `
         verticalAlign="middle"
       />
     </MenuItem>
-  </Link>
-  <CreateButton />
-  <MenuItem
+  </LinkRoutes>
+  <MenuMenu
     position="right"
   >
-    <mockConstructor />
-  </MenuItem>
+    <CreateMenu />
+    <MenuItem>
+      <mockConstructor />
+    </MenuItem>
+  </MenuMenu>
 </Menu>
 `;
