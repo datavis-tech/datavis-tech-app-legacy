@@ -1,6 +1,8 @@
 const RedisSMQ = require('rsmq')
+const { VIS_DOC_TYPE } = require('../../constants')
 const { isContentOp } = require('../../db/accessors')
 const QUEUES = require('./queues')
+const { datasetsUpdatesBuffer, visualizationsUpdatesBuffer } = require('./buffers')
 
 const rsmq = new RedisSMQ({host: process.env.DVT_REDIS_HOST, port: process.env.DVT_REDIS_PORT})
 
@@ -26,18 +28,12 @@ module.exports = (backend) => {
 
   backend.use('after submit', ({op, snapshot}, done) => {
     if (isContentOp(op)) {
-      const qname = snapshot.data.type === 'vis' ? QUEUES.VISUALIZATION_UPDATED : QUEUES.DATASET_UPDATED
-      const message = JSON.stringify({documentId: snapshot.id})
-
-      rsmq.sendMessage({qname, message}, (err, resp) => (
-        resp
-          ? console.log('Message sent. ID:', resp)
-          : console.log(err)
-      ))
-      done()
+      const buffer = snapshot.data.type === VIS_DOC_TYPE ? visualizationsUpdatesBuffer : datasetsUpdatesBuffer
+      buffer.add(snapshot.id)
     }
 
     done()
+
   })
 
 }
