@@ -12,7 +12,8 @@ import {
   forkedFrom,
   profile,
   files,
-  isContentOp
+  isContentOp,
+  viewCount
 } from '../../src/db/accessors'
 
 describe('accessors', () => {
@@ -202,6 +203,18 @@ describe('accessors', () => {
       expect(isContentOp({
         op: [ { p: [ 'content', 365 ], si: 'h' } ]
       })).toEqual(true)
+    })
+  })
+
+  describe('viewCount', () => {
+    it('should return zero if null passed as document', () => {
+      expect(viewCount(null)).toEqual(0)
+    })
+    it('should return zero no viewCount defined', () => {
+      expect(viewCount({})).toEqual(0)
+    })
+    it('should return viewCount if viewCount defined', () => {
+      expect(viewCount({ data: { viewCount: 25 } })).toEqual(25)
     })
   })
 })

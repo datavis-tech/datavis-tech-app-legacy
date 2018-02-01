@@ -1,6 +1,7 @@
 import React from 'react'
 import DocumentSubscription from '../../db/subscriptions/documentSubscription'
 import { title } from '../../db/accessors'
+import { incrementViewCount } from '../../db/actions'
 import Layout from '../../components/layout'
 import Subscription from '../../components/subscription'
 import Loader from '../../components/loader'
@@ -43,19 +44,28 @@ export default class BaseViewPage extends React.Component {
           onPermissionDenied={redirectTo404}
         >
           {
-            subscription => (
-              <div>
-                <Loader ready={subscription.isReady}>
-                  {
-                    children({
-                      doc: subscription.data,
-                      onError: this.onError
-                    })
-                  }
-                </Loader>
-                <ErrorMessage error={subscription.error || this.state.error} />
-              </div>
-            )
+            subscription => {
+              const shareDBDoc = subscription.data
+
+              if (shareDBDoc && !this.pageViewed) {
+                incrementViewCount(shareDBDoc)
+                this.pageViewed = true
+              }
+
+              return (
+                <div>
+                  <Loader ready={subscription.isReady}>
+                    {
+                      children({
+                        doc: shareDBDoc,
+                        onError: this.onError
+                      })
+                    }
+                  </Loader>
+                  <ErrorMessage error={subscription.error || this.state.error} />
+                </div>
+              )
+            }
           }
         </Subscription>
       </Layout>

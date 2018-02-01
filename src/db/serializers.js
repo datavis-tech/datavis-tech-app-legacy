@@ -13,7 +13,8 @@ const serializeDocument = (document) => (
     collaborators: accessors.collaborators(document),
     collaboratorsIds: accessors.collaboratorIds(document),
     forkedFrom: accessors.forkedFrom(document),
-    thumbnail: accessors.thumbnail(document)
+    thumbnail: accessors.thumbnail(document),
+    viewCount: accessors.viewCount(document)
   }
 )
 
