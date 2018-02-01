@@ -57,7 +57,9 @@ export const createDocument = options => {
     // The id of the document that this one was forked from, if any.
     forkedFrom,
 
-    isPrivate: isPrivate || false
+    isPrivate: isPrivate || false,
+
+    viewCount: 0
   })
 
   return doc

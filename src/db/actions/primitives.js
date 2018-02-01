@@ -47,21 +47,10 @@ const add = ({shareDBDoc, property, value}) => {
   }])
 }
 
-// Initializes the given value if it is missing from the document.
-const initializeIfMissing = ({shareDBDoc, property, value}) => {
-  if (shareDBDoc.data[property] === undefined) {
-    shareDBDoc.submitOp([{
-      p: [property],
-      oi: value
-    }])
-  }
-}
-
 module.exports = {
   set,
   setInList,
   push,
   listDelete,
-  add,
-  initializeIfMissing
+  add
 }

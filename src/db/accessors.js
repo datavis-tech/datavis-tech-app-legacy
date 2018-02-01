@@ -98,6 +98,11 @@ const profile = doc => (doc && doc.data) ? doc.data : null
 // Checks if the given op manipulates the content field of the document.
 const isContentOp = op => get(op, 'op[0].p[0]') === 'content'
 
+// Checks if the given op increments the view count.
+const isIncrementViewCount = op => (
+  (get(op, 'op[0].p[0]') === 'viewCount') && (get(op, 'op[0].na') === 1)
+)
+
 module.exports = {
   hasData,
   id,
@@ -116,6 +121,7 @@ module.exports = {
   files,
   profile,
   thumbnail,
+  viewCount,
   isContentOp,
-  viewCount
+  isIncrementViewCount
 }
