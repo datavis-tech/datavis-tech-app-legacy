@@ -3,10 +3,10 @@ import Runner from '../../../components/runner/runner'
 import ViewPageLayout from '../viewPageLayout'
 import { createSlots, DocumentPreviewList } from '../slots'
 
-export default ({id, document, ownerProfile, referenceDocuments, forkedFrom, onFork}) => {
+export default ({id, document, metaDocument, ownerProfile, referenceDocuments, forkedFrom, onFork}) => {
 
   const slots = createSlots(
-    {id, document, ownerProfile, forkedFrom, onFork},
+    {id, document, metaDocument, ownerProfile, forkedFrom, onFork},
     {
       Content: (
         <Runner

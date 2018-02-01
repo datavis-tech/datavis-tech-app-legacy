@@ -19,13 +19,13 @@ export default (ContentComponent, {includeCSS} = {}) => (
           user={user}
           includeCSS={includeCSS}
         >
-          {({doc, onError}) => (
+          {({doc, metaDoc, onError}) => (
             <ContentComponent
               id={id}
               user={user}
               doc={doc}
+              metaDoc={metaDoc}
               onError={onError}
-
             />
           )}
         </BaseViewPage>

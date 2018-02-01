@@ -1,7 +1,9 @@
 import connection from '../connection'
 
 // Manages subscription to a single ShareDB document.
-export default ({id}, {collection}) => {
+// If `template` is defined and the document does not yet exist,
+// then a new document is created with fields from the `template` object.
+export default ({id}, {collection, template}) => {
   let cleanup
 
   return {
@@ -22,6 +24,10 @@ export default ({id}, {collection}) => {
       if (err) {
         onError(err)
         return
+      }
+
+      if (template && doc.type === null) {
+        doc.create(template)
       }
 
       onUpdate(doc)

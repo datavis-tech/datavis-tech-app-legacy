@@ -27,7 +27,7 @@ backend.addProjection(DB_DOCUMENTS_PROJECTION, DB_DOCUMENTS_COLLECTION, {
   thumbnail: true
 })
 
-applyAccessControlMiddleware(backend)
+//applyAccessControlMiddleware(backend)
 applyChangeTrackingMiddleware(backend)
 
 const setup = (httpServer) => {

@@ -1,5 +1,5 @@
 const get = require('lodash/get')
-const { DB_FEEDBACK_COLLECTION } = require('../constants')
+const { DB_FEEDBACK_COLLECTION, DB_META_DOCUMENTS_COLLECTION } = require('../constants')
 const { isIncrementViewCount } = require('../db/accessors')
 
 // This module implements access control rules at the ShareDB layer.
@@ -69,6 +69,11 @@ module.exports = (shareDB) => {
         return done()
       }
       return done('You must be logged in to leave feedback.')
+    }
+
+    // Allow anyone to create a meta document.
+    if (collection === DB_META_DOCUMENTS_COLLECTION) {
+      return done()
     }
 
     // Anyone can increment a view count.

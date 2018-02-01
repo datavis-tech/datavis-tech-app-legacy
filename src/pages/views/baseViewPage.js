@@ -1,5 +1,6 @@
 import React from 'react'
 import DocumentSubscription from '../../db/subscriptions/documentSubscription'
+import MetaDocumentSubscription from '../../db/subscriptions/metaDocumentSubscription'
 import { title } from '../../db/accessors'
 import { incrementViewCount } from '../../db/actions'
 import Layout from '../../components/layout'
@@ -29,9 +30,9 @@ export default class BaseViewPage extends React.Component {
       this.setState({error})
     }
 
-    this.incrementViewCountOnPageView = shareDBDoc => {
-      if (shareDBDoc && !this.pageViewed) {
-        incrementViewCount(shareDBDoc)
+    this.incrementViewCountOnPageView = shareDBMetaDoc => {
+      if (shareDBMetaDoc && !this.pageViewed) {
+        incrementViewCount(shareDBMetaDoc)
         this.pageViewed = true
       }
     }
@@ -53,19 +54,29 @@ export default class BaseViewPage extends React.Component {
           {
             subscription => {
               const shareDBDoc = subscription.data
-              this.incrementViewCountOnPageView(shareDBDoc)
               return (
-                <div>
-                  <Loader ready={subscription.isReady}>
-                    {
-                      children({
-                        doc: shareDBDoc,
-                        onError: this.onError
-                      })
+                <Subscription subscription={MetaDocumentSubscription({id})} >
+                  {
+                    metaSubscription => {
+                      const shareDBMetaDoc = metaSubscription.data
+                      this.incrementViewCountOnPageView(shareDBMetaDoc)
+                      return (
+                        <div>
+                          <Loader ready={subscription.isReady}>
+                            {
+                              children({
+                                doc: shareDBDoc,
+                                metaDoc: shareDBMetaDoc,
+                                onError: this.onError
+                              })
+                            }
+                          </Loader>
+                          <ErrorMessage error={subscription.error || this.state.error} />
+                        </div>
+                      )
                     }
-                  </Loader>
-                  <ErrorMessage error={subscription.error || this.state.error} />
-                </div>
+                  }
+                </Subscription>
               )
             }
           }

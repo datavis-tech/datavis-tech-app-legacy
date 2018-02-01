@@ -9,6 +9,9 @@ const AUTH_LOGOUT_REDIRECT = '/'
 // The collection containing documents.
 const DB_DOCUMENTS_COLLECTION = 'documents'
 
+// The collection containing document metadata, e.g. view count.
+const DB_META_DOCUMENTS_COLLECTION = 'metaDocuments'
+
 // The ShareDB Projection that excludes the content from documents,
 // so a listing of documents need not download full content for each.
 const DB_DOCUMENTS_PROJECTION = 'documentsProjection'
@@ -36,6 +39,7 @@ module.exports = {
   AUTH_FAILURE_REDIRECT,
   AUTH_LOGOUT_REDIRECT,
   DB_DOCUMENTS_COLLECTION,
+  DB_META_DOCUMENTS_COLLECTION,
   DB_DOCUMENTS_PROJECTION,
   DB_USERS_COLLECTION,
   DB_FEEDBACK_COLLECTION,
