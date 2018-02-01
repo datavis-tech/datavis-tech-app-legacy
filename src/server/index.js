@@ -53,4 +53,5 @@ nextApp
 // launch services
 require('./thumbnails/thumbnailGenerationService')()
 require('./changeTracking/updateVisOnReferenceChangeService')()
+require('./changeTracking/throttleUpdatesService')()
 require('./missingThumbnailsDetector/detectMissingThumbnailsService')()

@@ -1,6 +1,8 @@
 const RedisSMQ = require('rsmq')
 const { backend } = require('../shareDB')
-const { VISUALIZATION_UPDATED, DATASET_UPDATED } = require('./queues')
+const { DATASET_UPDATED } = require('./queues')
+const { visualizationsUpdatesBuffer } = require('./buffers')
+const { THROTTLE_PERIOD } = require('./constants')
 const getReferencedByDocuments = require('./getReferencedByDocuments')
 
 const rsmq = new RedisSMQ({host: process.env.DVT_REDIS_HOST, port: process.env.DVT_REDIS_PORT})
@@ -18,19 +20,11 @@ const updateVisOnReferenceChangeService = async () => {
       if (resp && resp.message) {
         const message = JSON.parse(resp.message)
         const documents = await getReferencedByDocuments(connection, message.documentId)
-
-        documents.forEach(({id}) => {
-          const visUpdatedMessage = {documentId: id}
-          rsmq.sendMessage({qname: VISUALIZATION_UPDATED, message: JSON.stringify(visUpdatedMessage)}, (err, resp) => (
-            resp
-              ? console.log('Message sent. ID:', resp)
-              : console.log(err)
-          ))
-
-        })
+        documents.forEach(({id}) => visualizationsUpdatesBuffer.add(id))
       }
+
     })
-    setTimeout(loop, 1000)
+    setTimeout(loop, THROTTLE_PERIOD)
   }
 
   loop()
