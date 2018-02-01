@@ -28,6 +28,13 @@ export default class BaseViewPage extends React.Component {
     this.onError = error => {
       this.setState({error})
     }
+
+    this.incrementViewCountOnPageView = shareDBDoc => {
+      if (shareDBDoc && !this.pageViewed) {
+        incrementViewCount(shareDBDoc)
+        this.pageViewed = true
+      }
+    }
   }
 
   render () {
@@ -46,12 +53,7 @@ export default class BaseViewPage extends React.Component {
           {
             subscription => {
               const shareDBDoc = subscription.data
-
-              if (shareDBDoc && !this.pageViewed) {
-                incrementViewCount(shareDBDoc)
-                this.pageViewed = true
-              }
-
+              this.incrementViewCountOnPageView(shareDBDoc)
               return (
                 <div>
                   <Loader ready={subscription.isReady}>
