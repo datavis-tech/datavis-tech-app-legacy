@@ -32,6 +32,7 @@
     "connect-redis": "^3.3.3",
     "cookie": "^0.3.1",
     "cookie-parser": "^1.4.3",
+    "d3-format": "^1.2.2",
     "express": "^4.16.2",
     "express-session": "^1.15.6",
     "lodash": "^4.17.4",

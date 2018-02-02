@@ -35,7 +35,8 @@ export const createDocument = options => {
   doc.create({
 
     // Tracks versions of the document schema, for handling migrations.
-    schemaVersion: 1,
+    // Version 2 introduced viewCount.
+    schemaVersion: 2,
 
     // Human readable title, String.
     title,
@@ -62,7 +63,9 @@ export const createDocument = options => {
     // The id of the document that this one was forked from, if any.
     forkedFrom,
 
-    isPrivate: isPrivate || false
+    isPrivate: isPrivate || false,
+
+    viewCount: 0
   })
 
   return doc

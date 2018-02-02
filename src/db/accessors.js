@@ -43,17 +43,23 @@ const content = doc => data(doc).content || ''
 // Access the owner of a document.
 const owner = doc => data(doc).owner || ''
 
-// access the collaborators of a document.
+// Access the collaborators of a document.
 const collaborators = doc => data(doc).collaborators || []
 
+// Access the list of user ids for collaborators.
 const collaboratorIds = doc => collaborators(doc).map(c => c.id)
 
-// access the id of the document this one was forked from, if any.
+// Access the id of the document this one was forked from, if any.
 const forkedFrom = doc => data(doc).forkedFrom
 
+// Access whether or not the document is private.
 const isPrivate = doc => data(doc).isPrivate || false
 
+// Access the base64 encoded PNG thumbnail for a visualization document.
 const thumbnail = doc => data(doc).thumbnail
+
+// Access the view count for a document.
+const viewCount = doc => data(doc).viewCount || 0
 
 // This function returns true if all references have been loaded.
 // references is the array of reference objects stored in the ShareDB document
@@ -92,6 +98,11 @@ const profile = doc => (doc && doc.data) ? doc.data : null
 // Checks if the given op manipulates the content field of the document.
 const isContentOp = op => get(op, 'op[0].p[0]') === 'content'
 
+// Checks if the given op increments the view count.
+const isIncrementViewCount = op => (
+  (get(op, 'op[0].p[0]') === 'viewCount') && (get(op, 'op[0].na') === 1)
+)
+
 module.exports = {
   hasData,
   id,
@@ -110,5 +121,7 @@ module.exports = {
   files,
   profile,
   thumbnail,
-  isContentOp
+  viewCount,
+  isContentOp,
+  isIncrementViewCount
 }

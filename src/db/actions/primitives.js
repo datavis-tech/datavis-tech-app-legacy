@@ -39,9 +39,18 @@ const listDelete = ({shareDBDoc, property, index}) => {
   }])
 }
 
+// Adds the given numeric value to the given property.
+const add = ({shareDBDoc, property, value}) => {
+  shareDBDoc.submitOp([{
+    p: [property],
+    na: value
+  }])
+}
+
 module.exports = {
   set,
   setInList,
   push,
-  listDelete
+  listDelete,
+  add
 }

@@ -13,6 +13,7 @@ export default (slots) => (
           {slots.ForkedFrom}
         </Grid.Column>
         <Grid.Column width={4}>
+          {slots.ViewCount}
           {slots.Avatar}
           {slots.EditButton}
           {slots.ForkButton}
