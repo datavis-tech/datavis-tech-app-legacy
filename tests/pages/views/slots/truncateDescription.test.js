@@ -16,7 +16,7 @@ describe('truncate description', () => {
     expect(truncateDescription('This is a [link](http://google.com).'))
       .toEqual('This is a link.')
   })
-  
+
   it('should render Markdown images to plain text', () => {
     expect(truncateDescription('This is an ![image](foo.com/image.png "Title Text").'))
       .toEqual('This is an image.')
