@@ -30,7 +30,8 @@ export const createDocument = options => {
   doc.create({
 
     // Tracks versions of the document schema, for handling migrations.
-    schemaVersion: 1,
+    // Version 2 introduced viewCount.
+    schemaVersion: 2,
 
     // Human readable title, String.
     title,
