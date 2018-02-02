@@ -61,6 +61,9 @@ const thumbnail = doc => data(doc).thumbnail
 // Access the view count for a document.
 const viewCount = doc => data(doc).viewCount || 0
 
+// Access the license of a document.
+const license = doc => data(doc).license
+
 // This function returns true if all references have been loaded.
 // references is the array of reference objects stored in the ShareDB document
 // referenceDocuments is the array of serialized documents for references.
@@ -123,5 +126,6 @@ module.exports = {
   thumbnail,
   viewCount,
   isContentOp,
-  isIncrementViewCount
+  isIncrementViewCount,
+  license
 }

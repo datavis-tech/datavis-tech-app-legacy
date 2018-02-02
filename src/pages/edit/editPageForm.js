@@ -1,8 +1,9 @@
 import React from 'react'
-import { Form, Grid, Button } from 'semantic-ui-react'
+import { Form, Grid, Button, Dropdown } from 'semantic-ui-react'
 import { Link } from '../../routes'
 import CodeMirrorBinding from '../../components/codeMirrorBinding'
 import StringBinding from '../../components/stringBinding'
+import licenseOptions from './licenseOptions'
 
 // The Form in the body of the page.
 export default (
@@ -118,6 +119,11 @@ export default (
     <Form.Field inline>
       <label>Collaborators</label>
       { slots.Collaborators }
+    </Form.Field>
+
+    <Form.Field inline>
+      <label>License</label>
+      <Dropdown placeholder='State' search selection options={licenseOptions} />
     </Form.Field>
 
   </Form>
