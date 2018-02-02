@@ -1,10 +1,6 @@
 import { List, Image } from 'semantic-ui-react'
 import { Link } from '../../../routes'
-
-// Use only the first line of the description
-// as the tagline in the listing.
-// TODO strip out Markdown links
-const truncate = (description) => description && description.split('\n')[0]
+import truncateDescription from './truncateDescription'
 
 // Generates a Data URI for the base64 encoded thumbnail image.
 const thumbnailSrcURI = thumbnail => `data:image/png;base64,${thumbnail}`
@@ -40,7 +36,7 @@ const DocumentPreview = ({ id, type, title, description, thumbnail }) => (
       <Link route={type} params={{ id }}>
         <a>
           <List.Header>{title}</List.Header>
-          <List.Description>{truncate(description)}</List.Description>
+          <List.Description>{truncateDescription(description)}</List.Description>
         </a>
       </Link>
     </List.Content>
