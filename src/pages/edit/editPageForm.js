@@ -23,7 +23,9 @@ export default (
           </Grid.Column>
           <Grid.Column width={4}>
             <Link route={document.type} params={{id: document.id}}>
-              <Button type='button' fluid>View</Button>
+              <a>
+                <Button type='button' fluid>View</Button>
+              </a>
             </Link>
           </Grid.Column>
         </Grid.Row>
