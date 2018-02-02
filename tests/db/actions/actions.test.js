@@ -1,5 +1,11 @@
 import ShareDB from 'sharedb'
-import { DB_DOCUMENTS_COLLECTION, DB_FEEDBACK_COLLECTION } from '../../../src/constants'
+import {
+  DB_DOCUMENTS_COLLECTION,
+  DB_FEEDBACK_COLLECTION,
+  VIS_DOC_TYPE,
+  DATA_DOC_TYPE
+} from '../../../src/constants'
+import visTemplateContent from '../../../src/db/actions/createDocument/visTemplateContent'
 
 // Connect to an in-memory ShareDB instance (without query support)
 const mockConnection = (new ShareDB()).connect()
@@ -15,22 +21,28 @@ import {
   removeCollaborator,
   addReference,
   removeReference,
-  fork,
-  incrementViewCount
+  fork
 } from '../../../src/db/actions/index'
 
 import {
   push,
-  listDelete,
-  add
+  listDelete
 } from '../../../src/db/actions/primitives'
 
 describe('[integration test] actions', () => {
 
   let doc
+  let dataDoc
 
   beforeAll(() => {
     doc = createDocument({
+      type: VIS_DOC_TYPE,
+      title: 'My Title',
+      description: 'Some description',
+      owner: '78943278'
+    })
+    dataDoc = createDocument({
+      type: DATA_DOC_TYPE,
       title: 'My Title',
       description: 'Some description',
       owner: '78943278'
@@ -38,16 +50,28 @@ describe('[integration test] actions', () => {
   })
 
   describe('createDocument', () => {
-    it('should initialize a document', () => {
+    it('should initialize a vis document with template', () => {
       expect(doc.data).toMatchObject({
+        schemaVersion: 2,
+        title: 'My Title',
+        description: 'Some description',
+        owner: '78943278',
+        content: visTemplateContent
+      })
+      expect(doc.collection).toEqual(DB_DOCUMENTS_COLLECTION)
+      expect(doc.type.name).toEqual('json0')
+    })
+
+    it('should initialize a data document with empty string', () => {
+      expect(dataDoc.data).toMatchObject({
         schemaVersion: 2,
         title: 'My Title',
         description: 'Some description',
         owner: '78943278',
         content: ''
       })
-      expect(doc.collection).toEqual(DB_DOCUMENTS_COLLECTION)
-      expect(doc.type.name).toEqual('json0')
+      expect(dataDoc.collection).toEqual(DB_DOCUMENTS_COLLECTION)
+      expect(dataDoc.type.name).toEqual('json0')
     })
   })
   describe('push', () => {
@@ -108,7 +132,7 @@ describe('[integration test] actions', () => {
         title: 'Fork of My Title',
         description: 'Some description',
         owner: '007',
-        content: '',
+        content: visTemplateContent,
         references: [
           { fileName: 'data.csv', id: '1' },
           { fileName: '', id: '' },
@@ -161,30 +185,6 @@ describe('[integration test] actions', () => {
     it('should remove a third reference', () => {
       removeReference(doc, 0)
       expect(doc.data.references).toMatchObject([])
-    })
-  })
-
-  describe('add', () => {
-    it('should add a number', () => {
-      add({
-        shareDBDoc: doc,
-        property: 'viewCount',
-        value: 3
-      })
-      expect(doc.data.viewCount).toEqual(3)
-      add({
-        shareDBDoc: doc,
-        property: 'viewCount',
-        value: 2
-      })
-      expect(doc.data.viewCount).toEqual(5)
-    })
-  })
-
-  describe('incrementViewCount', () => {
-    it('should increment view count', () => {
-      incrementViewCount(doc)
-      expect(doc.data.viewCount).toEqual(6)
     })
   })
 
