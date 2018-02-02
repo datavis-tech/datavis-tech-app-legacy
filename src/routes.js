@@ -10,10 +10,6 @@ routes.add('pricing', '/pricing')
 // The Create page, for authenticated users to create documents.
 routes.add('create', '/create/:type')
 
-// The flow for providing feedback on the site/product/service.
-routes.add('feedback', '/feedback')
-routes.add('feedback-thanks', '/feedback-thanks')
-
 // View Pages that present documents.
 routes.add('data', '/data/:id', 'views/data')
 routes.add('vis', '/vis/:id', 'views/vis')
