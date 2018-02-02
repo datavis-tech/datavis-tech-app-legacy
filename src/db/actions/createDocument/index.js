@@ -1,10 +1,15 @@
-import connection from '../connection'
-import { DB_DOCUMENTS_COLLECTION, VIS_DOC_TYPE } from '../../constants'
-import generateId from '../generateId'
+import connection from '../../connection'
+import { DB_DOCUMENTS_COLLECTION, VIS_DOC_TYPE } from '../../../constants'
+import generateId from '../../generateId'
+import visTemplateContent from './visTemplateContent'
 
-// Creates a new document in the ShareDB backend,
-// returns the document ID.
-// TODO integration test
+const defaultContent = type => (
+  type === VIS_DOC_TYPE
+    ? visTemplateContent
+    : ''
+)
+
+// Creates a new document in the ShareDB backend, returns the document ID.
 export const createDocument = options => {
 
   // options
@@ -14,11 +19,11 @@ export const createDocument = options => {
     title,
     description,
     owner,
+    type,
 
     // Optional
     content,
     references,
-    type,
     forkedFrom,
     isPrivate
 
@@ -42,7 +47,7 @@ export const createDocument = options => {
     owner,
 
     // The content of this document, String.
-    content: content || '',
+    content: content === undefined ? defaultContent(type) : content,
 
     // The datasets referenced by a visualization.
     // Array of objects containing:
@@ -52,7 +57,7 @@ export const createDocument = options => {
 
     // The type of content the document contains.
     // It can be either "data", "vis", or (later) "tech".
-    type: type || VIS_DOC_TYPE,
+    type: type,
 
     // The id of the document that this one was forked from, if any.
     forkedFrom,
