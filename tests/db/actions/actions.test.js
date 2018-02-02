@@ -15,12 +15,14 @@ import {
   removeCollaborator,
   addReference,
   removeReference,
-  fork
+  fork,
+  incrementViewCount
 } from '../../../src/db/actions/index'
 
 import {
   push,
-  listDelete
+  listDelete,
+  add
 } from '../../../src/db/actions/primitives'
 
 describe('[integration test] actions', () => {
@@ -38,7 +40,7 @@ describe('[integration test] actions', () => {
   describe('createDocument', () => {
     it('should initialize a document', () => {
       expect(doc.data).toMatchObject({
-        schemaVersion: 1,
+        schemaVersion: 2,
         title: 'My Title',
         description: 'Some description',
         owner: '78943278',
@@ -102,7 +104,7 @@ describe('[integration test] actions', () => {
     it('should fork a document', () => {
       const forkedDoc = fork(doc, '007')
       expect(forkedDoc.data).toMatchObject({
-        schemaVersion: 1,
+        schemaVersion: 2,
         title: 'Fork of My Title',
         description: 'Some description',
         owner: '007',
@@ -159,6 +161,30 @@ describe('[integration test] actions', () => {
     it('should remove a third reference', () => {
       removeReference(doc, 0)
       expect(doc.data.references).toMatchObject([])
+    })
+  })
+
+  describe('add', () => {
+    it('should add a number', () => {
+      add({
+        shareDBDoc: doc,
+        property: 'viewCount',
+        value: 3
+      })
+      expect(doc.data.viewCount).toEqual(3)
+      add({
+        shareDBDoc: doc,
+        property: 'viewCount',
+        value: 2
+      })
+      expect(doc.data.viewCount).toEqual(5)
+    })
+  })
+
+  describe('incrementViewCount', () => {
+    it('should increment view count', () => {
+      incrementViewCount(doc)
+      expect(doc.data.viewCount).toEqual(6)
     })
   })
 
