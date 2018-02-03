@@ -16,6 +16,8 @@ const AvatarLink = ({ user }) => {
             // src='https://avatars2.githubusercontent.com/u/156229?v=4&size=72'
             src={avatarURL}
             inline
+            circular
+            bordered
           />
           <span style={{marginLeft: '4px'}}>{displayName}</span>
         </a>
