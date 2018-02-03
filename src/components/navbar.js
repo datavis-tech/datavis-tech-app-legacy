@@ -30,15 +30,13 @@ const CreateMenu = ({user}) => {
 const Navbar = ({user}) => (
   <Menu secondary>
     <Link href='/'>
-      <Menu.Item header fitted>
+      <Menu.Item header >
         <Image height='36px' verticalAlign='middle' src='/static/images/Logo_Nav.png' />
       </Menu.Item>
     </Link>
     <Menu.Menu position='right'>
       <CreateMenu user={user} />
-      <Menu.Item >
-        <LoginControl user={user} />
-      </Menu.Item>
+      <LoginControl user={user} />
     </Menu.Menu>
   </Menu>
 )

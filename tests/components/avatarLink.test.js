@@ -1,7 +1,6 @@
 import React from 'react'
 import {shallow} from 'enzyme'
 
-import {Image} from 'semantic-ui-react'
 import {Link} from '../../src/routes'
 
 import AvatarLink from '../../src/components/avatarLink'
@@ -34,14 +33,6 @@ describe('avatar link', () => {
       expect(sut.find(Link).props()).toMatchObject({
         route: 'profile',
         params: {username: user.username}
-      })
-    })
-
-    it('should have an image', () => {
-      expect(sut.find(Image).props()).toMatchObject({
-        height: 36,
-        src: `${user._json.avatar_url}&size=72`,
-        inline: true
       })
     })
 
