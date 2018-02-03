@@ -4,21 +4,20 @@ exports[`navbar should match snapshot with user 1`] = `
 <Menu
   secondary={true}
 >
-  <LinkRoutes
-    href="/"
-  >
-    <MenuItem
-      header={true}
+  <MenuItem>
+    <LinkRoutes
+      route="/"
     >
-      <Image
-        as="img"
-        height="36px"
-        src="/static/images/Logo_Nav.png"
-        ui={true}
-        verticalAlign="middle"
-      />
-    </MenuItem>
-  </LinkRoutes>
+      <a>
+        <Image
+          as="img"
+          height="36px"
+          src="/static/images/Logo_Nav.png"
+          ui={true}
+        />
+      </a>
+    </LinkRoutes>
+  </MenuItem>
   <MenuMenu
     position="right"
   >
@@ -54,21 +53,20 @@ exports[`navbar should match snapshot without user 1`] = `
 <Menu
   secondary={true}
 >
-  <LinkRoutes
-    href="/"
-  >
-    <MenuItem
-      header={true}
+  <MenuItem>
+    <LinkRoutes
+      route="/"
     >
-      <Image
-        as="img"
-        height="36px"
-        src="/static/images/Logo_Nav.png"
-        ui={true}
-        verticalAlign="middle"
-      />
-    </MenuItem>
-  </LinkRoutes>
+      <a>
+        <Image
+          as="img"
+          height="36px"
+          src="/static/images/Logo_Nav.png"
+          ui={true}
+        />
+      </a>
+    </LinkRoutes>
+  </MenuItem>
   <MenuMenu
     position="right"
   >
