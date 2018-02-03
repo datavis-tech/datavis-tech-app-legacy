@@ -33,7 +33,7 @@ export default ({ children, title, user, hideNav, includeCSS, hideFeedback }) =>
         ) : (
           <Grid textAlign='center'>
             <Grid.Column>
-              <a href='https://join.slack.com/t/datavistech/shared_invite/enQtMjkxMjA4MTIzODQ3LTQ2YzE0OTk1ZmVmNDY4ZTBiYmUzNTY0ZGFjNDQzYTEwZWM3M2IwNmQ5MGFjOWYwZGViN2I0ZjQ0YjZiN2ZkYzg'>Join our community!</a>
+              <a href='https://github.com/datavis-tech/community/blob/master/README.md'>Community</a>
             </Grid.Column>
           </Grid>
         )
