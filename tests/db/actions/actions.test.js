@@ -1,5 +1,5 @@
 import ShareDB from 'sharedb'
-import { DB_DOCUMENTS_COLLECTION, DB_FEEDBACK_COLLECTION } from '../../../src/constants'
+import { DB_DOCUMENTS_COLLECTION } from '../../../src/constants'
 
 // Connect to an in-memory ShareDB instance (without query support)
 const mockConnection = (new ShareDB()).connect()
@@ -10,7 +10,6 @@ jest.mock('../../../src/db/connection', () => ({
 import {
   createDocument,
   deleteDocument,
-  createFeedbackEntry,
   addCollaborator,
   removeCollaborator,
   addReference,
