@@ -8,13 +8,13 @@ export default (slots) => (
     <Grid columns={2} divided>
       <Grid.Row>
         <Grid.Column width={12}>
+          {slots.Avatar}
           {slots.Description}
           {slots.References}
           {slots.ForkedFrom}
         </Grid.Column>
-        <Grid.Column width={4}>
+        <Grid.Column textAlign='center' width={4}>
           {slots.ViewCount}
-          {slots.Avatar}
           {slots.EditButton}
           {slots.ForkButton}
           {slots.EmbedButton}

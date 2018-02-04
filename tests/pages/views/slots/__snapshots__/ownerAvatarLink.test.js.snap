@@ -4,6 +4,7 @@ exports[`owner avatar link should be properly styled and formatted 1`] = `
 <div
   style={
     Object {
+      "fontSize": "0.8em",
       "marginBottom": "0.3em",
     }
   }
@@ -11,7 +12,7 @@ exports[`owner avatar link should be properly styled and formatted 1`] = `
   <span
     style={
       Object {
-        "marginRight": "4px",
+        "marginRight": "3px",
       }
     }
   >

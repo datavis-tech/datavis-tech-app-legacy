@@ -86,10 +86,15 @@ const files = (references, referenceDocuments) => references
     return files
   }, {})
 
-/**********************************
+/***************************
  * For "profile" Documents *
- **********************************/
+ ***************************/
 const profile = doc => (doc && doc.data) ? doc.data : null
+
+/*************************
+ * For "profile" objects *
+ *************************/
+const avatarURL = (profile, size) => `${get(profile, '_json.avatar_url')}&size=${size}`
 
 /**********************************
  * For ShareDB Ops (operations)
@@ -120,6 +125,7 @@ module.exports = {
   allReferencesLoaded,
   files,
   profile,
+  avatarURL,
   thumbnail,
   viewCount,
   isContentOp,
