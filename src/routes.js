@@ -21,5 +21,8 @@ routes.add('vis', '/vis/:id', 'views/vis')
 // The Edit page, for authenticated users only.
 routes.add('edit', '/edit/:id')
 
+// The Settings page.
+routes.add('settings', '/settings')
+
 // The User Profile page.
 routes.add('profile', '/:username')
