@@ -18,7 +18,12 @@ const Thumbnail = ({thumbnail, type, id}) => (
       <Image>
         <Link route={type} params={{ id }}>
           <a>
-            <Image src={thumbnailSrcURI(thumbnail)} width={thumbnailWidth} height={thumbnailHeight} />
+            <Image
+              src={thumbnailSrcURI(thumbnail)}
+              width={thumbnailWidth}
+              height={thumbnailHeight}
+              style={{boxShadow: '0 0 0 1px rgba(0, 0, 0, 0.1)'}}
+            />
           </a>
         </Link>
       </Image>
