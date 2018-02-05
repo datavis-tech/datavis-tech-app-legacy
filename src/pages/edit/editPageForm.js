@@ -3,6 +3,12 @@ import { Form, Grid, Button } from 'semantic-ui-react'
 import { Link } from '../../routes'
 import CodeMirrorBinding from '../../components/codeMirrorBinding'
 import StringBinding from '../../components/stringBinding'
+import { VIS_DOC_TYPE, DATA_DOC_TYPE } from '../../constants'
+
+const contentLabel = {
+  [VIS_DOC_TYPE]: 'index.html',
+  [DATA_DOC_TYPE]: 'Content'
+}
 
 // The Form in the body of the page.
 export default (
@@ -99,7 +105,7 @@ export default (
     }
 
     <Form.Field>
-      <label>Content</label>
+      <label>{contentLabel[document.type]}</label>
       <CodeMirrorBinding
         doc={__shareDbDoc}
         path={['content']}
