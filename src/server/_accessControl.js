@@ -1,5 +1,4 @@
 const get = require('lodash/get')
-const { DB_FEEDBACK_COLLECTION } = require('../constants')
 const { isIncrementViewCount } = require('../db/accessors')
 
 // This module implements access control rules at the ShareDB layer.
@@ -39,8 +38,7 @@ module.exports = (shareDB) => {
         isServer,
         session
       },
-      snapshot,
-      collection
+      snapshot
     } = request
 
     // Get the id of the currently logged in user from the session.
@@ -61,14 +59,6 @@ module.exports = (shareDB) => {
     // Allow server code to do anything (e.g. create and update User entries).
     if (isServer) {
       return done()
-    }
-
-    // Allow anyone to leave a feedback entry.
-    if (collection === DB_FEEDBACK_COLLECTION) {
-      if (userId) {
-        return done()
-      }
-      return done('You must be logged in to leave feedback.')
     }
 
     // Anyone can increment a view count.

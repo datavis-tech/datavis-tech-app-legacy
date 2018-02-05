@@ -18,6 +18,9 @@ exports[`view page layout should render correct layout 1`] = `
         className="twelve wide column"
       >
         <div
+          data-test="Avatar"
+        />
+        <div
           data-test="Description"
         />
         <div
@@ -28,11 +31,8 @@ exports[`view page layout should render correct layout 1`] = `
         />
       </div>
       <div
-        className="four wide column"
+        className="center aligned four wide column"
       >
-        <div
-          data-test="Avatar"
-        />
         <div
           data-test="EditButton"
         />

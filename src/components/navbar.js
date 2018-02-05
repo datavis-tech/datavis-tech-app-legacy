@@ -29,16 +29,16 @@ const CreateMenu = ({user}) => {
 // which includes the logo, create button, and login control.
 const Navbar = ({user}) => (
   <Menu secondary>
-    <Link href='/'>
-      <Menu.Item header fitted>
-        <Image height='36px' verticalAlign='middle' src='/static/images/Logo_Nav.png' />
-      </Menu.Item>
-    </Link>
+    <Menu.Item>
+      <Link route='/'>
+        <a>
+          <Image height='36px' src='/static/images/Logo_Nav.png' />
+        </a>
+      </Link>
+    </Menu.Item>
     <Menu.Menu position='right'>
       <CreateMenu user={user} />
-      <Menu.Item >
-        <LoginControl user={user} />
-      </Menu.Item>
+      <LoginControl user={user} />
     </Menu.Menu>
   </Menu>
 )

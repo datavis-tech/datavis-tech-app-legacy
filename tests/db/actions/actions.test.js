@@ -16,7 +16,6 @@ jest.mock('../../../src/db/connection', () => ({
 import {
   createDocument,
   deleteDocument,
-  createFeedbackEntry,
   addCollaborator,
   removeCollaborator,
   addReference,
@@ -193,21 +192,6 @@ describe('[integration test] actions', () => {
       deleteDocument(doc)
       expect(doc.data).toBeUndefined()
       expect(doc.type).toBeNull()
-    })
-  })
-
-  describe('createFeedbackEntry', () => {
-    it('should initialize a feedback entry', () => {
-      const doc = createFeedbackEntry({
-        feedback: 'This is my feedback',
-        user: '007'
-      })
-      expect(doc.data).toMatchObject({
-        feedback: 'This is my feedback',
-        user: '007'
-      })
-      expect(doc.collection).toEqual(DB_FEEDBACK_COLLECTION)
-      expect(doc.type.name).toEqual('json0')
     })
   })
 })

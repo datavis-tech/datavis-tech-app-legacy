@@ -41,6 +41,7 @@ export default class CodeMirrorBinding extends Component {
           Tab: betterTab
         }
       })
+      codeMirror.setSize(null, 500)
 
       this.binding = new ShareDBCodeMirrorBinding(codeMirror, doc, path)
       this.binding.setup()
