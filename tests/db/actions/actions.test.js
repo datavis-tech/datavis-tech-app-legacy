@@ -1,7 +1,6 @@
 import ShareDB from 'sharedb'
 import {
   DB_DOCUMENTS_COLLECTION,
-  DB_FEEDBACK_COLLECTION,
   VIS_DOC_TYPE,
   DATA_DOC_TYPE
 } from '../../../src/constants'
