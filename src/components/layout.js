@@ -33,7 +33,7 @@ export default ({ children, title, user, hideNav, includeCSS, hideFeedback }) =>
         ) : (
           <Grid textAlign='center'>
             <Grid.Column>
-              <a href='/feedback'>Leave us some feedback!</a>
+              <a href='https://github.com/datavis-tech/community/blob/master/README.md'>Community</a>
             </Grid.Column>
           </Grid>
         )

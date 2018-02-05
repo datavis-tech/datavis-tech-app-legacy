@@ -41,8 +41,8 @@ describe('Layout', () => {
     expect(sut.find('div').contains('I am child')).toBeTruthy()
   })
 
-  it('should render feedback', () => {
-    expect(sut.find(Grid.Column).html()).toContain('feedback')
+  it('should render community link', () => {
+    expect(sut.find(Grid.Column).html()).toContain('Community')
   })
 
   describe('if user was provided', () => {
@@ -70,8 +70,8 @@ describe('Layout', () => {
         expect(sut.find(Navbar)).toHaveLength(0)
       })
 
-      it('should still render feedback', () => {
-        expect(sut.find(Grid.Column).html()).toContain('feedback')
+      it('should still render community link', () => {
+        expect(sut.find(Grid.Column).html()).toContain('Community')
       })
 
       it('should render the Spacer', () => {
@@ -103,7 +103,7 @@ describe('Layout', () => {
         sut.setProps({hideFeedback: true})
       })
 
-      it('should not render feedback', () => {
+      it('should not render community link', () => {
         expect(sut.find(Grid.Column)).toHaveLength(0)
       })
 
@@ -118,7 +118,7 @@ describe('Layout', () => {
         sut.setProps({hideFeedback: false})
       })
 
-      it('should not render feedback', () => {
+      it('should render community link', () => {
         expect(sut.find(Grid.Column)).toHaveLength(1)
       })
 

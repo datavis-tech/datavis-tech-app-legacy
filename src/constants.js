@@ -16,9 +16,6 @@ const DB_DOCUMENTS_PROJECTION = 'documentsProjection'
 // The collection containing user records.
 const DB_USERS_COLLECTION = 'users'
 
-// The collection containing feedback entries.
-const DB_FEEDBACK_COLLECTION = 'feedback'
-
 // The value of the 'type' field in documents
 // when the document is a visualization.
 const VIS_DOC_TYPE = 'vis'
@@ -38,7 +35,6 @@ module.exports = {
   DB_DOCUMENTS_COLLECTION,
   DB_DOCUMENTS_PROJECTION,
   DB_USERS_COLLECTION,
-  DB_FEEDBACK_COLLECTION,
   VIS_DOC_TYPE,
   DATA_DOC_TYPE
 }
