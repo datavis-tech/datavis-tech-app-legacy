@@ -4,6 +4,8 @@ services:
     image: 'redis:alpine'
   mongo:
     image: 'mongo'
+    volumes:
+      - ./db:/data/db
   app:
     build: .
     volumes:
