@@ -1,5 +1,5 @@
-const config = require('../config.js')
-//const stripe = require('stripe')('pk_test_Y4thsPih1A0NNySQzyX7DQEi')
+// const config = require('../config.js')
+// const stripe = require('stripe')('pk_test_Y4thsPih1A0NNySQzyX7DQEi')
 
 module.exports = (expressApp) => {
   expressApp.post('/stripe/earlyAdopterUpgrade', (req, res) => {
