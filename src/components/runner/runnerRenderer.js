@@ -6,7 +6,6 @@ export default ({template, files}) => (
     width='100%'
     height='500'
     scrolling='no'
-    style={{ border: 'solid 1px #ddd' }}
     srcDoc={magicSandbox(template, files)}
   />
 )
