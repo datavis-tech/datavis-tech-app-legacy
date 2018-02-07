@@ -12,5 +12,6 @@ module.exports = {
 
   mongoURL: process.env.DVT_MONGO_URL || 'mongodb://localhost:27017/datavistech',
 
-  stripeKey: process.env.DVT_STRIPE_KEY || 'pk_test_Y4thsPih1A0NNySQzyX7DQEi'
+  stripeSecretKey: process.env.DVT_STRIPE_SECRET_KEY || 'sk_test_Isw5Gw3q2WQmSuuU7q1Knll5',
+  stripePublishableKey: process.env.DVT_STRIPE_PUBLISHABLE_KEY || 'pk_test_Y4thsPih1A0NNySQzyX7DQEi'
 }

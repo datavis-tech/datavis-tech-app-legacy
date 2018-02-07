@@ -1,5 +1,5 @@
 const config = require('../config.js')
-const stripe = require('stripe')(config.stripeKey)
+const stripe = require('stripe')(config.stripeSecretKey)
 
 module.exports = (expressApp) => {
   expressApp.post('/stripe/earlyAdopterUpgrade', (req, res) => {
