@@ -2,7 +2,6 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import renderer from 'react-test-renderer'
 import fakeDoc from '../../utils/fakeDoc'
-import nodeSelector from '../../utils/nodeSelector'
 import { serializeDocument } from '../../../src/db/serializers'
 import CodeMirrorBinding from '../../../src/components/codeMirrorBinding'
 import EditPageForm from '../../../src/pages/edit/editPageForm'
@@ -16,7 +15,6 @@ describe('edit page form', () => {
   let onTitleChange
   let onPrivacyChange
   let onDescriptionChange
-  let value
 
   beforeEach(() => {
 
