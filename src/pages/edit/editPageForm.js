@@ -6,7 +6,7 @@ import StringBinding from '../../components/stringBinding'
 
 // The Form in the body of the page.
 export default (
-  {document, __shareDbDoc, onTypeChange, onPrivacyChange, ...slots}
+  {document, __shareDbDoc, onPrivacyChange, ...slots}
 ) => (
   <Form>
 
@@ -37,28 +37,6 @@ export default (
         doc={__shareDbDoc}
         path={['description']}
       />
-    </Form.Field>
-
-    <Form.Field>
-      <label>Document Type</label>
-      <Form.Group inline>
-        <Form.Radio
-          label='Visualization'
-          name='docTypeEditorRadioGroup'
-          value='vis'
-          checked={document.type === 'vis'}
-          onChange={() => onTypeChange('vis')}
-          data-test='type-visualization'
-        />
-        <Form.Radio
-          label='Dataset'
-          name='docTypeEditorRadioGroup'
-          value='data'
-          checked={document.type === 'data'}
-          onChange={() => onTypeChange('data')}
-          data-test='type-data'
-        />
-      </Form.Group>
     </Form.Field>
 
     {

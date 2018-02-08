@@ -14,7 +14,6 @@ describe('edit page form', () => {
   let __shareDbDoc
   let document
   let onTitleChange
-  let onTypeChange
   let onPrivacyChange
   let onDescriptionChange
   let value
@@ -26,11 +25,10 @@ describe('edit page form', () => {
 
     document = jest.fn()
     onTitleChange = jest.fn()
-    onTypeChange = jest.fn()
     onPrivacyChange = jest.fn()
     onDescriptionChange = jest.fn()
 
-    props = { document, __shareDbDoc, onTitleChange, onTypeChange, onPrivacyChange, onDescriptionChange }
+    props = { document, __shareDbDoc, onTitleChange, onPrivacyChange, onDescriptionChange }
 
     sut = shallow(<EditPageForm {...props} />)
   })
@@ -42,24 +40,18 @@ describe('edit page form', () => {
     })
   })
 
-  describe('changes of inputs', () => {
-
-    testInput('type-visualization', 'onTypeChange', 'vis')
-    testInput('type-data', 'onTypeChange', 'data')
-
-    // TODO uncomment the following when privacy feature is re-enabled.
-    // testInput('privacy-public', 'onPrivacyChange', false)
-    // testInput('privacy-private', 'onPrivacyChange', true)
-
-    function testInput (name, prop, expectedValue) {
-      it(`should notify about changes of ${name}`, () => {
-        value = String(Math.random())
-        sut.find(nodeSelector(name)).simulate('change', {target: {value}})
-        expect(props[prop]).toHaveBeenCalledWith(expectedValue === undefined ? value : expectedValue)
-      })
-    }
-
-  })
+  // TODO uncomment the following when privacy feature is re-enabled.
+  // describe('changes of inputs', () => {
+  //   testInput('privacy-public', 'onPrivacyChange', false)
+  //   testInput('privacy-private', 'onPrivacyChange', true)
+  //   function testInput (name, prop, expectedValue) {
+  //     it(`should notify about changes of ${name}`, () => {
+  //       value = String(Math.random())
+  //       sut.find(nodeSelector(name)).simulate('change', {target: {value}})
+  //       expect(props[prop]).toHaveBeenCalledWith(expectedValue === undefined ? value : expectedValue)
+  //     })
+  //   }
+  // })
 
   describe('layouts', () => {
 

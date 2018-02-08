@@ -39,7 +39,6 @@ export default class EditPageContent extends React.Component {
     this.updateReference = actions.updateReference.bind(null, props.doc)
     this.removeReference = actions.removeReference.bind(null, props.doc)
     this.addReference = actions.addReference.bind(null, props.doc)
-    this.setType = actions.setDocumentType.bind(null, props.doc)
     this.setPrivacy = actions.setDocumentPrivacy.bind(null, props.doc)
 
     this.document = serializeDocument(props.doc)
@@ -59,7 +58,6 @@ export default class EditPageContent extends React.Component {
                 <EditPageForm
                   document={this.document}
                   __shareDbDoc={this.props.doc}
-                  onTypeChange={this.setType}
                   onPrivacyChange={this.setPrivacy}
                   Collaborators={
                     <Collaborators
