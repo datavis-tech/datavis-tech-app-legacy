@@ -1,4 +1,4 @@
 module.exports = {
   visualizationsUpdatesBuffer: new Set(),
-  datasetsUpdatesBuffer: new Set()
+  referencesUpdatesBuffer: new Set()
 }

@@ -5,12 +5,12 @@ mockRsmq.prototype.sendMessage = sendMessage
 
 jest.mock('rsmq', () => mockRsmq)
 jest.mock('../../../src/server/changeTracking/buffers', () => ({
-  datasetsUpdatesBuffer: new Set([1, 2, 3]),
+  referencesUpdatesBuffer: new Set([1, 2, 3]),
   visualizationsUpdatesBuffer: new Set([4, 5, 6])
 }))
 
-import { VISUALIZATION_UPDATED, DATASET_UPDATED } from '../../../src/server/changeTracking/queues'
-import { datasetsUpdatesBuffer, visualizationsUpdatesBuffer } from '../../../src/server/changeTracking/buffers'
+import { VISUALIZATION_UPDATED, REFERENCE_UPDATED } from '../../../src/server/changeTracking/queues'
+import { referencesUpdatesBuffer, visualizationsUpdatesBuffer } from '../../../src/server/changeTracking/buffers'
 import { THROTTLE_PERIOD } from '../../../src/server/changeTracking/constants'
 import sut from '../../../src/server/changeTracking/throttleUpdatesService'
 
@@ -24,17 +24,17 @@ describe('throttle updates service', () => {
 
   it('should send messages to dataset updated queue using datasets updates buffer', () => {
     expect(sendMessage).toHaveBeenCalledWith({
-      qname: DATASET_UPDATED,
+      qname: REFERENCE_UPDATED,
       message: JSON.stringify({documentId: 1})
     }, expect.any(Function))
 
     expect(sendMessage).toHaveBeenCalledWith({
-      qname: DATASET_UPDATED,
+      qname: REFERENCE_UPDATED,
       message: JSON.stringify({documentId: 2})
     }, expect.any(Function))
 
     expect(sendMessage).toHaveBeenCalledWith({
-      qname: DATASET_UPDATED,
+      qname: REFERENCE_UPDATED,
       message: JSON.stringify({documentId: 3})
     }, expect.any(Function))
   })
@@ -57,7 +57,7 @@ describe('throttle updates service', () => {
   })
 
   it('should empty datasets updates buffers', () => {
-    expect(datasetsUpdatesBuffer.size).toBe(0)
+    expect(referencesUpdatesBuffer.size).toBe(0)
   })
 
   it('should empty visualizations updates buffers', () => {
@@ -70,7 +70,7 @@ describe('throttle updates service', () => {
 
       sendMessage.mockClear()
 
-      datasetsUpdatesBuffer.add(10)
+      referencesUpdatesBuffer.add(10)
       visualizationsUpdatesBuffer.add(40)
 
       jest.runTimersToTime(THROTTLE_PERIOD)
