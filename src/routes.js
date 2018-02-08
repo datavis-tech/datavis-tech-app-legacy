@@ -12,6 +12,7 @@ routes.add('create', '/create/:type')
 
 // View Pages that present documents.
 routes.add('data', '/data/:id', 'views/data')
+routes.add('tech', '/tech/:id', 'views/data')
 routes.add('vis', '/vis/:id', 'views/vis')
 
 // The Edit page, for authenticated users only.
