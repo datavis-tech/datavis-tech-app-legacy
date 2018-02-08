@@ -30,4 +30,19 @@ describe('fork button', () => {
     expect(button.prop('loading')).toEqual(true)
   })
 
+  it('should return to default state when fork completed', () => {
+    onFork.mockImplementationOnce(done => done())
+    let button = sut.find(Button)
+
+    expect(button.prop('disabled')).toEqual(false)
+    expect(button.prop('loading')).toEqual(false)
+
+    button.prop('onClick')()
+    sut.update()
+    button = sut.find(Button)
+
+    expect(button.prop('disabled')).toEqual(false)
+    expect(button.prop('loading')).toEqual(false)
+  })
+
 })
