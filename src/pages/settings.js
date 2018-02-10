@@ -19,8 +19,6 @@ const onToken = token => {
   })
 }
 
-
-
 export default Page(({ user }) => {
   return (
     <Layout title='Settings | Datavis.tech' user={user} hideFeedback >

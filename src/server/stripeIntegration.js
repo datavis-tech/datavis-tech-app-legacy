@@ -1,5 +1,7 @@
 const config = require('../config.js')
 const stripe = require('stripe')(config.stripeSecretKey)
+const { DB_USERS_COLLECTION } = require('../constants')
+const { setStripeCustomerId } = require('../db/actions')
 const { backend } = require('./shareDB')
 
 const connection = backend.connect()
@@ -10,14 +12,12 @@ const fetchUser = userId => {
     const doc = connection.get(DB_USERS_COLLECTION, userId)
     doc.fetch(err => {
       if (err) {
-        reject(err)
-        return
+        return reject(err)
       }
 
       // If User entry doesn't exist.
       if (doc.type === null) {
-        reject(new Error('User does not exist with id: ' + userId))
-        return
+        return reject(new Error('User does not exist with id: ' + userId))
       }
 
       resolve(doc)
@@ -43,8 +43,8 @@ module.exports = (expressApp) => {
       source: id
     }).then(customer => {
 
-      // TODO store the stripe customer id in our DB for later use.
-      //fetchUser(userId).then(doc => setStripeCustomerId(doc, customer.id))
+      // Store the stripe customer id in our DB for later use.
+      fetchUser(userId).then(doc => setStripeCustomerId(doc, customer.id))
 
       return stripe.subscriptions.create({
         customer: customer.id,
@@ -65,12 +65,22 @@ module.exports = (expressApp) => {
   // See https://stripe.com/docs/webhooks
   expressApp.post('/stripe/webhook', (req, res) => {
     // TODO verify signature https://stripe.com/docs/webhooks/signatures
-    console.log(req.body)
     const type = req.body.type
 
     switch (type) {
       case 'customer.subscription.created':
+        console.log('Subscription created')
+        const stripeSubscription = req.body.data.object
+        const stripeCustomerId = stripeSubscription.customer
+        const plan = stripeSubscription.plan
+
+        console.log('customer = ' + stripeCustomerId)
+        console.log('plan = ' + JSON.stringify(plan))
         // TODO update subscriptionPlan to 'earlyAdopter' in User entry in DB
+        // fetchUserByStripeCustomerId(stripeCustomerId).then((doc) => {
+        //  setSubscriptionPlan(doc, plan)
+        //  setSubscriptionStatus(doc, 'active')
+        // })
         break
       case 'customer.subscription.deleted':
         // TODO update subscriptionPlan to 'null' in User entry in DB
