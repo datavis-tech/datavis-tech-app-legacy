@@ -1,7 +1,7 @@
 const config = require('../config.js')
 const stripe = require('stripe')(config.stripeSecretKey)
 const { DB_USERS_COLLECTION } = require('../constants')
-const { setStripeCustomerId } = require('../db/actions')
+const { setStripeCustomerId, setSubscriptionPlan, setSubscriptionStatus } = require('../db/actions')
 const { backend } = require('./shareDB')
 
 const connection = backend.connect()
@@ -22,6 +22,26 @@ const fetchUser = userId => {
 
       resolve(doc)
     })
+  })
+}
+
+// Fetch the ShareDB document for a User by Stripe customer id.
+const fetchUserByStripeCustomerId = stripeCustomerId => {
+  return new Promise((resolve, reject) => {
+    connection.createFetchQuery(
+      DB_USERS_COLLECTION,
+      { stripeCustomerId },
+      {},
+      (err, users) => {
+        if (err) {
+          return reject(err)
+        }
+        if (users.length !== 1) {
+          return reject(new Error(`Expected exactly one user to have customer id ${stripeCustomerId}, found ${users.length}.`))
+        }
+        return resolve(users[0])
+      }
+    )
   })
 }
 
@@ -72,15 +92,18 @@ module.exports = (expressApp) => {
         console.log('Subscription created')
         const stripeSubscription = req.body.data.object
         const stripeCustomerId = stripeSubscription.customer
-        const plan = stripeSubscription.plan
+        const plan = stripeSubscription.plan.id
+        const status = stripeSubscription.status
 
         console.log('customer = ' + stripeCustomerId)
         console.log('plan = ' + JSON.stringify(plan))
-        // TODO update subscriptionPlan to 'earlyAdopter' in User entry in DB
-        // fetchUserByStripeCustomerId(stripeCustomerId).then((doc) => {
-        //  setSubscriptionPlan(doc, plan)
-        //  setSubscriptionStatus(doc, 'active')
-        // })
+        console.log('status = ' + JSON.stringify(status))
+
+        fetchUserByStripeCustomerId(stripeCustomerId).then((doc) => {
+          console.log('Fetched user by stripe customer id')
+          setSubscriptionPlan(doc, plan)
+          setSubscriptionStatus(doc, status)
+        })
         break
       case 'customer.subscription.deleted':
         // TODO update subscriptionPlan to 'null' in User entry in DB
