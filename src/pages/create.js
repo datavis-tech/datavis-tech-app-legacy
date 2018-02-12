@@ -6,11 +6,12 @@ import { Form, Button, Container } from 'semantic-ui-react'
 import { Router } from '../routes'
 import { id } from '../db/accessors'
 import { createDocument } from '../db/actions'
-import { VIS_DOC_TYPE, DATA_DOC_TYPE } from '../constants'
+import { VIS_DOC_TYPE, DATA_DOC_TYPE, TECH_DOC_TYPE } from '../constants'
 
 const typeWords = {
   [VIS_DOC_TYPE]: 'Visualization',
-  [DATA_DOC_TYPE]: 'Dataset'
+  [DATA_DOC_TYPE]: 'Dataset',
+  [TECH_DOC_TYPE]: 'Tech'
 }
 
 class CreatePage extends React.Component {

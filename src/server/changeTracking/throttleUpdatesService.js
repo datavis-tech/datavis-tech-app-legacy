@@ -1,7 +1,7 @@
 const RedisSMQ = require('rsmq')
 const curry = require('lodash/curry')
-const { VISUALIZATION_UPDATED, DATASET_UPDATED } = require('./queues')
-const { datasetsUpdatesBuffer, visualizationsUpdatesBuffer } = require('./buffers')
+const { VISUALIZATION_UPDATED, REFERENCE_UPDATED } = require('./queues')
+const { referencesUpdatesBuffer, visualizationsUpdatesBuffer } = require('./buffers')
 const { THROTTLE_PERIOD } = require('./constants')
 
 const rsmq = new RedisSMQ({host: process.env.DVT_REDIS_HOST, port: process.env.DVT_REDIS_PORT})
@@ -17,10 +17,10 @@ function throttleUpdatesService () {
 
   function loop () {
 
-    Array.from(datasetsUpdatesBuffer).forEach(sendMessage(DATASET_UPDATED))
+    Array.from(referencesUpdatesBuffer).forEach(sendMessage(REFERENCE_UPDATED))
     Array.from(visualizationsUpdatesBuffer).forEach(sendMessage(VISUALIZATION_UPDATED))
 
-    datasetsUpdatesBuffer.clear()
+    referencesUpdatesBuffer.clear()
     visualizationsUpdatesBuffer.clear()
 
     setTimeout(loop, THROTTLE_PERIOD)
