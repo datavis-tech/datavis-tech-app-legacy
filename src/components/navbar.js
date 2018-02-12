@@ -9,13 +9,13 @@ const CreateMenu = ({user}) => {
       <Dropdown item text='Create'>
         <Dropdown.Menu>
           <Dropdown.Item>
-            <Link route='create' params={{type: VIS_DOC_TYPE}}>
-              <a>Visualization</a>
+            <Link route='create' params={{type: DATA_DOC_TYPE}}>
+              <a>Data</a>
             </Link>
           </Dropdown.Item>
           <Dropdown.Item>
-            <Link route='create' params={{type: DATA_DOC_TYPE}}>
-              <a>Dataset</a>
+            <Link route='create' params={{type: VIS_DOC_TYPE}}>
+              <a>Vis</a>
             </Link>
           </Dropdown.Item>
           <Dropdown.Item>
