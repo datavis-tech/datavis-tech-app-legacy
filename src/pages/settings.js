@@ -27,7 +27,7 @@ export default Page(({ user }) => {
       <StripeCheckout
         label='Upgrade to the Early Adopter Plan'
         name='Datavis Tech INC.'
-        description='Early Adopter Plan - $5/mo'
+        description='Early Adopter Plan - $3.99/mo'
         image='/static/images/logo/Logo_Icon_128px.png'
         amount={399}
         currency='USD'
