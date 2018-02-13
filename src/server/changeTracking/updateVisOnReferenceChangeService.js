@@ -1,6 +1,6 @@
 const RedisSMQ = require('rsmq')
 const { backend } = require('../shareDB')
-const { DATASET_UPDATED } = require('./queues')
+const { REFERENCE_UPDATED } = require('./queues')
 const { visualizationsUpdatesBuffer } = require('./buffers')
 const { THROTTLE_PERIOD } = require('./constants')
 const getReferencedByDocuments = require('./getReferencedByDocuments')
@@ -11,7 +11,7 @@ const connection = backend.connect()
 // TODO refactor and test
 const updateVisOnReferenceChangeService = async () => {
   function loop () {
-    rsmq.popMessage({qname: DATASET_UPDATED}, async (err, resp) => {
+    rsmq.popMessage({qname: REFERENCE_UPDATED}, async (err, resp) => {
 
       if (err) {
         console.log(err)

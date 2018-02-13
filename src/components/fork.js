@@ -8,13 +8,14 @@ export default class Fork extends React.Component {
   constructor (props) {
     super(props)
 
-    this.onFork = () => {
+    this.onFork = (onForkFailed) => {
       if (props.user) {
         Router.pushRoute('edit', {
           id: id(fork(props.doc, props.user.id))
         })
       } else {
         props.onError('You must be logged in to fork.')
+        onForkFailed()
       }
     }
 

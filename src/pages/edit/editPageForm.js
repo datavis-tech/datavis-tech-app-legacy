@@ -3,10 +3,17 @@ import { Form, Grid, Button } from 'semantic-ui-react'
 import { Link } from '../../routes'
 import CodeMirrorBinding from '../../components/codeMirrorBinding'
 import StringBinding from '../../components/stringBinding'
+import { VIS_DOC_TYPE, DATA_DOC_TYPE, TECH_DOC_TYPE } from '../../constants'
+
+const contentLabel = {
+  [VIS_DOC_TYPE]: 'index.html',
+  [DATA_DOC_TYPE]: 'Content',
+  [TECH_DOC_TYPE]: 'Content'
+}
 
 // The Form in the body of the page.
 export default (
-  {document, __shareDbDoc, onTypeChange, onPrivacyChange, ...slots}
+  {document, __shareDbDoc, onPrivacyChange, ...slots}
 ) => (
   <Form>
 
@@ -23,7 +30,9 @@ export default (
           </Grid.Column>
           <Grid.Column width={4}>
             <Link route={document.type} params={{id: document.id}}>
-              <Button type='button' fluid>View</Button>
+              <a>
+                <Button type='button' fluid>View</Button>
+              </a>
             </Link>
           </Grid.Column>
         </Grid.Row>
@@ -37,28 +46,6 @@ export default (
         doc={__shareDbDoc}
         path={['description']}
       />
-    </Form.Field>
-
-    <Form.Field>
-      <label>Document Type</label>
-      <Form.Group inline>
-        <Form.Radio
-          label='Visualization'
-          name='docTypeEditorRadioGroup'
-          value='vis'
-          checked={document.type === 'vis'}
-          onChange={() => onTypeChange('vis')}
-          data-test='type-visualization'
-        />
-        <Form.Radio
-          label='Dataset'
-          name='docTypeEditorRadioGroup'
-          value='data'
-          checked={document.type === 'data'}
-          onChange={() => onTypeChange('data')}
-          data-test='type-data'
-        />
-      </Form.Group>
     </Form.Field>
 
     {
@@ -97,7 +84,7 @@ export default (
     }
 
     <Form.Field>
-      <label>Content</label>
+      <label>{contentLabel[document.type]}</label>
       <CodeMirrorBinding
         doc={__shareDbDoc}
         path={['content']}

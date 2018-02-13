@@ -7,9 +7,9 @@ import DataViewPageContent from './content'
 class DataViewPage extends React.Component {
 
   render () {
-    const {id, user, doc} = this.props
+    const {id, user, doc, onError} = this.props
     return (
-      <Fork user={user} doc={doc}>
+      <Fork user={user} doc={doc} onError={onError}>
         {
           ({onFork}) => <DataViewPageContent id={id} doc={doc} onFork={onFork} />
         }

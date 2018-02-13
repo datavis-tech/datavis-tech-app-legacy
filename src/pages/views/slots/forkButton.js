@@ -6,9 +6,14 @@ export default class ForkButton extends React.Component {
   constructor (props) {
     super(props)
     this.state = { forking: false }
+
+    this.onForkFailed = () => {
+      this.setState({ forking: false })
+    }
+
     this.onClick = () => {
       this.setState({ forking: true })
-      this.props.onFork()
+      this.props.onFork(this.onForkFailed)
     }
   }
 

@@ -5,7 +5,10 @@ import ViewPageLayout from '../../../../src/pages/views/viewPageLayout'
 import Runner from '../../../../src/components/runner/runner'
 
 jest.mock('../../../../src/pages/views/slots')
-import { createSlots, DocumentPreviewList } from '../../../../src/pages/views/slots'
+import { createSlots } from '../../../../src/pages/views/slots'
+
+jest.mock('../../../../src/pages/views/vis/references')
+import References from '../../../../src/pages/views/vis/references'
 
 import VisViewPageLayout from '../../../../src/pages/views/vis/layout'
 
@@ -67,9 +70,8 @@ describe('vis page layout', () => {
     })
 
     it('should override references', () => {
-      expect(overrideSlots.References.type).toBe(DocumentPreviewList)
+      expect(overrideSlots.References.type).toBe(References)
       expect(overrideSlots.References.props).toMatchObject({
-        title: 'Data',
         documents: props.referenceDocuments
       })
     })

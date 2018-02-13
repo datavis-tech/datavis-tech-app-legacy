@@ -18,9 +18,11 @@ describe('fork', () => {
   let user
   let children
   let forkedDocument
+  let onForkFailed
 
   beforeEach(() => {
 
+    onForkFailed = jest.fn()
     forkedDocument = fakeDoc()
     fork.mockReturnValue(forkedDocument)
 
@@ -41,9 +43,8 @@ describe('fork', () => {
   })
 
   describe('on fork', () => {
-
     beforeEach(() => {
-      children.mock.calls[0][0].onFork()
+      children.mock.calls[0][0].onFork(onForkFailed)
     })
 
     it('should fork doc', () => {
@@ -54,6 +55,34 @@ describe('fork', () => {
       expect(Router.pushRoute).toHaveBeenCalledWith('edit', {id: forkedDocument.id})
     })
 
+    it('should not call onForkFailed', () => {
+      expect(onForkFailed).not.toHaveBeenCalled()
+    })
+
+  })
+
+  describe('trying to fork without user', () => {
+
+    let onError
+
+    beforeEach(() => {
+
+      onError = jest.fn()
+
+      props = {
+        onError
+      }
+      shallow(<Fork {...props}>{children}</Fork>)
+      children.mock.calls[1][0].onFork(onForkFailed)
+    })
+
+    it('should notify about error', () => {
+      expect(onError).toHaveBeenCalledWith('You must be logged in to fork.')
+    })
+
+    it('should call onForkFailed with error', () => {
+      expect(onForkFailed).toHaveBeenCalled()
+    })
   })
 
 })

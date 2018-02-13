@@ -1,5 +1,6 @@
 import React from 'react'
-import partition from 'lodash/partition'
+import groupBy from 'lodash/groupBy'
+import { VIS_DOC_TYPE, DATA_DOC_TYPE, TECH_DOC_TYPE } from '../../constants'
 import DocumentPreviewList from '../views/slots/documentPreviewList'
 
 const DocumentsList = ({ documents }) => {
@@ -8,12 +9,13 @@ const DocumentsList = ({ documents }) => {
     return null
   }
 
-  const [dataDocuments, visDocuments] = partition(documents, doc => doc.type === 'data')
+  const documentsByType = groupBy(documents, 'type')
 
   return (
     <div>
-      <DocumentPreviewList title='Visualizations' documents={visDocuments} dataTest='visualizations' />
-      <DocumentPreviewList title='Datasets' documents={dataDocuments} dataTest='datasets' />
+      <DocumentPreviewList title='Visualizations' documents={documentsByType[VIS_DOC_TYPE]} dataTest='visualizations' />
+      <DocumentPreviewList title='Datasets' documents={documentsByType[DATA_DOC_TYPE]} dataTest='datasets' />
+      <DocumentPreviewList title='Tech' documents={documentsByType[TECH_DOC_TYPE]} dataTest='tech' />
     </div>
   )
 }
