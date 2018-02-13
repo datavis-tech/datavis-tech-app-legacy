@@ -1,5 +1,4 @@
-import { set } from './primitives'
-
-export const setStripeCustomerId = (shareDBDoc, stripeCustomerId) => (
+const { set } = require('./primitives')
+module.exports = (shareDBDoc, stripeCustomerId) => (
   set({shareDBDoc, property: 'stripeCustomerId', item: stripeCustomerId})
 )

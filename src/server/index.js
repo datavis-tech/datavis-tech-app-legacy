@@ -13,7 +13,7 @@ const shareDB = require('./shareDB')
 const authorization = require('./authorization')
 const accessControl = require('./_accessControl')
 const addUserToOps = require('./addUserToOps')
-const stripeIntegration = require('./stripeIntegration')
+const stripe = require('./stripe')
 const createEmbedDocsHandler = require('./embed/handler')
 
 const expressApp = express()
@@ -25,7 +25,7 @@ expressApp.use(session.middleware)
 authorization(expressApp)
 accessControl(shareDB.backend)
 addUserToOps(shareDB.backend)
-stripeIntegration(expressApp)
+stripe(expressApp)
 
 // Set up the Next.js server, informing it whether we are in dev mode,
 // and also informing it that it should look for pages under the src directory.

@@ -1,5 +1,4 @@
-import { set } from './primitives'
-
-export const setSubscriptionPlan = (shareDBDoc, subscriptionPlan) => (
+const { set } = require('./primitives')
+module.exports = (shareDBDoc, subscriptionPlan) => (
   set({shareDBDoc, property: 'subscriptionPlan', item: subscriptionPlan})
 )
