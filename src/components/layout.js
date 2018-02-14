@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Navbar from './navbar'
 import Spacer from './spacer'
 import { Container, Grid } from 'semantic-ui-react'
+import { Link } from '../routes'
 
 // This component provides the page layout common to most pages in the app,
 // including content of the <head> of the document, the navigation bar, and the footer.
@@ -27,17 +28,24 @@ export default ({ children, title, user, hideNav, includeCSS, hideFeedback }) =>
     <Container>
       { hideNav ? <Spacer /> : <Navbar user={user} /> }
       { children }
-      {
-        hideFeedback ? (
-          null
-        ) : (
-          <Grid textAlign='center'>
+    </Container>
+    {
+      hideFeedback ? (
+        null
+      ) : (
+        <div data-test='footer'>
+          <Grid textAlign='center' style={{paddingTop: '40px'}}>
             <Grid.Column>
               <a href='https://github.com/datavis-tech/community/blob/master/README.md'>Community</a>
             </Grid.Column>
+            <Grid.Column>
+              <Link route='about'>
+                <a>About</a>
+              </Link>
+            </Grid.Column>
           </Grid>
-        )
-      }
-    </Container>
+        </div>
+      )
+    }
   </div>
 )

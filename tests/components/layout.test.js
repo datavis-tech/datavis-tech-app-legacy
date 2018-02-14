@@ -1,7 +1,6 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 
-import { Grid } from 'semantic-ui-react'
 import Head from 'next/head'
 
 import Layout from '../../src/components/layout'
@@ -41,10 +40,6 @@ describe('Layout', () => {
     expect(sut.find('div').contains('I am child')).toBeTruthy()
   })
 
-  it('should render community link', () => {
-    expect(sut.find(Grid.Column).html()).toContain('Community')
-  })
-
   describe('if user was provided', () => {
     let user
 
@@ -68,10 +63,6 @@ describe('Layout', () => {
 
       it('should not render the Navbar', () => {
         expect(sut.find(Navbar)).toHaveLength(0)
-      })
-
-      it('should still render community link', () => {
-        expect(sut.find(Grid.Column).html()).toContain('Community')
       })
 
       it('should render the Spacer', () => {
@@ -103,10 +94,6 @@ describe('Layout', () => {
         sut.setProps({hideFeedback: true})
       })
 
-      it('should not render community link', () => {
-        expect(sut.find(Grid.Column)).toHaveLength(0)
-      })
-
       it('should still render Navbar with user prop as undefined', () => {
         expect(sut.find(Navbar).prop('user')).toBeUndefined()
       })
@@ -116,10 +103,6 @@ describe('Layout', () => {
 
       beforeEach(() => {
         sut.setProps({hideFeedback: false})
-      })
-
-      it('should render community link', () => {
-        expect(sut.find(Grid.Column)).toHaveLength(1)
       })
 
     })
