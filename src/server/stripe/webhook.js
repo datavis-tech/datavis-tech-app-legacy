@@ -25,6 +25,8 @@ const webhook = (expressApp, stripe, connection) => {
           console.log('Fetched user by stripe customer id')
           setSubscriptionPlan(doc, plan)
           setSubscriptionStatus(doc, status)
+          console.log('Updated user entry:')
+          console.log(JSON.stringify(doc.data))
         })
         break
       case 'customer.subscription.deleted':
