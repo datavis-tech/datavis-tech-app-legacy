@@ -11,15 +11,15 @@ const webhook = (expressApp, stripe, connection) => {
 
     switch (type) {
       case 'customer.subscription.created':
-        console.log('Subscription created')
+        // console.log('Subscription created')
         const stripeSubscription = req.body.data.object
         const stripeCustomerId = stripeSubscription.customer
         const plan = stripeSubscription.plan.id
         const status = stripeSubscription.status
 
-        console.log('customer = ' + stripeCustomerId)
-        console.log('plan = ' + JSON.stringify(plan))
-        console.log('status = ' + JSON.stringify(status))
+        // console.log('customer = ' + stripeCustomerId)
+        // console.log('plan = ' + JSON.stringify(plan))
+        // console.log('status = ' + JSON.stringify(status))
 
         fetchUserByStripeCustomerId(stripeCustomerId, connection).then((doc) => {
           setSubscriptionPlan(doc, plan)
