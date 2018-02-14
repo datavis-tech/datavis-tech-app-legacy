@@ -9,7 +9,7 @@ const upgrade = (expressApp, stripe, connection) => {
     const { email, id, user } = req.body
 
     if (!user) {
-      res.send({ error: 'You must be logged in to upgrade.' })
+      return res.send({ error: 'You must be logged in to upgrade.' })
     }
 
     const userId = user.id
