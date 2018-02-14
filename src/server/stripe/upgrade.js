@@ -18,19 +18,28 @@ const upgrade = (expressApp, stripe, connection) => {
     stripe.customers.create({
       email,
       source: id
-    }).then(customer => {
+    }).then(customer => new Promise((resolve, reject) => {
 
       // Store the stripe customer id in our DB for later use.
       fetchUser(userId, connection)
-        .then(doc => setStripeCustomerId(doc, customer.id))
+        .then(doc => {
 
-      return stripe.subscriptions.create({
-        customer: customer.id,
-        items: [{
-          plan: 'early-adopter'
-        }]
-      })
-    }).then(subscription => {
+          // TODO wait for this write to complete before creating subscription.
+          setStripeCustomerId(doc, customer.id)
+
+          // TODO remove this timeout
+          // See https://gitlab.com/curran/datavis-tech/issues/334
+          setTimeout(() => {
+            resolve(stripe.subscriptions.create({
+              customer: customer.id,
+              items: [{
+                plan: 'early-adopter'
+              }]
+            }))
+          }, 5000)
+        })
+        .catch(reject)
+    })).then(subscription => {
 
       // User plan will be updated in DB later via Webhook.
       res.send({ success: true })
