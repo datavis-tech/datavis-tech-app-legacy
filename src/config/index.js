@@ -10,5 +10,8 @@ module.exports = {
   gitHubClientSecret: process.env.DVT_GITHUB_CLIENT_SECRET || 'ac9faa321c0b0067ea52c1b32f31ee1de7b5a04e',
   gitHubCallbackURL: process.env.DVT_GITHUB_CALLBACK_URL || 'http://localhost:3000/auth/github/callback',
 
-  mongoURL: process.env.DVT_MONGO_URL || 'mongodb://localhost:27017/datavistech'
+  mongoURL: process.env.DVT_MONGO_URL || 'mongodb://localhost:27017/datavistech',
+
+  stripeSecretKey: process.env.DVT_STRIPE_SECRET_KEY || 'sk_test_Isw5Gw3q2WQmSuuU7q1Knll5',
+  stripePublishableKey: process.env.DVT_STRIPE_PUBLISHABLE_KEY || 'pk_test_Y4thsPih1A0NNySQzyX7DQEi'
 }

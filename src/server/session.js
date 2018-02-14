@@ -7,7 +7,7 @@ const {
   redisHost,
   redisPort,
   sessionSecret
-} = require('../config.js')
+} = require('../config')
 
 const RedisStore = connectRedis(expressSession)
 const store = new RedisStore({

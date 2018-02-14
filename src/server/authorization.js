@@ -1,6 +1,6 @@
 const passport = require('passport')
 const passportGitHub = require('passport-github')
-const config = require('../config.js')
+const config = require('../config')
 const findOrCreateUser = require('./findOrCreateUser')
 
 const {
