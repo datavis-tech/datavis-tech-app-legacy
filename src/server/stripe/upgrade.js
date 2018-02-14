@@ -6,12 +6,13 @@ const upgrade = (expressApp, stripe, connection) => {
   // This gets invoked after the user clicks "Upgrade"
   // and enters their credit card details.
   expressApp.post('/stripe/earlyAdopterUpgrade', (req, res) => {
-    const { email, id, user } = req.body
+    const user = req.user
 
     if (!user) {
       return res.send({ error: 'You must be logged in to upgrade.' })
     }
 
+    const { email, id } = req.body
     const userId = user.id
 
     stripe.customers.create({
