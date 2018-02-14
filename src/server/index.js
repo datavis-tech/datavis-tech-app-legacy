@@ -25,7 +25,7 @@ expressApp.use(session.middleware)
 authorization(expressApp)
 accessControl(shareDB.backend)
 addUserToOps(shareDB.backend)
-stripe(expressApp)
+stripe(expressApp, shareDB.backend)
 
 // Set up the Next.js server, informing it whether we are in dev mode,
 // and also informing it that it should look for pages under the src directory.
