@@ -1,9 +1,10 @@
 import React from 'react'
 import { Header } from 'semantic-ui-react'
-import Page from '../components/page'
-import Layout from '../components/layout'
+import Page from '../../components/page'
+import Layout from '../../components/layout'
 import StripeCheckout from 'react-stripe-checkout'
 import onStripeToken from './onStripeToken'
+import stripePublishableKey from '../../config/stripePublishableKey'
 
 export default Page(({ user }) => {
   return (
@@ -18,7 +19,7 @@ export default Page(({ user }) => {
         amount={399}
         currency='USD'
         token={onStripeToken}
-        stripeKey='pk_test_Y4thsPih1A0NNySQzyX7DQEi'
+        stripeKey={stripePublishableKey}
       />
     </Layout>
   )

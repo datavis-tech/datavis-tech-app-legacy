@@ -1,4 +1,4 @@
-const config = require('../../config.js')
+const config = require('../../config')
 const stripe = require('stripe')(config.stripeSecretKey)
 const { backend } = require('../shareDB')
 const upgrade = require('./upgrade')
