@@ -22,11 +22,11 @@ const webhook = (expressApp, stripe, connection) => {
         console.log('status = ' + JSON.stringify(status))
 
         fetchUserByStripeCustomerId(stripeCustomerId, connection).then((doc) => {
-          console.log('Fetched user by stripe customer id')
           setSubscriptionPlan(doc, plan)
           setSubscriptionStatus(doc, status)
-          console.log('Updated user entry:')
-          console.log(JSON.stringify(doc.data))
+          // console.log('Fetched user by stripe customer id')
+          // console.log('Updated user entry:')
+          // console.log(JSON.stringify(doc.data))
         })
         break
       case 'customer.subscription.deleted':
@@ -39,7 +39,7 @@ const webhook = (expressApp, stripe, connection) => {
         // TODO update subscriptionStatus to 'pastDue' in User entry in DB
         break
     }
-    res.send(200)
+    res.sendStatus(200)
   })
 }
 
