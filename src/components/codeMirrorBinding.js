@@ -38,6 +38,7 @@ export default class CodeMirrorBinding extends Component {
         mode: 'htmlmixed',
         indentWithTabs: false,
         indentUnit: 2,
+        lineNumbers: true,
         extraKeys: {
           Tab: betterTab,
           'Cmd-/': 'toggleComment',
