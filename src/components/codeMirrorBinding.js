@@ -32,13 +32,17 @@ export default class CodeMirrorBinding extends Component {
       require('codemirror/mode/xml/xml')
       require('codemirror/mode/css/css')
       require('codemirror/mode/htmlmixed/htmlmixed')
+      require('codemirror/addon/comment/comment')
 
       const codeMirror = CodeMirror(this.el, {
         mode: 'htmlmixed',
         indentWithTabs: false,
         indentUnit: 2,
+        lineNumbers: true,
         extraKeys: {
-          Tab: betterTab
+          Tab: betterTab,
+          'Cmd-/': 'toggleComment',
+          'Ctrl-/': 'toggleComment'
         }
       })
       codeMirror.setSize(null, 500)
