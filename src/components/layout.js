@@ -24,6 +24,7 @@ export default ({ children, title, user, hideNav, includeCSS, hideFeedback }) =>
         ) : null
       }
       <link rel='shortcut icon' href='/static/images/favicon.ico' />
+      <link rel='stylesheet' href='/static/codemirror/inlet.css' />
     </Head>
     <Container>
       { hideNav ? <Spacer /> : <Navbar user={user} /> }
