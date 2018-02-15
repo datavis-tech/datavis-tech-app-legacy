@@ -15,7 +15,6 @@ xdescribe('view page component factory', () => {
   let sut
   let ViewPage
   let ContentComponent
-  let includeCSS
   let props
   let id
   let user
@@ -24,7 +23,6 @@ xdescribe('view page component factory', () => {
 
   beforeEach(() => {
     ContentComponent = () => null
-    includeCSS = String(Math.random())
 
     id = String(Math.random())
     user = fakeUser()
@@ -33,7 +31,7 @@ xdescribe('view page component factory', () => {
 
     BaseViewPage.mockImplementation(({children}) => children({doc, error}))
 
-    ViewPage = createViewPage(ContentComponent, {includeCSS})
+    ViewPage = createViewPage(ContentComponent)
 
     props = {id, user}
     sut = mount(<ViewPage {...props} />)
@@ -49,8 +47,7 @@ xdescribe('view page component factory', () => {
   it('should contain base view page', () => {
     expect(sut.find(BaseViewPage).props()).toMatchObject({
       id,
-      user,
-      includeCSS
+      user
     })
   })
 
