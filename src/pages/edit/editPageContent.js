@@ -51,7 +51,10 @@ export default class EditPageContent extends React.Component {
   render () {
     return (
       <React.Fragment>
-        <Subscription subscription={ReferencesSubscription({ids: this.document.referencesIds})}>
+        <Subscription
+          subscription={ReferencesSubscription({ids: this.document.referencesIds})}
+          key={JSON.stringify(this.document.referencesIds)}
+        >
           {
             ({data: referenceDocuments}) => (
               <React.Fragment>
