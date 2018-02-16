@@ -29,13 +29,13 @@ describe('html', () => {
       expect(result).toEqual(`<html>${someContent}</html>`)
     })
 
-    it('should preserver src as is if contains both opening and closing tags', () => {
+    it('should preserve src as is if contains both opening and closing tags', () => {
       src = `<${htmlTagName}>${someContent}</${htmlTagName}>`
       result = withHtmlTag(src)
       expect(result).toEqual(src)
     })
 
-    it('should be able to work with formmated html source', () => {
+    it('should be able to work with formatted html source', () => {
       src = `
           <!DOCTYPE html>
           <${htmlTagName}>
@@ -86,7 +86,7 @@ describe('html', () => {
 
     })
 
-    it('should preserver src as is if contains both opening and closing tags', () => {
+    it('should preserve src as is if contains both opening and closing tags', () => {
       src = `<${bodyTagName}>${someContent}</${bodyTagName}>`
       result = withBodyTag(src)
       expect(result).toEqual(src)
@@ -106,11 +106,12 @@ describe('html', () => {
       bodyTagName = randomCase('body')
     })
 
-    it('should inser logo before body closing tag', () => {
+    it('should insert logo before body closing tag', () => {
       src = `<${bodyTagName}>${someContent}</${bodyTagName}>`
       result = injectLogo(src, href)
-      const styles = `position:fixed;right:0;bottom:0;width:64px;height:64px;background-image:url(data:image/png;base64,${logo.base64})`
-      expect(result).toEqual(`<${bodyTagName}>${someContent}<a href="${href}" style="${styles}" target="_parent" /></${bodyTagName}>`)
+      const styles = `position:fixed;right:3px;bottom:3px;opacity:0.8;`
+      const imgSrc = `data:image/png;base64,${logo.base64}`
+      expect(result).toEqual(`<${bodyTagName}>${someContent}<a href="${href}" target="_parent"><img style="${styles}" width="32" height="32" src=${imgSrc}></a></${bodyTagName}>`)
     })
 
   })
