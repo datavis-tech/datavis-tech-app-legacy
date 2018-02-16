@@ -15,6 +15,7 @@ const accessControl = require('./_accessControl')
 const addUserToOps = require('./addUserToOps')
 const stripe = require('./stripe')
 const createEmbedDocsHandler = require('./embed/handler')
+const visualizationExport = require('./visualizationExport')
 
 const expressApp = express()
 expressApp.use(bodyParser.urlencoded({ extended: true }))
@@ -26,6 +27,7 @@ authorization(expressApp)
 accessControl(shareDB.backend)
 addUserToOps(shareDB.backend)
 stripe(expressApp, shareDB.backend)
+visualizationExport(expressApp, shareDB.backend)
 
 // Set up the Next.js server, informing it whether we are in dev mode,
 // and also informing it that it should look for pages under the src directory.
@@ -38,6 +40,7 @@ const nextApp = next({
 // Serve static assets.
 expressApp.use('/static', express.static('static'))
 
+// TODO rewrite to stripe and visualizationExport style insted of setting path directly
 // Set up the NextJS Express handler.
 expressApp.get('/vis/:id/embed', createEmbedDocsHandler(shareDB.backend))
 

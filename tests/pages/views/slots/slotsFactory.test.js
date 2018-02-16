@@ -5,6 +5,7 @@ import DocumentPreviewList from '../../../../src/pages/views/slots/documentPrevi
 import EditButton from '../../../../src/pages/views/slots/editButton'
 import ForkButton from '../../../../src/pages/views/slots/forkButton'
 import EmbedButton from '../../../../src/pages/views/slots/embedButton'
+import ExportButton from '../../../../src/pages/views/slots/exportButton'
 
 import sut from '../../../../src/pages/views/slots/slotsFactory'
 
@@ -80,6 +81,10 @@ describe('slots factory', () => {
       expect(slots.EmbedButton.props).toMatchObject({id})
     })
 
+    it('should contain export button', () => {
+      expect(slots.ExportButton.type).toBe(ExportButton)
+      expect(slots.ExportButton.props).toMatchObject({id})
+    })
   })
 
   describe('overrides', () => {
@@ -93,6 +98,7 @@ describe('slots factory', () => {
     let CustomEditButton
     let CustomForkButton
     let CustomEmbedButton
+    let CustomExportButton
 
     beforeEach(() => {
       CustomHeader = Symbol('Header')
@@ -104,6 +110,7 @@ describe('slots factory', () => {
       CustomEditButton = Symbol('EditButton')
       CustomForkButton = Symbol('ForkButton')
       CustomEmbedButton = Symbol('EmbedButton')
+      CustomExportButton = Symbol('ExportButton')
 
       slots = sut(props, {
         Header: CustomHeader,
@@ -114,7 +121,8 @@ describe('slots factory', () => {
         Avatar: CustomAvatar,
         EditButton: CustomEditButton,
         ForkButton: CustomForkButton,
-        EmbedButton: CustomEmbedButton
+        EmbedButton: CustomEmbedButton,
+        ExportButton: CustomExportButton
       })
 
     })
@@ -153,6 +161,10 @@ describe('slots factory', () => {
 
     it('should allow to override embed button', () => {
       expect(slots.EmbedButton).toBe(CustomEmbedButton)
+    })
+
+    it('should allow to override export button', () => {
+      expect(slots.ExportButton).toBe(CustomExportButton)
     })
 
   })

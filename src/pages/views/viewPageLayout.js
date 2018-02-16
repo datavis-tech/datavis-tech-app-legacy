@@ -3,21 +3,22 @@ import { Grid } from 'semantic-ui-react'
 
 export default (slots) => (
   <div>
-    {slots.Header}
-    {slots.Content}
+    { slots.Header }
+    { slots.Content }
     <Grid columns={2} divided>
       <Grid.Row>
         <Grid.Column width={12}>
-          {slots.Avatar}
-          {slots.Description}
-          {slots.References}
-          {slots.ForkedFrom}
+          { slots.Avatar}
+          { slots.Description }
+          { slots.References }
+          { slots.ForkedFrom }
         </Grid.Column>
         <Grid.Column textAlign='center' width={4}>
-          {slots.ViewCount}
-          {slots.EditButton}
-          {slots.ForkButton}
-          {slots.EmbedButton}
+          { slots.ViewCount }
+          { slots.EditButton }
+          { slots.ForkButton }
+          { slots.EmbedButton }
+          { slots.ExportButton }
         </Grid.Column>
       </Grid.Row>
     </Grid>
