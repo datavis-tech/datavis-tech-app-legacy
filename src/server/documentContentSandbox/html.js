@@ -21,8 +21,9 @@ function withBodyTag (src) {
 }
 
 function injectLogo (src, href) {
-  const styles = `position:fixed;right:0;bottom:0;width:64px;height:64px;background-image:url(data:image/png;base64,${logo.base64})`
-  const logoElement = `<a href="${href}" style="${styles}" target="_parent" />`
+  const styles = `position:fixed;right:3px;bottom:3px;opacity:0.8;`
+  const imgSrc = `data:image/png;base64,${logo.base64}`
+  const logoElement = `<a href="${href}" target="_parent"><img style="${styles}" width="32" height="32" src=${imgSrc}></a>`
   const bodyAsInSrc = findOpeningTag(src, 'body')
   const insertionPosition = src.indexOf(`</${bodyAsInSrc}>`)
   return `${src.slice(0, insertionPosition)}${logoElement}${src.slice(insertionPosition)}`
