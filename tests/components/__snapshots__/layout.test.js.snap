@@ -21,6 +21,10 @@ exports[`Layout should match Head snapshot 1`] = `
     rel="stylesheet"
   />
   <link
+    href="/static/codemirror/inlet.css"
+    rel="stylesheet"
+  />
+  <link
     href="/static/images/favicon.ico"
     rel="shortcut icon"
   />
