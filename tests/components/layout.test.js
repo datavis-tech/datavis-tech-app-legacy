@@ -109,16 +109,4 @@ describe('Layout', () => {
 
   })
 
-  describe('if includeCSS present', () => {
-    let style = '/style.css'
-    beforeEach(() => {
-      sut.setProps({includeCSS: style})
-    })
-
-    it(`should render the link inside Head with '${style}'`, () => {
-      expect(sut.find(Head).find(`link[href='${style}']`)).toHaveLength(1)
-    })
-
-  })
-
 })

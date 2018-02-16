@@ -27,4 +27,4 @@ class EditPage extends React.Component {
   }
 }
 
-export default Page(createViewPage(EditPage, {includeCSS: '/static/codemirror/codemirror.min.css'}))
+export default Page(createViewPage(EditPage))
