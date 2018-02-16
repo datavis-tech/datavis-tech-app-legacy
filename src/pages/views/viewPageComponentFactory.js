@@ -1,7 +1,7 @@
 import React from 'react'
 import BaseViewPage from './baseViewPage'
 
-export default (ContentComponent, {includeCSS} = {}) => (
+export default (ContentComponent) => (
   class ViewPage extends React.Component {
 
     static async getInitialProps ({query}) {
@@ -17,7 +17,6 @@ export default (ContentComponent, {includeCSS} = {}) => (
         <BaseViewPage
           id={id}
           user={user}
-          includeCSS={includeCSS}
         >
           {({doc, onError}) => (
             <ContentComponent
