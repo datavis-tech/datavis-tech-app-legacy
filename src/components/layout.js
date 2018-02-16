@@ -17,6 +17,7 @@ export default ({ children, title, user, hideNav, hideFeedback }) => (
       <meta name='viewport' content='initial-scale=1.0, width=device-width' />
       <link rel='stylesheet' href='/static/semantic/dist/semantic.min.css' />
       <link rel='stylesheet' href='/static/codemirror/codemirror.min.css' />
+      <link rel='stylesheet' href='/static/codemirror/inlet.css' />
       <link rel='shortcut icon' href='/static/images/favicon.ico' />
     </Head>
     <Container>

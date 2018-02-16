@@ -33,6 +33,7 @@ export default class CodeMirrorBinding extends Component {
       require('codemirror/mode/css/css')
       require('codemirror/mode/htmlmixed/htmlmixed')
       require('codemirror/addon/comment/comment')
+      const Inlet = require('codemirror-inlet/index-browserify')
 
       const codeMirror = CodeMirror(this.el, {
         mode: 'htmlmixed',
@@ -46,6 +47,7 @@ export default class CodeMirrorBinding extends Component {
         }
       })
       codeMirror.setSize(null, 500)
+      Inlet(codeMirror)
 
       this.binding = new ShareDBCodeMirrorBinding(codeMirror, doc, path)
       this.binding.setup()

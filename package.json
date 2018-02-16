@@ -29,6 +29,7 @@
   "dependencies": {
     "codemirror": "^5.34.0",
     "codemirror-binding": "^1.0.0",
+    "codemirror-inlet": "^0.1.9",
     "connect-redis": "^3.3.3",
     "cookie": "^0.3.1",
     "cookie-parser": "^1.4.3",
