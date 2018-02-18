@@ -17,11 +17,11 @@ export const createDocument = options => {
 
     // Required
     title,
-    description,
     owner,
     type,
 
     // Optional
+    description,
     content,
     references,
     forkedFrom,
@@ -38,14 +38,14 @@ export const createDocument = options => {
     // Version 2 introduced viewCount.
     schemaVersion: 2,
 
+    // The id of the user who owns this document.
+    owner,
+
     // Human readable title, String.
     title,
 
     // Human readable description, String.
-    description,
-
-    // The id of the user who owns this document.
-    owner,
+    description: description || '',
 
     // The content of this document, String.
     content: content === undefined ? defaultContent(type) : content,

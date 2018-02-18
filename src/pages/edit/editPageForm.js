@@ -43,6 +43,7 @@ export default (
       <label>Description</label>
       <StringBinding
         type='textarea'
+        placeholder='Enter your description here (Markdown supported)'
         doc={__shareDbDoc}
         path={['description']}
       />

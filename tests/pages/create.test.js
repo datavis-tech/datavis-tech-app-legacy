@@ -9,7 +9,6 @@ import fakeDoc from '../utils/fakeDoc'
 const mockUser = fakeUser()
 const mockDoc = fakeDoc()
 const mockTitle = 'This is a Title'
-const mockDescription = 'This is a Description'
 
 jest.mock('../../src/components/page', () => Page => Page)
 jest.mock('../../src/components/layout', () => ({children}) => children)
@@ -35,13 +34,11 @@ describe('create page', () => {
   it('should invoke createDocument for vis type', async () => {
     const sut = mount(<CreatePage type={VIS_DOC_TYPE} user={mockUser} />)
     sut.find(nodeSelector('title-input')).instance().value = mockTitle
-    sut.find(nodeSelector('description-input')).instance().value = mockDescription
 
     createDocument.mockClear()
     expect(sut.find(Form).props().onSubmit(new Event('test')))
     expect(createDocument).toHaveBeenCalledWith({
       title: mockTitle,
-      description: mockDescription,
       owner: mockUser.id,
       type: VIS_DOC_TYPE
     })
@@ -50,13 +47,11 @@ describe('create page', () => {
   it('should invoke createDocument for data type', async () => {
     const sut = mount(<CreatePage type={DATA_DOC_TYPE} user={mockUser} />)
     sut.find(nodeSelector('title-input')).instance().value = mockTitle
-    sut.find(nodeSelector('description-input')).instance().value = mockDescription
 
     createDocument.mockClear()
     expect(sut.find(Form).props().onSubmit(new Event('test')))
     expect(createDocument).toHaveBeenCalledWith({
       title: mockTitle,
-      description: mockDescription,
       owner: mockUser.id,
       type: DATA_DOC_TYPE
     })

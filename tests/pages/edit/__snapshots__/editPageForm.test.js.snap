@@ -51,7 +51,9 @@ exports[`edit page form layouts should contain slots if they were provided 1`] =
     <label>
       Description
     </label>
-    <textarea />
+    <textarea
+      placeholder="Enter your description here (Markdown supported)"
+    />
   </div>
   <div
     className="field"
@@ -140,7 +142,9 @@ exports[`edit page form layouts should not contain slots if they were not provid
     <label>
       Description
     </label>
-    <textarea />
+    <textarea
+      placeholder="Enter your description here (Markdown supported)"
+    />
   </div>
   <div
     className="field"

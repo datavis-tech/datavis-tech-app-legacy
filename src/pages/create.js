@@ -35,7 +35,6 @@ class CreatePage extends React.Component {
     // Create a new document in the ShareDB backend.
     const doc = createDocument({
       title: this.titleInput.value,
-      description: this.descriptionInput.value,
       owner: this.props.user.id,
       type: this.props.type
     })
@@ -59,16 +58,7 @@ class CreatePage extends React.Component {
             <label>Title</label>
             <input
               data-test='title-input'
-              placeholder='Enter your title here.'
               ref={(el) => { this.titleInput = el }}
-            />
-          </Form.Field>
-          <Form.Field>
-            <label>Description</label>
-            <input
-              data-test='description-input'
-              placeholder='Enter your description here (optional).'
-              ref={(el) => { this.descriptionInput = el }}
             />
           </Form.Field>
           <Button disabled={creating} loading={creating}>Create</Button>
