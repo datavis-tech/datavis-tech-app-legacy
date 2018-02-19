@@ -62,4 +62,23 @@ describe('route utils', () => {
     })
   })
 
+  describe('export urls', () => {
+    beforeEach(() => {
+      params = Symbol('params')
+      result = getHrefForRoute('export', params)
+    })
+
+    it('should try to find route', () => {
+      expect(routes.findByName).toHaveBeenCalledWith('vis')
+    })
+
+    it('should construct path from params', () => {
+      expect(getAs).toHaveBeenCalledWith(params)
+    })
+
+    it('should return href for known route', () => {
+      expect(result).toEqual(`${domain}${path}/export`)
+    })
+  })
+
 })

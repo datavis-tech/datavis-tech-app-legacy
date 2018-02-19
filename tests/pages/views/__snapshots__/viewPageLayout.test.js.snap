@@ -42,6 +42,9 @@ exports[`view page layout should render correct layout 1`] = `
         <div
           data-test="EmbedButton"
         />
+        <div
+          data-test="ExportButton"
+        />
       </div>
     </div>
   </div>
