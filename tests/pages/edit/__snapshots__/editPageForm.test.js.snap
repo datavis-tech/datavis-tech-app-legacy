@@ -94,7 +94,16 @@ exports[`edit page form layouts should contain slots if they were provided 1`] =
     className="inline field"
   >
     <label>
-      Collaborators
+      Collaborators 
+      <i
+        aria-hidden="true"
+        className="info circle icon"
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+      />
     </label>
   </div>
 </form>
@@ -165,7 +174,16 @@ exports[`edit page form layouts should not contain slots if they were not provid
     className="inline field"
   >
     <label>
-      Collaborators
+      Collaborators 
+      <i
+        aria-hidden="true"
+        className="info circle icon"
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+      />
     </label>
   </div>
 </form>
