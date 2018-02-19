@@ -75,7 +75,16 @@ exports[`edit page form layouts should contain slots if they were provided 1`] =
     className="field"
   >
     <label>
-      References
+      References 
+      <i
+        aria-hidden="true"
+        className="info circle icon"
+        onBlur={[Function]}
+        onClick={[Function]}
+        onFocus={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+      />
     </label>
     <div>
       References
