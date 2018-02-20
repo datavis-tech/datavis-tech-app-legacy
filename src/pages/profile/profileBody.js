@@ -7,26 +7,24 @@ import DocumentsList from './documentsList'
 import { serializeDocument } from '../../db/serializers'
 
 export default ({profile, documentsSubscription}) => (
-  <Grid>
-    <Grid.Column width={4}>
+  <div>
+    <Grid centered>
       <ProfileCard profile={profile} />
-    </Grid.Column>
-    <Grid.Column width={12}>
-      <Subscription subscription={documentsSubscription}>
-        {
-          ({data, isReady}) => {
+    </Grid>
+    <Subscription subscription={documentsSubscription}>
+      {
+        ({data, isReady}) => {
 
-            // Reverse order so documents are ordered from most recent to least recent.
-            const documents = (data || []).reverse()
+          // Reverse order so documents are ordered from most recent to least recent.
+          const documents = (data || []).reverse()
 
-            return (
-              <Loader ready={isReady}>
-                <DocumentsList documents={documents.map(serializeDocument)} />
-              </Loader>
-            )
-          }
+          return (
+            <Loader ready={isReady}>
+              <DocumentsList documents={documents.map(serializeDocument)} />
+            </Loader>
+          )
         }
-      </Subscription>
-    </Grid.Column>
-  </Grid>
+      }
+    </Subscription>
+  </div>
 )
