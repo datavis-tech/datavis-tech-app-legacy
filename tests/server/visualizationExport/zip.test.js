@@ -4,10 +4,12 @@ const mockZip = {
   toBuffer: () => mockZipped
 }
 jest.mock('adm-zip', () => jest.fn(() => mockZip))
+jest.mock('../../../src/server/visualizationExport/formatVisualizationDesciption', () => jest.fn(() => 'combined description'))
 
 import AdmZip from 'adm-zip'
 import fakeDoc from '../../utils/fakeDoc'
 import { serializeDocument } from '../../../src/db/serializers'
+import formatVisualizationDesciption from '../../../src/server/visualizationExport/formatVisualizationDesciption'
 import sut from '../../../src/server/visualizationExport/zip'
 
 const permissions = 0o644
@@ -18,7 +20,7 @@ describe('zip', () => {
 
   beforeAll(() => {
     global.Buffer = {
-      from: src => ({value: `${src} buffered`})
+      from: (src, encoding) => ({value: `${src} buffered`, encoding})
     }
   })
 
@@ -46,8 +48,13 @@ describe('zip', () => {
     expect(mockZip.addFile).toHaveBeenCalledWith('index.html', {value: `${document.content} buffered`}, null, permissions)
   })
 
-  it('should add description as README.md to zip', () => {
-    expect(mockZip.addFile).toHaveBeenCalledWith('README.md', {value: `${document.description} buffered`}, null, permissions)
+  it('should add description combined from both document and references as README.md to zip', () => {
+    expect(formatVisualizationDesciption).toHaveBeenCalledWith(document, referencedDocuments)
+    expect(mockZip.addFile).toHaveBeenCalledWith('README.md', {value: 'combined description buffered'}, null, permissions)
+  })
+
+  it('should add thumbnail as thumbnail.png to zip', () => {
+    expect(mockZip.addFile).toHaveBeenCalledWith('thumbnail.png', {value: `${document.thumbnail} buffered`, encoding: 'base64'}, null, permissions)
   })
 
   it('should add references as their filenames to zip', () => {

@@ -2,7 +2,7 @@
 // in any tests where a doc object is required.
 export default ({
   id,
-  data: {type, title, description, content, owner, references, collaborators, forkedFrom, isPrivate}} = {data: {}}
+  data: {type, title, description, content, owner, references, collaborators, forkedFrom, isPrivate, thumbnail}} = {data: {}}
 ) => ({
   id: id || String(Math.random()),
   data: {
@@ -14,7 +14,8 @@ export default ({
     references: references || [],
     collaborators: collaborators || [],
     forkedFrom: forkedFrom || String(Math.random()),
-    isPrivate: isPrivate || false
+    isPrivate: isPrivate || false,
+    thumbnail: thumbnail || String(Math.random())
   },
   subscribe: jest.fn(),
   on: jest.fn(),
