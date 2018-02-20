@@ -6,13 +6,8 @@ import { Form, Button, Container } from 'semantic-ui-react'
 import { Router } from '../routes'
 import { id } from '../db/accessors'
 import { createDocument } from '../db/actions'
-import { VIS_DOC_TYPE, DATA_DOC_TYPE, TECH_DOC_TYPE } from '../constants'
-
-const typeWords = {
-  [VIS_DOC_TYPE]: 'Visualization',
-  [DATA_DOC_TYPE]: 'Dataset',
-  [TECH_DOC_TYPE]: 'Technology'
-}
+import { typeWords } from '../words/typeWords'
+import { typeDescriptions } from '../words/typeDescriptions'
 
 class CreatePage extends React.Component {
 
@@ -61,7 +56,7 @@ class CreatePage extends React.Component {
               ref={(el) => { this.titleInput = el }}
             />
           </Form.Field>
-          <Button disabled={creating} loading={creating}>Create</Button>
+          <Button primary disabled={creating} loading={creating}>Create</Button>
         </Form>
       )
     }
@@ -77,6 +72,7 @@ class CreatePage extends React.Component {
           <h1 data-test='create-heading'>
             Create a {typeWords[this.props.type]}
           </h1>
+          { typeDescriptions[this.props.type] }
           { this.renderBody() }
         </Container>
       </Layout>

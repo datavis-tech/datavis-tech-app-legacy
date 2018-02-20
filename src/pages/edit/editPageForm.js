@@ -4,6 +4,8 @@ import { Link } from '../../routes'
 import CodeMirrorBinding from '../../components/codeMirrorBinding'
 import StringBinding from '../../components/stringBinding'
 import { VIS_DOC_TYPE, DATA_DOC_TYPE, TECH_DOC_TYPE } from '../../constants'
+import { ReferencesInfo } from './referencesInfo'
+import { CollaboratorsInfo } from './collaboratorsInfo'
 
 const contentLabel = {
   [VIS_DOC_TYPE]: 'index.html',
@@ -96,7 +98,7 @@ export default (
       slots.References
         ? (
           <Form.Field>
-            <label>References</label>
+            <label>References <ReferencesInfo /></label>
             { slots.References }
           </Form.Field>
         )
@@ -104,7 +106,7 @@ export default (
     }
 
     <Form.Field inline>
-      <label>Collaborators</label>
+      <label>Collaborators <CollaboratorsInfo type={document.type} /></label>
       { slots.Collaborators }
     </Form.Field>
 
