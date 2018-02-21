@@ -53,6 +53,21 @@ describe('on vis updated handler', () => {
       expect(updateThumbnail).toHaveBeenCalledWith(browser, sandbox, shareDbDoc)
     })
 
+    describe('when doc is not found', () => {
+
+      beforeEach(async (done) => {
+        updateThumbnail.mockReset()
+        getDocument.mockImplementation(() => Promise.resolve(null))
+        await sut({message: JSON.stringify(message)})
+        done()
+      })
+
+      it('should not update thubmnail', () => {
+        expect(updateThumbnail).not.toHaveBeenCalled()
+      })
+
+    })
+
   })
 
 })
