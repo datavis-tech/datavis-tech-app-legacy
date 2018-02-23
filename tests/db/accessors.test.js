@@ -148,12 +148,12 @@ describe('accessors', () => {
   describe('files', () => {
     it('should construct the "files" object expected by MagicSandbox.js', () => {
       const references = [
-        { fileName: 'foo' },
-        { fileName: 'bar' }
+        { id: 'foo', fileName: 'foo' },
+        { id: 'bar', fileName: 'bar' }
       ]
       const docs = [
-        { content: 'fooContent' },
-        { content: 'barContent' }
+        { id: 'foo', content: 'fooContent' },
+        { id: 'bar', content: 'barContent' }
       ]
       expect(files(references, docs)).toMatchObject({
         foo: { content: 'fooContent' },
