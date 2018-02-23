@@ -72,6 +72,14 @@ describe('data page layout', () => {
       })
     })
 
+    it('should disable embed button', () => {
+      expect(overrideSlots.EmbedButton).toBeNull()
+    })
+
+    it('should disable export button', () => {
+      expect(overrideSlots.ExportButton).toBeNull()
+    })
+
   })
 
   it('should render view page layout with created slots', () => {
