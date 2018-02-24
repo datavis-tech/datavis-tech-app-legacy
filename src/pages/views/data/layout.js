@@ -11,7 +11,8 @@ export default ({id, document, ownerProfile, referenceDocuments, forkedFrom, onF
       Content: <DataViewer content={document.content} />,
       References: <DocumentPreviewList title='Visualizations' documents={referenceDocuments} />,
       EmbedButton: null,
-      ExportButton: null
+      ExportButton: null,
+      FullscreenButton: null
     }
   )
 

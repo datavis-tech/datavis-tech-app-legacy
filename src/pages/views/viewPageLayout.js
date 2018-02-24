@@ -19,6 +19,7 @@ export default (slots) => (
           { slots.ForkButton }
           { slots.EmbedButton }
           { slots.ExportButton }
+          { slots.FullscreenButton }
         </Grid.Column>
       </Grid.Row>
     </Grid>
