@@ -21,18 +21,12 @@ module.exports = (backend) => {
   const extractContent = partialRight(get, 'content')
 
   return async ({id, href, origin}) => {
-
-    console.log(id, href, origin)
-
     const injectLogoWithHrefToVis = href ? partialRight(injectLogo, href) : identity
     const getProccessedHtml = flow([prepareHtml, injectLogoWithHrefToVis])
     const getMagicSandbox = partialRight(magicSandbox, origin)
 
     const serializedDocument = serializeDocument(await getDocumentFromConnection(id))
     const serializedReferencedDocuments = (await getReferencedDocumentsFromConnection(serializedDocument.referencesIds)).map(serializeDocument)
-
-    console.log(serializedDocument.references)
-    console.log(serializedReferencedDocuments.map(rd => rd.id))
 
     const getDocumentFilesFromReferences = partialRight(filesAccessor, serializedReferencedDocuments)
 
