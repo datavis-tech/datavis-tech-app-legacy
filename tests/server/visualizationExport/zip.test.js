@@ -35,8 +35,8 @@ describe('zip', () => {
 
   beforeEach(() => {
     referencesNames = [String(Math.random()), String(Math.random())]
-    document = serializeDocument(fakeDoc({data: {references: referencesNames.map(fileName => ({fileName}))}}))
     referencedDocuments = referencesNames.map(() => serializeDocument(fakeDoc()))
+    document = serializeDocument(fakeDoc({data: {references: referencedDocuments.map((rd, i) => ({id: rd.id, fileName: referencesNames[i]}))}}))
     result = sut(document, referencedDocuments)
   })
 

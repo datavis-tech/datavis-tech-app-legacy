@@ -21,7 +21,6 @@ module.exports = (backend) => {
   const extractContent = partialRight(get, 'content')
 
   return async ({id, href, origin}) => {
-
     const injectLogoWithHrefToVis = href ? partialRight(injectLogo, href) : identity
     const getProccessedHtml = flow([prepareHtml, injectLogoWithHrefToVis])
     const getMagicSandbox = partialRight(magicSandbox, origin)

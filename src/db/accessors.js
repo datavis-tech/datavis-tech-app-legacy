@@ -1,4 +1,6 @@
 const get = require('lodash/get')
+const find = require('lodash/find')
+
 // TODO split this into separate files for each accessor.
 
 /****************************
@@ -79,9 +81,9 @@ const allReferencesLoaded = (references, referenceDocuments) => {
 // Constructs the "files" object expected by MagicSandbox.js,
 // using the file names from `references`, and content from `referenceDocs`.
 const files = (references, referenceDocuments) => references
-  .reduce((files, {fileName}, i) => {
+  .reduce((files, {id, fileName}) => {
     files[fileName] = {
-      content: referenceDocuments[i].content
+      content: find(referenceDocuments, {id}).content
     }
     return files
   }, {})
