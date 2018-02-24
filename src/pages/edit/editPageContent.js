@@ -6,6 +6,7 @@ import { serializeDocument } from '../../db/serializers'
 import * as actions from '../../db/actions'
 import Subscription from '../../components/subscription'
 import Runner from '../../components/runner/runner'
+import FullscreenButton from '../../pages/views/slots/fullscreenButton'
 import EditPageForm from './editPageForm'
 import Collaborators from './collaborators'
 import AddCollaboratorModal from './addCollaboratorModal'
@@ -93,15 +94,19 @@ export default class EditPageContent extends React.Component {
                       : null
                   }
                 />
-                <Button
-                  negative
-                  disabled={this.deletingDocument}
-                  loading={this.deletingDocument}
-                  onClick={this.showDeleteConfirmModal}
-                  style={{marginTop: '1em'}}
-                >
-                  Delete this document
-                </Button>
+                <Button.Group vertical>
+                  <Button
+                    negative
+                    disabled={this.deletingDocument}
+                    loading={this.deletingDocument}
+                    onClick={this.showDeleteConfirmModal}
+                    style={{marginTop: '1em'}}
+                    data-test='delete-button'
+                  >
+                    Delete this document
+                  </Button>
+                  <FullscreenButton id={this.document.id} style={{marginTop: '1em'}} />
+                </Button.Group>
               </React.Fragment>
             )
           }

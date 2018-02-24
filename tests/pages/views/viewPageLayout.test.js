@@ -19,6 +19,7 @@ describe('view page layout', () => {
   let ForkButton
   let EmbedButton
   let ExportButton
+  let FullscreenButton
 
   beforeEach(() => {
     Header = <div data-test='Header' />
@@ -31,6 +32,7 @@ describe('view page layout', () => {
     ForkButton = <div data-test='ForkButton' />
     EmbedButton = <div data-test='EmbedButton' />
     ExportButton = <div data-test='ExportButton' />
+    FullscreenButton = <div data-test='FullscreenButton' />
 
     props = {
       Header,
@@ -42,7 +44,8 @@ describe('view page layout', () => {
       EditButton,
       ForkButton,
       EmbedButton,
-      ExportButton
+      ExportButton,
+      FullscreenButton
     }
 
     sut = mount(<ViewPageLayout {...props} />)
@@ -86,6 +89,10 @@ describe('view page layout', () => {
 
   it('should render export button', () => {
     expect(sut.find(nodeSelector('ExportButton')).exists()).toBeTruthy()
+  })
+
+  it('should render fullscreen button', () => {
+    expect(sut.find(nodeSelector('FullscreenButton')).exists()).toBeTruthy()
   })
 
   it('should render correct layout', () => {

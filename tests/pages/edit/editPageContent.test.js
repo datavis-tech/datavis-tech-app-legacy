@@ -1,6 +1,5 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import { Button } from 'semantic-ui-react'
 
 jest.mock('../../../src/pages/edit/editPageForm')
 import EditPageForm from '../../../src/pages/edit/editPageForm'
@@ -11,6 +10,7 @@ import ReferencesSubscription from '../../../src/db/subscriptions/documentSubscr
 import fakeDoc from '../../utils/fakeDoc'
 import fakeUser from '../../utils/fakeUser'
 import fakeSubscription from '../../utils/fakeSubscription'
+import nodeSelector from '../../utils/nodeSelector'
 
 jest.mock('../../../src/db/actions')
 import {
@@ -31,6 +31,8 @@ import DeleteConfirmModal from '../../../src/pages/edit/deleteConfirmModal'
 import Collaborators from '../../../src/pages/edit/collaborators'
 
 import Runner from '../../../src/components/runner/runner'
+
+import FullscreenButton from '../../../src/pages/views/slots/fullscreenButton'
 
 import EditPageContent from '../../../src/pages/edit/editPageContent'
 
@@ -208,10 +210,14 @@ describe('edit page content', () => {
 
   })
 
+  it('should have fullscreen button', () => {
+    expect(sut.find(FullscreenButton).exists()).toBeTruthy()
+  })
+
   describe('delete document', () => {
 
     it('should show delete confirmation modal on delete button click', () => {
-      sut.find(Button).simulate('click')
+      sut.find(nodeSelector('delete-button')).at(0).simulate('click')
       expect(setState).toHaveBeenCalledWith({
         showDeleteConfirmModal: true
       })

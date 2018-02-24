@@ -8,6 +8,7 @@ import ForkButton from './forkButton'
 import EmbedButton from './embedButton'
 import ExportButton from './exportButton'
 import ViewCount from './viewCount'
+import FullscreenButton from './fullscreenButton'
 
 export default ({id, ownerProfile, document, forkedFrom, onFork}, overrideSlots = {}) => {
   const slots = {
@@ -19,7 +20,8 @@ export default ({id, ownerProfile, document, forkedFrom, onFork}, overrideSlots 
     EditButton: <EditButton id={id} />,
     ForkButton: <ForkButton onFork={onFork} />,
     EmbedButton: <EmbedButton id={id} />,
-    ExportButton: <ExportButton id={id} />
+    ExportButton: <ExportButton id={id} />,
+    FullscreenButton: <FullscreenButton id={id} />
   }
 
   return {...slots, ...overrideSlots}

@@ -6,6 +6,7 @@ import EditButton from '../../../../src/pages/views/slots/editButton'
 import ForkButton from '../../../../src/pages/views/slots/forkButton'
 import EmbedButton from '../../../../src/pages/views/slots/embedButton'
 import ExportButton from '../../../../src/pages/views/slots/exportButton'
+import FullscreenButton from '../../../../src/pages/views/slots/fullscreenButton'
 
 import sut from '../../../../src/pages/views/slots/slotsFactory'
 
@@ -85,6 +86,11 @@ describe('slots factory', () => {
       expect(slots.ExportButton.type).toBe(ExportButton)
       expect(slots.ExportButton.props).toMatchObject({id})
     })
+
+    it('should contain fullscreen button', () => {
+      expect(slots.FullscreenButton.type).toBe(FullscreenButton)
+      expect(slots.FullscreenButton.props).toMatchObject({id})
+    })
   })
 
   describe('overrides', () => {
@@ -99,6 +105,7 @@ describe('slots factory', () => {
     let CustomForkButton
     let CustomEmbedButton
     let CustomExportButton
+    let CustomFullscreenButton
 
     beforeEach(() => {
       CustomHeader = Symbol('Header')
@@ -111,6 +118,7 @@ describe('slots factory', () => {
       CustomForkButton = Symbol('ForkButton')
       CustomEmbedButton = Symbol('EmbedButton')
       CustomExportButton = Symbol('ExportButton')
+      CustomFullscreenButton = Symbol('FullscreenButton')
 
       slots = sut(props, {
         Header: CustomHeader,
@@ -122,7 +130,8 @@ describe('slots factory', () => {
         EditButton: CustomEditButton,
         ForkButton: CustomForkButton,
         EmbedButton: CustomEmbedButton,
-        ExportButton: CustomExportButton
+        ExportButton: CustomExportButton,
+        FullscreenButton: CustomFullscreenButton
       })
 
     })
@@ -165,6 +174,10 @@ describe('slots factory', () => {
 
     it('should allow to override export button', () => {
       expect(slots.ExportButton).toBe(CustomExportButton)
+    })
+
+    it('should allow to override fullscreen button', () => {
+      expect(slots.FullscreenButton).toBe(CustomFullscreenButton)
     })
 
   })

@@ -80,6 +80,10 @@ describe('data page layout', () => {
       expect(overrideSlots.ExportButton).toBeNull()
     })
 
+    it('should disable fullsreen button', () => {
+      expect(overrideSlots.FullscreenButton).toBeNull()
+    })
+
   })
 
   it('should render view page layout with created slots', () => {
