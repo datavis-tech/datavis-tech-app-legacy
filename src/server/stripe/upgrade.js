@@ -1,5 +1,6 @@
 const fetchUser = require('./fetchUser')
 const setStripeCustomerId = require('../../db/actions/setStripeCustomerId')
+const { EARLY_ADOPTER } = require('./plans')
 
 const upgrade = (expressApp, stripe, connection) => {
 
@@ -33,7 +34,7 @@ const upgrade = (expressApp, stripe, connection) => {
             resolve(stripe.subscriptions.create({
               customer: customer.id,
               items: [{
-                plan: 'early-adopter'
+                plan: EARLY_ADOPTER
               }]
             }))
           }, 5000)
