@@ -82,6 +82,44 @@ To rebuild the image without clearing cache:
 
 If you're just getting started with the system, please watch this video to learn how to run and use it locally: [Datavis Tech Manual Testing](https://www.youtube.com/watch?v=K_kEzndQ66U&feature=youtu.be).
 
+## Debug
+
+### Server code
+
+In order to debug server code launch app via:
+```
+yarn debug
+```
+
+Inside docker:
+```
+docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
+```
+
+It is possible to integrate node inspector with IDE:
+  1. VS code -- create launch.json witht the next content:
+  ```
+  {
+      // Use IntelliSense to learn about possible attributes.
+      // Hover to view descriptions of existing attributes.
+      // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+      "version": "0.2.0",
+      "configurations": [
+          {
+              "type": "node",
+              "request": "attach",
+              "name": "datavis",
+              "protocol": "inspector",
+              "address": "localhost",
+              "port": "56745",
+              "remoteRoot": "/usr/src/app/",
+              "localRoot": "${workspaceRoot}/"
+          }
+      ]
+  }
+  ```
+  **Note:** `yarn debug` should be launched before.
+
 # Testing and Linting
 
 We use unit tests with [Jest](https://github.com/facebook/jest) in this project. To run the tests, run

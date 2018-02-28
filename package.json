@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "node src/server/index.js",
+    "debug": "node --inspect=0.0.0.0:56745 src/server/index.js",
     "build": "next build src",
     "test": "jest",
     "test:coverage": "jest --coverage",
