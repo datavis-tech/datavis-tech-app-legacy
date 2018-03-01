@@ -56,14 +56,15 @@ export default (
       plan === EARLY_ADOPTER
         ? (
           <Form.Field>
-            <label>Document Privacy</label>
-            <Form.Group>
+            <label>Privacy</label>
+            <Form.Group style={{margin: 0}}>
               <Radio
                 label='Public'
                 name='docPrivacyEditorRadioGroup'
                 value='public'
                 checked={!document.isPrivate}
                 onChange={() => onPrivacyChange(false)}
+                style={{paddingRight: '1em'}}
                 data-test='privacy-public'
               />
               <Radio
