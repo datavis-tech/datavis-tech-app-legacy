@@ -60,6 +60,7 @@ export default class EditPageContent extends React.Component {
             ({data: referenceDocuments}) => (
               <React.Fragment>
                 <EditPageForm
+                  plan={this.props.user.subscriptionPlan}
                   document={this.document}
                   __shareDbDoc={this.props.doc}
                   onPrivacyChange={this.setPrivacy}

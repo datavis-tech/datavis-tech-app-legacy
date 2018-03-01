@@ -1,5 +1,6 @@
 import React from 'react'
-import { Form, Grid, Button } from 'semantic-ui-react'
+import { Form, Grid, Button, Radio } from 'semantic-ui-react'
+import { EARLY_ADOPTER } from '../../server/stripe/plans'
 import { Link } from '../../routes'
 import CodeMirrorBinding from '../../components/codeMirrorBinding'
 import StringBinding from '../../components/stringBinding'
@@ -15,7 +16,7 @@ const contentLabel = {
 
 // The Form in the body of the page.
 export default (
-  {document, __shareDbDoc, onPrivacyChange, ...slots}
+  {plan, document, __shareDbDoc, onPrivacyChange, ...slots}
 ) => (
   <Form>
 
@@ -52,27 +53,32 @@ export default (
     </Form.Field>
 
     {
-      // <Form.Field>
-      //   <label>Document Privacy</label>
-      //   <Form.Group inline>
-      //     <Radio
-      //       label='Public'
-      //       name='docPrivacyEditorRadioGroup'
-      //       value='public'
-      //       checked={!document.isPrivate}
-      //       onChange={() => onPrivacyChange(false)}
-      //       data-test='privacy-public'
-      //     />
-      //     <Radio
-      //       label='Private'
-      //       name='docPrivacyEditorRadioGroup'
-      //       value='private'
-      //       checked={document.isPrivate}
-      //       onChange={() => onPrivacyChange(true)}
-      //       data-test='privacy-private'
-      //     />
-      //   </Form.Group>
-      // </Form.Field>
+      plan === EARLY_ADOPTER
+        ? (
+          <Form.Field>
+            <label>Document Privacy</label>
+            <Form.Group>
+              <Radio
+                label='Public'
+                name='docPrivacyEditorRadioGroup'
+                value='public'
+                checked={!document.isPrivate}
+                onChange={() => onPrivacyChange(false)}
+                data-test='privacy-public'
+              />
+              <Radio
+                label='Private'
+                name='docPrivacyEditorRadioGroup'
+                value='private'
+                checked={document.isPrivate}
+                onChange={() => onPrivacyChange(true)}
+                data-test='privacy-private'
+              />
+            </Form.Group>
+          </Form.Field>
+        )
+        : null
+
     }
 
     {
