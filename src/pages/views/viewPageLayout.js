@@ -5,7 +5,7 @@ export default (slots) => (
   <div>
     { slots.Header }
     { slots.Content }
-    <Grid columns={2} divided>
+    <Grid stackable columns={2} divided>
       <Grid.Row>
         <Grid.Column width={12}>
           { slots.Avatar}

@@ -9,7 +9,7 @@ exports[`view page layout should render correct layout 1`] = `
     data-test="Content"
   />
   <div
-    className="ui divided two column grid"
+    className="ui stackable divided two column grid"
   >
     <div
       className="row"
