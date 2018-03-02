@@ -29,11 +29,12 @@ export default ({ children, title, user, hideNav, hideFeedback }) => (
         null
       ) : (
         <div data-test='footer'>
-          <Grid textAlign='center' style={{paddingTop: '40px'}}>
-            <Grid.Column>
+          {/* reserved place for up to 16 links in footer, links are centered */}
+          <Grid stackable columns={16} textAlign='center' style={{paddingTop: '40px'}}>
+            <Grid.Column width='2'>
               <a href='https://github.com/datavis-tech/community/blob/master/README.md'>Community</a>
             </Grid.Column>
-            <Grid.Column>
+            <Grid.Column width='2'>
               <Link route='about'>
                 <a>About</a>
               </Link>
