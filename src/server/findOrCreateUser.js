@@ -29,24 +29,10 @@ module.exports = (profile, callback) => {
         if (err) {
           return callback(err)
         }
-        callback(null, profile)
+        callback(null, doc.data)
       })
     }
 
-    callback(null, profile)
-
-    // // If the user document does exist,
-    // // update it to contain the most recent profile data.
-    // const op = {
-    //   p: [],
-    //   od: doc.data,
-    //   oi: profile
-    // }
-    // doc.submitOp(op, (err) => {
-    //   if (err){
-    //     return callback(err)
-    //   }
-    //   callback(null, profile)
-    // })
+    callback(null, doc.data)
   })
 }
