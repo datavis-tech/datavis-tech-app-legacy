@@ -13,8 +13,14 @@ const DB_DOCUMENTS_COLLECTION = 'documents'
 // so a listing of documents need not download full content for each.
 const DB_DOCUMENTS_PROJECTION = 'documentsProjection'
 
+// The ShareDB Projection that contains author details for comments
+const DB_COMMENT_AUTHOR_PROJECTION = 'commentAuthorProjection'
+
 // The collection containing user records.
 const DB_USERS_COLLECTION = 'users'
+
+// The collection containing comment records.
+const DB_COMMENTS_COLLECTION = 'comments'
 
 // The value of the 'type' field in documents
 // when the document is a visualization.
@@ -39,6 +45,8 @@ module.exports = {
   DB_DOCUMENTS_COLLECTION,
   DB_DOCUMENTS_PROJECTION,
   DB_USERS_COLLECTION,
+  DB_COMMENTS_COLLECTION,
+  DB_COMMENT_AUTHOR_PROJECTION,
   VIS_DOC_TYPE,
   DATA_DOC_TYPE,
   TECH_DOC_TYPE

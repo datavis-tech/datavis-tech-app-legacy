@@ -11,7 +11,7 @@ class DataViewPage extends React.Component {
     return (
       <Fork user={user} doc={doc} onError={onError}>
         {
-          ({onFork}) => <DataViewPageContent id={id} doc={doc} onFork={onFork} />
+          ({onFork}) => <DataViewPageContent id={id} user={user} doc={doc} onFork={onFork} />
         }
       </Fork>
     )

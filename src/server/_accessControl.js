@@ -1,5 +1,6 @@
 const get = require('lodash/get')
 const { isIncrementViewCount } = require('../db/accessors')
+const { DB_COMMENTS_COLLECTION } = require('../constants')
 
 // This module implements access control rules at the ShareDB layer.
 // This prevents, for example, editing documents you don't own.
@@ -34,6 +35,7 @@ module.exports = (shareDB) => {
     // Unpack the ShareDB request object.
     const {
       op,
+      collection,
       agent: {
         isServer,
         session
@@ -58,6 +60,10 @@ module.exports = (shareDB) => {
 
     // Allow server code to do anything (e.g. create and update User entries).
     if (isServer) {
+      return done()
+    }
+
+    if (collection === DB_COMMENTS_COLLECTION) {
       return done()
     }
 

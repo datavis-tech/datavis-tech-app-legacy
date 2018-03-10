@@ -13,7 +13,7 @@ class VisViewPage extends React.Component {
     return (
       <Fork user={user} doc={doc} onError={onError}>
         {
-          ({onFork}) => <VisViewPageContent id={id} doc={doc} onFork={onFork} />
+          ({onFork}) => <VisViewPageContent id={id} user={user} doc={doc} onFork={onFork} />
         }
       </Fork>
     )

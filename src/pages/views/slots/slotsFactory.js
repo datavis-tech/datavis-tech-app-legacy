@@ -9,8 +9,9 @@ import EmbedButton from './embedButton'
 import ExportButton from './exportButton'
 import ViewCount from './viewCount'
 import FullscreenButton from './fullscreenButton'
+import Comments from './comments/connectedComments'
 
-export default ({id, ownerProfile, document, forkedFrom, onFork}, overrideSlots = {}) => {
+export default ({id, user, ownerProfile, document, forkedFrom, onFork}, overrideSlots = {}) => {
   const slots = {
     Header: <Header title={document.title} />,
     Description: <Description description={document.description} />,
@@ -21,7 +22,8 @@ export default ({id, ownerProfile, document, forkedFrom, onFork}, overrideSlots 
     ForkButton: <ForkButton onFork={onFork} />,
     EmbedButton: <EmbedButton id={id} />,
     ExportButton: <ExportButton id={id} />,
-    FullscreenButton: <FullscreenButton id={id} />
+    FullscreenButton: <FullscreenButton id={id} />,
+    Comments: <Comments author={user.id} relatedDocument={document.id} />
   }
 
   return {...slots, ...overrideSlots}

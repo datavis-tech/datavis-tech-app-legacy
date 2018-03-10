@@ -22,6 +22,11 @@ export default (slots) => (
           { slots.FullscreenButton }
         </Grid.Column>
       </Grid.Row>
+      <Grid.Row>
+        <Grid.Column width={16}>
+          { slots.Comments }
+        </Grid.Column>
+      </Grid.Row>
     </Grid>
   </div>
 )

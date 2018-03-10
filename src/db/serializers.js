@@ -1,3 +1,4 @@
+const find = require('lodash/find')
 const accessors = require('./accessors')
 
 const serializeDocument = (document) => (
@@ -18,6 +19,31 @@ const serializeDocument = (document) => (
   }
 )
 
+const serializeComment = (comment) => (
+  {
+    id: comment.id,
+    author: comment.data.author,
+    relatedDocument: comment.data.relatedDocument,
+    text: comment.data.text
+  }
+)
+
+const serializeComments = (comments, authors) => {
+
+  console.log(comments, authors)
+
+  return comments.map(comment => {
+    const author = find(authors, {id: comment.author})
+    return {
+      ...serializeComment(comment),
+      displayName: author ? author.data.displayName : '---',
+      avatarUrl: author ? author.data._json.avatar_url : null
+    }
+  })
+}
+
 module.exports = {
-  serializeDocument
+  serializeDocument,
+  serializeComment,
+  serializeComments
 }

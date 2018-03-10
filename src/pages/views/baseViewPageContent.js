@@ -3,7 +3,7 @@ import Subscription from '../../components/subscription'
 import { profile, id as getId } from '../../db/accessors'
 import { serializeDocument } from '../../db/serializers'
 
-export default ({id, doc, onFork, subscription, Layout}) => (
+export default ({id, user, doc, onFork, subscription, Layout}) => (
   <Subscription subscription={subscription}>
     {
       ({data}) => {
@@ -18,6 +18,7 @@ export default ({id, doc, onFork, subscription, Layout}) => (
           <Layout
             id={id}
             document={document}
+            user={user}
             ownerProfile={profile(profileDoc)}
             referenceDocuments={referenceDocuments}
             forkedFrom={forkedFrom}

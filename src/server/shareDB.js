@@ -4,7 +4,10 @@ const JSONStream = require('websocket-json-stream')
 const ShareDBMongo = require('sharedb-mongo')
 const { getSession } = require('./session')
 const { mongoURL } = require('../config')
-const { DB_DOCUMENTS_PROJECTION, DB_DOCUMENTS_COLLECTION } = require('../constants')
+const {
+  DB_DOCUMENTS_PROJECTION, DB_DOCUMENTS_COLLECTION,
+  DB_COMMENT_AUTHOR_PROJECTION, DB_USERS_COLLECTION
+} = require('../constants')
 const { applyAccessControlMiddleware } = require('./accessControl')
 const { applyChangeTrackingMiddleware } = require('./changeTracking')
 
@@ -25,6 +28,13 @@ backend.addProjection(DB_DOCUMENTS_PROJECTION, DB_DOCUMENTS_COLLECTION, {
   collaborators: true,
   isPrivate: true,
   thumbnail: true
+})
+
+backend.addProjection(DB_COMMENT_AUTHOR_PROJECTION, DB_USERS_COLLECTION, {
+  id: true,
+  schemaVersion: true,
+  displayName: true,
+  '_json.avatar_url': true
 })
 
 applyAccessControlMiddleware(backend)

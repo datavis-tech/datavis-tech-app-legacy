@@ -4,10 +4,10 @@ import ViewPageLayout from '../viewPageLayout'
 import { createSlots } from '../slots'
 import References from './references'
 
-export default ({id, document, ownerProfile, referenceDocuments, forkedFrom, onFork}) => {
+export default ({id, user, document, ownerProfile, referenceDocuments, forkedFrom, onFork}) => {
 
   const slots = createSlots(
-    {id, document, ownerProfile, forkedFrom, onFork},
+    {id, user, document, ownerProfile, forkedFrom, onFork},
     {
       Content: (
         <Runner

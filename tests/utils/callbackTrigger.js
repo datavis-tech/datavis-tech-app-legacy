@@ -10,3 +10,13 @@ export default class CallbackTrigger {
     }
   }
 }
+
+export function controlledCallback (impl, ctx, ...params) {
+  function callback () {
+    return impl.apply(ctx, ...params)
+  }
+
+  callback.trigger = () => callback.apply(null)
+
+  return callback
+}
