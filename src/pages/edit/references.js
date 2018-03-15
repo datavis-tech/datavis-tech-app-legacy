@@ -1,14 +1,15 @@
 import React from 'react'
 import { Input, Table, Button } from 'semantic-ui-react'
+import SearchReference from './searchReference'
 
 // TODO: test
-export default ({references, onReferenceAdd, onReferenceUpdate, onReferenceRemove}) => (
+export default ({userId, references, onReferenceAdd, onReferenceUpdate, onReferenceRemove}) => (
   <Table>
     <Table.Header>
       <Table.Row>
-        <Table.HeaderCell>File name</Table.HeaderCell>
-        <Table.HeaderCell>Document ID</Table.HeaderCell>
-        <Table.HeaderCell>
+        <Table.HeaderCell width={5}>File name</Table.HeaderCell>
+        <Table.HeaderCell width={9}>Document ID</Table.HeaderCell>
+        <Table.HeaderCell width={2}>
           <Button floated='right' primary size='small' compact onClick={() => onReferenceAdd()}>
             Add
           </Button>
@@ -20,7 +21,7 @@ export default ({references, onReferenceAdd, onReferenceUpdate, onReferenceRemov
       {
         references.map(({ fileName, id }, i) => (
           <Table.Row key={i}>
-            <Table.Cell>
+            <Table.Cell width={5}>
               <div className='ui fluid transparent input'>
                 <Input
                   placeholder='Type file name (local alias) here.'
@@ -29,16 +30,16 @@ export default ({references, onReferenceAdd, onReferenceUpdate, onReferenceRemov
                 />
               </div>
             </Table.Cell>
-            <Table.Cell>
+            <Table.Cell width={9}>
               <div className='ui fluid transparent input'>
-                <Input
-                  placeholder='Paste document ID here.'
+                <SearchReference
                   value={id}
-                  onChange={(_, {value}) => onReferenceUpdate(i, {id: value, fileName})}
+                  userId={userId}
+                  onReferenceSelect={id => onReferenceUpdate(i, {id, fileName})}
                 />
               </div>
             </Table.Cell>
-            <Table.Cell collapsing>
+            <Table.Cell width={2} collapsing>
               <Button
                 floated='right'
                 negative
