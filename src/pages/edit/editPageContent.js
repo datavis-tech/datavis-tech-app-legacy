@@ -75,6 +75,7 @@ export default class EditPageContent extends React.Component {
                     this.document.type === VIS_DOC_TYPE
                       ? (
                         <References
+                          userId={this.props.user ? this.props.user.id : null}
                           references={this.document.references}
                           onReferenceAdd={this.addReference}
                           onReferenceUpdate={this.updateReference}
