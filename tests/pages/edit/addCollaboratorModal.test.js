@@ -1,3 +1,12 @@
+/**
+ * @jest-environment jsdom
+ */
+
+// TODO react-test-renderer does not work with portal so that we need to mock it
+// Checkout https://github.com/Semantic-Org/Semantic-UI-React/issues/2454
+// and https://github.com/facebook/react/issues/11565 for details
+jest.mock('semantic-ui-react/dist/commonjs/addons/Portal/Portal', () => ({ children }) => children)
+
 import React from 'react'
 import { shallow } from 'enzyme'
 import renderer from 'react-test-renderer'
