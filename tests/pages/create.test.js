@@ -1,5 +1,6 @@
 import React from 'react'
-import { mount, shallow } from 'enzyme'
+import { mount } from 'enzyme'
+import renderer from 'react-test-renderer'
 import nodeSelector from '../utils/nodeSelector'
 import { VIS_DOC_TYPE, DATA_DOC_TYPE } from '../../src/constants'
 import { Form } from 'semantic-ui-react'
@@ -20,16 +21,6 @@ import { createDocument } from '../../src/db/actions/createDocument'
 import { Router } from '../../src/routes'
 
 describe('create page', () => {
-
-  it('should say "Create a Visualization" for vis type', async () => {
-    const sut = shallow(<CreatePage type={VIS_DOC_TYPE} />)
-    expect(sut.find(nodeSelector('create-heading')).text()).toEqual('Create a Visualization')
-  })
-
-  it('should say "Create a Dataset" for data type', async () => {
-    const sut = shallow(<CreatePage type={DATA_DOC_TYPE} />)
-    expect(sut.find(nodeSelector('create-heading')).text()).toEqual('Create a Dataset')
-  })
 
   it('should invoke createDocument for vis type', async () => {
     const sut = mount(<CreatePage type={VIS_DOC_TYPE} user={mockUser} />)
@@ -62,6 +53,13 @@ describe('create page', () => {
     Router.pushRoute.mockClear()
     expect(sut.find(Form).props().onSubmit(new Event('test')))
     expect(Router.pushRoute).toHaveBeenCalledWith('edit', { id: mockDoc.id })
+  })
+
+  it('should render correct layout', () => {
+    const tree = renderer
+      .create(<CreatePage type={DATA_DOC_TYPE} user={mockUser} />)
+      .toJSON()
+    expect(tree).toMatchSnapshot()
   })
 
 })
