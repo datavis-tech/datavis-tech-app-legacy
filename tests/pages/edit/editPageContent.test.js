@@ -15,7 +15,7 @@ import nodeSelector from '../../utils/nodeSelector'
 jest.mock('../../../src/db/actions')
 import {
   removeCollaborator, addCollaborator,
-  addReference, removeReference, updateReference
+  addReference, removeReference
 } from '../../../src/db/actions'
 
 jest.mock('../../../src/pages/edit/getProfileByUsername')
@@ -25,6 +25,9 @@ import { serializeDocument } from '../../../src/db/serializers'
 
 jest.mock('../../../src/pages/edit/addCollaboratorModal', () => () => null)
 import AddCollaboratorModal from '../../../src/pages/edit/addCollaboratorModal'
+
+jest.mock('../../../src/pages/edit/addReferenceModal', () => () => null)
+import AddReferenceModal from '../../../src/pages/edit/addReferenceModal'
 
 import DeleteConfirmModal from '../../../src/pages/edit/deleteConfirmModal'
 
@@ -168,19 +171,6 @@ describe('edit page content', () => {
           expect(ReferencesElement.props.references).toBe(doc.data.references)
         })
 
-        it('should add reference when user tries to add', () => {
-          ReferencesElement.props.onReferenceAdd()
-          expect(addReference).toHaveBeenCalledWith(doc)
-        })
-
-        it('should update reference with fileName and id when user tries to update', () => {
-          const id = String(Math.random())
-          const fileName = String(Math.random())
-          const index = Math.random()
-          ReferencesElement.props.onReferenceUpdate(index, {fileName, id})
-          expect(updateReference).toHaveBeenCalledWith(doc, index, {fileName, id})
-        })
-
         it('should remove reference when user tries to remove', () => {
           const index = Math.random()
           ReferencesElement.props.onReferenceRemove(index)
@@ -314,6 +304,56 @@ describe('edit page content', () => {
           })
         })
 
+      })
+
+    })
+
+  })
+
+  describe('add reference modal', () => {
+
+    let AddReferenceModalWrapper
+
+    beforeEach(() => {
+      AddReferenceModalWrapper = sut.find(AddReferenceModal)
+    })
+
+    it('should be on the page', () => {
+      expect(AddReferenceModalWrapper.exists()).toBeTruthy()
+    })
+
+    it('should close itself when user closes modal', () => {
+      sut.setState({
+        showAddReferenceModal: true
+      })
+      AddReferenceModalWrapper.prop('onClose')()
+      expect(sut.state('showAddReferenceModal')).toBeFalsy()
+    })
+
+    describe('on collaborator submit', () => {
+
+      let filename
+      let id
+
+      beforeEach(() => {
+        filename = String(Math.random())
+        id = String(Math.random())
+      })
+
+      beforeEach(async (done) => {
+        AddReferenceModalWrapper.prop('onReferenceSubmit')(filename, id)
+        sut.update()
+        done()
+      })
+
+      it('should add reference', () => {
+        expect(addReference).toHaveBeenCalledWith(doc, filename, id)
+      })
+
+      it('should close modal', () => {
+        expect(setState.mock.calls[0][0]).toMatchObject({
+          showAddReferenceModal: false
+        })
       })
 
     })

@@ -10,6 +10,7 @@ import FullscreenButton from '../../pages/views/slots/fullscreenButton'
 import EditPageForm from './editPageForm'
 import Collaborators from './collaborators'
 import AddCollaboratorModal from './addCollaboratorModal'
+import AddReferenceModal from './addReferenceModal'
 import DeleteConfirmModal from './deleteConfirmModal'
 import References from './references'
 import getProfileByUsername from './getProfileByUsername'
@@ -23,6 +24,7 @@ export default class EditPageContent extends React.Component {
       showDeleteConfirmModal: false,
       deletingDocument: false,
       showAddCollaboratorModal: false,
+      showAddRefrenceModal: false,
       loadingCollaboratorProfile: false,
       profileNotFound: false
     }
@@ -31,15 +33,19 @@ export default class EditPageContent extends React.Component {
     this.closeAddCollaboratorModal = this.closeAddCollaboratorModal.bind(this)
     this.submitCollaborator = this.submitCollaborator.bind(this)
 
+    this.showAddRefrenceModal = this.showAddRefrenceModal.bind(this)
+    this.closeAddReferenceModal = this.closeAddReferenceModal.bind(this)
+    this.submitReference = this.submitReference.bind(this)
+
     this.showDeleteConfirmModal = this.showDeleteConfirmModal.bind(this)
     this.hideDeleteConfirmModal = this.hideDeleteConfirmModal.bind(this)
     this.deleteDocument = this.deleteDocument.bind(this)
 
     this.removeCollaborator = actions.removeCollaborator.bind(null, props.doc)
 
-    this.updateReference = actions.updateReference.bind(null, props.doc)
     this.removeReference = actions.removeReference.bind(null, props.doc)
     this.addReference = actions.addReference.bind(null, props.doc)
+
     this.setPrivacy = actions.setDocumentPrivacy.bind(null, props.doc)
 
     this.document = serializeDocument(props.doc)
@@ -75,10 +81,8 @@ export default class EditPageContent extends React.Component {
                     this.document.type === VIS_DOC_TYPE
                       ? (
                         <References
-                          userId={this.props.user ? this.props.user.id : null}
                           references={this.document.references}
-                          onReferenceAdd={this.addReference}
-                          onReferenceUpdate={this.updateReference}
+                          onReferenceAdd={this.showAddRefrenceModal}
                           onReferenceRemove={this.removeReference}
                         />
                       )
@@ -120,6 +124,12 @@ export default class EditPageContent extends React.Component {
           onClose={this.closeAddCollaboratorModal}
           onCollaboratorSubmit={this.submitCollaborator}
         />
+        <AddReferenceModal
+          userId={this.props.user ? this.props.user.id : null}
+          show={this.state.showAddReferenceModal}
+          onClose={this.closeAddReferenceModal}
+          onReferenceSubmit={this.submitReference}
+        />
         <DeleteConfirmModal
           show={this.state.showDeleteConfirmModal}
           title={this.document.title}
@@ -159,6 +169,19 @@ export default class EditPageContent extends React.Component {
       })
     }
 
+  }
+
+  showAddRefrenceModal () {
+    this.setState({showAddReferenceModal: true})
+  }
+
+  closeAddReferenceModal () {
+    this.setState({showAddReferenceModal: false})
+  }
+
+  submitReference (...args) {
+    this.addReference(...args)
+    this.closeAddReferenceModal()
   }
 
   showDeleteConfirmModal () {

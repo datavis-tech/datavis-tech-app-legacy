@@ -1,3 +1,83 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`add collaborator modal should render correct layout 1`] = `null`;
+exports[`add collaborator modal should render correct layout 1`] = `
+<div
+  className="ui small modal transition visible active"
+  style={
+    Object {
+      "marginTop": undefined,
+    }
+  }
+>
+  <div
+    className="ui header"
+  >
+    Add Collaborator
+  </div>
+  <div
+    className="content"
+  >
+    <form
+      action={undefined}
+      className="ui form"
+      onSubmit={[Function]}
+    >
+      <div
+        className="field"
+      >
+        <label>
+          Username
+        </label>
+        <input
+          onChange={[Function]}
+          placeholder="Enter the user name of the collaborator."
+          value=""
+        />
+      </div>
+    </form>
+    <div>
+      <div
+        className="ui negative message"
+      >
+        <i
+          aria-hidden="true"
+          className="warning icon"
+        />
+        User not found.
+      </div>
+    </div>
+  </div>
+  <div
+    className="actions"
+  >
+    <button
+      className="ui button"
+      data-test="cancel"
+      disabled={undefined}
+      onClick={[Function]}
+      role="button"
+      tabIndex={undefined}
+    >
+      <i
+        aria-hidden="true"
+        className="remove icon"
+      />
+      Cancel
+    </button>
+    <button
+      className="ui loading primary disabled button"
+      data-test="addCollaborator"
+      disabled={true}
+      onClick={[Function]}
+      role="button"
+      tabIndex={-1}
+    >
+      <i
+        aria-hidden="true"
+        className="checkmark icon"
+      />
+      Add Collaborator
+    </button>
+  </div>
+</div>
+`;
