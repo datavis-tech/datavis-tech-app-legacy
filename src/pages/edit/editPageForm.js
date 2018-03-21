@@ -1,6 +1,5 @@
 import React from 'react'
 import { Form, Grid, Button, Radio } from 'semantic-ui-react'
-import { EARLY_ADOPTER } from '../../server/stripe/plans'
 import { Link } from '../../routes'
 import CodeMirrorBinding from '../../components/codeMirrorBinding'
 import StringBinding from '../../components/stringBinding'
@@ -15,9 +14,7 @@ const contentLabel = {
 }
 
 // The Form in the body of the page.
-export default (
-  {plan, document, __shareDbDoc, onPrivacyChange, ...slots}
-) => (
+export default ({ allowPrivacySwitching, document, __shareDbDoc, onPrivacyChange, ...slots }) => (
   <Form>
 
     <Form.Field>
@@ -53,7 +50,7 @@ export default (
     </Form.Field>
 
     {
-      plan === EARLY_ADOPTER
+      allowPrivacySwitching
         ? (
           <Form.Field>
             <label>Privacy</label>

@@ -7,6 +7,7 @@ const serializeDocument = (document) => (
     title: accessors.title(document),
     description: accessors.description(document),
     content: accessors.content(document),
+    owner: accessors.owner(document),
     isPrivate: accessors.isPrivate(document),
     references: accessors.references(document),
     referencesIds: accessors.referenceIds(document),

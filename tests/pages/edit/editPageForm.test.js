@@ -27,7 +27,7 @@ describe('edit page form', () => {
     onPrivacyChange = jest.fn()
     onDescriptionChange = jest.fn()
 
-    props = { plan: 'early-adopter', document, __shareDbDoc, onTitleChange, onPrivacyChange, onDescriptionChange }
+    props = { allowPrivacySwitching: true, document, __shareDbDoc, onTitleChange, onPrivacyChange, onDescriptionChange }
 
     sut = shallow(<EditPageForm {...props} />)
   })
@@ -37,6 +37,12 @@ describe('edit page form', () => {
       doc: __shareDbDoc,
       path: ['content']
     })
+  })
+
+  it('should not contain privacy switcher if is not allowed to switch privacy', () => {
+    sut.setProps({ allowPrivacySwitching: false })
+    expect(sut.find(nodeSelector('privacy-public')).exists()).toBeFalsy()
+    expect(sut.find(nodeSelector('privacy-private')).exists()).toBeFalsy()
   })
 
   describe('changes of inputs', () => {
