@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`create page should render correct layout 1`] = `
+<div
+  className="ui text container"
+>
+  <h1
+    data-test="create-heading"
+  >
+    Create a 
+    Dataset
+     
+    <i
+      aria-hidden="true"
+      className="info circle icon"
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    />
+  </h1>
+  <form
+    action={undefined}
+    className="ui form"
+    onSubmit={[Function]}
+  >
+    <div
+      className="field"
+    >
+      <label>
+        Title
+      </label>
+      <input
+        data-test="title-input"
+      />
+    </div>
+    <button
+      className="ui primary button"
+      disabled={undefined}
+      onClick={[Function]}
+      role="button"
+      tabIndex={undefined}
+    >
+      Create
+    </button>
+  </form>
+</div>
+`;

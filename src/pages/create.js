@@ -2,7 +2,7 @@ import React from 'react'
 import Page from '../components/page'
 import Layout from '../components/layout'
 import LoginButton from '../components/loginButton'
-import { Form, Button, Container } from 'semantic-ui-react'
+import { Form, Button, Container, Icon, Popup } from 'semantic-ui-react'
 import { Router } from '../routes'
 import { id } from '../db/accessors'
 import { createDocument } from '../db/actions'
@@ -70,14 +70,24 @@ class CreatePage extends React.Component {
       <Layout title={'Create | Datavis.tech'} user={this.props.user}>
         <Container text>
           <h1 data-test='create-heading'>
-            Create a {typeWords[this.props.type]}
+            Create a {typeWords[this.props.type]} <TypeInfo type={this.props.type} />
           </h1>
-          { typeDescriptions[this.props.type] }
           { this.renderBody() }
         </Container>
       </Layout>
     )
   }
+}
+
+function TypeInfo ({type}) {
+  return (
+    <Popup trigger={<Icon name='info circle' />} wide>
+      <Popup.Header>About {typeWords[type]}</Popup.Header>
+      <Popup.Content>
+        { typeDescriptions[type] }
+      </Popup.Content>
+    </Popup>
+  )
 }
 
 export default Page(CreatePage)
