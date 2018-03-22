@@ -17,9 +17,9 @@ describe('recent document query subscription', () => {
 
     query = {
       type: VIS_DOC_TYPE,
-      viewCount: { $gte: 10 },
+      viewCount: { $gte: 20 },
       isPrivate: { $ne: true },
-      $sort: { '_m.ctime': -1 }
+      $sort: { viewCount: -1 }
     }
 
     sut = RecentDocumentQuerySubscription()

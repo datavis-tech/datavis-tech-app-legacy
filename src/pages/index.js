@@ -28,7 +28,7 @@ export default Page(({ user }) => (
           {
             ({data: documents, isReady}) => (
               <Loader ready={isReady}>
-                <DocumentPreviewList title='Recent visualizations' documents={(documents || []).map(serializeDocument)} />
+                <DocumentPreviewList title='Most Viewed Visualizations' documents={(documents || []).map(serializeDocument)} />
               </Loader>
             )
           }
