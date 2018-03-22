@@ -1,6 +1,8 @@
 import React from 'react'
 import { mount } from 'enzyme'
 
+import { EARLY_ADOPTER } from '../../../src/server/stripe/plans'
+
 jest.mock('../../../src/pages/edit/editPageForm')
 import EditPageForm from '../../../src/pages/edit/editPageForm'
 
@@ -47,6 +49,7 @@ describe('edit page content', () => {
   let id
   let user
   let doc
+  let owner
   let onDocumentDelete
 
   let referencesSubscription
@@ -70,8 +73,11 @@ describe('edit page content', () => {
 
     id = String(Math.random())
     user = fakeUser()
+
+    owner = String(Math.random())
     doc = fakeDoc({
       data: {
+        owner,
         collaborators: [{id: String(Math.random())}, {id: String(Math.random())}, {id: String(Math.random())}],
         references: referenceDocs.map(rd => ({fileName: String(Math.random()), id: rd.id}))
       }
@@ -196,6 +202,29 @@ describe('edit page content', () => {
 
       })
 
+    })
+
+    describe('can switch privacy', () => {
+
+      it('should not allow switch privacy if user is not logged in', () => {
+        sut.setProps({user: undefined})
+        expect(sut.find(EditPageForm).prop('allowPrivacySwitching')).toBeFalsy()
+      })
+
+      it('should not allow to switch privacy if user is not early adopter', () => {
+        sut.setProps({user: { id: owner, subscriptionPlan: String(Math.random()) }})
+        expect(sut.find(EditPageForm).prop('allowPrivacySwitching')).toBeFalsy()
+      })
+
+      it('should not allow to switch privacy if user is early adopter but is not owner', () => {
+        sut.setProps({user: { id: String(Math.random()), subscriptionPlan: EARLY_ADOPTER }})
+        expect(sut.find(EditPageForm).prop('allowPrivacySwitching')).toBeFalsy()
+      })
+
+      it('should allow to switch privacy if user is docuemnt owner and he is early adopter', () => {
+        sut.setProps({user: { id: owner, subscriptionPlan: EARLY_ADOPTER }})
+        expect(sut.find(EditPageForm).prop('allowPrivacySwitching')).toBeTruthy()
+      })
     })
 
   })

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Button } from 'semantic-ui-react'
 import { VIS_DOC_TYPE } from '../../constants'
+import { EARLY_ADOPTER } from '../../server/stripe/plans'
 import ReferencesSubscription from '../../db/subscriptions/documentSubscriptions'
 import { serializeDocument } from '../../db/serializers'
 import * as actions from '../../db/actions'
@@ -15,6 +16,7 @@ import DeleteConfirmModal from './deleteConfirmModal'
 import References from './references'
 import getProfileByUsername from './getProfileByUsername'
 
+// TODO this component is too big
 export default class EditPageContent extends React.Component {
 
   constructor (props) {
@@ -66,7 +68,7 @@ export default class EditPageContent extends React.Component {
             ({data: referenceDocuments}) => (
               <React.Fragment>
                 <EditPageForm
-                  plan={this.props.user ? this.props.user.subscriptionPlan : null}
+                  allowPrivacySwitching={this.canSwitchPrivacy}
                   document={this.document}
                   __shareDbDoc={this.props.doc}
                   onPrivacyChange={this.setPrivacy}
@@ -199,5 +201,13 @@ export default class EditPageContent extends React.Component {
   deleteDocument () {
     this.setState({showDeleteConfirmModal: false, deletingDocument: true})
     this.props.onDocumentDelete()
+  }
+
+  get canSwitchPrivacy () {
+    if (this.props.user) {
+      return (this.document.owner === this.props.user.id) && (this.props.user.subscriptionPlan === EARLY_ADOPTER)
+    }
+
+    return false
   }
 }
