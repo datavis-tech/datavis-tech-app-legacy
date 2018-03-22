@@ -8,7 +8,9 @@ describe('referenced by subscription', () => {
 
   let sut
   let id
+  let userId
   let subscription
+  let query
 
   beforeEach(() => {
 
@@ -16,11 +18,26 @@ describe('referenced by subscription', () => {
     BaseQuerySubscription.mockReturnValue(subscription)
 
     id = Symbol('id')
-    sut = ReferencedBySubscription({id})
+    userId = Symbol('userId')
+
+    query = {
+      $and: [
+        { references: { $elemMatch: { id } } },
+        {
+          $or: [
+            { isPrivate: {$ne: true} },
+            { collaborators: { $elemMatch: { id: userId } } },
+            { owner: userId }
+          ]
+        }
+      ]
+    }
+
+    sut = ReferencedBySubscription({id, userId})
   })
 
   it('should create base query subscription instance', () => {
-    expect(BaseQuerySubscription).toHaveBeenCalledWith({references: {$elemMatch: {id}}}, DB_DOCUMENTS_COLLECTION)
+    expect(BaseQuerySubscription).toHaveBeenCalledWith(query, DB_DOCUMENTS_COLLECTION)
   })
 
   it('should be an instance of base subscription', () => {

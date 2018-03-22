@@ -23,6 +23,7 @@ describe('data page content', () => {
   let props
   let id
   let doc
+  let user
   let onFork
 
   let profileQuerySubscription
@@ -44,23 +45,26 @@ describe('data page content', () => {
 
     id = String(Math.random())
     doc = fakeDoc()
+    user = {
+      id: Symbol('id')
+    }
     onFork = Symbol('onFork')
 
-    props = {id, doc, onFork}
+    props = { id, doc, onFork, user }
 
     sut = shallow(<DataViewPageContent {...props} />)
   })
 
   it('should create profile subscription', () => {
-    expect(ProfileQuerySubscription).toHaveBeenCalledWith({id: doc.data.owner})
+    expect(ProfileQuerySubscription).toHaveBeenCalledWith({ id: doc.data.owner })
   })
 
   it('should create referenced by subscription', () => {
-    expect(ReferencedBySubscription).toHaveBeenCalledWith({id: doc.id})
+    expect(ReferencedBySubscription).toHaveBeenCalledWith({ id: doc.id, userId: user.id })
   })
 
   it('should create forked from subscription', () => {
-    expect(ForkedFromSubscription).toHaveBeenCalledWith({id: doc.data.forkedFrom}, {projection: true})
+    expect(ForkedFromSubscription).toHaveBeenCalledWith({ id: doc.data.forkedFrom }, { projection: true })
   })
 
   it('should create composite subscription of profile and references', () => {

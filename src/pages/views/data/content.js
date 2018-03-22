@@ -13,9 +13,9 @@ export default class DataViewPageContent extends React.Component {
     super(props)
 
     this.subscription = CompositeSubscription({
-      profile: ProfileQuerySubscription({id: owner(props.doc)}),
-      referenceDocs: ReferencedBySubscription({id: id(props.doc)}),
-      forkedFrom: ForkedFromSubscription({id: forkedFrom(props.doc)}, {projection: true})
+      profile: ProfileQuerySubscription({ id: owner(props.doc) }),
+      referenceDocs: ReferencedBySubscription({ id: id(props.doc), userId: props.user.id }),
+      forkedFrom: ForkedFromSubscription({ id: forkedFrom(props.doc) }, { projection: true })
     })
   }
 
