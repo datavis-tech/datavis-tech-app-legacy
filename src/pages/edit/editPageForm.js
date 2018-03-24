@@ -1,9 +1,9 @@
 import React from 'react'
 import { Form, Grid, Button, Radio } from 'semantic-ui-react'
 import { Link } from '../../routes'
-import CodeMirrorBinding from '../../components/codeMirrorBinding'
 import StringBinding from '../../components/stringBinding'
 import { VIS_DOC_TYPE, DATA_DOC_TYPE, TECH_DOC_TYPE } from '../../constants'
+import CodeMirror from './codeMirror'
 import { ReferencesInfo } from './referencesInfo'
 import { CollaboratorsInfo } from './collaboratorsInfo'
 
@@ -92,8 +92,9 @@ export default ({ allowPrivacySwitching, document, __shareDbDoc, onPrivacyChange
 
     <Form.Field>
       <label>{contentLabel[document.type]}</label>
-      <CodeMirrorBinding
-        doc={__shareDbDoc}
+      <CodeMirror
+        document={document}
+        shareDbDocument={__shareDbDoc}
         path={['content']}
       />
     </Form.Field>
