@@ -4,7 +4,7 @@ import renderer from 'react-test-renderer'
 import fakeDoc from '../../utils/fakeDoc'
 import nodeSelector from '../../utils/nodeSelector'
 import { serializeDocument } from '../../../src/db/serializers'
-import CodeMirrorBinding from '../../../src/components/codeMirrorBinding'
+import CodeMirror from '../../../src/pages/edit/codeMirror'
 import EditPageForm from '../../../src/pages/edit/editPageForm'
 
 describe('edit page form', () => {
@@ -33,8 +33,9 @@ describe('edit page form', () => {
   })
 
   it('should render content as code mirror', () => {
-    expect(sut.find(CodeMirrorBinding).props()).toMatchObject({
-      doc: __shareDbDoc,
+    expect(sut.find(CodeMirror).props()).toMatchObject({
+      document: document,
+      shareDbDocument: __shareDbDoc,
       path: ['content']
     })
   })

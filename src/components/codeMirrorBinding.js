@@ -24,11 +24,12 @@ export default class CodeMirrorBinding extends Component {
 
   componentDidMount () {
     if (process.browser) {
-      const { doc, path } = this.props
+      const { doc, path, mode, inlet = true } = this.props
 
       // Static import breaks the server, see https://github.com/codemirror/CodeMirror/issues/3701
       const CodeMirror = require('codemirror')
       require('codemirror/mode/javascript/javascript')
+      require('codemirror/mode/jsx/jsx')
       require('codemirror/mode/xml/xml')
       require('codemirror/mode/css/css')
       require('codemirror/mode/htmlmixed/htmlmixed')
@@ -36,7 +37,7 @@ export default class CodeMirrorBinding extends Component {
       const Inlet = require('codemirror-inlet/index-browserify')
 
       const codeMirror = CodeMirror(this.el, {
-        mode: 'htmlmixed',
+        mode,
         indentWithTabs: false,
         indentUnit: 2,
         lineNumbers: true,
@@ -47,7 +48,10 @@ export default class CodeMirrorBinding extends Component {
         }
       })
       codeMirror.setSize(null, 500)
-      Inlet(codeMirror)
+
+      if (inlet) {
+        Inlet(codeMirror)
+      }
 
       this.binding = new ShareDBCodeMirrorBinding(codeMirror, doc, path)
       this.binding.setup()
