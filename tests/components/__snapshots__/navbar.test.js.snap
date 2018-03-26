@@ -29,6 +29,7 @@ exports[`navbar should match snapshot with user 1`] = `
           },
           "displayName": "Fred",
           "id": undefined,
+          "subscriptionPlan": undefined,
           "username": "fred",
         }
       }
@@ -41,6 +42,7 @@ exports[`navbar should match snapshot with user 1`] = `
           },
           "displayName": "Fred",
           "id": undefined,
+          "subscriptionPlan": undefined,
           "username": "fred",
         }
       }

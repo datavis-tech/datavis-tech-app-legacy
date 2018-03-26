@@ -1,11 +1,13 @@
 // This utility creates a fake "user" object that can be used
 // in any tests where a user object is required.
 export const fakeUser = options => {
-  const {id, username, displayName, avatarUrl} = options || {id: String(Math.random())}
+  const { id, subscriptionPlan, username, displayName, avatarUrl } = options || { id: String(Math.random()), subscriptionPlan: String(Math.random()) }
   return {
     id,
+    subscriptionPlan,
     data: {
       id,
+      subscriptionPlan,
       username: username || String(Math.random()),
       displayName: displayName || String(Math.random()),
       _json: {
