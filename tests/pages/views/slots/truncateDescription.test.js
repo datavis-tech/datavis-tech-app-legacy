@@ -41,4 +41,29 @@ describe('truncate description', () => {
       .toEqual('This is codespan.')
   })
 
+  it('should render apostrophe to plain text', () => {
+    expect(truncateDescription("It's great"))
+      .toEqual("It's great")
+  })
+
+  it('should render ampersand to plain text', () => {
+    expect(truncateDescription('M & M'))
+      .toEqual('M & M')
+  })
+
+  it('should render less than to plain text', () => {
+    expect(truncateDescription('A < B'))
+      .toEqual('A < B')
+  })
+
+  it('should render greater than to plain text', () => {
+    expect(truncateDescription('A > B'))
+      .toEqual('A > B')
+  })
+
+  it('should render quote to plain text', () => {
+    expect(truncateDescription('He said "What?"'))
+      .toEqual('He said "What?"')
+  })
+
 })
