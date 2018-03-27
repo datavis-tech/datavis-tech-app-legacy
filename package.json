@@ -40,7 +40,7 @@
     "express": "^4.16.2",
     "express-session": "^1.15.6",
     "lodash": "^4.17.4",
-    "magic-sandbox": "^1.0.0",
+    "magic-sandbox": "^1.1.0",
     "marked": "^0.3.12",
     "ms": "^2.1.1",
     "next": "^4.2.3",
