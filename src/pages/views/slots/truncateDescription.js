@@ -41,7 +41,7 @@ const unescapeHTML = html => html
   .replace(/&lt;/g, '<')
   .replace(/&gt;/g, '>')
   .replace(/&quot;/g, '"')
-  .replace(/&#39;/g, "'");
+  .replace(/&#39;/g, "'")
 
 const truncate = description => unescapeHTML(ellipsis(plainText(firstLine(description))))
 
