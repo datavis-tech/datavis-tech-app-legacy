@@ -36,6 +36,13 @@ const plainText = markdown => marked(markdown, {
   renderer: PlainTextRenderer
 })
 
-const truncate = description => ellipsis(plainText(firstLine(description)))
+const unescapeHTML = html => html
+  .replace(/&amp;/, '&')
+  .replace(/&lt;/g, '<')
+  .replace(/&gt;/g, '>')
+  .replace(/&quot;/g, '"')
+  .replace(/&#39;/g, "'")
+
+const truncate = description => unescapeHTML(ellipsis(plainText(firstLine(description))))
 
 export default truncate
