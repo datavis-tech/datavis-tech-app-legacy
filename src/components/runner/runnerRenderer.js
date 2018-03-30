@@ -2,70 +2,85 @@ import React, { Component } from 'react'
 import magicSandbox from 'magic-sandbox'
 
 // Z Indices for layering iframe buffers.
-const BACK = 4;
-const FRONT = 5;
+const BACK = 4
+const FRONT = 5
+
+const defaultUpdateInterval = 300
 
 // This "dumb" component runs the code for a visualization in an iframe.
 export default class RunnerRenderer extends Component {
   constructor (props) {
     super(props)
-    const updateInterval = props.updateInterval || 300
-
+    const updateInterval = props.updateInterval || defaultUpdateInterval
     this.contentChanged = true
-
-    this.state = {
-      bufferA: {
-        zIndex: BACK,
-        srcDoc: ''
-      },
-      bufferB: {
-        zIndex: FRONT,
-        srcDoc: ''
-      }
-    };
+    this.swapped = true
 
     this.interval = setInterval(() => {
-      if (this.needsBufferSwap) {
-        this.swapBuffers()
-        this.needsBufferSwap = false
-      }
-      if (this.contentChanged) {
-        this.updateBackBuffer()
-        this.needsBufferSwap = true
+      if (this.iFrameRefA && this.iFrameRefB) {
+        if (this.needsBufferSwap) {
+          this.swapBuffers()
+          this.needsBufferSwap = false
+        }
+        if (this.contentChanged) {
+          this.updateBackBuffer()
+          this.needsBufferSwap = true
+          this.contentChanged = false
+        }
       }
     }, updateInterval)
   }
 
-  swapBuffers(){
+  swapBuffers () {
+    this.swapped = !this.swapped
+    this.backBuffer().style.zIndex = BACK
+    this.frontBuffer().style.zIndex = FRONT
   }
 
   updateBackBuffer () {
     const {template, files} = this.props
-    const backBufferName = this.state.buffers.bufferA.zIndex === BACK ? 'bufferA' : 'bufferB';
-    this.setState(Object.assign({}, this.state, {
-      [backBufferName]: {
-        zIndex: this.state.buffers[backBufferName].zIndex,
-        srcDoc: magicSandbox(template, files)
-      }
-    }))
+    const srcDoc = magicSandbox(template, files)
+    this.backBuffer().setAttribute('srcDoc', srcDoc)
   }
 
-  componentWillReceiveProps (props) {
+  backBuffer () {
+    return this.swapped ? this.iFrameRefA : this.iFrameRefB
+  }
+
+  frontBuffer () {
+    return this.swapped ? this.iFrameRefB : this.iFrameRefA
   }
 
   componentWillUnmount () {
     clearInterval(this.interval)
   }
 
-  render(){
-    return Object.values(this.state.buffers).map(({zIndex, srcDoc}) => (
-      <iframe
-        style={{zIndex}}
-        width='100%'
-        height='500'
-        scrolling='no'
-        srcDoc={srcDoc}
-      />
-    ))
+  shouldComponentUpdate (nextProps) {
+    this.contentChanged = true
+    return false
+  }
+
+  render () {
+    const width = '100%'
+    const height = '500'
+    const style = { position: 'absolute', top: '0px', left: '0px' }
+
+    return (
+      <div style={{position: 'relative', height: height + 'px'}} >
+        <iframe
+          ref={el => { this.iFrameRefA = el }}
+          style={style}
+          width={width}
+          height={height}
+          scrolling='no'
+        />
+        <iframe
+          ref={el => { this.iFrameRefB = el }}
+          style={style}
+          width={width}
+          height={height}
+          scrolling='no'
+        />
+      </div>
+    )
   }
 }
