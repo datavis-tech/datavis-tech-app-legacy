@@ -1,5 +1,6 @@
 import React from 'react'
 import { Table, Button } from 'semantic-ui-react'
+import { Link } from '../../routes'
 
 // TODO: test
 export default ({
@@ -33,7 +34,9 @@ export default ({
             <div className='ui fluid transparent'>{fileName}</div>
           </Table.Cell>
           <Table.Cell width={9}>
-            <div className='ui fluid transparent'>{id}</div>
+            <Link route={'edit'} params={{id}}>
+              <a>{id}</a>
+            </Link>
           </Table.Cell>
           <Table.Cell width={2} collapsing>
             <Button
