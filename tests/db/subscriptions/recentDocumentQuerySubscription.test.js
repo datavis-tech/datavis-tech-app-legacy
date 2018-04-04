@@ -1,4 +1,4 @@
-import { DB_DOCUMENTS_COLLECTION, VIS_DOC_TYPE } from '../../../src/constants'
+import { DB_DOCUMENTS_PROJECTION, VIS_DOC_TYPE } from '../../../src/constants'
 jest.mock('../../../src/db/subscriptions/baseQuerySubscription')
 import BaseQuerySubscription from '../../../src/db/subscriptions/baseQuerySubscription'
 
@@ -26,7 +26,7 @@ describe('recent document query subscription', () => {
   })
 
   it('should create base query subscription instance', () => {
-    expect(BaseQuerySubscription).toHaveBeenCalledWith(query, DB_DOCUMENTS_COLLECTION)
+    expect(BaseQuerySubscription).toHaveBeenCalledWith(query, DB_DOCUMENTS_PROJECTION)
   })
 
   it('should be an instance of base subscription', () => {
