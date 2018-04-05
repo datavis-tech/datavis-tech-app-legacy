@@ -2,7 +2,7 @@ jest.mock('../../../src/db/connection', () => ({
   createFetchQuery: jest.fn()
 }))
 
-import { DB_DOCUMENTS_COLLECTION, DATA_DOC_TYPE, TECH_DOC_TYPE } from '../../../src/constants'
+import { DB_DOCUMENTS_PROJECTION, DATA_DOC_TYPE, TECH_DOC_TYPE } from '../../../src/constants'
 import connection from '../../../src/db/connection'
 import fakeDoc from '../../utils/fakeDoc'
 import sut from '../../../src/db/queries/queryReferencesForCompletion'
@@ -44,7 +44,7 @@ describe('query references for completion', () => {
   })
 
   it('should fetch documents that match pattern', () => {
-    expect(connection.createFetchQuery).toHaveBeenCalledWith(DB_DOCUMENTS_COLLECTION, query, {}, expect.any(Function))
+    expect(connection.createFetchQuery).toHaveBeenCalledWith(DB_DOCUMENTS_PROJECTION, query, {}, expect.any(Function))
   })
 
   it('should return id-title mapping of matched documents', () => {

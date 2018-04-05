@@ -1,11 +1,11 @@
-import { DB_DOCUMENTS_COLLECTION, DATA_DOC_TYPE, TECH_DOC_TYPE } from '../../constants'
+import { DB_DOCUMENTS_PROJECTION, DATA_DOC_TYPE, TECH_DOC_TYPE } from '../../constants'
 import { title, id } from '../accessors'
 import connection from '../connection'
 
 export default async function queryReferencesForCompletion (userId, pattern) {
   return new Promise((resolve, reject) => (
     connection.createFetchQuery(
-      DB_DOCUMENTS_COLLECTION,
+      DB_DOCUMENTS_PROJECTION,
       createQuery(userId, pattern),
       {},
       (err, results) => {
