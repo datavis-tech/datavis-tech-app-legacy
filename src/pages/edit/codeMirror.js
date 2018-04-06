@@ -19,7 +19,8 @@ export default ({ document: {type}, shareDbDocument, path }) => {
   const props = {
     path,
     doc: shareDbDocument,
-    mode: MODES[type]
+    mode: MODES[type],
+    height: 700
   }
 
   if (type === DATA_DOC_TYPE) {
