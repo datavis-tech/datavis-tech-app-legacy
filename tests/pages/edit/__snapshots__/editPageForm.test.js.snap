@@ -126,6 +126,7 @@ exports[`edit page form layouts should contain slots if they were provided 1`] =
   </div>
   <div
     className="field"
+    style={Object {}}
   >
     <label>
       Preview
@@ -137,7 +138,6 @@ exports[`edit page form layouts should contain slots if they were provided 1`] =
   <div
     className="field"
   >
-    <label />
     <div />
   </div>
   <div
@@ -305,7 +305,6 @@ exports[`edit page form layouts should not contain slots if they were not provid
   <div
     className="field"
   >
-    <label />
     <div />
   </div>
   <div

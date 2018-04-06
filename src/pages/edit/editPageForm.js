@@ -8,9 +8,8 @@ import { ReferencesInfo } from './referencesInfo'
 import { CollaboratorsInfo } from './collaboratorsInfo'
 
 const contentLabel = {
-  [VIS_DOC_TYPE]: 'index.html',
-  [DATA_DOC_TYPE]: 'Content',
-  [TECH_DOC_TYPE]: 'Content'
+  [DATA_DOC_TYPE]: 'Data Content (drag & drop text-based data file here, e.g. .csv)',
+  [TECH_DOC_TYPE]: 'JavaScript'
 }
 
 // The Form in the body of the page.
@@ -82,7 +81,7 @@ export default ({ allowPrivacySwitching, document, __shareDbDoc, onPrivacyChange
     {
       slots.Preview
         ? (
-          <Form.Field>
+          <Form.Field style={document.type === VIS_DOC_TYPE ? { marginBottom: '0px' } : {}}>
             <label>Preview</label>
             { slots.Preview }
           </Form.Field>
@@ -91,7 +90,11 @@ export default ({ allowPrivacySwitching, document, __shareDbDoc, onPrivacyChange
     }
 
     <Form.Field>
-      <label>{contentLabel[document.type]}</label>
+      {
+        document.type in contentLabel
+          ? <label>{contentLabel[document.type]}</label>
+          : null
+      }
       <CodeMirror
         document={document}
         shareDbDocument={__shareDbDoc}

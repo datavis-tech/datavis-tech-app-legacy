@@ -24,7 +24,7 @@ export default class CodeMirrorBinding extends Component {
 
   componentDidMount () {
     if (process.browser) {
-      const { doc, path, mode, inlet = true } = this.props
+      const { doc, path, mode, inlet = true, height = 500 } = this.props
 
       // Static import breaks the server, see https://github.com/codemirror/CodeMirror/issues/3701
       const CodeMirror = require('codemirror')
@@ -47,7 +47,7 @@ export default class CodeMirrorBinding extends Component {
           'Ctrl-/': 'toggleComment'
         }
       })
-      codeMirror.setSize(null, 500)
+      codeMirror.setSize(null, height)
 
       if (inlet) {
         Inlet(codeMirror)
