@@ -9,7 +9,7 @@ export default ({error}) => {
         error
         style={{
           position: 'fixed',
-          bottom: '0px',
+          bottom: '5px',
           zIndex: 6 // Make this appear above CodeMirror editor.
         }}
       >
