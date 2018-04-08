@@ -93,6 +93,12 @@ const files = (references, referenceDocuments) => references
  ***************************/
 const profile = doc => (doc && doc.data) ? doc.data : null
 
+// TODO test
+const subscriptionId = (doc) => {
+  const p = profile(doc)
+  return p ? p.subscriptionId : null
+}
+
 /*************************
  * For "profile" objects *
  *************************/
@@ -127,6 +133,7 @@ module.exports = {
   allReferencesLoaded,
   files,
   profile,
+  subscriptionId,
   avatarURL,
   thumbnail,
   viewCount,

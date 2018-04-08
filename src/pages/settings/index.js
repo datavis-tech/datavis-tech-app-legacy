@@ -10,6 +10,7 @@ import Layout from '../../components/layout'
 import Loader from '../../components/loader'
 import stripePublishableKey from '../../config/stripePublishableKey'
 import onStripeToken from './onStripeToken'
+import cancel from './cancel'
 
 class Settings extends React.Component {
   constructor (props) {
@@ -74,7 +75,7 @@ class Settings extends React.Component {
   }
 
   renderDowngradeButton () {
-    return <button>Downgrade</button>
+    return <button onClick={cancel}>Downgrade</button>
   }
 }
 
