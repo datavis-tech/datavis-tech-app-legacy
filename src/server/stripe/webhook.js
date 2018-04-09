@@ -18,7 +18,7 @@ const webhook = (expressApp, stripe, connection) => {
         // console.log('Subscription created')
         stripeSubscription = req.body.data.object
         stripeCustomerId = stripeSubscription.customer
-        
+
         const id = stripeSubscription.id
         const plan = stripeSubscription.plan.id
         const status = stripeSubscription.status
@@ -39,7 +39,7 @@ const webhook = (expressApp, stripe, connection) => {
       case 'customer.subscription.deleted':
         stripeSubscription = req.body.data.object
         stripeCustomerId = stripeSubscription.customer
-        
+
         fetchUserByStripeCustomerId(stripeCustomerId, connection).then((doc) => {
           setSubscriptionPlan(doc, null)
           setSubscriptionStatus(doc, null)

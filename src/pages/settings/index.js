@@ -9,12 +9,16 @@ import Page from '../../components/page'
 import Layout from '../../components/layout'
 import Loader from '../../components/loader'
 import stripePublishableKey from '../../config/stripePublishableKey'
+import DonwgradeConfirmationModal from './downgradeConfirmationModal'
 import onStripeToken from './onStripeToken'
 import cancel from './cancel'
 
 class Settings extends React.Component {
   constructor (props) {
     super(props)
+    this.state = {
+      showDowngradeConfirmationModal: false
+    }
     this.subscription = ProfileSubscription({ id: this.props.user.id })
   }
 
@@ -47,6 +51,11 @@ class Settings extends React.Component {
             )
             : <p data-test='noUser'>Please log in to see your settings.</p>
         }
+        <DonwgradeConfirmationModal
+          show={this.state.showDowngradeConfirmationModal}
+          onConfirm={cancel}
+          onClose={() => this.setState({showDowngradeConfirmationModal: false})}
+        />
       </Layout>
     )
   }
@@ -75,7 +84,7 @@ class Settings extends React.Component {
   }
 
   renderDowngradeButton () {
-    return <button onClick={cancel}>Downgrade</button>
+    return <button onClick={() => this.setState({showDowngradeConfirmationModal: true})}>Downgrade</button>
   }
 }
 
