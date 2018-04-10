@@ -19,3 +19,5 @@ services:
       - DVT_REDIS_HOST=redis
       - DVT_REDIS_PORT=6379
       - DVT_MONGO_URL=mongodb://mongo:27017/datavistech
+      - DVT_STRIPE_PUBLISHABLE_KEY=${DVT_STRIPE_PUBLISHABLE_KEY}
+      - DVT_STRIPE_SECRET_KEY=${DVT_STRIPE_SECRET_KEY}
