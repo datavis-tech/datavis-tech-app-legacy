@@ -25,7 +25,8 @@ function createQuery (userId, pattern) {
       ] },
       { $or: [
         { owner: userId },
-        { collaborators: { $elemMatch: { id: userId } } }
+        { collaborators: { $elemMatch: { id: userId } } },
+        { isPrivate: { $ne: true } }
       ] }
     ]
   }

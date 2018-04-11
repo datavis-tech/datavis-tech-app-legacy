@@ -33,7 +33,8 @@ describe('query references for completion', () => {
         ] },
         { $or: [
           { owner: userId },
-          { collaborators: { $elemMatch: { id: userId } } }
+          { collaborators: { $elemMatch: { id: userId } } },
+          { isPrivate: { $ne: true } }
         ] }
       ]
     }
