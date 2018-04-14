@@ -8,6 +8,7 @@ export default ({ show, onClose, onConfirm }) => {
       <Header content='Downgrade' />
       <Modal.Content>
         <p>Are you sure want to downgrade to the free plan?</p>
+        <p>Your private documents will be deleted after 30 days.</p>
       </Modal.Content>
       <Modal.Actions>
         <Button onClick={onClose}>
