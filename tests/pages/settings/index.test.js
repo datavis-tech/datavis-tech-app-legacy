@@ -108,9 +108,9 @@ describe('settings', () => {
           expect(sut.find(StripeCheckout).props()).toMatchObject({
             label: 'Upgrade to the Early Adopter Plan',
             name: 'Datavis Tech INC.',
-            description: 'Early Adopter Plan - $3.99/mo',
+            description: 'Early Adopter Plan - $4.99/mo',
             image: '/static/images/logo/Logo_Icon_128px.png',
-            amount: 399,
+            amount: 499,
             currency: 'USD',
             token: onStripeToken,
             stripeKey: stripePublishableKey

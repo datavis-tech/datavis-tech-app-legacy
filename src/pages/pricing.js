@@ -1,7 +1,9 @@
 import React from 'react'
 import { Icon, Table, Header, Button } from 'semantic-ui-react'
+import { Link } from '../routes'
 import Page from '../components/page'
 import Layout from '../components/layout'
+import { EARLY_ADOPTER_COST_DISPLAY } from '../server/stripe/plans'
 
 const features = [
   { key: 'realtime', title: 'Real-time Collaboration' },
@@ -12,7 +14,7 @@ const features = [
 
 const plans = [
   { name: 'Free Plan', realtime: true, public: true },
-  { name: 'Early Adopter Plan ($5.99 per month)', realtime: true, public: true, private: true }
+  { name: `Early Adopter Plan (${EARLY_ADOPTER_COST_DISPLAY} per month)`, realtime: true, public: true, private: true }
   // { name: 'Paid ($7/mo)', disabled: true, realtime: true, public: true, private: true },
   // { name: 'Enterprise', disabled: true, realtime: true, public: true, private: true, onsite: true }
 ]
@@ -58,11 +60,17 @@ export default Page(({ user }) => (
   <Layout title='Pricing | Datavis.tech' user={user} hideFeedback >
     <Header as='h1'>Pricing</Header>
 
-    <p>Datavis.tech is free to use for public content, paid for private content.</p>
+    <p>Datavis.tech is free for public content, paid for private content.</p>
+
+    <p>For a limited time we are offering a special low price "Early Adopter" plan for our first customers.</p>
 
     <PricingTable />
 
-    <Button primary floated='right'>Upgrade to the Early Adopter Plan</Button>
+    <Link route='/settings'>
+      <a>
+        <Button primary floated='right'>Change Plan</Button>
+      </a>
+    </Link>
 
   </Layout>
 ))

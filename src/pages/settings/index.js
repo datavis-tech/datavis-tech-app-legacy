@@ -1,13 +1,15 @@
 import React from 'react'
 import { Header } from 'semantic-ui-react'
 import StripeCheckout from 'react-stripe-checkout'
-import { EARLY_ADOPTER } from '../../server/stripe/plans'
+import { Link } from '../../routes'
+import { EARLY_ADOPTER, EARLY_ADOPTER_COST, EARLY_ADOPTER_COST_DISPLAY } from '../../server/stripe/plans'
 import ProfileSubscription from '../../db/subscriptions/profileSubscription'
 import { profile } from '../../db/accessors'
 import Subscription from '../../components/subscription'
 import Page from '../../components/page'
 import Layout from '../../components/layout'
 import Loader from '../../components/loader'
+import LoginButton from '../../components/loginButton'
 import stripePublishableKey from '../../config/stripePublishableKey'
 import DonwgradeConfirmationModal from './downgradeConfirmationModal'
 import onStripeToken from './onStripeToken'
@@ -19,7 +21,9 @@ class Settings extends React.Component {
     this.state = {
       showDowngradeConfirmationModal: false
     }
-    this.subscription = ProfileSubscription({ id: this.props.user.id })
+    if (this.props.user) {
+      this.subscription = ProfileSubscription({ id: this.props.user.id })
+    }
   }
 
   render () {
@@ -39,9 +43,18 @@ class Settings extends React.Component {
                       {
                         <div>
                           <p>You are currently on the <strong data-test='plan'>{ this.renderPlan(profile(data) || {}) }</strong> plan.</p>
-                          {
-                            this.renderButton(profile(data) || {})
-                          }
+                          <p>
+                            {
+                              this.renderButton(profile(data) || {})
+                            }
+                          </p>
+                          <p>
+                            See also
+                            <Link route='/pricing'>
+                              <a> pricing</a>
+                            </Link>
+                            .
+                          </p>
                         </div>
                       }
                     </Loader>
@@ -49,7 +62,7 @@ class Settings extends React.Component {
                 }
               </Subscription>
             )
-            : <p data-test='noUser'>Please log in to see your settings.</p>
+            : <p data-test='noUser'>Please <LoginButton /> to see your settings.</p>
         }
         <DonwgradeConfirmationModal
           show={this.state.showDowngradeConfirmationModal}
@@ -73,9 +86,9 @@ class Settings extends React.Component {
       <StripeCheckout
         label='Upgrade to the Early Adopter Plan'
         name='Datavis Tech INC.'
-        description='Early Adopter Plan - $3.99/mo'
+        description={`Early Adopter Plan - ${EARLY_ADOPTER_COST_DISPLAY}/mo`}
         image='/static/images/logo/Logo_Icon_128px.png'
-        amount={399}
+        amount={EARLY_ADOPTER_COST}
         currency='USD'
         token={onStripeToken}
         stripeKey={stripePublishableKey}
