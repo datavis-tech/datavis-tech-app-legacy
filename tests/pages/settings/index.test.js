@@ -59,8 +59,7 @@ describe('settings', () => {
   it('should have layout', () => {
     expect(sut.find(Layout).props()).toMatchObject({
       title: `Settings | Datavis.tech`,
-      user,
-      hideFeedback: true
+      user
     })
   })
 

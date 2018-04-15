@@ -57,7 +57,7 @@ const PricingTable = () => (
 )
 
 export default Page(({ user }) => (
-  <Layout title='Pricing | Datavis.tech' user={user} hideFeedback >
+  <Layout title='Pricing | Datavis.tech' user={user} >
     <Header as='h1'>Pricing</Header>
 
     <p>Datavis.tech is free for public content, paid for private content.</p>

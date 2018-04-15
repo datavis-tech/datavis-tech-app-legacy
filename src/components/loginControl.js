@@ -25,11 +25,11 @@ export default ({ user }) => (
             </Link>
           </Dropdown.Item>
           {
-            // <Dropdown.Item>
-            //   <Link route='settings'>
-            //     <a>Settings</a>
-            //   </Link>
-            // </Dropdown.Item>
+          // <Dropdown.Item>
+          //   <Link route='settings'>
+          //     <a>Settings</a>
+          //   </Link>
+          // </Dropdown.Item>
           }
           <Dropdown.Item>
             <a href={AUTH_PATH_LOGOUT}>Sign out</a>
