@@ -12,13 +12,11 @@ export default ({ children, title, user, hideNav }) => (
       <List.Item>
         <a href='https://github.com/datavis-tech/community/blob/master/README.md'>Community</a>
       </List.Item>
-      {
-      // <List.Item>
-      //   <Link route='pricing'>
-      //     <a>Pricing</a>
-      //   </Link>
-      // </List.Item>
-      }
+      <List.Item>
+        <Link route='pricing'>
+          <a>Pricing</a>
+        </Link>
+      </List.Item>
       <List.Item>
         <a href='static/legal/Terms of Use.pdf'>Terms of Use</a>
       </List.Item>
