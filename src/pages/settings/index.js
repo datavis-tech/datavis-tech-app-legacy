@@ -31,7 +31,7 @@ class Settings extends React.Component {
     const { user } = this.props
 
     return (
-      <Layout title='Settings | Datavis.tech' user={user} hideFeedback >
+      <Layout title='Settings | Datavis.tech' user={user} >
         <Header as='h1'>Settings</Header>
         {
           user

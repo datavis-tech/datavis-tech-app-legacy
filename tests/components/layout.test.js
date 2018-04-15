@@ -87,26 +87,4 @@ describe('Layout', () => {
     })
 
   })
-
-  describe('hide Feedback', () => {
-    describe('when it is set', () => {
-      beforeEach(() => {
-        sut.setProps({hideFeedback: true})
-      })
-
-      it('should still render Navbar with user prop as undefined', () => {
-        expect(sut.find(Navbar).prop('user')).toBeUndefined()
-      })
-    })
-
-    describe('when it is not set', () => {
-
-      beforeEach(() => {
-        sut.setProps({hideFeedback: false})
-      })
-
-    })
-
-  })
-
 })
