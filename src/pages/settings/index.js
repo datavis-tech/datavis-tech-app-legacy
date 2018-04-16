@@ -43,6 +43,7 @@ class Settings extends React.Component {
                       {
                         <div>
                           <p>You are currently on the <strong data-test='plan'>{ this.renderPlan(profile(data) || {}) }</strong> plan.</p>
+                          <p>Note: If you recently upgraded, you may need to sign out and sign in again for your new plan to take effect.</p>
                           <p>
                             {
                               this.renderButton(profile(data) || {})
