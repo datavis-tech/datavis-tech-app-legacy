@@ -1,5 +1,5 @@
 import React from 'react'
-import { Header } from 'semantic-ui-react'
+import { Header, Button } from 'semantic-ui-react'
 import StripeCheckout from 'react-stripe-checkout'
 import { Link } from '../../routes'
 import { EARLY_ADOPTER, EARLY_ADOPTER_COST, EARLY_ADOPTER_COST_DISPLAY } from '../../server/stripe/plans'
@@ -97,7 +97,11 @@ class Settings extends React.Component {
   }
 
   renderDowngradeButton () {
-    return <button onClick={() => this.setState({showDowngradeConfirmationModal: true})}>Downgrade</button>
+    return (
+      <Button onClick={() => this.setState({showDowngradeConfirmationModal: true})}>
+        Downgrade
+      </Button>
+    )
   }
 }
 

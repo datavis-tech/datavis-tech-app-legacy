@@ -18,10 +18,9 @@ const cancel = (expressApp, stripe, connection) => {
         const id = subscriptionId(doc)
         return id ? Promise.resolve(id) : Promise.reject(new Error('There is no active subscriptions.'))
       })
-      .then(id => stripe.subscriptions.del(id, {at_period_end: true}))
+      .then(id => stripe.subscriptions.del(id))
       .then(() => res.send({ success: true }))
       .catch(error => res.send({ error }))
-
   })
 }
 
