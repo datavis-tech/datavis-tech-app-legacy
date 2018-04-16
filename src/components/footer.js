@@ -1,27 +1,30 @@
 import { Container, List } from 'semantic-ui-react'
 import { Link } from '../routes'
 
+// Footer with links.
+
+// To make links be styled as links (not dull gray), className='ui' was added to the <a> elements.
 export default ({ children, title, user, hideNav }) => (
-  <Container fluid textAlign='center' style={{ paddingTop: '40px' }} >
+  <Container fluid textAlign='center' style={{ paddingTop: '40px', paddingBottom: '40px' }} >
     <List bulleted horizontal link>
       <List.Item>
         <Link route='about'>
-          <a>About</a>
+          <a className='ui'>About</a>
         </Link>
       </List.Item>
       <List.Item>
-        <a href='https://github.com/datavis-tech/community/blob/master/README.md'>Community</a>
+        <a className='ui' href='https://github.com/datavis-tech/community/blob/master/README.md'>Community</a>
       </List.Item>
       <List.Item>
         <Link route='pricing'>
-          <a>Pricing</a>
+          <a className='ui'>Pricing</a>
         </Link>
       </List.Item>
       <List.Item>
-        <a href='static/legal/Terms of Use.pdf'>Terms of Use</a>
+        <a className='ui' href='static/legal/Terms of Use.pdf'>Terms</a>
       </List.Item>
       <List.Item>
-        <a href='static/legal/Privacy Policy.pdf'>Privacy Policy</a>
+        <a className='ui' href='static/legal/Privacy Policy.pdf'>Privacy</a>
       </List.Item>
     </List>
   </Container>
