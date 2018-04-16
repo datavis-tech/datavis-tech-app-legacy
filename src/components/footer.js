@@ -5,7 +5,7 @@ import { Link } from '../routes'
 
 // To make links be styled as links (not dull gray), className='ui' was added to the <a> elements.
 export default ({ children, title, user, hideNav }) => (
-  <Container fluid textAlign='center' style={{ paddingTop: '40px', paddingBottom: '50px' }} >
+  <Container fluid textAlign='center' style={{ paddingTop: '40px', paddingBottom: '40px' }} >
     <List bulleted horizontal link>
       <List.Item>
         <Link route='about'>
