@@ -24,7 +24,7 @@ module.exports = (expressApp, backend) => {
         provider_name: 'Datavis Tech',
         provider_url: 'https://datavis.tech/',
 
-        html: `<iframe src="https://datavis.tech/vis/${id}/embed" width="100%" height="500" scrolling="no" style="border: solid 1px #ddd" ></iframe>`,
+        html: `<iframe src="https://datavis.tech/vis/${id}/embed" width="960" height="500" scrolling="no" style="border: solid 1px #ddd" ></iframe>`,
         width: 960,
         height: 500,
 

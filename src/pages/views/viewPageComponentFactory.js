@@ -6,7 +6,7 @@ const Unfurl = ({ unfurlMeta }) => (
 
     <link rel='alternate'
       type='application/json+oembed'
-      href={`http://datavis.tech/oembed?url=http://datavis.tech/vis/${unfurlMeta.id}`}
+      href={`https://datavis.tech/oembed?url=https://datavis.tech/vis/${unfurlMeta.id}`}
       title={unfurlMeta.title}
     />
 
@@ -42,7 +42,6 @@ export default (ContentComponent) => (
               user={user}
               doc={doc}
               onError={onError}
-
             />
           )}
         </BaseViewPage>
