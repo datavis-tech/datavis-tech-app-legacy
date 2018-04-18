@@ -1,5 +1,5 @@
 import React from 'react'
-import DataViewer from '../../../components/dataViewer'
+import DataViewerProvider from './dataViewerProvider'
 import ViewPageLayout from '../viewPageLayout'
 import { createSlots, DocumentPreviewList } from '../slots'
 
@@ -8,7 +8,7 @@ export default ({id, document, ownerProfile, referenceDocuments, forkedFrom, onF
   const slots = createSlots(
     {id, document, ownerProfile, forkedFrom, onFork},
     {
-      Content: <DataViewer content={document.content} />,
+      Content: <DataViewerProvider document={document} />,
       References: <DocumentPreviewList title='Visualizations' documents={referenceDocuments} />,
       EmbedButton: null,
       ExportButton: null,
