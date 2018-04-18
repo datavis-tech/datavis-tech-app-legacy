@@ -14,6 +14,8 @@ const authorization = require('./authorization')
 const accessControl = require('./_accessControl')
 const addUserToOps = require('./addUserToOps')
 const stripe = require('./stripe')
+const thumbnails = require('./thumbnails')
+const oembed = require('./oembed')
 const createEmbedDocsHandler = require('./embed/handler')
 const visualizationExport = require('./visualizationExport')
 
@@ -27,6 +29,8 @@ authorization(expressApp)
 accessControl(shareDB.backend)
 addUserToOps(shareDB.backend)
 stripe(expressApp, shareDB.backend)
+thumbnails(expressApp, shareDB.backend)
+oembed(expressApp, shareDB.backend)
 visualizationExport(expressApp, shareDB.backend)
 
 // Set up the Next.js server, informing it whether we are in dev mode,

@@ -12,7 +12,7 @@ import { Container } from 'semantic-ui-react'
 
 // Sticky footer technique inspired by:
 // https://philipwalton.github.io/solved-by-flexbox/demos/sticky-footer/
-export default ({ children, title, user, hideNav }) => (
+export default ({ children, title, user, hideNav, unfurl }) => (
   <div
     style={{
       minHeight: '100vh',
@@ -28,6 +28,11 @@ export default ({ children, title, user, hideNav }) => (
       <link rel='stylesheet' href='/static/codemirror/codemirror.min.css' />
       <link rel='stylesheet' href='/static/codemirror/inlet.css' />
       <link rel='shortcut icon' href='/static/images/favicon.ico' />
+
+      {
+        unfurl
+      }
+
     </Head>
     <Container style={{ flex: 1 }}>
       { hideNav ? <Spacer /> : <Navbar user={user} /> }
