@@ -2,7 +2,7 @@ import React from 'react'
 import { shallow } from 'enzyme'
 
 import ViewPageLayout from '../../../../src/pages/views/viewPageLayout'
-import DataViewer from '../../../../src/components/dataViewer'
+import DataViewerProvider from '../../../../src/pages/views/data/dataViewerProvider'
 
 jest.mock('../../../../src/pages/views/slots')
 import { createSlots, DocumentPreviewList } from '../../../../src/pages/views/slots'
@@ -58,9 +58,9 @@ describe('data page layout', () => {
     })
 
     it('should override content', () => {
-      expect(overrideSlots.Content.type).toBe(DataViewer)
+      expect(overrideSlots.Content.type).toBe(DataViewerProvider)
       expect(overrideSlots.Content.props).toMatchObject({
-        content: props.document.content
+        document: props.document
       })
     })
 
