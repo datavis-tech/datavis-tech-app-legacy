@@ -23,18 +23,17 @@ export default Page(({ user }) => (
       <Spacer space='50px' />
       <p style={{fontSize: '1.5em', textAlign: 'center'}}>You can use this site to publish datasets and create visualizations, collaborating with others in real time.</p>
       <Spacer space='50px' />
-      <Container>
-        <Subscription subscription={RecentDocumentQuerySubscription()} >
-          {
-            ({data: documents, isReady}) => (
-              <Loader ready={isReady}>
-                <DocumentsList documents={(documents || []).map(serializeDocument)} showTech={false} />
-              </Loader>
-            )
-          }
-        </Subscription>
-      </Container>
-      <Spacer space='250px' />
+    </Container>
+    <Container>
+      <Subscription subscription={RecentDocumentQuerySubscription()} >
+        {
+          ({data: documents, isReady}) => (
+            <Loader ready={isReady}>
+              <DocumentsList documents={(documents || []).map(serializeDocument)} showTech={false} />
+            </Loader>
+          )
+        }
+      </Subscription>
     </Container>
   </Layout>
 ))
