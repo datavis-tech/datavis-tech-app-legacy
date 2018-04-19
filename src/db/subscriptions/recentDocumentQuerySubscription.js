@@ -1,9 +1,9 @@
-import { DB_DOCUMENTS_PROJECTION, VIS_DOC_TYPE } from '../../constants'
+import { DB_DOCUMENTS_PROJECTION } from '../../constants'
 import BaseQuerySubscription from './baseQuerySubscription'
 
-export default () => BaseQuerySubscription(
+export default ({ type } = {}) => BaseQuerySubscription(
   {
-    type: VIS_DOC_TYPE,
+    type,
     viewCount: { $gte: 20 },
     isPrivate: { $ne: true },
     $sort: { viewCount: -1 }

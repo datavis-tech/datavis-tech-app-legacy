@@ -1,6 +1,6 @@
 import React from 'react'
 import { Container, Header } from 'semantic-ui-react'
-import RecentVisualizationsQuerySubscription from '../db/subscriptions/recentDocumentQuerySubscription'
+import RecentDocumentQuerySubscription from '../db/subscriptions/recentDocumentQuerySubscription'
 import { serializeDocument } from '../db/serializers'
 import Subscription from '../components/subscription'
 import Page from '../components/page'
@@ -8,7 +8,7 @@ import Layout from '../components/layout'
 import Loader from '../components/loader'
 import Spacer from '../components/spacer'
 import HugeLogo from '../components/hugeLogo'
-import DocumentPreviewList from '../pages/views/slots/documentPreviewList'
+import DocumentsList from '../components/documentsList'
 
 // TODO: test
 export default Page(({ user }) => (
@@ -24,11 +24,11 @@ export default Page(({ user }) => (
       <p style={{fontSize: '1.5em', textAlign: 'center'}}>You can use this site to publish datasets and create visualizations, collaborating with others in real time.</p>
       <Spacer space='50px' />
       <Container>
-        <Subscription subscription={RecentVisualizationsQuerySubscription()} >
+        <Subscription subscription={RecentDocumentQuerySubscription()} >
           {
             ({data: documents, isReady}) => (
               <Loader ready={isReady}>
-                <DocumentPreviewList title='Most Viewed Visualizations' documents={(documents || []).map(serializeDocument)} />
+                <DocumentsList documents={(documents || []).map(serializeDocument)} showTech={false} />
               </Loader>
             )
           }

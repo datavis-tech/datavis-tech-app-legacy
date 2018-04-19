@@ -1,6 +1,6 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import DocumentsList from '../../../src/pages/profile/documentsList'
+import DocumentsList from '../../src/components/documentsList'
 
 describe('document list', () => {
 

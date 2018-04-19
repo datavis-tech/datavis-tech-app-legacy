@@ -13,8 +13,8 @@ import { Grid } from 'semantic-ui-react'
 import Loader from '../../../src/components/loader'
 import ProfileCard from '../../../src/pages/profile/profileCard'
 
-jest.mock('../../../src/pages/profile/documentsList', () => () => null)
-import DocumentsList from '../../../src/pages/profile/documentsList'
+jest.mock('../../../src/components/documentsList', () => () => null)
+import DocumentsList from '../../../src/components/documentsList'
 import ProfileBody from '../../../src/pages/profile/profileBody'
 
 describe('profile body', () => {
