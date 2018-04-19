@@ -2,8 +2,8 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { random, range } from 'lodash'
 import { Divider } from 'semantic-ui-react'
-import DocumentPreview from '../../../../src/pages/views/slots/documentPreview'
-import DocumentPreviewList from '../../../../src/pages/views/slots/documentPreviewList'
+import DocumentPreview from '../../src/components/documentPreview'
+import DocumentPreviewList from '../../src/components/documentPreviewList'
 
 describe('document preview list', () => {
 

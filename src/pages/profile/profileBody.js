@@ -1,10 +1,10 @@
 import React from 'react'
 import { Grid } from 'semantic-ui-react'
+import { serializeDocument } from '../../db/serializers'
 import Subscription from '../../components/subscription'
 import Loader from '../../components/loader'
+import DocumentsList from '../../components/documentsList'
 import ProfileCard from './profileCard'
-import DocumentsList from './documentsList'
-import { serializeDocument } from '../../db/serializers'
 
 export default ({profile, documentsSubscription}) => (
   <div>

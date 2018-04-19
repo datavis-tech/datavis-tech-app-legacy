@@ -1,4 +1,4 @@
-import { DB_DOCUMENTS_PROJECTION, VIS_DOC_TYPE } from '../../../src/constants'
+import { DB_DOCUMENTS_PROJECTION } from '../../../src/constants'
 jest.mock('../../../src/db/subscriptions/baseQuerySubscription')
 import BaseQuerySubscription from '../../../src/db/subscriptions/baseQuerySubscription'
 
@@ -15,14 +15,15 @@ describe('recent document query subscription', () => {
     subscription = Symbol('subscription')
     BaseQuerySubscription.mockReturnValue(subscription)
 
+    const type = String(Math.random())
     query = {
-      type: VIS_DOC_TYPE,
+      type,
       viewCount: { $gte: 20 },
       isPrivate: { $ne: true },
       $sort: { viewCount: -1 }
     }
 
-    sut = RecentDocumentQuerySubscription()
+    sut = RecentDocumentQuerySubscription({ type })
   })
 
   it('should create base query subscription instance', () => {

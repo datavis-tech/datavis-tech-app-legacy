@@ -1,4 +1,4 @@
-import truncateDescription from '../../../../src/pages/views/slots/truncateDescription'
+import truncateDescription from '../../src/components/truncateDescription'
 
 describe('truncate description', () => {
 

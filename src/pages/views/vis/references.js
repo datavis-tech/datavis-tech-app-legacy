@@ -1,6 +1,6 @@
 import React from 'react'
 import { DATA_DOC_TYPE, TECH_DOC_TYPE } from '../../../constants'
-import { DocumentPreviewList } from '../slots'
+import DocumentPreviewList from '../../../components/documentPreviewList'
 
 export default function References ({documents}) {
   return (

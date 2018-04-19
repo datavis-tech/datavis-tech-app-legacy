@@ -1,5 +1,5 @@
 import { List, Image } from 'semantic-ui-react'
-import { Link } from '../../../routes'
+import { Link } from '../routes'
 import truncateDescription from './truncateDescription'
 
 // Generates a Data URI for the base64 encoded thumbnail image.

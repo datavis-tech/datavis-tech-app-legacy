@@ -3,8 +3,8 @@ import { shallow } from 'enzyme'
 
 import { DATA_DOC_TYPE, TECH_DOC_TYPE } from '../../../../src/constants'
 
-jest.mock('../../../../src/pages/views/slots')
-import { DocumentPreviewList } from '../../../../src/pages/views/slots'
+jest.mock('../../../../src/components/documentPreviewList')
+import DocumentPreviewList from '../../../../src/components/documentPreviewList'
 import References from '../../../../src/pages/views/vis/references'
 
 describe('references', () => {
