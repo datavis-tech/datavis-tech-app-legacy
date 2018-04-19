@@ -23,10 +23,10 @@ const expressApp = express()
 
 // Enable CORS for cross-origin embedding (required by Embedly).
 expressApp.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  next();
-});
+  res.header('Access-Control-Allow-Origin', '*')
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
+  next()
+})
 
 expressApp.use(bodyParser.urlencoded({ extended: true }))
 expressApp.use(bodyParser.json())
