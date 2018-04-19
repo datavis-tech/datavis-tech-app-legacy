@@ -16,12 +16,7 @@ describe('recent document query subscription', () => {
     BaseQuerySubscription.mockReturnValue(subscription)
 
     const type = String(Math.random())
-    query = {
-      type,
-      viewCount: { $gte: 20 },
-      isPrivate: { $ne: true },
-      $sort: { viewCount: -1 }
-    }
+    query = {'$or': [{'type': 'vis', 'viewCount': {'$gte': 20}}, {'type': 'data', 'viewCount': {'$gte': 3}}], '$sort': {'viewCount': -1}, 'isPrivate': {'$ne': true}}
 
     sut = RecentDocumentQuerySubscription({ type })
   })

@@ -4,8 +4,8 @@ import BaseQuerySubscription from './baseQuerySubscription'
 export default () => BaseQuerySubscription(
   {
     $or: [
-      { type: VIS_DOC_TYPE, viewCount: { $gte: 20 }},
-      { type: DATA_DOC_TYPE, viewCount: { $gte: 3 }}
+      { type: VIS_DOC_TYPE, viewCount: { $gte: 20 } },
+      { type: DATA_DOC_TYPE, viewCount: { $gte: 3 } }
     ],
     isPrivate: { $ne: true },
     $sort: { viewCount: -1 }
