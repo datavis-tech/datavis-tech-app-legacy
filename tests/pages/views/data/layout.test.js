@@ -5,7 +5,8 @@ import ViewPageLayout from '../../../../src/pages/views/viewPageLayout'
 import DataViewerProvider from '../../../../src/pages/views/data/dataViewerProvider'
 
 jest.mock('../../../../src/pages/views/slots')
-import { createSlots, DocumentPreviewList } from '../../../../src/pages/views/slots'
+import { createSlots } from '../../../../src/pages/views/slots'
+import DocumentPreviewList from '../../../../src/components/documentPreviewList'
 
 import DataViewPageLayout from '../../../../src/pages/views/data/layout'
 

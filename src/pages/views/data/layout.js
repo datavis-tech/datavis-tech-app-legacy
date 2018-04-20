@@ -1,7 +1,8 @@
 import React from 'react'
 import DataViewerProvider from './dataViewerProvider'
 import ViewPageLayout from '../viewPageLayout'
-import { createSlots, DocumentPreviewList } from '../slots'
+import { createSlots } from '../slots'
+import DocumentPreviewList from '../../../components/documentPreviewList'
 
 export default ({id, document, ownerProfile, referenceDocuments, forkedFrom, onFork}) => {
 
