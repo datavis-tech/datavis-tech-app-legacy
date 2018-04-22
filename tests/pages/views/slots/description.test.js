@@ -10,8 +10,7 @@ describe('view page description', () => {
   let tag
 
   beforeEach(() => {
-    tag = String(Math.random())
-    description = `<${tag}>${String(Math.random())}</${tag}>`
+    description = String(Math.random())
     sut = shallow(<Description description={description} />)
   })
 
