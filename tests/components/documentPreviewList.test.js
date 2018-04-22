@@ -38,7 +38,7 @@ describe('document preview list', () => {
 
     it('should render N document previews with proper document', () => {
       sut.find(DocumentPreview).forEach((d, i) => {
-        expect(d.props()).toMatchObject({ ...documents[i] })
+        expect(d.props().document).toMatchObject({ ...documents[i] })
       })
     })
 

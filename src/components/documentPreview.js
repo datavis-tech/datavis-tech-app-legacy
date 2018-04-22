@@ -1,51 +1,36 @@
-import { List, Image } from 'semantic-ui-react'
-import { Link } from '../routes'
+import { Image, Card } from 'semantic-ui-react'
+import { VIS_DOC_TYPE } from '../constants'
 import truncateDescription from './truncateDescription'
+import { Link } from '../routes'
 
 // Generates a Data URI for the base64 encoded thumbnail image.
 const thumbnailSrcURI = thumbnail => `data:image/png;base64,${thumbnail}`
 
-const thumbnailScale = 2 / 3
-const thumbnailWidth = 230 * thumbnailScale
-const thumbnailHeight = 120 * thumbnailScale
+// Match thumbnail width for visualizations.
+// Use horizontal space for data and tech.
+const cardStyle = type => ({ width: type === VIS_DOC_TYPE ? '230px' : '100%' })
 
-// The nesting of Image and Link here may seem odd,
-// but this is required to get the right behavior of Next.js Routing
-// and Semantic UI, with regard to links and styling.
-const Thumbnail = ({thumbnail, type, id}) => (
-  thumbnail
-    ? (
-      <Image>
-        <Link route={type} params={{ id }}>
-          <a>
-            <Image
-              src={thumbnailSrcURI(thumbnail)}
-              width={thumbnailWidth}
-              height={thumbnailHeight}
-              style={{boxShadow: '0 0 0 1px rgba(0, 0, 0, 0.1)'}}
-            />
-          </a>
-        </Link>
-      </Image>
-    )
-    : null
+const Thumbnail = ({thumbnail}) => (
+  thumbnail ? <Image src={thumbnailSrcURI(thumbnail)} /> : null
 )
 
 // This component implements a preview for a document
 // that shows its title and a truncated version of its description.
 // Clicking on this preview will navigate to the view page for the document shown.
-const DocumentPreview = ({ id, type, title, description, thumbnail }) => (
-  <List.Item>
-    <Thumbnail thumbnail={thumbnail} id={id} type={type} />
-    <List.Content>
-      <Link route={type} params={{ id }}>
-        <a>
-          <List.Header>{title}</List.Header>
-          <List.Description>{truncateDescription(description)}</List.Description>
-        </a>
-      </Link>
-    </List.Content>
-  </List.Item>
-)
+const DocumentPreview = ({document}) => {
+  const { id, type, title, description, thumbnail, viewCount } = document
+  return (
+    <Link route={type} params={{ id }}>
+      <a className='ui card' style={cardStyle(type)} >
+        <Thumbnail thumbnail={thumbnail} />
+        <Card.Content>
+          <Card.Header>{title}</Card.Header>
+          <Card.Meta>{viewCount} views</Card.Meta>
+          <Card.Description>{truncateDescription(description)}</Card.Description>
+        </Card.Content>
+      </a>
+    </Link>
+  )
+}
 
 export default DocumentPreview
