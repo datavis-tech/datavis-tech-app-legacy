@@ -1,4 +1,4 @@
-FROM node:9.3.0
+FROM node:9.11.1
 
 RUN apt-get update
 
@@ -11,6 +11,9 @@ RUN apt-get install -yyq libappindicator1 libasound2 libatk1.0-0 libc6 libcairo2
 RUN apt-get install -yyq gconf-service lsb-release wget xdg-utils
 # and fonts
 RUN apt-get install -yyq fonts-liberation
+
+# This one is required to build the Sharp package.
+RUN apt-get install -yyq glib-dev
 
 # Create app directory
 RUN mkdir -p /usr/src/app
