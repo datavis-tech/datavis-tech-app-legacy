@@ -167,7 +167,7 @@ Work that closes an issue should be submitted as a Merge Request. To work on an 
 
 This section contains detailed information on how to launch the application in production on Amazon Web Services.
 
-## Launching the Virtual Maching
+## Launching the Virtual Machine
 
 In Amazon EC2, click "launch instance"
 
@@ -228,16 +228,23 @@ cd datavis-tech
 
 ## Set up SSL Keys (needed for HTTPS & WSS protocols)
 
-After SSHing into the virtual machine (VM), at the home directory:
+After SSHing into the remote machine, at the home directory:
 
 ```
 mkdir ssl
 ```
 
-In the super secret directory with the SSL keys:
+In the local directory with the SSL key, for example called `datavis.tech`:
 
 ```
-scp -i secret.pem ./SSL/upload/* ubuntu@datavis.tech:ssl/
+scp -i secret.pem ./datavis.tech ubuntu@datavis.tech:ssl/datavis.tech
+```
+
+In the directory with the SSL certificates, first combine them then upload:
+
+```
+cat e23afde09cde93de.crt gd_bundle-g2-g1.crt > dvt_combined.crt
+scp -i secret.pem ./dvt_combined.crt ubuntu@datavis.tech:ssl/dvt_combined.crt
 ```
 
 ## Configure NGINX
