@@ -7,14 +7,17 @@ describe('view page description', () => {
 
   let sut
   let description
+  let tag
 
   beforeEach(() => {
-    description = String(Math.random())
+    tag = String(Math.random())
+    description = `<${tag}>${String(Math.random())}</${tag}>`
     sut = shallow(<Description description={description} />)
   })
 
   it('should contain doc description', () => {
-    expect(sut.html().replace(/\s/g, '')).toEqual(`<div><p>${description}</p></div>`)
+    const escapedDescription = description.replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    expect(sut.html().replace(/\s/g, '')).toEqual(`<div><p>${escapedDescription}</p></div>`)
   })
 
 })
