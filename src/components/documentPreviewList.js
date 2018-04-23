@@ -1,21 +1,21 @@
 import React from 'react'
-import {List, Divider} from 'semantic-ui-react'
+import { Card, Divider } from 'semantic-ui-react'
 import DocumentPreview from './documentPreview'
 
 export default ({title, documents}) => {
 
   if (documents && documents.length) {
     return (
-      <div>
+      <React.Fragment>
         <Divider horizontal>{title}</Divider>
-        <List verticalAlign='middle'>
+        <Card.Group>
           {
-            documents.map(({id, ...documentAttributes}) => (
-              <DocumentPreview key={id} id={id} {...documentAttributes} />
+            documents.map(document => (
+              <DocumentPreview key={document.id} document={document} />
             ))
           }
-        </List>
-      </div>
+        </Card.Group>
+      </React.Fragment>
     )
   }
 

@@ -14,7 +14,7 @@ import DocumentsList from '../components/documentsList'
 export default Page(({ user }) => (
   <Layout title='Datavis.tech' user={user}>
     <Container text>
-      <Spacer space='100px' />
+      <Spacer space='60px' />
       <HugeLogo noLink />
       <Spacer space='10px' />
       <Container textAlign='center'>
@@ -24,16 +24,14 @@ export default Page(({ user }) => (
       <p style={{fontSize: '1.5em', textAlign: 'center'}}>You can use this site to publish datasets and create visualizations, collaborating with others in real time.</p>
       <Spacer space='50px' />
     </Container>
-    <Container>
-      <Subscription subscription={RecentDocumentQuerySubscription()} >
-        {
-          ({data: documents, isReady}) => (
-            <Loader ready={isReady}>
-              <DocumentsList documents={(documents || []).map(serializeDocument)} showTech={false} />
-            </Loader>
-          )
-        }
-      </Subscription>
-    </Container>
+    <Subscription subscription={RecentDocumentQuerySubscription()} >
+      {
+        ({data: documents, isReady}) => (
+          <Loader ready={isReady}>
+            <DocumentsList documents={(documents || []).map(serializeDocument)} />
+          </Loader>
+        )
+      }
+    </Subscription>
   </Layout>
 ))
