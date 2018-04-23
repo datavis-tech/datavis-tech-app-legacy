@@ -7,7 +7,6 @@ describe('view page description', () => {
 
   let sut
   let description
-  let tag
 
   beforeEach(() => {
     description = String(Math.random())
