@@ -1,7 +1,7 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 
-import { List } from 'semantic-ui-react'
+import { Card } from 'semantic-ui-react'
 import { Link } from '../../src/routes'
 
 import DocumentPreview from '../../src/components/documentPreview'
@@ -22,7 +22,7 @@ describe('document preview', () => {
     title = String(Math.random())
     description = String(Math.random())
 
-    props = { id, type, title, description }
+    props = { document: { id, type, title, description } }
     sut = shallow(<DocumentPreview {...props} />)
   })
 
@@ -34,11 +34,11 @@ describe('document preview', () => {
   })
 
   it('should contain header', () => {
-    expect(sut.find(List.Header).children().text()).toEqual(title)
+    expect(sut.find(Card.Header).children().text()).toEqual(title)
   })
 
   it('should use only first line of description', () => {
-    expect(sut.find(List.Description).children().text()).toEqual(description)
+    expect(sut.find(Card.Description).children().text()).toEqual(description)
   })
 
 })
