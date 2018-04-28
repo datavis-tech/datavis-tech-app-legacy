@@ -9,6 +9,7 @@
 // Draws from https://github.com/possibilities/next-github-auth/blob/60317b64f639cfd400ab8c932583341653cdb042/src/decorators/PageDecoratorInvariant.js
 
 import React from 'react'
+import store from '../stores/documentStore'
 
 // This is a singleton variable on the browser side
 // used for storing the user data from the server.
@@ -42,7 +43,7 @@ export default (Page) => {
     render () {
       // TODO subscribe to the user as a ShareDB document,
       // and pass the ShareDB document down through children.
-      return <Page {...this.props} />
+      return <Page {...this.props} store={store} />
     }
   }
 
