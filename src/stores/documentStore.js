@@ -1,32 +1,51 @@
-import { observable, computed, action } from 'mobx'
-import Document from './document'
+import { observable, computed, action } from 'mobx';
+import { type } from 'ot-json0'
+import Document from './document';
 
-function DocumentStore () {
-  const documents = observable.array([])
-  const recentIds = observable.array([])
+module.exports = function DocumentStore(socket) {
+    const documents = observable.array([]);
+    const recentIds = observable.array([]);
 
-  const recent = computed(() => recentIds.map(findDocumentById))
+    const recent = computed(() => recentIds.map(findDocumentById));
 
-  return {
-    get recent () {
-      return recent.get()
-    },
+    socket.on('change', action((id, diff) => {
+        const document = documents.find(d => d.id === id)
+        if (document) {
+            type.apply(document, diff)
+        }
+    }))
 
-    addRecent: action(addRecent)
-  }
+    return {
+        get recent() {
+            return recent.get();
+        },
 
-  function addRecent (documentProperties) {
-    const dedupedDocumentProperties = documentProperties.filter(
-      dp => !findDocumentById(dp.id)
-    )
+        addRecent: action(addRecent)
+    };
 
-    documents.push(...dedupedDocumentProperties.map(Document))
-    recentIds.push(...dedupedDocumentProperties.map(dp => dp.id))
-  }
+    function addRecent(documentProperties) {
+        const dedupedDocumentProperties = documentProperties.filter(
+            dp => !findDocumentById(dp.id)
+        );
 
-  function findDocumentById (id) {
-    return documents.find(d => d.id === id)
-  }
-}
+        rememberRecentIds(dedupedDocumentProperties.map(dp => dp.id));
+        add(documentProperties);
+    }
 
-export default DocumentStore()
+    function add(documentProperties) {
+        documentProperties
+          .map(Document)
+          .forEach(d => {
+            documents.push(d);
+            socket.emit('subscribe', { id: d.id })
+          });
+    }
+
+    function rememberRecentIds(ids) {
+        recentIds.push(...ids);
+    }
+
+    function findDocumentById(id) {
+        return documents.find(d => d.id === id);
+    }
+};

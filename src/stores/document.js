@@ -1,4 +1,4 @@
-import { observable } from 'mobx'
+import { observable, action } from 'mobx'
 
 export default function Document (documentProperties) {
   const title = observable.box(documentProperties.title)

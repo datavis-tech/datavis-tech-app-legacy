@@ -69,8 +69,14 @@ nextApp
 
     const httpServer = createServer(expressApp)
 
-    subscriptions(IO(httpServer), shareDB.backend)
+    const io = IO(httpServer)
+
+    subscriptions(io, shareDB.backend)
     
+    io.on('error', function(error){
+      console.log(error);
+    });
+
     shareDB.setup(httpServer)
 
     httpServer.listen(3000, (err) => {
