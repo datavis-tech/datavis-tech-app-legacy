@@ -4,6 +4,7 @@
 //   https://github.com/zeit/next.js/blob/v3-beta/examples/custom-server-express/server.js
 
 const express = require('express')
+const IO = require('socket.io')
 const bodyParser = require('body-parser')
 const { createServer } = require('http')
 const next = require('next')
@@ -17,6 +18,7 @@ const stripe = require('./stripe')
 const thumbnails = require('./thumbnails')
 const oembed = require('./oembed')
 const rest = require('./rest')
+const subscriptions = require('./subscriptions')
 const createEmbedDocsHandler = require('./embed/handler')
 const visualizationExport = require('./visualizationExport')
 
@@ -64,8 +66,13 @@ expressApp.get('*', handler)
 nextApp
   .prepare()
   .then(() => {
+
     const httpServer = createServer(expressApp)
+
+    subscriptions(IO(httpServer), shareDB.backend)
+    
     shareDB.setup(httpServer)
+
     httpServer.listen(3000, (err) => {
       if (err) throw err
       console.log('> Ready on http://localhost:3000')
