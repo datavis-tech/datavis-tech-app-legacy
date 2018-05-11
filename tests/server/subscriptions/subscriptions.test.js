@@ -16,7 +16,6 @@ import subscriptions from '../../../src/server/subscriptions/subscriptions'
 describe('subscriptions', () => {
   let sut
 
-  let io
   let connection
 
   let socket
@@ -44,10 +43,9 @@ describe('subscriptions', () => {
     subscribe.mockReturnValue(subscribeHandler)
     unsubscribe.mockReturnValue(unsubscribeHandler)
 
-    io = Symbol('io')
     connection = Symbol('connection')
 
-    sut = subscriptions(io, connection)
+    sut = subscriptions(connection)
 
     socket = {
       on: jest.fn()
@@ -61,7 +59,7 @@ describe('subscriptions', () => {
   })
 
   it('should create callback factory', () => {
-    expect(createCallbackFactory).toHaveBeenCalledWith(io)
+    expect(createCallbackFactory).toHaveBeenCalledWith(socket)
   })
 
   it('should create callback registry', () => {

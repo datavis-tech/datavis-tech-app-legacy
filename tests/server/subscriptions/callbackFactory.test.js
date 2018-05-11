@@ -12,21 +12,21 @@ import emitter from '../../../src/server/subscriptions/emitter'
 import createCallbackFactory from '../../../src/server/subscriptions/callbackFactory'
 
 describe('callback factory', () => {
-  let io
-  let room
+  let socket
+  let id
   let emit
 
   beforeEach(() => {
     emit = Symbol('emit')
     emitter.mockReturnValue(emit)
 
-    io = Symbol('io')
-    room = Symbol('room')
-    createCallbackFactory(io)(room)
+    socket = Symbol('socket')
+    id = Symbol('id')
+    createCallbackFactory(socket)(id)
   })
 
   it('should create emitter', () => {
-    expect(emitter).toHaveBeenCalledWith(io, room)
+    expect(emitter).toHaveBeenCalledWith(socket, id)
   })
 
   it('should create a flow that consist of error handlind, diff computing and emiting', () => {

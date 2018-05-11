@@ -30,7 +30,6 @@ class Home extends React.Component {
   }
 
   render () {
-
     const { user, store } = this.props
 
     return (

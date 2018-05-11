@@ -3,4 +3,4 @@ const rejectOnError = require('./rejectOnError')
 const computeOTDiff = require('./computeOTDiff')
 const emitter = require('./emitter')
 
-module.exports = (io) => (room) => flow(rejectOnError, computeOTDiff, emitter(io, room))
+module.exports = socket => id => flow(rejectOnError, computeOTDiff, emitter(socket, id))

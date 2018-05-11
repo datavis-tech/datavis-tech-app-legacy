@@ -12,6 +12,7 @@ module.exports = function DocumentRepository (connection) {
   }
 
   const subscribedDocuments = {}
+  const sharedbListeners = {}
 
   return {
     getRecentDocuments,
@@ -43,13 +44,15 @@ module.exports = function DocumentRepository (connection) {
         callbacks: [callback]
       }
 
-      document.subscribe(() => {
+      sharedbListeners[id] = () => {
         const sd = serializeDocument(document)
         subscribedDocuments[id].callbacks.forEach(cb =>
           cb(null, { old, new: sd })
         )
         old = sd
-      })
+      }
+
+      document.subscribe(() => document.on('op', sharedbListeners[id]))
     } else {
       subscribedDocuments[id].callbacks.push(callback)
     }
@@ -71,7 +74,10 @@ module.exports = function DocumentRepository (connection) {
 
     if (id && subscribedDocuments[id].callbacks.length === 0) {
       subscribedDocuments[id].document.unsubscribe()
+      subscribedDocuments[id].document.removeListener('op', sharedbListeners[id])
+
       delete subscribedDocuments[id]
+      delete sharedbListeners[id]
     }
   }
 

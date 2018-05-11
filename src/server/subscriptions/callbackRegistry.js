@@ -2,7 +2,8 @@ module.exports = callbackFactory => {
   const callbacks = {}
 
   return {
-    get
+    get,
+    getAll
   }
 
   function get (id) {
@@ -11,5 +12,10 @@ module.exports = callbackFactory => {
     }
 
     return callbacks[id]
+  }
+
+  // TODO test
+  function getAll () {
+    return Object.keys(callbacks).map(id => callbacks[id])
   }
 }

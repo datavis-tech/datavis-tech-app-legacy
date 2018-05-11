@@ -1,1 +1,1 @@
-module.exports = (io, room) => diff => io.to(room).emit('change', room, diff)
+module.exports = (socket, id) => diff => socket.broadcast.emit('change', id, diff)

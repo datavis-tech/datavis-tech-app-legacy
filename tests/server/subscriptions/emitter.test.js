@@ -3,26 +3,25 @@ import emitter from '../../../src/server/subscriptions/emitter'
 describe('emmiter', () => {
   let sut
 
-  let io
-  let room
-  let emit
+  let socket
+  let id
 
   let diff
 
   beforeEach(() => {
-    room = String(Math.random())
-    emit = jest.fn()
-    io = {
-      to: jest.fn(() => ({ emit }))
+    id = String(Math.random())
+    socket = {
+      broadcast: {
+        emit: jest.fn()
+      }
     }
 
-    sut = emitter(io, room)
+    sut = emitter(socket, id)
     diff = Symbol('diff')
     sut(diff)
   })
 
   it('should emit a diff to a room', () => {
-    expect(io.to).toHaveBeenCalledWith(room)
-    expect(emit).toHaveBeenCalledWith('change', diff)
+    expect(socket.broadcast.emit).toHaveBeenCalledWith('change', id, diff)
   })
 })

@@ -68,20 +68,19 @@ nextApp
   .then(() => {
 
     const httpServer = createServer(expressApp)
-
-    const io = IO(httpServer)
-
-    subscriptions(io, shareDB.backend)
-    
-    io.on('error', function(error){
-      console.log(error);
-    });
-
     shareDB.setup(httpServer)
 
     httpServer.listen(3000, (err) => {
       if (err) throw err
       console.log('> Ready on http://localhost:3000')
+    })
+
+    const webSocketServer = createServer()
+    subscriptions(IO(webSocketServer), shareDB.backend)
+
+    webSocketServer.listen(3001, (err) => {
+      if (err) throw err
+      console.log('> Socket.io ready on http://localhost:3001')
     })
   })
 

@@ -92,14 +92,7 @@ describe('document repository', () => {
     beforeEach(() => {
       id = String(Math.random())
       title = String(Math.random())
-      document = {
-        data: {
-          id,
-          title
-        },
-        subscribe: jest.fn(),
-        unsubscribe: jest.fn()
-      }
+      document = fakeDocument({ id, data: { title } })
       connection.get.mockReturnValue(document)
 
       callback = jest.fn()
@@ -172,7 +165,6 @@ describe('document repository', () => {
     })
 
     describe('unsubscribe', () => {
-
       let secondCallback
 
       beforeEach(() => {
@@ -191,12 +183,13 @@ describe('document repository', () => {
         sut.unsubscribe(secondCallback)
         expect(document.unsubscribe).toHaveBeenCalled()
       })
-
     })
 
     function triggerUpdate (title) {
       document.data.title = title
-      document.subscribe.mock.calls[0][0]() // triggering update
+      document.subscribe.mock.calls[0][0]()
+      document.on.mock.calls[0][1]() // triggering update
     }
+
   })
 })

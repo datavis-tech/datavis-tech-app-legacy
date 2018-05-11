@@ -9,17 +9,37 @@
 // Draws from https://github.com/possibilities/next-github-auth/blob/60317b64f639cfd400ab8c932583341653cdb042/src/decorators/PageDecoratorInvariant.js
 
 import React from 'react'
-import store from '../stores'
+import DocumentStore from '../stores/documentStore'
 
 // This is a singleton variable on the browser side
 // used for storing the user data from the server.
 let globalUserData
 
-export default (Page) => {
+let store
+if (process.browser) {
+  const createSocket = require('../stores/socket').default
+  const socket = createSocket()
+  const { observe } = require('mobx')
+  const observeDocuments = documents => {
+    observe(documents, change => {
+      change.added.forEach(
+        d => socket.emit('subscribe', { id: d.id })
+      )
+    })
+  }
+  store = DocumentStore(observeDocuments)
+  socket.on('change', store.applyDiffToDocument)
+} else {
+  store = DocumentStore(() => {})
+}
+
+export default Page => {
   class WrappedPage extends React.Component {
     static async getInitialProps (pageContext) {
       // Get data about the currently logged in user.
-      const user = process.browser ? globalUserData : pageContext.req.user
+      const user = process.browser
+        ? globalUserData
+        : pageContext.req.user
 
       // Support getInitialProps on the wrapped page.
       const pageProps = Page.getInitialProps
@@ -41,8 +61,6 @@ export default (Page) => {
     }
 
     render () {
-      // TODO subscribe to the user as a ShareDB document,
-      // and pass the ShareDB document down through children.
       return <Page {...this.props} store={store} />
     }
   }
