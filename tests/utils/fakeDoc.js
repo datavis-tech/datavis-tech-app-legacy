@@ -21,6 +21,7 @@ export default ({
       thumbnail: thumbnail || String(Math.random())
     },
     subscribe: jest.fn(),
+    unsubscribe: jest.fn(),
     on: jest.fn(),
     destroy: jest.fn(),
     removeListener: jest.fn(),

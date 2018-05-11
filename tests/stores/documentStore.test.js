@@ -1,11 +1,13 @@
 jest.mock('../../src/stores/document')
 import Document from '../../src/stores/document'
-import sut from '../../src/stores/documentStore'
+import DocumentStore from '../../src/stores/documentStore'
 
 describe('document store', () => {
-  describe('add recent documents', () => {
-    let documentProperties
+  let sut
+  let documentProperties
+  let externalObserver
 
+  beforeEach(() => {
     Document.mockImplementation(d => ({ id: d.id, observable: true }))
 
     documentProperties = [
@@ -14,7 +16,19 @@ describe('document store', () => {
       { id: String(Math.random()) }
     ]
 
-    sut.addRecent(documentProperties)
+    externalObserver = jest.fn()
+
+    sut = DocumentStore(externalObserver)
+  })
+
+  it('should allow observe changes', () => {
+    expect(externalObserver).toHaveBeenCalled()
+  })
+
+  describe('add recent documents', () => {
+    beforeEach(() => {
+      sut.addRecent(documentProperties)
+    })
 
     it('should create documents', () => {
       documentProperties.forEach(dp => {
@@ -39,4 +53,5 @@ describe('document store', () => {
       )
     })
   })
+
 })
