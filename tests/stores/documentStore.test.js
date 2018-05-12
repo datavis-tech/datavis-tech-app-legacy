@@ -9,6 +9,7 @@ describe('document store', () => {
 
   beforeEach(() => {
     Document.mockImplementation(d => ({ id: d.id, observable: true }))
+    Document.mockClear()
 
     documentProperties = [
       { id: String(Math.random()) },
@@ -54,4 +55,22 @@ describe('document store', () => {
     })
   })
 
+  describe('add and get', () => {
+
+    beforeEach(() => {
+      sut.add(documentProperties)
+    })
+
+    it('should contain added documents', () => {
+      documentProperties.forEach(d => {
+        expect(sut.getById(d.id)).toMatchObject({ id: d.id, observable: true })
+      })
+    })
+
+    it('should not contain duplicates', () => {
+      sut.add([documentProperties[0]])
+      expect(Document).toHaveBeenCalledTimes(3)
+    })
+
+  })
 })
