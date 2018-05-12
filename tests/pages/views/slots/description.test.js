@@ -16,7 +16,8 @@ describe('view page description', () => {
   })
 
   it('should contain doc description', () => {
-    expect(sut.html().replace(/\s/g, '')).toEqual(`<div><p>${description}</p></div>`)
+    const escapedDescription = description.replace(/</g, '&lt;').replace(/>/g, '&gt;')
+    expect(sut.html().replace(/\s/g, '')).toEqual(`<div><p>${escapedDescription}</p></div>`)
   })
 
 })
