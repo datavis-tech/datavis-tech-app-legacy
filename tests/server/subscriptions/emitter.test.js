@@ -11,9 +11,7 @@ describe('emmiter', () => {
   beforeEach(() => {
     id = String(Math.random())
     socket = {
-      broadcast: {
-        emit: jest.fn()
-      }
+      emit: jest.fn()
     }
 
     sut = emitter(socket, id)
@@ -22,6 +20,6 @@ describe('emmiter', () => {
   })
 
   it('should emit a diff to a room', () => {
-    expect(socket.broadcast.emit).toHaveBeenCalledWith('change', id, diff)
+    expect(socket.emit).toHaveBeenCalledWith('change', id, diff)
   })
 })

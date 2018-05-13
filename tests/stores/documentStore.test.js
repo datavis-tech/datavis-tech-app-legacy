@@ -73,4 +73,32 @@ describe('document store', () => {
     })
 
   })
+
+  describe('delete', () => {
+
+    let dp
+
+    beforeEach(() => {
+      dp = documentProperties[0]
+      sut.add([dp])
+    })
+
+    it('should delete document', () => {
+      const doc = sut.getById(dp.id)
+      sut.remove(doc)
+
+      // if document was deleted store should allow to store the same doc again
+      sut.add([dp])
+      expect(Document).toHaveBeenCalledTimes(2)
+    })
+
+    it('should call back on delete', () => {
+      const callback = jest.fn()
+      const doc = sut.getById(dp.id)
+      sut.remove(doc, callback)
+
+      expect(callback).toHaveBeenCalled()
+    })
+
+  })
 })
