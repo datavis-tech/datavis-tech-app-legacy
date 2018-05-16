@@ -21,13 +21,23 @@ exports[`edit page form layouts should contain slots if they were provided 1`] =
         <div
           className="twelve wide column"
         >
-          <input />
+          <div
+            className="ui input"
+          >
+            <input
+              disabled={undefined}
+              onChange={[Function]}
+              tabIndex={undefined}
+              type="text"
+              value={undefined}
+            />
+          </div>
         </div>
         <div
           className="four wide column"
         >
           <a
-            href={undefined}
+            href="some unique type"
             onClick={[Function]}
           >
             <button
@@ -52,7 +62,16 @@ exports[`edit page form layouts should contain slots if they were provided 1`] =
       Description
     </label>
     <textarea
+      onChange={[Function]}
+      onInput={[Function]}
       placeholder="Enter your description here (Markdown supported)"
+      rows={3}
+      style={
+        Object {
+          "resize": "",
+        }
+      }
+      value={undefined}
     />
   </div>
   <div
@@ -199,13 +218,23 @@ exports[`edit page form layouts should not contain slots if they were not provid
         <div
           className="twelve wide column"
         >
-          <input />
+          <div
+            className="ui input"
+          >
+            <input
+              disabled={undefined}
+              onChange={[Function]}
+              tabIndex={undefined}
+              type="text"
+              value={undefined}
+            />
+          </div>
         </div>
         <div
           className="four wide column"
         >
           <a
-            href={undefined}
+            href="some unique type"
             onClick={[Function]}
           >
             <button
@@ -230,7 +259,16 @@ exports[`edit page form layouts should not contain slots if they were not provid
       Description
     </label>
     <textarea
+      onChange={[Function]}
+      onInput={[Function]}
       placeholder="Enter your description here (Markdown supported)"
+      rows={3}
+      style={
+        Object {
+          "resize": "",
+        }
+      }
+      value={undefined}
     />
   </div>
   <div

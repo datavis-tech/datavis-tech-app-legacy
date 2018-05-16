@@ -1,13 +1,4 @@
-/**
- * This component encapsulates codemirror-binding as a React component.
- * Derived from the original ShareDB textarea example found at
- * https://github.com/share/sharedb/blob/master/examples/textarea/client.js
- */
-
 import React, { Component } from 'react'
-
-// https://github.com/curran/codemirror-binding
-import ShareDBCodeMirrorBinding from 'codemirror-binding'
 
 // Use two spaces instead of tabs when indenting.
 // From https://github.com/codemirror/CodeMirror/issues/988#issuecomment-14921785
@@ -15,16 +6,25 @@ function betterTab (cm) {
   if (cm.somethingSelected()) {
     cm.indentSelection('add')
   } else {
-    cm.replaceSelection(cm.getOption('indentWithTabs') ? '\t'
-      : Array(cm.getOption('indentUnit') + 1).join(' '), 'end', '+input')
+    cm.replaceSelection(
+      cm.getOption('indentWithTabs')
+        ? '\t'
+        : Array(cm.getOption('indentUnit') + 1).join(' '),
+      'end',
+      '+input'
+    )
   }
 }
 
 export default class CodeMirrorBinding extends Component {
-
   componentDidMount () {
     if (process.browser) {
-      const { doc, path, mode, inlet = true, height = 500 } = this.props
+      const {
+        value,
+        mode,
+        inlet = true,
+        height = 500
+      } = this.props
 
       // Static import breaks the server, see https://github.com/codemirror/CodeMirror/issues/3701
       const CodeMirror = require('codemirror')
@@ -34,9 +34,9 @@ export default class CodeMirrorBinding extends Component {
       require('codemirror/mode/css/css')
       require('codemirror/mode/htmlmixed/htmlmixed')
       require('codemirror/addon/comment/comment')
-      const Inlet = require('codemirror-inlet/index-browserify')
 
-      const codeMirror = CodeMirror(this.el, {
+      this.codeMirror = CodeMirror(this.el, {
+        value,
         mode,
         indentWithTabs: false,
         indentUnit: 2,
@@ -47,24 +47,25 @@ export default class CodeMirrorBinding extends Component {
           'Ctrl-/': 'toggleComment'
         }
       })
-      codeMirror.setSize(null, height)
+      this.codeMirror.setSize(null, height)
 
       if (inlet) {
-        Inlet(codeMirror)
+        require('codemirror-inlet/index-browserify')(this.codeMirror)
       }
-
-      this.binding = new ShareDBCodeMirrorBinding(codeMirror, doc, path)
-      this.binding.setup()
     }
   }
 
-  componentWillUnmount () {
-    if (this.binding) {
-      this.binding.destroy()
-    }
+  componentDidUpdate () {
+    this.codeMirror.setValue(this.props.value)
   }
 
   render () {
-    return <div ref={el => { this.el = el }} />
+    return (
+      <div
+        ref={el => {
+          this.el = el
+        }}
+      />
+    )
   }
 }

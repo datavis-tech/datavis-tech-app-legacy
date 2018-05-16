@@ -17,17 +17,16 @@ let globalUserData
 
 let store
 if (process.browser) {
+
   const createSocket = require('../stores/socket').default
   const socket = createSocket()
-  const { observe } = require('mobx')
-  const observeDocuments = documents => {
-    observe(documents, change => {
-      change.added.forEach(
-        d => socket.emit('subscribe', { id: d.id })
-      )
-    })
-  }
-  store = DocumentStore(observeDocuments)
+
+  const onDocumentAdded = added => added.forEach(d => socket.emit('subscribe', { id: d.id }))
+  const onDocumentRemoved = removed => removed.forEach(d => socket.emit('unsubscribe', { id: d.id }))
+  const onDocumentDiff = (id, diff) => socket.emit('change', id, diff)
+
+  store = DocumentStore({ onDocumentAdded, onDocumentRemoved, onDocumentDiff })
+
   socket.on('change', store.applyDiffToDocument)
 } else {
   store = DocumentStore(() => {})

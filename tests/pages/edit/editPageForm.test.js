@@ -1,9 +1,7 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 import renderer from 'react-test-renderer'
-import fakeDoc from '../../utils/fakeDoc'
 import nodeSelector from '../../utils/nodeSelector'
-import { serializeDocument } from '../../../src/db/serializers'
 import CodeMirror from '../../../src/pages/edit/codeMirror'
 import EditPageForm from '../../../src/pages/edit/editPageForm'
 
@@ -11,7 +9,6 @@ describe('edit page form', () => {
 
   let sut
   let props
-  let __shareDbDoc
   let document
   let onTitleChange
   let onPrivacyChange
@@ -19,29 +16,32 @@ describe('edit page form', () => {
 
   beforeEach(() => {
 
-    __shareDbDoc = fakeDoc()
-    document = serializeDocument(__shareDbDoc)
-
-    document = jest.fn()
+    document = {
+      type: 'some unique type',
+      content: 'some unique content'
+    }
     onTitleChange = jest.fn()
     onPrivacyChange = jest.fn()
     onDescriptionChange = jest.fn()
 
-    props = { allowPrivacySwitching: true, document, __shareDbDoc, onTitleChange, onPrivacyChange, onDescriptionChange }
+    props = { allowPrivacySwitching: true, document, onTitleChange, onPrivacyChange, onDescriptionChange }
 
-    sut = shallow(<EditPageForm {...props} />)
+    sut = shallow(<EditPageForm {...props} />).dive() // go one level deeper, omitting mobx observer
+
   })
 
   it('should render content as code mirror', () => {
     expect(sut.find(CodeMirror).props()).toMatchObject({
-      document: document,
-      shareDbDocument: __shareDbDoc,
-      path: ['content']
+      content: document.content,
+      type: document.type
     })
   })
 
   it('should not contain privacy switcher if is not allowed to switch privacy', () => {
-    sut.setProps({ allowPrivacySwitching: false })
+
+    props = { allowPrivacySwitching: false, document, onTitleChange, onPrivacyChange, onDescriptionChange }
+    sut = shallow(<EditPageForm {...props} />).dive() // go one level deeper, omitting mobx observer
+
     expect(sut.find(nodeSelector('privacy-public')).exists()).toBeFalsy()
     expect(sut.find(nodeSelector('privacy-private')).exists()).toBeFalsy()
   })
