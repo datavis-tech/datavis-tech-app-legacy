@@ -1,1 +1,1 @@
-module.exports = (socket, id) => diff => socket.broadcast.emit('change', id, diff)
+module.exports = (socket, id) => diff => socket.emit('change', id, diff)

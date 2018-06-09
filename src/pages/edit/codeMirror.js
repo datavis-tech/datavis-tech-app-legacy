@@ -15,10 +15,9 @@ const MODES = {
   [TECH_DOC_TYPE]: 'javascript'
 }
 
-export default ({ document: {type}, shareDbDocument, path }) => {
+export default ({ type, content }) => {
   const props = {
-    path,
-    doc: shareDbDocument,
+    value: content,
     mode: MODES[type],
     height: 700
   }

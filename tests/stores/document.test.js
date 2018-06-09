@@ -12,7 +12,8 @@ describe('document', () => {
       description: String(Math.random()),
       content: String(Math.random()),
       references: String(Math.random()),
-      isPrivate: String(Math.random())
+      isPrivate: String(Math.random()),
+      type: String(Math.random())
     }
 
     sut = Document(documentProperties)
@@ -40,6 +41,25 @@ describe('document', () => {
 
   it('should allow to keep track privacy changes', done => {
     checkObservable(sut, 'isPrivate', done)
+  })
+
+  it('should allow to check if the document is a visualization', done => {
+    const changes = []
+    const dispose = autorun(() => {
+      changes.push(sut.isVisualization.get())
+    })
+
+    setTimeout(() => {
+      sut.type = 'vis'
+      setTimeout(() => {
+
+        expect(changes[0]).toBeFalsy()
+        expect(changes[1]).toBeTruthy()
+
+        dispose()
+        done()
+      }, 0)
+    }, 0)
   })
 })
 

@@ -5,10 +5,11 @@ import DocumentStore from '../../src/stores/documentStore'
 describe('document store', () => {
   let sut
   let documentProperties
-  let externalObserver
+  let observers
 
   beforeEach(() => {
     Document.mockImplementation(d => ({ id: d.id, observable: true }))
+    Document.mockClear()
 
     documentProperties = [
       { id: String(Math.random()) },
@@ -16,13 +17,12 @@ describe('document store', () => {
       { id: String(Math.random()) }
     ]
 
-    externalObserver = jest.fn()
+    observers = {
+      onDocumentAdded: jest.fn(),
+      onDocumentRemoved: jest.fn()
+    }
 
-    sut = DocumentStore(externalObserver)
-  })
-
-  it('should allow observe changes', () => {
-    expect(externalObserver).toHaveBeenCalled()
+    sut = DocumentStore(observers)
   })
 
   describe('add recent documents', () => {
@@ -54,4 +54,53 @@ describe('document store', () => {
     })
   })
 
+  describe('add and get', () => {
+    beforeEach(() => {
+      sut.add(documentProperties)
+    })
+
+    it('should contain added documents', () => {
+      documentProperties.forEach(d => {
+        expect(sut.getById(d.id)).toMatchObject({
+          id: d.id,
+          observable: true
+        })
+      })
+    })
+
+    it('should not contain duplicates', () => {
+      sut.add([documentProperties[0]])
+      expect(Document).toHaveBeenCalledTimes(3)
+    })
+  })
+
+  describe('delete', () => {
+    let dp
+
+    beforeEach(() => {
+      dp = documentProperties[0]
+      sut.add([dp])
+    })
+
+    it('should delete document', () => {
+      const doc = sut.getById(dp.id)
+      sut.remove(doc)
+
+      // if document was deleted store should allow to store the same doc again
+      sut.add([dp])
+      expect(Document).toHaveBeenCalledTimes(2)
+    })
+
+    it('should call back on delete', () => {
+      const callback = jest.fn()
+      const doc = sut.getById(dp.id)
+      sut.remove(doc, callback)
+
+      expect(callback).toHaveBeenCalled()
+    })
+  })
+
+  describe('changes', () => {
+    // TODO test changes methods
+  })
 })
