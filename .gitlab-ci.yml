@@ -1,6 +1,6 @@
 # Official framework image. Look for the different tagged releases at:
 # https://hub.docker.com/r/library/node/tags/
-image: node:9.3
+image: node:9.11.1
 
 before_script:
   - yarn install
