@@ -347,7 +347,7 @@ sudo service mongod start
 
 ```
 npm install pm2 -g
-pm2 start process.yml
+pm2 start process.yml --env production
 ```
 
 Generate a startup script:
