@@ -1,4 +1,10 @@
-This repository contains the Web application deployed at [https://datavis.tech](https://datavis.tech).
+Development on this project has ceased. Effort has shifted to developing [VizHub](https://vizhub.com/). For more context and a writeup, see [Introducing VizHub Alpha](https://medium.com/@currankelleher/introducing-vizhub-75644cb8bba6)
+
+This codebase has been Open Sourced so that the things figured out here can be visible to developers, in order to port the functionality into VizHub.
+
+This repository contains the Web application once deployed at [https://datavis.tech](https://datavis.tech).
+
+# Old README content
 
 To understand the overall direction of the product, see [Product Vision](https://gitlab.com/curran/datavis-tech/wikis/Product-Vision) in the [Wiki](https://gitlab.com/curran/datavis-tech/wikis/Home).
 
